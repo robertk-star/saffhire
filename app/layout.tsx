@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import './globals.css';
 import './visual-polish.css';
+import './industries-alignment.css';
 import { navItems, site } from '@/lib/site';
 
 export const metadata: Metadata = {
