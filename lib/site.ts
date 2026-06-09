@@ -25,10 +25,10 @@ export const services = [
   {
     slug: 'criminal-background-checks',
     title: 'Criminal Background Checks',
-    shortTitle: 'Criminal Checks',
+    shortTitle: 'Criminal Background Checks',
     description: 'County, state, national, and federal criminal search options for employer background screening programs.',
     intro: 'SaffHire helps employers order criminal background checks through a clean, applicant-friendly process with support when questions come up.',
-    bullets: ['County criminal searches', 'Federal criminal searches', 'National criminal database search options', 'Sex offender registry searches', 'Watch list options'],
+    bullets: ['County criminal searches', 'Statewide criminal search options', 'National criminal database search options', 'Federal criminal searches', 'Sex offender registry searches', 'Watch list options'],
   },
   {
     slug: 'employment-verification',
@@ -39,12 +39,52 @@ export const services = [
     bullets: ['Prior employer verification', 'Candidate-reported history review', 'Clear status updates', 'Documentation-focused workflow'],
   },
   {
+    slug: 'education-verification',
+    title: 'Education Verification',
+    shortTitle: 'Education Verification',
+    description: 'Education verification options to help employers review schools, degrees, credentials, and attendance information.',
+    intro: 'Education verification gives employers another layer of confidence when roles require specific training, degrees, or credentials.',
+    bullets: ['School verification', 'Degree confirmation options', 'Attendance information when available', 'Credential-focused support'],
+  },
+  {
     slug: 'drug-screening',
     title: 'Drug Screening',
     shortTitle: 'Drug Screening',
     description: 'Drug and alcohol testing options for employers that need a practical screening process.',
     intro: 'SaffHire supports drug screening workflows that are built around employer needs, candidate communication, and practical turnaround expectations.',
     bullets: ['5-panel options', '10-panel options', 'Alcohol testing options', 'Employer-friendly ordering support'],
+  },
+  {
+    slug: 'motor-vehicle-records',
+    title: 'Motor Vehicle Records',
+    shortTitle: 'Motor Vehicle Records',
+    description: 'Motor vehicle record options for employers screening drivers and employees who may operate vehicles.',
+    intro: 'Motor vehicle record checks can help employers review driving-related information for roles involving company vehicles, deliveries, transportation, or field work.',
+    bullets: ['MVR options', 'Driver role support', 'Transportation screening packages', 'Field service screening support'],
+  },
+  {
+    slug: 'professional-license-verification',
+    title: 'Professional License Verification',
+    shortTitle: 'License Verification',
+    description: 'Professional license verification support for employers hiring licensed or credentialed workers.',
+    intro: 'Professional license verification can help employers review license information when a role requires a specific professional credential.',
+    bullets: ['License verification options', 'Healthcare and professional roles', 'Credential review support', 'Role-based package guidance'],
+  },
+  {
+    slug: 'social-security-address-trace',
+    title: 'SSN Address Trace',
+    shortTitle: 'SSN Address Trace',
+    description: 'SSN address trace options used to help develop address history and support background screening searches.',
+    intro: 'An SSN address trace can help identify possible address history and names used to support a more complete screening workflow.',
+    bullets: ['Address history support', 'Alias name support', 'County search guidance', 'Screening workflow support'],
+  },
+  {
+    slug: 'global-watch-list-searches',
+    title: 'Global Watch List Searches',
+    shortTitle: 'Global Watch List',
+    description: 'Watch list search options for employers that need additional screening support for certain roles.',
+    intro: 'Global watch list searches can provide additional screening information for employers with roles or industries that require broader review.',
+    bullets: ['Watch list options', 'Role-based packages', 'Employer support', 'Additional screening layer'],
   },
 ];
 
@@ -55,7 +95,7 @@ export const industries = [
     eyebrow: 'Transportation',
     description: 'Screen drivers, support staff, and safety-sensitive transportation roles with practical background screening options.',
     body: 'Transportation employers need background screening that is fast, organized, and easy to repeat. SaffHire helps review drivers and support roles with package options that can include criminal searches, motor vehicle reports, drug screening, and verification support.',
-    bullets: ['Motor vehicle report options', 'Criminal search packages', 'Drug screening workflows', 'Fast ordering support'],
+    bullets: ['Motor vehicle record options', 'Criminal search packages', 'Drug screening workflows', 'Fast ordering support'],
   },
   {
     slug: 'churches',
@@ -103,7 +143,7 @@ export const industries = [
     eyebrow: 'Construction',
     description: 'Screen field employees, crews, supervisors, and service workers with background check options that fit the role.',
     body: 'Construction and field service companies often hire for mobile, safety-sensitive, and customer-site roles. SaffHire helps employers choose screening options that support practical hiring decisions.',
-    bullets: ['Criminal background checks', 'Drug screening options', 'Motor vehicle report options', 'Crew and field role support'],
+    bullets: ['Criminal background checks', 'Drug screening options', 'Motor vehicle record options', 'Crew and field role support'],
   },
   {
     slug: 'professional-services',
@@ -121,12 +161,36 @@ export const industries = [
     body: 'Small businesses need screening help that is easy to understand and easy to start. SaffHire helps employers choose practical packages without making the process feel overwhelming.',
     bullets: ['Simple setup support', 'Custom package guidance', 'No public pricing pressure', 'Real human help'],
   },
+  {
+    slug: 'energy',
+    title: 'Energy & Field Operations',
+    eyebrow: 'Energy',
+    description: 'Background screening support for energy, field operations, industrial, and site-based hiring needs.',
+    body: 'Energy and field operations employers often need screening for roles that involve worksites, driving, safety-sensitive duties, and field teams. SaffHire helps employers choose a package that supports the role and the work environment.',
+    bullets: ['Criminal search options', 'Drug screening options', 'MVR options', 'Field team support'],
+  },
+  {
+    slug: 'retail',
+    title: 'Retail Employers',
+    eyebrow: 'Retail',
+    description: 'Screen store employees, managers, warehouse support, and customer-facing workers with practical screening options.',
+    body: 'Retail employers need hiring workflows that move quickly without creating unnecessary friction. SaffHire helps retail teams screen candidates with clear package options and a simple process.',
+    bullets: ['Customer-facing role support', 'Criminal search options', 'Employment verification options', 'Fast ordering support'],
+  },
+  {
+    slug: 'education',
+    title: 'Education & Youth Programs',
+    eyebrow: 'Education',
+    description: 'Screen staff, volunteers, instructors, tutors, and youth program workers with thoughtful background screening support.',
+    body: 'Education and youth-focused organizations need screening that supports trust and safety while keeping the process respectful and organized for applicants and volunteers.',
+    bullets: ['Staff screening support', 'Volunteer screening support', 'Criminal search options', 'Verification options'],
+  },
 ];
 
 export const faqs = [
-  { question: 'What does SaffHire do?', answer: 'SaffHire provides employer background screening services, including criminal background checks, employment verification, drug screening, motor vehicle reports, and related screening options.' },
+  { question: 'What does SaffHire do?', answer: 'SaffHire provides employer background screening services, including criminal background checks, employment verification, education verification, drug screening, motor vehicle records, SSN address trace options, watch list searches, and related screening services.' },
   { question: 'Does SaffHire serve companies outside Texas?', answer: 'Yes. SaffHire is based in Frisco, Texas and serves employers across all 50 states.' },
   { question: 'Does SaffHire show public pricing?', answer: 'Not at this time. Employers can request a quote so SaffHire can recommend screening options based on industry, volume, and hiring needs.' },
-  { question: 'What industries does SaffHire serve?', answer: 'SaffHire supports many types of employers, including transportation, churches, nonprofits, staffing agencies, healthcare, manufacturing, hospitality, construction, professional services, and small businesses.' },
+  { question: 'What industries does SaffHire serve?', answer: 'SaffHire supports many types of employers, including transportation, churches, nonprofits, staffing agencies, healthcare, manufacturing, hospitality, construction, professional services, retail, energy, education, and small businesses.' },
   { question: 'How should I get started?', answer: 'The fastest way is to call SaffHire at 888-588-1733. You can also submit the request-a-quote form online.' },
 ];

@@ -1,63 +1,153 @@
 import Link from 'next/link';
 import { JsonLd } from '@/components/JsonLd';
-import { PeopleIllustration } from '@/components/PeopleIllustration';
 import { organizationSchema } from '@/lib/schema';
 import { industries, services, site } from '@/lib/site';
+
+const featuredIndustries = industries.slice(0, 12);
+const featuredServices = services.slice(0, 8);
 
 export default function HomePage() {
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <section className="hero people-hero">
+
+      <section className="hero">
         <div className="hero-inner">
           <div>
-            <p className="eyebrow">Background screening since {site.established}</p>
-            <h1>Background checks with people behind the process.</h1>
-            <p className="hero-lead">SaffHire helps employers screen applicants without making hiring feel cold, confusing, or automated. Your team gets clear screening support, and applicants get a simple digital process.</p>
-            <div className="hero-actions"><a className="btn btn-primary" href={site.phoneHref}>Call {site.phone}</a><Link className="btn btn-light" href="/request-a-quote">Request a Quote</Link></div>
-            <div className="trust-row"><span>Real support when questions come up</span><span>Built for employers and applicants</span><span>Serving all 50 states</span></div>
+            <p className="kicker">FCRA-focused employer background screening</p>
+            <h1>Fast, secure background checks for today’s hiring teams.</h1>
+            <p className="hero-lead">
+              SaffHire helps employers, staffing firms, churches, nonprofits, transportation companies, healthcare teams, and growing businesses screen applicants with a professional process and real human support.
+            </p>
+            <div className="actions">
+              <a className="btn btn-gold" href={site.phoneHref}>Call {site.phone}</a>
+              <Link className="btn btn-white" href="/request-a-quote">Request a Quote</Link>
+            </div>
+            <p className="hero-note">No public pricing pressure. No one-size-fits-all package. Talk with us about what your business actually needs.</p>
           </div>
-          <PeopleIllustration />
+
+          <aside className="hero-card">
+            <div className="hero-card-head">
+              <h2>Professional screening support without unnecessary complexity.</h2>
+            </div>
+            <div className="hero-card-body">
+              <ul className="check-list">
+                <li>Criminal background check packages</li>
+                <li>Employment and education verification options</li>
+                <li>Drug screening and MVR options</li>
+                <li>Applicant-friendly digital workflows</li>
+                <li>Support for employers across all 50 states</li>
+              </ul>
+              <div className="hero-stats">
+                <div className="hero-stat"><strong>50</strong><span>States served</span></div>
+                <div className="hero-stat"><strong>2020</strong><span>Serving employers since</span></div>
+                <div className="hero-stat"><strong>0</strong><span>Public setup-fee pressure</span></div>
+                <div className="hero-stat"><strong>1</strong><span>Real support team</span></div>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <section className="people-strip">
-        <div className="inner people-strip-grid">
-          <div><strong>For employers</strong><span>Simple ordering and clear next steps.</span></div>
-          <div><strong>For applicants</strong><span>A smoother process with less confusion.</span></div>
-          <div><strong>For hiring teams</strong><span>Screening help from real people.</span></div>
+      <section className="section section-soft">
+        <div className="wrap">
+          <div className="section-title center">
+            <p className="kicker">What SaffHire does</p>
+            <h2>Full-service background screening for employers.</h2>
+            <p>
+              Bring your hiring needs, applicant volume, industry concerns, and compliance questions. SaffHire helps you build a screening process that fits your organization.
+            </p>
+          </div>
+          <div className="grid-3">
+            <div className="card icon-box">
+              <span className="icon">1</span>
+              <div><h3>Choose the right checks</h3><p>Start with the role and business need instead of forcing every applicant into the same package.</p></div>
+            </div>
+            <div className="card icon-box">
+              <span className="icon gold">2</span>
+              <div><h3>Keep applicants moving</h3><p>Use a digital process that helps reduce confusion and keeps your hiring workflow organized.</p></div>
+            </div>
+            <div className="card icon-box">
+              <span className="icon">3</span>
+              <div><h3>Get real support</h3><p>When questions come up, SaffHire is built around practical help, not a cold self-service-only experience.</p></div>
+            </div>
+          </div>
         </div>
       </section>
-
-      <section className="section story-section">
-        <div className="story-grid">
-          <div>
-            <p className="eyebrow">The SaffHire difference</p>
-            <h2>Hiring is about people. Screening should support that.</h2>
-            <p className="intro">A background check is not just a report. It affects an applicant, a hiring manager, a business owner, a church volunteer coordinator, or a staffing recruiter trying to move quickly.</p>
-            <p>SaffHire keeps the process practical: collect the right information, order the right checks, and help your team understand what comes next.</p>
-          </div>
-          <div className="human-card-stack">
-            <div className="human-card"><span className="mini-avatar">HR</span><div><strong>Hiring manager</strong><p>Needs clear status and fewer delays.</p></div></div>
-            <div className="human-card"><span className="mini-avatar gold">A</span><div><strong>Applicant</strong><p>Needs simple steps and clear instructions.</p></div></div>
-            <div className="human-card"><span className="mini-avatar">SH</span><div><strong>SaffHire support</strong><p>Helps when the process needs a real person.</p></div></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section services-soft">
-        <p className="eyebrow">Core services</p>
-        <h2>Screening services built around real hiring workflows.</h2>
-        <p className="intro">Choose screening options based on the role, the industry, and how your team hires.</p>
-        <div className="cards softer-cards">{services.map((service)=><Link className="card card-link" key={service.slug} href={`/services/${service.slug}`}><h3>{service.title}</h3><p>{service.description}</p><strong>Learn more →</strong></Link>)}</div>
-      </section>
-
-      <section className="section-alt industry-people-section"><div className="inner"><div className="split"><div><p className="eyebrow">Who we help most</p><h2>Focused support for teams that screen people every day.</h2><p className="intro">Trucking companies, churches, nonprofits, and staffing agencies all need screening, but they do not all need the same process.</p><ul className="check-list"><li>Trucking teams screening drivers and safety-sensitive roles.</li><li>Churches and nonprofits screening staff and volunteers.</li><li>Staffing agencies managing repeatable, high-volume hiring.</li></ul></div><div className="warm-panel"><h3>Talk through your hiring process first.</h3><p>Instead of forcing every employer into the same package, SaffHire helps you think through what checks make sense for your organization.</p><a className="btn btn-primary" href={site.phoneHref}>Call {site.phone}</a></div></div></div></section>
 
       <section className="section">
-        <p className="eyebrow">Top industries</p>
-        <h2>Screening pages for the teams we serve most.</h2>
-        <div className="cards industry-cards">{industries.map((industry)=><Link className="card card-link" key={industry.slug} href={`/industries/${industry.slug}`}><p className="eyebrow">{industry.eyebrow}</p><h3>{industry.title}</h3><p>{industry.description}</p><strong>View industry page →</strong></Link>)}</div>
+        <div className="wrap split">
+          <div>
+            <p className="kicker">Services</p>
+            <h2>Screening options that support better hiring decisions.</h2>
+            <p className="section-title-text">
+              SaffHire provides the background screening services employers commonly need when hiring employees, contractors, volunteers, drivers, field workers, office staff, and customer-facing team members.
+            </p>
+            <div className="actions">
+              <Link className="btn btn-blue" href="/services">View Services</Link>
+              <Link className="btn btn-outline" href="/request-a-quote">Request a Quote</Link>
+            </div>
+          </div>
+          <div className="service-list">
+            {featuredServices.map((service) => (
+              <Link className="service-row" key={service.slug} href={`/services/${service.slug}`}>
+                <strong>{service.shortTitle}</strong>
+                <span>{service.description}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-blue">
+        <div className="wrap split">
+          <div>
+            <p className="kicker">Professional, credible, practical</p>
+            <h2>A more established screening experience for your business.</h2>
+            <p>
+              Background screening is a trust service. Your website, hiring workflow, and applicant process should feel serious, safe, and professional. SaffHire gives employers a screening partner that understands that.
+            </p>
+          </div>
+          <div>
+            <ul className="check-list">
+              <li>Designed for businesses that want responsive support.</li>
+              <li>Useful for single-location employers and high-volume hiring teams.</li>
+              <li>Built for applicants, employees, contractors, volunteers, and drivers.</li>
+              <li>Helpful for companies that want background checks without a complicated sales process.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-soft">
+        <div className="wrap">
+          <div className="section-title">
+            <p className="kicker">Industries served</p>
+            <h2>Background screening for many types of employers.</h2>
+            <p>
+              SaffHire is not limited to one industry. We help businesses and organizations that need a professional way to screen applicants before hiring, onboarding, or approving volunteer roles.
+            </p>
+          </div>
+          <div className="industry-list">
+            {featuredIndustries.map((industry) => (
+              <Link className="industry-pill" key={industry.slug} href={`/industries/${industry.slug}`}>{industry.title}</Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="section-title center">
+            <p className="kicker">How it works</p>
+            <h2>A simple process for employers and applicants.</h2>
+          </div>
+          <div className="grid-3 process">
+            <div className="card"><h3>Tell us what you need</h3><p>Call SaffHire or request a quote with your industry, hiring volume, and screening goals.</p></div>
+            <div className="card"><h3>Build your package</h3><p>Choose screening options based on the roles you hire for and how your team works.</p></div>
+            <div className="card"><h3>Screen with support</h3><p>Use a process that keeps your team informed and gives applicants clear steps.</p></div>
+          </div>
+        </div>
       </section>
     </>
   );

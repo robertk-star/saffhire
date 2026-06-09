@@ -35,11 +35,29 @@ export function LeadForm({ type }: LeadFormProps) {
     <form className="form" onSubmit={onSubmit}>
       <label>Name<input name="name" required /></label>
       <label>Company<input name="company" /></label>
-      <div className="form-grid"><label>Email<input name="email" type="email" required /></label><label>Phone<input name="phone" type="tel" /></label></div>
-      <label>Industry<select name="industry" defaultValue=""><option value="" disabled>Select one</option><option>Trucking / Transportation</option><option>Church / Nonprofit</option><option>Staffing Agency</option><option>Healthcare</option><option>Manufacturing</option><option>Other</option></select></label>
+      <div className="form-grid">
+        <label>Email<input name="email" type="email" required /></label>
+        <label>Phone<input name="phone" type="tel" /></label>
+      </div>
+      <label>
+        Industry
+        <select name="industry" defaultValue="">
+          <option value="" disabled>Select one</option>
+          <option>Transportation</option>
+          <option>Church / Nonprofit</option>
+          <option>Staffing Agency</option>
+          <option>Healthcare</option>
+          <option>Manufacturing / Warehouse</option>
+          <option>Hospitality</option>
+          <option>Construction / Field Services</option>
+          <option>Professional Services</option>
+          <option>Small Business</option>
+          <option>Other</option>
+        </select>
+      </label>
       {type === 'quote' && <label>Estimated monthly background checks<input name="monthlyVolume" placeholder="Example: 10-25" /></label>}
       <label>Message<textarea name="message" /></label>
-      <button className="btn btn-primary" type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Sending...' : type === 'quote' ? 'Request a Quote' : 'Send Message'}</button>
+      <button className="btn btn-gold" type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Sending...' : type === 'quote' ? 'Request a Quote' : 'Send Message'}</button>
       {message && <p className={status === 'error' ? 'form-error' : 'form-success'}>{message}</p>}
     </form>
   );
