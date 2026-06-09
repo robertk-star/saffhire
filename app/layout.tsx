@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import './globals.css';
 import { navItems, site } from '@/lib/site';
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: { title: 'SaffHire Background Screening', description: 'Fast, secure background screening support for employers.', url: site.url, siteName: site.name, type: 'website' },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
