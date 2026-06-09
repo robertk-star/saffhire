@@ -53,7 +53,12 @@ function DialogDescription({ className = "", children, ...props }: HTMLAttribute
 }
 
 function useDialogComposition() {
-  return { isComposing: () => false, setComposing: () => {}, justEndedComposing: () => false, markCompositionEnd: () => {} };
+  return {
+    isComposing: () => false,
+    setComposing: (_composing: boolean) => {},
+    justEndedComposing: () => false,
+    markCompositionEnd: () => {},
+  };
 }
 
 export { Dialog, DialogTrigger, DialogPortal, DialogClose, DialogOverlay, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, useDialogComposition };
