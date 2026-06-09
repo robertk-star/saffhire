@@ -1,10 +1,25 @@
 import type { ReactNode } from "react";
 
-function TooltipProvider({ children }: { children: ReactNode }) {
+type TooltipProviderProps = {
+  children: ReactNode;
+  delayDuration?: number;
+  skipDelayDuration?: number;
+  disableHoverableContent?: boolean;
+};
+
+type TooltipProps = {
+  children: ReactNode;
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  delayDuration?: number;
+};
+
+function TooltipProvider({ children }: TooltipProviderProps) {
   return <>{children}</>;
 }
 
-function Tooltip({ children }: { children: ReactNode }) {
+function Tooltip({ children }: TooltipProps) {
   return <>{children}</>;
 }
 
