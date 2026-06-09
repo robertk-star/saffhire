@@ -1,4 +1,4 @@
-import { site, faqs } from './site';
+import { faqs, site } from './site';
 
 export function organizationSchema() {
   return {

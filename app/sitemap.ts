@@ -7,11 +7,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const serviceRoutes = services.map((service) => `/services/${service.slug}`);
   const industryRoutes = industries.map((industry) => `/industries/${industry.slug}`);
   const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
-
-  return [...staticRoutes, ...serviceRoutes, ...industryRoutes, ...blogRoutes].map((route) => ({
-    url: `${site.url}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === '' ? 'weekly' as const : 'monthly' as const,
-    priority: route === '' ? 1 : 0.7,
-  }));
+  return [...staticRoutes, ...serviceRoutes, ...industryRoutes, ...blogRoutes].map((route) => ({ url: `${site.url}${route}`, lastModified: new Date(), changeFrequency: route === '' ? 'weekly' as const : 'monthly' as const, priority: route === '' ? 1 : 0.7 }));
 }
