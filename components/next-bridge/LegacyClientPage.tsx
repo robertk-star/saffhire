@@ -1,7 +1,6 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
 import { Router, Route } from 'wouter';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
@@ -104,13 +103,11 @@ const pageMap: Record<PageKey, () => ReactNode> = {
 export default function LegacyClientPage({ page, path }: { page: PageKey; path: string }) {
   const useStaticLocation = () => [path, () => undefined] as const;
   return (
-    <HelmetProvider>
-      <ThemeProvider defaultTheme="light">
-        <TooltipProvider>
-          <Router hook={useStaticLocation as any}>{pageMap[page]()}</Router>
-          <Toaster />
-        </TooltipProvider>
-      </ThemeProvider>
-    </HelmetProvider>
+    <ThemeProvider defaultTheme="light">
+      <TooltipProvider>
+        <Router hook={useStaticLocation as any}>{pageMap[page]()}</Router>
+        <Toaster />
+      </TooltipProvider>
+    </ThemeProvider>
   );
 }
