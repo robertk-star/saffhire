@@ -1,6 +1,14 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-function Dialog({ children }: { children: ReactNode }) {
+type DialogRootProps = {
+  children: ReactNode;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  modal?: boolean;
+};
+
+function Dialog({ children }: DialogRootProps) {
   return <>{children}</>;
 }
 
