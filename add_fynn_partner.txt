@@ -1,2 +1,0 @@
-const FYNN_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fynn-logo_658b6e67.png";
