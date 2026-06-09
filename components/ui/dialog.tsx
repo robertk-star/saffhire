@@ -8,6 +8,10 @@ type DialogRootProps = {
   modal?: boolean;
 };
 
+type DialogContentProps = HTMLAttributes<HTMLDivElement> & {
+  showCloseButton?: boolean;
+};
+
 function Dialog({ children }: DialogRootProps) {
   return <>{children}</>;
 }
@@ -28,7 +32,7 @@ function DialogOverlay({ className = "", ...props }: HTMLAttributes<HTMLDivEleme
   return <div className={className} {...props} />;
 }
 
-function DialogContent({ className = "", children, ...props }: HTMLAttributes<HTMLDivElement>) {
+function DialogContent({ className = "", children, showCloseButton: _showCloseButton, ...props }: DialogContentProps) {
   return <div className={className} {...props}>{children}</div>;
 }
 
