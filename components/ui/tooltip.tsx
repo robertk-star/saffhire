@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
 type TooltipProviderProps = {
   children: ReactNode;
@@ -15,6 +15,20 @@ type TooltipProps = {
   delayDuration?: number;
 };
 
+type TooltipTriggerProps = {
+  children: ReactNode;
+  asChild?: boolean;
+};
+
+type TooltipContentProps = HTMLAttributes<HTMLDivElement> & {
+  children: ReactNode;
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+  sideOffset?: number;
+  alignOffset?: number;
+  avoidCollisions?: boolean;
+};
+
 function TooltipProvider({ children }: TooltipProviderProps) {
   return <>{children}</>;
 }
@@ -23,12 +37,12 @@ function Tooltip({ children }: TooltipProps) {
   return <>{children}</>;
 }
 
-function TooltipTrigger({ children }: { children: ReactNode }) {
+function TooltipTrigger({ children }: TooltipTriggerProps) {
   return <>{children}</>;
 }
 
-function TooltipContent({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+function TooltipContent({ children, className = "", side: _side, align: _align, sideOffset: _sideOffset, alignOffset: _alignOffset, avoidCollisions: _avoidCollisions, ...props }: TooltipContentProps) {
+  return <div className={className} {...props}>{children}</div>;
 }
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
