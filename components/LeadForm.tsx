@@ -1,5 +1,6 @@
 'use client';
 
+import type { FormEvent } from 'react';
 import { useState } from 'react';
 
 type LeadFormProps = { type: 'quote' | 'contact' };
@@ -8,7 +9,7 @@ export function LeadForm({ type }: LeadFormProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus('loading');
     setMessage('');
