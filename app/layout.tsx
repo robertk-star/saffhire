@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { organizationSchema, websiteSchema } from '@/lib/structuredData';
 import TrackingScripts from '@/components/TrackingScripts';
+import ConversionEventBridge from '@/components/ConversionEventBridge';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </noscript>
         ) : null}
         <TrackingScripts />
+        <ConversionEventBridge />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
