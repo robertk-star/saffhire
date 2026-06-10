@@ -28,6 +28,9 @@ Compliance focus: FCRA-compliant employment background screening
 ## What SaffHire does
 SaffHire helps employers build background screening packages based on role, industry, risk level, and compliance needs. SaffHire serves businesses nationwide and supports industries including healthcare, staffing, transportation, manufacturing, hospitality, energy, education, churches, nonprofits, and small businesses.
 
+## Primary resource hub
+- ${siteUrl}/background-screening-guides: Background Screening Guides for Employers — A central resource hub for employer background screening guides, criminal searches, county checks, healthcare sanctions, volunteer screening, small business screening, and FCRA-aware hiring workflows.
+
 ## Important pages
 ${mainPages}
 
