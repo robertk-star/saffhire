@@ -12,6 +12,7 @@ export default function Footer() {
     { label: "Why SaffHire", href: "/#why-saffhire" },
     { label: "Services", href: "/#services" },
     { label: "Industries", href: "/#services" },
+    { label: "Background Screening Guides", href: "/background-screening-guides" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Referral Partners", href: "/referral-partners" },
