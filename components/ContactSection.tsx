@@ -60,10 +60,7 @@ export default function ContactSection() {
   return (
     <>
       {/* CTA Banner */}
-      <section
-        className="py-16"
-        style={{ backgroundColor: "#0f172a" }}
-      >
+      <section className="py-16" style={{ backgroundColor: "#0f172a" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
@@ -83,7 +80,6 @@ export default function ContactSection() {
               style={{ fontFamily: "'Montserrat', sans-serif" }}
               data-conversion="quote_cta_click"
               data-location="contact_cta_banner"
-              onClick={() => trackConversion("quote_cta_click", { location: "contact_cta_banner" })}
             >
               Get Quote
             </a>
@@ -115,7 +111,10 @@ export default function ContactSection() {
                     <Phone size={18} style={{ color: "#22c55e" }} />
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                    <p
+                      className="font-bold text-gray-900 text-sm mb-1"
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
                       Phone
                     </p>
                     <a
@@ -123,7 +122,6 @@ export default function ContactSection() {
                       className="text-gray-600 hover:text-green-600 transition-colors"
                       data-conversion="phone_click"
                       data-location="contact_section"
-                      onClick={() => trackConversion("phone_click", { location: "contact_section" })}
                     >
                       (888) 588-1733
                     </a>
@@ -135,7 +133,10 @@ export default function ContactSection() {
                     <Mail size={18} style={{ color: "#22c55e" }} />
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                    <p
+                      className="font-bold text-gray-900 text-sm mb-1"
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
                       Email
                     </p>
                     <a
@@ -143,7 +144,6 @@ export default function ContactSection() {
                       className="text-gray-600 hover:text-green-600 transition-colors"
                       data-conversion="email_click"
                       data-location="contact_section"
-                      onClick={() => trackConversion("email_click", { location: "contact_section" })}
                     >
                       info@saffhire.com
                     </a>
@@ -155,10 +155,15 @@ export default function ContactSection() {
                     <MapPin size={18} style={{ color: "#22c55e" }} />
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                    <p
+                      className="font-bold text-gray-900 text-sm mb-1"
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
                       Service Area
                     </p>
-                    <p className="text-gray-600">Headquartered in Frisco, TX, Serving Businesses Nationwide</p>
+                    <p className="text-gray-600">
+                      Headquartered in Frisco, TX, Serving Businesses Nationwide
+                    </p>
                   </div>
                 </div>
               </div>
@@ -193,7 +198,10 @@ export default function ContactSection() {
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                      <label
+                        className="block text-sm font-semibold text-gray-700 mb-1.5"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      >
                         Full Name *
                       </label>
                       <input
@@ -206,7 +214,10 @@ export default function ContactSection() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                      <label
+                        className="block text-sm font-semibold text-gray-700 mb-1.5"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      >
                         Email *
                       </label>
                       <input
@@ -221,7 +232,10 @@ export default function ContactSection() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                      <label
+                        className="block text-sm font-semibold text-gray-700 mb-1.5"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      >
                         Company
                       </label>
                       <input
@@ -233,7 +247,10 @@ export default function ContactSection() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                      <label
+                        className="block text-sm font-semibold text-gray-700 mb-1.5"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      >
                         Phone
                       </label>
                       <input
@@ -246,7 +263,10 @@ export default function ContactSection() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                    <label
+                      className="block text-sm font-semibold text-gray-700 mb-1.5"
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
                       Message
                     </label>
                     <textarea
@@ -261,7 +281,6 @@ export default function ContactSection() {
                     type="submit"
                     className="w-full btn-green rounded-sm py-3 text-base font-bold flex items-center justify-center gap-2"
                     style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    data-conversion="contact_form_submit"
                   >
                     <Send size={16} />
                     Send Message
