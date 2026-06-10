@@ -6,6 +6,24 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+function trackConversion(eventName: string, details: Record<string, unknown> = {}) {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...details });
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, details);
+  }
+}
+
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,6 +45,13 @@ export default function ContactSection() {
     } catch {
       // Keep the user experience simple even if email/storage is not configured yet.
     }
+
+    trackConversion("contact_form_submit", {
+      form_type: "contact",
+      has_company: Boolean(formData.company),
+      has_phone: Boolean(formData.phone),
+    });
+
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
     setFormData({ name: "", email: "", company: "", phone: "", message: "" });
@@ -56,6 +81,9 @@ export default function ContactSection() {
               href="#contact"
               className="flex-shrink-0 btn-green rounded-sm px-8 py-3 text-base font-bold"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
+              data-conversion="quote_cta_click"
+              data-location="contact_cta_banner"
+              onClick={() => trackConversion("quote_cta_click", { location: "contact_cta_banner" })}
             >
               Get Quote
             </a>
@@ -90,7 +118,13 @@ export default function ContactSection() {
                     <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                       Phone
                     </p>
-                    <a href="tel:8885881733" className="text-gray-600 hover:text-green-600 transition-colors">
+                    <a
+                      href="tel:8885881733"
+                      className="text-gray-600 hover:text-green-600 transition-colors"
+                      data-conversion="phone_click"
+                      data-location="contact_section"
+                      onClick={() => trackConversion("phone_click", { location: "contact_section" })}
+                    >
                       (888) 588-1733
                     </a>
                   </div>
@@ -104,7 +138,13 @@ export default function ContactSection() {
                     <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                       Email
                     </p>
-                    <a href="mailto:info@saffhire.com" className="text-gray-600 hover:text-green-600 transition-colors">
+                    <a
+                      href="mailto:info@saffhire.com"
+                      className="text-gray-600 hover:text-green-600 transition-colors"
+                      data-conversion="email_click"
+                      data-location="contact_section"
+                      onClick={() => trackConversion("email_click", { location: "contact_section" })}
+                    >
                       info@saffhire.com
                     </a>
                   </div>
@@ -145,7 +185,12 @@ export default function ContactSection() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                  data-form="contact"
+                  data-conversion="contact_form_submit"
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
@@ -216,6 +261,7 @@ export default function ContactSection() {
                     type="submit"
                     className="w-full btn-green rounded-sm py-3 text-base font-bold flex items-center justify-center gap-2"
                     style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    data-conversion="contact_form_submit"
                   >
                     <Send size={16} />
                     Send Message
