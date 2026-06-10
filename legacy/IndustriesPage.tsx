@@ -9,56 +9,56 @@ const industries = [
     href: "/industries/healthcare",
     description:
       "OIG LEIE monitoring, license verification, and FCRA-compliant screening for hospitals, clinics, home health, and long-term care facilities.",
-    image: "https://saffhire.com/sites/default/files/2025-06/helthcare.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/healthcare-doctor-nTFoqwwszBNffvezvpUdxY.webp",
   },
   {
     name: "Staffing",
     href: "/industries/staffing",
     description:
       "Fast, scalable background screening for staffing agencies. Reduce time-to-fill and stay FCRA compliant across every client placement.",
-    image: "https://saffhire.com/sites/default/files/2025-06/staffing.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/staffing-recruiting-HQ8peYmxmBwDN6V8FFHabf.webp",
   },
   {
     name: "Transportation",
     href: "/industries/transportation",
     description:
       "DOT-compliant background checks and MVR screening for transportation and logistics companies. Keep your fleet safe and compliant.",
-    image: "https://saffhire.com/sites/default/files/2025-06/transportation.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/transportation-trucking-e5XVJsb3NqKq7bBzpvWYdp.webp",
   },
   {
     name: "Manufacturing",
     href: "/industries/manufacturing",
     description:
       "Pre-employment background screening for manufacturing and industrial employers. Verify safety records and reduce workplace risk.",
-    image: "https://saffhire.com/sites/default/files/2025-06/manufacturing.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/manufacturing-warehouse-MRbE6ngTRYM7etAtYgJE2K.webp",
   },
   {
     name: "Hospitality",
     href: "/industries/hospitality",
     description:
       "Fast background checks for hotels, restaurants, and hospitality businesses. Protect guests and staff with FCRA-compliant screening.",
-    image: "https://saffhire.com/sites/default/files/2025-06/hospitality.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/hospitality-hotel-hPwjFumDVuE53coRNdmCA5.webp",
   },
   {
     name: "Energy",
     href: "/industries/energy",
     description:
       "Safety-first screening for energy, oil and gas, and utilities workers. Verify safety credentials and reduce workforce risk.",
-    image: "https://saffhire.com/sites/default/files/2025-06/energy.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/energy-worker-6uXbGGHeWEWGLof37q9FAz.webp",
   },
   {
     name: "Education",
     href: "/industries/education",
     description:
       "FCRA-compliant background checks for K-12 schools, universities, and education organizations. Protect students with thorough screening.",
-    image: "https://saffhire.com/sites/default/files/2025-06/education.jpeg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/education-teacher-ZXUK3NiRcgkPtpdCJ6LBUf.webp",
   },
   {
     name: "Churches & Nonprofits",
     href: "/industries/church-nonprofit",
     description:
       "Affordable, FCRA-compliant background screening for churches, faith-based organizations, and nonprofits. Protect your community.",
-    image: "https://saffhire.com/sites/default/files/2025-06/church-nonprofit.jpg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/church-nonprofit-i472wLXW7cpcTt6sne5C2x.webp",
   },
 ];
 
