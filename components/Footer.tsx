@@ -22,6 +22,11 @@ export default function Footer() {
 
   const services = [
     { label: "Criminal Background Checks", href: "/criminal-background-checks" },
+    { label: "County Criminal Checks", href: "/county-criminal-background-checks" },
+    { label: "National Criminal Search", href: "/national-criminal-database-search" },
+    { label: "Healthcare OIG Checks", href: "/healthcare-sanctions-oig-checks" },
+    { label: "Volunteer Background Checks", href: "/volunteer-background-checks" },
+    { label: "Small Business Checks", href: "/small-business-background-checks" },
     { label: "Employment Verification", href: "/employment-verification" },
     { label: "Drug Screening", href: "/drug-screening" },
     { label: "Education Verification", href: "/education-verification" },
