@@ -29,14 +29,6 @@ export default function Footer() {
     { label: "FCRA Compliance News", href: "/fcra-news" },
   ];
 
-  const serviceAreas = [
-    { label: "Frisco, TX", href: "/background-screening-frisco-tx" },
-    { label: "Dallas, TX", href: "/background-screening-dallas-tx" },
-    { label: "Plano, TX", href: "/background-screening-plano-tx" },
-    { label: "McKinney, TX", href: "/background-screening-mckinney-tx" },
-    { label: "Allen, TX", href: "/background-screening-allen-tx" },
-  ];
-
   return (
     <footer style={{ backgroundColor: "#0f172a" }}>
       {/* Main Footer */}
@@ -123,26 +115,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Service Areas */}
+          {/* Coverage */}
           <div>
             <h4
               className="text-white font-bold text-sm mb-5 tracking-wider uppercase"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              Service Areas
+              Nationwide Coverage
             </h4>
-            <ul className="space-y-3">
-              {serviceAreas.map((area) => (
-                <li key={area.label}>
-                  <a
-                    href={area.href}
-                    className="text-gray-400 text-sm hover:text-green-400 transition-colors"
-                  >
-                    {area.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-3">
+              <p className="text-gray-400 text-sm leading-relaxed">
+                SaffHire provides background screening services nationwide for employers across all 50 states.
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Based in Frisco, Texas. Serving businesses throughout the United States.
+              </p>
+            </div>
           </div>
 
           {/* Contact */}
