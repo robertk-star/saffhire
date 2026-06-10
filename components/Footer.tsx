@@ -5,6 +5,14 @@
 
 import { Facebook, Linkedin, Phone } from "lucide-react";
 
+function getFooterConversion(label: string) {
+  if (label === "Login") return "login_click";
+  if (label === "Create Account") return "create_account_click";
+  if (label === "Contact") return "contact_click";
+  if (label === "Background Screening Guides") return "guide_hub_click";
+  return "footer_link_click";
+}
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -63,6 +71,8 @@ export default function Footer() {
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                 style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
                 aria-label="Facebook"
+                data-conversion="social_click"
+                data-location="footer_facebook"
               >
                 <Facebook size={16} className="text-gray-300" />
               </a>
@@ -71,6 +81,8 @@ export default function Footer() {
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                 style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
                 aria-label="LinkedIn"
+                data-conversion="social_click"
+                data-location="footer_linkedin"
               >
                 <Linkedin size={16} className="text-gray-300" />
               </a>
@@ -91,6 +103,8 @@ export default function Footer() {
                   <a
                     href={link.href}
                     className="text-gray-400 text-sm hover:text-green-400 transition-colors"
+                    data-conversion={getFooterConversion(link.label)}
+                    data-location="footer_quick_links"
                   >
                     {link.label}
                   </a>
@@ -113,6 +127,8 @@ export default function Footer() {
                   <a
                     href={service.href}
                     className="text-gray-400 text-sm hover:text-green-400 transition-colors"
+                    data-conversion="service_link_click"
+                    data-location="footer_services"
                   >
                     {service.label}
                   </a>
@@ -158,6 +174,8 @@ export default function Footer() {
                 <a
                   href="tel:8885881733"
                   className="text-gray-300 text-sm hover:text-green-400 transition-colors font-medium"
+                  data-conversion="phone_click"
+                  data-location="footer_contact"
                 >
                   (888) 588-1733
                 </a>
