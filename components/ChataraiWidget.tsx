@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 const widgetScriptId = "chatarai-widget-script";
-const widgetSrc = "https://www.chatarai.com/widget.js?v=chatarai-canonical-20260610a";
+const widgetSrc = "https://chatarai.com/widget.js?v=chatarai-canonical-20260610a";
 
 export default function ChataraiWidget() {
   useEffect(() => {
