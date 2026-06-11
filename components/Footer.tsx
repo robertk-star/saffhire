@@ -17,16 +17,16 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { label: "Why SaffHire", href: "/#why-saffhire" },
-    { label: "Services", href: "/#services" },
-    { label: "Industries", href: "/#services" },
+    { label: "Why SaffHire", href: "/why-saffhire" },
+    { label: "Services", href: "/services" },
+    { label: "Industries", href: "/industries" },
     { label: "Background Screening Guides", href: "/background-screening-guides" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Referral Partners", href: "/referral-partners" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Contact", href: "/contact" },
     { label: "Login", href: "https://saffhire.instascreen.net/sso/login.taz" },
-    { label: "Create Account", href: "https://sendlink.co/documents/doc-form/69679c4ebf297f0594403f7a?locale=en-US" },
+    { label: "Create Account", href: "https://intake.saffhire.com/" },
   ];
 
   const services = [
@@ -67,7 +67,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/saffhire"
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                 style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
                 aria-label="Facebook"
