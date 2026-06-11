@@ -19,6 +19,17 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ai-powered-resume-fraud-hiring-challenge",
+    title: "AI-Powered Resume Fraud: The New Hiring Challenge Employers Can’t Ignore",
+    excerpt:
+      "AI-generated resumes can make candidates look more qualified than they are. Learn how employers can use verification and background screening to reduce hiring risk.",
+    category: "Hiring Risk",
+    date: "May 25, 2026",
+    readTime: "8 min read",
+    author: "SaffHire Compliance Team",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/Screenshot2026-04-30at2.37.09PM_978eaaef.png",
+  },
+  {
     slug: "gig-economy-background-screening-contingent-workforce-liability",
     title: "Gig Economy Background Screening: Contingent Workforce Liability Employers Can’t Ignore",
     excerpt:
@@ -249,6 +260,11 @@ export function formatRssDate(date: Date): string {
 export function getRelatedPosts(slug: string): BlogPost[] {
   // Map of related posts (slug -> array of related slugs)
   const relatedPostsMap: Record<string, string[]> = {
+    "ai-powered-resume-fraud-hiring-challenge": [
+      "ai-in-background-screening-faster-smarter-more-reliable",
+      "true-cost-of-bad-hire",
+      "small-business-background-checks",
+    ],
     "gig-economy-background-screening-contingent-workforce-liability": [
       "top-industries-that-require-most-screening",
       "true-cost-of-bad-hire",
