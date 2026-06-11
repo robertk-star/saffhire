@@ -8,8 +8,11 @@ function getSupabaseAdmin() {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
-function isEmailConfigured() {
-  return Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL);
+function getEmailConfig() {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL || 'info@saffhire.com';
+  return { apiKey, from, to, configured: Boolean(apiKey && from) };
 }
 
 function buildEmailText(payload: Record<string, string>) {
@@ -22,6 +25,7 @@ function buildEmailText(payload: Record<string, string>) {
     industry: 'Industry',
     monthlyVolume: 'Monthly Volume',
     message: 'Message',
+    page: 'Submitted From',
   };
 
   return Object.entries(payload)
@@ -31,10 +35,10 @@ function buildEmailText(payload: Record<string, string>) {
 }
 
 async function sendEmail(payload: Record<string, string>) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL || 'info@saffhire.com';
-  const from = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !from) return { sent: false, reason: 'Email is not configured.' };
+  const { apiKey, to, from, configured } = getEmailConfig();
+  if (!configured || !apiKey || !from) {
+    return { sent: false, reason: 'Email delivery is not configured. Add RESEND_API_KEY and CONTACT_FROM_EMAIL in Vercel.' };
+  }
 
   const subject = payload.formType === 'quote'
     ? 'New SaffHire quote request'
@@ -44,7 +48,13 @@ async function sendEmail(payload: Record<string, string>) {
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to, subject, text }),
+    body: JSON.stringify({
+      from,
+      to,
+      reply_to: payload.email,
+      subject,
+      text,
+    }),
   });
 
   if (!response.ok) {
@@ -65,11 +75,11 @@ export async function POST(request: Request) {
   if (!name || !email) return NextResponse.json({ error: 'Name and email are required.' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
-  const emailConfigured = isEmailConfigured();
+  const emailConfig = getEmailConfig();
 
-  if (!supabase && !emailConfigured) {
+  if (!emailConfig.configured) {
     return NextResponse.json(
-      { error: 'Forms are not configured yet. Please call SaffHire at 888-588-1733.' },
+      { error: 'Email delivery is not configured yet. Add RESEND_API_KEY and CONTACT_FROM_EMAIL in Vercel, then redeploy.' },
       { status: 503 }
     );
   }
@@ -86,26 +96,34 @@ export async function POST(request: Request) {
   };
 
   let saved = false;
+  let saveError: string | null = null;
   if (supabase) {
     const table = formType === 'quote' ? 'quote_requests' : 'contact_submissions';
     const { error } = await supabase.from(table).insert(row);
-    if (error && !emailConfigured) {
-      return NextResponse.json({ error: 'Could not save the request.' }, { status: 500 });
-    }
     saved = !error;
+    saveError = error?.message || null;
   }
 
-  const emailResult = await sendEmail({ ...body, formType }).catch((error) => ({
+  const emailResult = await sendEmail({
+    ...body,
+    formType,
+    page: request.headers.get('referer') || '',
+  }).catch((error) => ({
     sent: false,
     reason: error instanceof Error ? error.message : 'Email send failed.',
   }));
 
-  if (!saved && !emailResult.sent) {
+  if (!emailResult.sent) {
     return NextResponse.json(
-      { error: 'Could not send or save the request. Please call SaffHire at 888-588-1733.' },
+      {
+        error: `Email did not send. ${emailResult.reason || 'Please check Resend and Vercel email settings.'}`,
+        saved,
+        saveError,
+        emailSent: false,
+      },
       { status: 500 }
     );
   }
 
-  return NextResponse.json({ ok: true, saved, emailSent: emailResult.sent });
+  return NextResponse.json({ ok: true, saved, saveError, emailSent: true });
 }
