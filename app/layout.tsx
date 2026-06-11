@@ -38,11 +38,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ) : null}
         <TrackingScripts />
         <ConversionEventBridge />
-        <Script
-          src="https://www.chatarai.com/widget.js?v=chatarai-canonical-20260610a"
-          data-site-id="saffhire"
-          strategy="afterInteractive"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -52,6 +47,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         {children}
+        <Script
+          src="https://www.chatarai.com/widget.js?v=chatarai-canonical-20260610a"
+          data-site-id="saffhire"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
