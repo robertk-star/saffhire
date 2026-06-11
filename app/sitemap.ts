@@ -2,13 +2,19 @@ import type { MetadataRoute } from 'next';
 import { seoMetadata } from '@/shared/seoMetadata';
 import { blogPosts } from '@/data/blogPosts';
 import { seoAuthorityPages } from '@/data/seoAuthorityPages';
+import { getPublishedDbBlogPosts } from '@/lib/blogDrafts';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
 const guideHubRoute = '/background-screening-guides';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const dbPosts = await getPublishedDbBlogPosts();
   const staticRoutes = Object.keys(seoMetadata);
-  const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
+  const fileBlogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
+  const dbBlogRoutes = dbPosts.map((post) => `/blog/${post.slug}`);
+  const blogRoutes = Array.from(new Set([...dbBlogRoutes, ...fileBlogRoutes]));
   const authorityRoutes = seoAuthorityPages.map((page) => page.path);
   const routes = Array.from(new Set([...staticRoutes, guideHubRoute, ...authorityRoutes, ...blogRoutes]));
 
