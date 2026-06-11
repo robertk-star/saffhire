@@ -19,6 +19,17 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "gig-economy-background-screening-contingent-workforce-liability",
+    title: "Gig Economy Background Screening: Contingent Workforce Liability Employers Can’t Ignore",
+    excerpt:
+      "Gig workers, contractors, temporary staff, and freelancers can still create safety, customer, compliance, and reputation risk. Learn how employers should approach contingent workforce background screening.",
+    category: "Workforce Risk",
+    date: "May 22, 2026",
+    readTime: "9 min read",
+    author: "SaffHire Compliance Team",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/top-industries-screening-hero-WE6rERMRUjdEYRvK8mNf9T.webp",
+  },
+  {
     slug: "why-warehousing-companies-cant-afford-hiring-mistakes",
     title: "Why Warehousing Companies Can't Afford Hiring Mistakes",
     excerpt:
@@ -238,6 +249,11 @@ export function formatRssDate(date: Date): string {
 export function getRelatedPosts(slug: string): BlogPost[] {
   // Map of related posts (slug -> array of related slugs)
   const relatedPostsMap: Record<string, string[]> = {
+    "gig-economy-background-screening-contingent-workforce-liability": [
+      "top-industries-that-require-most-screening",
+      "true-cost-of-bad-hire",
+      "trucking-companies-bad-hiring-decisions",
+    ],
     "fcra-adverse-action-rules-2025-employer-compliance": [
       "fcra-adverse-action-two-step-notice-requirements-2026",
       "fcra-compliance-checklist-employers-2026",
