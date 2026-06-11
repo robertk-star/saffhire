@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import Script from 'next/script';
 import { organizationSchema, websiteSchema } from '@/lib/structuredData';
 import TrackingScripts from '@/components/TrackingScripts';
 import ConversionEventBridge from '@/components/ConversionEventBridge';
@@ -37,6 +38,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ) : null}
         <TrackingScripts />
         <ConversionEventBridge />
+        <Script
+          src="https://www.chatarai.com/widget.js?v=chatarai-canonical-20260610a"
+          data-site-id="saffhire"
+          strategy="afterInteractive"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
