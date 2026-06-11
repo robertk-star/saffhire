@@ -1,6 +1,7 @@
 import { blogPosts } from '@/data/blogPosts';
+import { getPublishedDbBlogPosts } from '@/lib/blogDrafts';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 function escapeXml(value: string) {
   return value
@@ -17,38 +18,45 @@ function toRssDate(value: string) {
   return date.toUTCString();
 }
 
-export function GET() {
+function tag(name: string, value: string) {
+  return `<${name}>${escapeXml(value)}</${name}>`;
+}
+
+export async function GET() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
-  const items = blogPosts
-    .map((post) => {
-      const url = `${siteUrl}/blog/${post.slug}`;
-      return `
-    <item>
-      <title>${escapeXml(post.title)}</title>
-      <link>${escapeXml(url)}</link>
-      <guid>${escapeXml(url)}</guid>
-      <description>${escapeXml(post.excerpt)}</description>
-      <pubDate>${toRssDate(post.date)}</pubDate>
-      <category>${escapeXml(post.category)}</category>
-      <author>${escapeXml(post.author)}</author>
-    </item>`;
-    })
-    .join('');
+  const dbPosts = await getPublishedDbBlogPosts();
+  const allPosts = [...dbPosts, ...blogPosts]
+    .filter((post, index, array) => array.findIndex((item) => item.slug === post.slug) === index)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>SaffHire Background Screening Blog</title>
-    <link>${escapeXml(siteUrl)}</link>
-    <description>Background screening, FCRA compliance, hiring, and industry updates from SaffHire.</description>
-    <language>en-us</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>${items}
-  </channel>
-</rss>`;
+  const items = allPosts.map((post) => {
+    const url = `${siteUrl}/blog/${post.slug}`;
+    return [
+      '<item>',
+      tag('title', post.title),
+      tag('link', url),
+      tag('guid', url),
+      tag('description', post.excerpt),
+      tag('pubDate', toRssDate(post.date)),
+      tag('category', post.category),
+      tag('author', post.author),
+      '</item>',
+    ].join('');
+  }).join('');
 
-  return new Response(xml, {
-    headers: {
-      'Content-Type': 'application/rss+xml; charset=utf-8',
-    },
-  });
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<rss version="2.0">',
+    '<channel>',
+    tag('title', 'SaffHire Background Screening Blog'),
+    tag('link', siteUrl),
+    tag('description', 'Background screening, FCRA compliance, hiring, and industry updates from SaffHire.'),
+    tag('language', 'en-us'),
+    tag('lastBuildDate', new Date().toUTCString()),
+    items,
+    '</channel>',
+    '</rss>',
+  ].join('');
+
+  return new Response(xml, { headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' } });
 }
