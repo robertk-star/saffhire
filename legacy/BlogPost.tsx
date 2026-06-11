@@ -10,6 +10,7 @@ import PageSEO from "@/components/PageSEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GigEconomyBlogClient from "@/components/GigEconomyBlogClient";
+import AIResumeFraudBlogClient from "@/components/AIResumeFraudBlogClient";
 import { Calendar, Clock, ArrowLeft, Tag, BookOpen, ChevronRight } from "lucide-react";
 import { blogPosts, getRelatedPosts } from "@/data/blogPosts";
 import { blogPostRegistry } from "./blogRegistry";
@@ -18,15 +19,15 @@ import { blogPostRegistry } from "./blogRegistry";
 import { Section, NumberedCard, WarningBox, ConclusionBox, CheckList } from "./blogRegistry";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
 
-const standaloneBlogSlugs = new Set([
-  "gig-economy-background-screening-contingent-workforce-liability",
-]);
-
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
 
-  if (slug && standaloneBlogSlugs.has(slug)) {
+  if (slug === "gig-economy-background-screening-contingent-workforce-liability") {
     return <GigEconomyBlogClient />;
+  }
+
+  if (slug === "ai-powered-resume-fraud-hiring-challenge") {
+    return <AIResumeFraudBlogClient />;
   }
 
   // Find post metadata from Blog listing
