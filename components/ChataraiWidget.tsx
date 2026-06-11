@@ -1,12 +1,23 @@
-import Script from 'next/script';
+"use client";
+
+import { useEffect } from "react";
+
+const widgetScriptId = "chatarai-widget-script";
+const widgetSrc = "https://www.chatarai.com/widget.js?v=chatarai-canonical-20260610a";
 
 export default function ChataraiWidget() {
-  return (
-    <Script
-      id="chatarai-widget"
-      src="https://www.chatarai.com/widget.js?v=chatarai-canonical-20260610a"
-      data-site-id="saffhire"
-      strategy="afterInteractive"
-    />
-  );
+  useEffect(() => {
+    const existingScript = document.getElementById(widgetScriptId);
+    if (existingScript) return;
+
+    const script = document.createElement("script");
+    script.id = widgetScriptId;
+    script.src = widgetSrc;
+    script.setAttribute("data-site-id", "saffhire");
+    script.async = true;
+
+    document.body.appendChild(script);
+  }, []);
+
+  return null;
 }
