@@ -1,9 +1,11 @@
 import { seoMetadata } from '@/shared/seoMetadata';
 import { seoAuthorityPages } from '@/data/seoAuthorityPages';
+import { blogPosts } from '@/data/blogPosts';
+import { getPublishedDbBlogPosts } from '@/lib/blogDrafts';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
-export function GET() {
+export async function GET() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
 
   const mainPages = Object.entries(seoMetadata)
@@ -12,6 +14,13 @@ export function GET() {
 
   const authorityPages = seoAuthorityPages
     .map((page) => `- ${siteUrl}${page.path}: ${page.title} — ${page.heroAnswer}`)
+    .join('\n');
+
+  const dbPosts = await getPublishedDbBlogPosts();
+  const allPosts = [...dbPosts, ...blogPosts]
+    .filter((post, index, array) => array.findIndex((item) => item.slug === post.slug) === index)
+    .slice(0, 25)
+    .map((post) => `- ${siteUrl}/blog/${post.slug}: ${post.title} — ${post.excerpt}`)
     .join('\n');
 
   const content = `# SaffHire Background Screening
@@ -36,6 +45,9 @@ ${mainPages}
 
 ## Background screening guides
 ${authorityPages}
+
+## Latest blog posts
+${allPosts}
 `;
 
   return new Response(content, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
