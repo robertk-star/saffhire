@@ -40,7 +40,13 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
     const { error: updateError } = await supabase
       .from('social_post_drafts')
-      .update({ image_url: generatedImage.imageUrl, notes })
+      .update({
+        image_url: generatedImage.imageUrl,
+        image_source: 'ai_generated',
+        image_generation_error: null,
+        image_generated_at: new Date().toISOString(),
+        notes,
+      })
       .eq('id', id);
 
     if (updateError) throw updateError;
@@ -53,7 +59,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
     await supabase
       .from('social_post_drafts')
-      .update({ notes })
+      .update({
+        image_generation_error: message,
+        notes,
+      })
       .eq('id', id);
   }
 
