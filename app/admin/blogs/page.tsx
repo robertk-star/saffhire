@@ -36,7 +36,10 @@ export default async function BlogAdminPage() {
             <h1 className="text-4xl font-black text-slate-900">Blog Drafts</h1>
             <p className="text-gray-600 mt-2">Review, approve, and publish blog drafts.</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
+            <a href="/api/cron/generate-blog-draft" className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
+              Generate Blog Draft Now
+            </a>
             <a href="/admin/blogs/new" className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
               New Draft
             </a>
