@@ -22,7 +22,8 @@ function networkKey(platform: string) {
 }
 
 function buildPostText(draft: SocialPostDraft) {
-  return [draft.post_text, draft.hashtags].filter(Boolean).join('\n\n').trim();
+  const mainText = [draft.post_text, draft.hashtags].filter(Boolean).join('\n\n').trim();
+  return [mainText, draft.blog_url].filter(Boolean).join('\n\n').trim();
 }
 
 export function buildPublerPayload(input: { draft: SocialPostDraft; settings: SocialPostingSettings }) {
@@ -36,11 +37,11 @@ export function buildPublerPayload(input: { draft: SocialPostDraft; settings: So
       state: 'scheduled',
       posts: [
         {
+          state: 'scheduled',
           networks: {
             [key]: {
-              type: 'link',
+              type: 'status',
               text,
-              url: input.draft.blog_url,
             },
           },
           accounts: [
