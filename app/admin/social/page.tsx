@@ -50,13 +50,14 @@ export default async function SocialDraftsPage() {
             </select>
             <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Generate Social Posts</button>
           </div>
-          <p className="text-xs text-gray-500 mt-3">This creates draft posts for Facebook, Instagram, Google Business Profile, and LinkedIn.</p>
+          <p className="text-xs text-gray-500 mt-3">This creates draft posts for Facebook, Instagram, Google Business Profile, and LinkedIn. The blog image is attached to each post.</p>
         </form>
 
         <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-slate-900 text-white">
               <tr>
+                <th className="text-left px-5 py-4">Image</th>
                 <th className="text-left px-5 py-4">Blog</th>
                 <th className="text-left px-5 py-4">Platform</th>
                 <th className="text-left px-5 py-4">Status</th>
@@ -66,9 +67,16 @@ export default async function SocialDraftsPage() {
             </thead>
             <tbody>
               {drafts.length === 0 ? (
-                <tr><td colSpan={5} className="px-5 py-10 text-center text-gray-500">No social drafts yet.</td></tr>
+                <tr><td colSpan={6} className="px-5 py-10 text-center text-gray-500">No social drafts yet.</td></tr>
               ) : drafts.map((draft) => (
                 <tr key={draft.id} className="border-t border-gray-100">
+                  <td className="px-5 py-4">
+                    {draft.image_url ? (
+                      <img src={draft.image_url} alt="Social post image" className="h-14 w-20 rounded-md object-cover border border-gray-200" />
+                    ) : (
+                      <span className="text-xs text-red-600 font-bold">No image</span>
+                    )}
+                  </td>
                   <td className="px-5 py-4">
                     <div className="font-bold text-slate-900">{draft.blog_title}</div>
                     <div className="text-xs text-gray-500">/{draft.blog_slug}</div>
