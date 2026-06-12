@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { getAdminSession } from '@/lib/adminAuth';
-import { getSocialPostDraftById, platformLabel } from '@/lib/socialPostDrafts';
+import { getSocialPostDraftById, imageSourceLabel, platformLabel } from '@/lib/socialPostDrafts';
 
 export const metadata: Metadata = {
   title: 'Edit Social Post Draft',
@@ -29,7 +29,8 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
         <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h2 className="font-black text-slate-900">AI Social Image</h2>
-            <p className="text-sm text-slate-600 mt-1">Generate a custom image for this specific platform post.</p>
+            <p className="text-sm text-slate-600 mt-1">Current image source: <strong>{imageSourceLabel(draft.image_source)}</strong></p>
+            {draft.image_generated_at ? <p className="text-xs text-slate-500 mt-1">Generated: {new Date(draft.image_generated_at).toLocaleString()}</p> : null}
           </div>
           <form action={`/api/admin/social/${draft.id}/generate-image`} method="post">
             <button className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
@@ -37,6 +38,13 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
             </button>
           </form>
         </div>
+
+        {draft.image_generation_error ? (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-5 text-sm text-red-800 break-words">
+            <p className="font-bold mb-2">Last image generation error</p>
+            <p>{draft.image_generation_error}</p>
+          </div>
+        ) : null}
 
         <form action={`/api/admin/social/${draft.id}`} method="post" className="space-y-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-700">
