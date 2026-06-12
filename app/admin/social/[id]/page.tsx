@@ -26,6 +26,18 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
           <p className="mt-2 text-gray-600">{draft.blog_title}</p>
         </div>
 
+        <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="font-black text-slate-900">AI Social Image</h2>
+            <p className="text-sm text-slate-600 mt-1">Generate a custom image for this specific platform post.</p>
+          </div>
+          <form action={`/api/admin/social/${draft.id}/generate-image`} method="post">
+            <button className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
+              Regenerate AI Image
+            </button>
+          </form>
+        </div>
+
         <form action={`/api/admin/social/${draft.id}`} method="post" className="space-y-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-700">
             <p><strong>Status:</strong> {draft.status.replaceAll('_', ' ')}</p>
