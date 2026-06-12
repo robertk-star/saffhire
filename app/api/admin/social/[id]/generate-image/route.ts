@@ -36,20 +36,25 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     const notes = [
       draft.notes || '',
       `AI social image regenerated. Storage path: ${generatedImage.storagePath}`,
+      `Image model used: ${generatedImage.model || 'unknown'} ${generatedImage.size || ''}`.trim(),
     ].filter(Boolean).join('\n\n');
 
-    const { error: updateError } = await supabase
+    const baseUpdate = await supabase
+      .from('social_post_drafts')
+      .update({ image_url: generatedImage.imageUrl, notes })
+      .eq('id', id);
+
+    if (baseUpdate.error) throw baseUpdate.error;
+
+    await supabase
       .from('social_post_drafts')
       .update({
-        image_url: generatedImage.imageUrl,
         image_source: 'ai_generated',
         image_generation_error: null,
         image_generated_at: new Date().toISOString(),
-        notes,
       })
-      .eq('id', id);
-
-    if (updateError) throw updateError;
+      .eq('id', id)
+      .then(() => null);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Could not generate social image.';
     const notes = [
@@ -59,11 +64,14 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
     await supabase
       .from('social_post_drafts')
-      .update({
-        image_generation_error: message,
-        notes,
-      })
+      .update({ notes })
       .eq('id', id);
+
+    await supabase
+      .from('social_post_drafts')
+      .update({ image_generation_error: message })
+      .eq('id', id)
+      .then(() => null);
   }
 
   return NextResponse.redirect(new URL(`/admin/social/${id}`, request.url), { status: 303 });
