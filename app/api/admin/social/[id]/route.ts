@@ -21,6 +21,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   const status = statusForAction(action);
 
   const update: Record<string, unknown> = {
+    image_url: String(formData.get('image_url') || '').trim() || null,
     post_text: String(formData.get('post_text') || '').trim(),
     hashtags: String(formData.get('hashtags') || '').trim(),
     notes: String(formData.get('notes') || '').trim() || null,
