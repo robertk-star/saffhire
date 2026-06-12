@@ -30,22 +30,20 @@ Style requirements:
 }
 
 function buildSocialImagePrompt(input: { platform: string; blogTitle: string; postText: string; hashtags?: string }) {
-  return `Create a professional social media image for SaffHire Background Screening.
+  return `Create a professional social media image for a business services company.
 
 Platform: ${input.platform}
-Related blog title: ${input.blogTitle}
-Social post theme: ${input.postText}
-Hashtags: ${input.hashtags || ''}
+Topic: ${input.blogTitle}
+Post summary: ${input.postText.slice(0, 600)}
 
 Style requirements:
-- Clean modern business illustration or realistic business-style image
-- Professional, trustworthy, polished, employment screening brand feel
+- Clean modern business illustration
+- Professional, trustworthy, polished, corporate feel
 - Suitable for ${input.platform} social media
+- Show abstract business concepts like hiring, teamwork, documents, technology, checklists, dashboards, or professional office work
 - No text, no letters, no numbers, no logos, no watermarks
-- No identifiable real people or close-up faces
-- Use visual themes related to hiring, compliance, identity, verification, records, screening, security, workforce risk, or employer trust
-- Make the image visually distinct from a blog hero image
-- High quality social post image`;
+- Avoid close-up faces and avoid identifiable real people
+- Bright, clean, high quality social post image`;
 }
 
 async function ensureBlogImageBucket() {
