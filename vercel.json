@@ -2,11 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/generate-blog-draft",
-      "schedule": "0 14 * * 1"
-    },
-    {
-      "path": "/api/cron/generate-blog-draft",
-      "schedule": "0 14 * * 4"
+      "schedule": "0 * * * *"
     }
   ]
 }
