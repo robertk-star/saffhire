@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getBlogImageForCategory } from '@/data/blogCategoryImages';
+import { generateAndStoreBlogImage } from '@/lib/blogImageGenerator';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 function cleanSlug(value: string) {
@@ -50,7 +51,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Missing required fields: title, slug or title, excerpt, and content are required.' }, { status: 400 });
   }
 
-  const imageUrl = stringField(body, 'image_url') || stringField(body, 'imageUrl') || getBlogImageForCategory(category);
+  let imageUrl = stringField(body, 'image_url') || stringField(body, 'imageUrl') || '';
+  let imageNote = imageUrl ? 'Custom image URL provided.' : '';
+
+  if (!imageUrl) {
+    try {
+      const generatedImage = await generateAndStoreBlogImage({ title, slug, excerpt, category });
+      imageUrl = generatedImage.imageUrl;
+      imageNote = `AI image generated and attached. Storage path: ${generatedImage.storagePath}`;
+    } catch (imageError) {
+      const imageMessage = imageError instanceof Error ? imageError.message : 'AI image generation failed.';
+      imageUrl = getBlogImageForCategory(category);
+      imageNote = `AI image generation failed, so default category image was applied. Error: ${imageMessage}`;
+    }
+  }
+
+  const baseNotes = stringField(body, 'notes') || 'AI-generated draft submitted for review.';
 
   const { data, error } = await supabase
     .from('blog_drafts')
@@ -63,7 +79,7 @@ export async function POST(request: Request) {
       author: stringField(body, 'author', 'SaffHire Compliance Team'),
       image_url: imageUrl,
       read_time: stringField(body, 'read_time') || stringField(body, 'readTime') || '8 min read',
-      notes: stringField(body, 'notes') || 'AI-generated draft submitted for review. Category image applied if no custom image was provided.',
+      notes: `${baseNotes}\n\n${imageNote}`.trim(),
       status: 'pending_review',
       approved_at: null,
       published_at: null,
