@@ -27,7 +27,7 @@ export default async function SocialPostingSettingsPage() {
 
         <form action="/api/admin/social/settings" method="post" className="space-y-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm text-blue-900">
-            Phase 16B-1 only saves settings. It does not send anything to Publer yet.
+            Phase 16B-2 can send approved drafts to a configured Publer endpoint. If Publer gives you a different endpoint format, update the endpoint here without changing code.
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -42,11 +42,39 @@ export default async function SocialPostingSettingsPage() {
           </div>
 
           <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Publer API Endpoint</label>
+            <input name="publer_api_endpoint" defaultValue={settings.publer_api_endpoint || ''} placeholder="Paste the Publer create/schedule post endpoint here" className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+            <p className="text-xs text-gray-500 mt-2">This should be the Publer endpoint used to create or schedule a post. Leave blank until Publer gives you the endpoint.</p>
+          </div>
+
+          <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">Publer API Token</label>
             <input name="publer_api_token" type="password" placeholder={settings.has_publer_api_token ? 'Token saved. Leave blank to keep current token.' : 'Paste Publer API token here'} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
             <p className="text-xs text-gray-500 mt-2">
               {settings.has_publer_api_token ? 'A token is saved. For safety, it is not displayed here.' : 'No Publer token is saved yet.'}
             </p>
+          </div>
+
+          <div>
+            <p className="block text-sm font-bold text-gray-700 mb-3">Publer Account IDs</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-xs font-bold text-gray-600 mb-2">Facebook Account ID</label>
+                <input name="publer_facebook_account_id" defaultValue={settings.publer_facebook_account_id || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-600 mb-2">Instagram Account ID</label>
+                <input name="publer_instagram_account_id" defaultValue={settings.publer_instagram_account_id || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-600 mb-2">Google Business Profile Account ID</label>
+                <input name="publer_google_business_account_id" defaultValue={settings.publer_google_business_account_id || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-600 mb-2">LinkedIn Account ID</label>
+                <input name="publer_linkedin_account_id" defaultValue={settings.publer_linkedin_account_id || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -104,6 +132,7 @@ export default async function SocialPostingSettingsPage() {
 
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-700">
             <p><strong>Token saved:</strong> {settings.has_publer_api_token ? 'Yes' : 'No'}</p>
+            <p><strong>Endpoint saved:</strong> {settings.publer_api_endpoint ? 'Yes' : 'No'}</p>
             <p><strong>Last updated:</strong> {settings.updated_at ? new Date(settings.updated_at).toLocaleString() : 'Not saved yet'}</p>
           </div>
 
