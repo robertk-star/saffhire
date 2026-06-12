@@ -29,6 +29,25 @@ Style requirements:
 - High quality website blog image`;
 }
 
+function buildSocialImagePrompt(input: { platform: string; blogTitle: string; postText: string; hashtags?: string }) {
+  return `Create a professional social media image for SaffHire Background Screening.
+
+Platform: ${input.platform}
+Related blog title: ${input.blogTitle}
+Social post theme: ${input.postText}
+Hashtags: ${input.hashtags || ''}
+
+Style requirements:
+- Clean modern business illustration or realistic business-style image
+- Professional, trustworthy, polished, employment screening brand feel
+- Suitable for ${input.platform} social media
+- No text, no letters, no numbers, no logos, no watermarks
+- No identifiable real people or close-up faces
+- Use visual themes related to hiring, compliance, identity, verification, records, screening, security, workforce risk, or employer trust
+- Make the image visually distinct from a blog hero image
+- High quality social post image`;
+}
+
 async function ensureBlogImageBucket() {
   const supabase = getSupabaseAdmin();
   if (!supabase) throw new Error('Database is not configured.');
@@ -98,12 +117,11 @@ async function generateImageBytes(prompt: string) {
   throw new Error('OpenAI image response did not include image data.');
 }
 
-export async function generateAndStoreBlogImage(input: { title: string; excerpt: string; category: string; slug?: string }) {
+async function storeGeneratedImage(input: { prompt: string; slug: string; prefix: string }) {
   const supabase = await ensureBlogImageBucket();
-  const prompt = buildImagePrompt(input);
-  const generated = await generateImageBytes(prompt);
-  const slug = cleanSlug(input.slug || input.title || 'blog-image');
-  const path = `${slug}-${Date.now()}.${generated.extension}`;
+  const generated = await generateImageBytes(input.prompt);
+  const slug = cleanSlug(input.slug || 'generated-image');
+  const path = `${input.prefix}/${slug}-${Date.now()}.${generated.extension}`;
 
   const { error } = await supabase.storage.from(bucketName).upload(path, generated.bytes, {
     contentType: generated.contentType,
@@ -117,7 +135,25 @@ export async function generateAndStoreBlogImage(input: { title: string; excerpt:
 
   return {
     imageUrl: data.publicUrl,
-    prompt,
+    prompt: input.prompt,
     storagePath: path,
   };
+}
+
+export async function generateAndStoreBlogImage(input: { title: string; excerpt: string; category: string; slug?: string }) {
+  const prompt = buildImagePrompt(input);
+  return storeGeneratedImage({
+    prompt,
+    slug: input.slug || input.title || 'blog-image',
+    prefix: 'blog-heroes',
+  });
+}
+
+export async function generateAndStoreSocialImage(input: { platform: string; blogTitle: string; postText: string; hashtags?: string; slug?: string }) {
+  const prompt = buildSocialImagePrompt(input);
+  return storeGeneratedImage({
+    prompt,
+    slug: input.slug || `${input.platform}-${input.blogTitle}`,
+    prefix: 'social-posts',
+  });
 }
