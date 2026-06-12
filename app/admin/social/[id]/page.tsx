@@ -16,6 +16,8 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
   const draft = await getSocialPostDraftById(id);
   if (!draft) notFound();
 
+  const canSend = draft.status === 'approved' || draft.status === 'failed';
+
   return (
     <main className="min-h-screen bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 py-10">
@@ -38,6 +40,23 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
             </button>
           </form>
         </div>
+
+        {draft.publer_error ? (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-5 text-sm text-red-800 break-words">
+            <p className="font-bold mb-2">Last Publer send error</p>
+            <p>{draft.publer_error}</p>
+          </div>
+        ) : null}
+
+        {draft.publer_post_id || draft.sent_at ? (
+          <div className="mb-6 rounded-xl border border-green-200 bg-green-50 p-5 text-sm text-green-800">
+            <p className="font-bold mb-2">Publer Send Status</p>
+            {draft.publer_post_id ? <p><strong>Publer post ID:</strong> {draft.publer_post_id}</p> : null}
+            {draft.publer_account_id ? <p><strong>Publer account ID:</strong> {draft.publer_account_id}</p> : null}
+            {draft.sent_at ? <p><strong>Sent at:</strong> {new Date(draft.sent_at).toLocaleString()}</p> : null}
+            <p><strong>Send attempts:</strong> {draft.send_attempts || 0}</p>
+          </div>
+        ) : null}
 
         {draft.image_generation_error ? (
           <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-5 text-sm text-red-800 break-words">
@@ -92,6 +111,20 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
             <button name="action" value="reject" className="rounded-md bg-orange-500 px-5 py-3 text-sm font-bold text-white hover:bg-orange-600">Reject</button>
           </div>
         </form>
+
+        <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="font-black text-slate-900 mb-2">Publer</h2>
+          <p className="text-sm text-gray-600 mb-4">Approved posts can be sent to the configured Publer endpoint.</p>
+          {canSend ? (
+            <form action={`/api/admin/social/${draft.id}/send-publer`} method="post">
+              <button className="rounded-md bg-indigo-500 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-600">
+                Send to Publer
+              </button>
+            </form>
+          ) : (
+            <p className="text-sm text-gray-500">Approve this social post before sending it to Publer.</p>
+          )}
+        </div>
       </div>
     </main>
   );
