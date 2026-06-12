@@ -33,6 +33,24 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
             <a href={draft.blog_url} target="_blank" rel="noreferrer" className="text-green-700 font-bold hover:underline">View blog</a>
           </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Image URL</label>
+              <input name="image_url" defaultValue={draft.image_url || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+              <p className="text-xs text-gray-500 mt-2">This image will be sent with the social post in the Publer phase.</p>
+            </div>
+            <div>
+              <p className="block text-sm font-bold text-gray-700 mb-2">Image Preview</p>
+              <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+                {draft.image_url ? (
+                  <img src={draft.image_url} alt="Social post image preview" className="h-44 w-full rounded-lg object-cover" />
+                ) : (
+                  <div className="h-44 w-full rounded-lg bg-white border border-dashed border-red-300 flex items-center justify-center text-sm font-bold text-red-600">No image attached</div>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">Post Text</label>
             <textarea name="post_text" rows={10} defaultValue={draft.post_text} required className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
