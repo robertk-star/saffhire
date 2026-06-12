@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { blogGenerationTopics } from '@/data/blogGenerationTopics';
+import { getAdminSession } from '@/lib/adminAuth';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 export const dynamic = 'force-dynamic';
@@ -110,13 +111,17 @@ Requirements:
 - Include a short disclaimer paragraph at the end that the article is informational and not legal advice.`;
 }
 
-export async function GET(request: Request) {
-  const cronSecret = process.env.CRON_SECRET;
-  if (!cronSecret) {
-    return NextResponse.json({ error: 'CRON_SECRET is not configured.' }, { status: 503 });
-  }
+async function isAuthorized(request: Request) {
+  const adminLoggedIn = await getAdminSession();
+  if (adminLoggedIn) return true;
 
-  if (getSecret(request) !== cronSecret) {
+  const cronSecret = process.env.CRON_SECRET;
+  if (!cronSecret) return false;
+  return getSecret(request) === cronSecret;
+}
+
+export async function GET(request: Request) {
+  if (!(await isAuthorized(request))) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
   }
 
