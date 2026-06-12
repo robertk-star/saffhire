@@ -43,6 +43,9 @@ export default async function SocialDraftsPage() {
             <p className="text-gray-600 mt-2">Generate, edit, and approve social media drafts from published blogs.</p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <a href="/admin/social/settings" className="rounded-md bg-purple-500 px-5 py-3 text-sm font-bold text-white hover:bg-purple-600">
+              Posting Settings
+            </a>
             <form action="/api/admin/social/generate-missing-image" method="post">
               <button className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
                 Generate AI Image
