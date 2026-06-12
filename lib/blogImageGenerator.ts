@@ -63,12 +63,25 @@ async function ensureBlogImageBucket() {
   return supabase;
 }
 
-async function generateImageBytes(prompt: string) {
+function resolveImageSettings(kind: 'blog' | 'social') {
+  if (kind === 'social') {
+    return {
+      model: process.env.OPENAI_SOCIAL_IMAGE_MODEL || process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1',
+      size: process.env.OPENAI_SOCIAL_IMAGE_SIZE || '1024x1024',
+    };
+  }
+
+  return {
+    model: process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1',
+    size: process.env.OPENAI_IMAGE_SIZE || '1536x1024',
+  };
+}
+
+async function generateImageBytes(prompt: string, kind: 'blog' | 'social') {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY is missing.');
 
-  const model = process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1';
-  const size = process.env.OPENAI_IMAGE_SIZE || '1536x1024';
+  const { model, size } = resolveImageSettings(kind);
 
   const response = await fetch('https://api.openai.com/v1/images/generations', {
     method: 'POST',
@@ -86,12 +99,12 @@ async function generateImageBytes(prompt: string) {
 
   if (!response.ok) {
     const details = await response.text().catch(() => 'Unknown OpenAI image error');
-    throw new Error(details);
+    throw new Error(`Image API failed using model ${model} and size ${size}: ${details}`);
   }
 
   const result = await response.json() as { data?: Array<{ b64_json?: string; url?: string }> };
   const image = result.data?.[0];
-  if (!image) throw new Error('OpenAI did not return an image.');
+  if (!image) throw new Error(`OpenAI did not return an image using model ${model} and size ${size}.`);
 
   if (image.b64_json) {
     return {
@@ -115,9 +128,9 @@ async function generateImageBytes(prompt: string) {
   throw new Error('OpenAI image response did not include image data.');
 }
 
-async function storeGeneratedImage(input: { prompt: string; slug: string; prefix: string }) {
+async function storeGeneratedImage(input: { prompt: string; slug: string; prefix: string; kind: 'blog' | 'social' }) {
   const supabase = await ensureBlogImageBucket();
-  const generated = await generateImageBytes(input.prompt);
+  const generated = await generateImageBytes(input.prompt, input.kind);
   const slug = cleanSlug(input.slug || 'generated-image');
   const path = `${input.prefix}/${slug}-${Date.now()}.${generated.extension}`;
 
@@ -144,6 +157,7 @@ export async function generateAndStoreBlogImage(input: { title: string; excerpt:
     prompt,
     slug: input.slug || input.title || 'blog-image',
     prefix: 'blog-heroes',
+    kind: 'blog',
   });
 }
 
@@ -153,5 +167,6 @@ export async function generateAndStoreSocialImage(input: { platform: string; blo
     prompt,
     slug: input.slug || `${input.platform}-${input.blogTitle}`,
     prefix: 'social-posts',
+    kind: 'social',
   });
 }
