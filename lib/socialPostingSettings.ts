@@ -4,7 +4,12 @@ export type SocialPostingSettings = {
   id: string;
   provider: string;
   publer_api_token: string | null;
+  publer_api_endpoint: string | null;
   publer_workspace_id: string | null;
+  publer_facebook_account_id: string | null;
+  publer_instagram_account_id: string | null;
+  publer_google_business_account_id: string | null;
+  publer_linkedin_account_id: string | null;
   default_schedule_delay_minutes: number;
   default_hashtags: string;
   timezone: string;
@@ -25,7 +30,12 @@ export const defaultSocialPostingSettings: SocialPostingSettings = {
   id: 'default',
   provider: 'publer',
   publer_api_token: null,
+  publer_api_endpoint: null,
   publer_workspace_id: null,
+  publer_facebook_account_id: null,
+  publer_instagram_account_id: null,
+  publer_google_business_account_id: null,
+  publer_linkedin_account_id: null,
   default_schedule_delay_minutes: 60,
   default_hashtags: '',
   timezone: 'America/Chicago',
@@ -49,7 +59,7 @@ export async function getSocialPostingSettings() {
     .single();
 
   if (error || !data) return defaultSocialPostingSettings;
-  return data as SocialPostingSettings;
+  return { ...defaultSocialPostingSettings, ...(data as Partial<SocialPostingSettings>) } as SocialPostingSettings;
 }
 
 export async function getSafeSocialPostingSettings() {
@@ -57,7 +67,12 @@ export async function getSafeSocialPostingSettings() {
   const safe: SafeSocialPostingSettings = {
     id: settings.id,
     provider: settings.provider,
+    publer_api_endpoint: settings.publer_api_endpoint,
     publer_workspace_id: settings.publer_workspace_id,
+    publer_facebook_account_id: settings.publer_facebook_account_id,
+    publer_instagram_account_id: settings.publer_instagram_account_id,
+    publer_google_business_account_id: settings.publer_google_business_account_id,
+    publer_linkedin_account_id: settings.publer_linkedin_account_id,
     default_schedule_delay_minutes: settings.default_schedule_delay_minutes,
     default_hashtags: settings.default_hashtags,
     timezone: settings.timezone,
@@ -72,4 +87,12 @@ export async function getSafeSocialPostingSettings() {
   };
 
   return safe;
+}
+
+export function publerAccountIdForPlatform(settings: SocialPostingSettings, platform: string) {
+  if (platform === 'facebook') return settings.publer_facebook_account_id;
+  if (platform === 'instagram') return settings.publer_instagram_account_id;
+  if (platform === 'google_business') return settings.publer_google_business_account_id;
+  if (platform === 'linkedin') return settings.publer_linkedin_account_id;
+  return null;
 }
