@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAdminSession } from '@/lib/adminAuth';
+import { generateAndStoreSocialImage } from '@/lib/blogImageGenerator';
 import { getPublishedBlogOptionBySlug, socialPlatforms } from '@/lib/socialPostDrafts';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
@@ -90,22 +91,42 @@ export async function POST(request: Request) {
 
   const generated = await callOpenAI(buildPrompt(blog));
 
-  const rows = socialPlatforms.map((platform) => {
+  const rows = await Promise.all(socialPlatforms.map(async (platform) => {
     const draft = generated[platform.value] || { post_text: '', hashtags: '' };
+    const postText = String(draft.post_text || '').trim();
+    const hashtags = String(draft.hashtags || '').trim();
+    let imageUrl = blog.image;
+    let imageNote = 'Blog image used as fallback.';
+
+    try {
+      const generatedImage = await generateAndStoreSocialImage({
+        platform: platform.label,
+        blogTitle: blog.title,
+        postText,
+        hashtags,
+        slug: `${blog.slug}-${platform.value}`,
+      });
+      imageUrl = generatedImage.imageUrl;
+      imageNote = `AI social image generated and attached. Storage path: ${generatedImage.storagePath}`;
+    } catch (imageError) {
+      const message = imageError instanceof Error ? imageError.message : 'AI social image generation failed.';
+      imageNote = `AI social image failed, so blog image was used. Error: ${message}`;
+    }
+
     return {
       blog_slug: blog.slug,
       blog_title: blog.title,
       blog_url: blog.url,
-      image_url: blog.image,
+      image_url: imageUrl,
       platform: platform.value,
-      post_text: String(draft.post_text || '').trim(),
-      hashtags: String(draft.hashtags || '').trim(),
+      post_text: postText,
+      hashtags,
       status: 'draft',
-      notes: 'AI-generated social draft for admin review. Blog image attached.',
+      notes: `AI-generated social draft for admin review. ${imageNote}`,
       approved_at: null,
       sent_at: null,
     };
-  });
+  }));
 
   const { error } = await supabase
     .from('social_post_drafts')
