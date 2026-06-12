@@ -10,6 +10,7 @@ export type SocialPostDraft = {
   blog_slug: string;
   blog_title: string;
   blog_url: string;
+  image_url: string | null;
   platform: SocialPlatform;
   post_text: string;
   hashtags: string;
@@ -28,6 +29,7 @@ export type SocialBlogOption = {
   category: string;
   date: string;
   url: string;
+  image: string;
 };
 
 export const socialPlatforms: Array<{ value: SocialPlatform; label: string }> = [
@@ -55,6 +57,7 @@ export async function getPublishedBlogOptions() {
     category: post.category,
     date: post.date,
     url: `${siteUrl}/blog/${post.slug}`,
+    image: post.image,
   })) as SocialBlogOption[];
 }
 
