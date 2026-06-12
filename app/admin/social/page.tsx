@@ -36,7 +36,14 @@ export default async function SocialDraftsPage() {
             <h1 className="text-4xl font-black text-slate-900">Blog Social Posts</h1>
             <p className="text-gray-600 mt-2">Generate, edit, and approve social media drafts from published blogs.</p>
           </div>
-          <a href="/admin/blogs" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Back to Blogs</a>
+          <div className="flex flex-wrap gap-3">
+            <form action="/api/admin/social/generate-missing-image" method="post">
+              <button className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
+                Generate Missing AI Image
+              </button>
+            </form>
+            <a href="/admin/blogs" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Back to Blogs</a>
+          </div>
         </div>
 
         <form action="/api/admin/social/generate" method="post" className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -50,7 +57,7 @@ export default async function SocialDraftsPage() {
             </select>
             <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Generate Social Posts</button>
           </div>
-          <p className="text-xs text-gray-500 mt-3">This creates draft posts for Facebook, Instagram, Google Business Profile, and LinkedIn. The blog image is attached to each post.</p>
+          <p className="text-xs text-gray-500 mt-3">This creates the social post text and attaches the blog image first. Use Generate Missing AI Image to create custom post images one at a time.</p>
         </form>
 
         <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
