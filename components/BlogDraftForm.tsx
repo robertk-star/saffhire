@@ -1,7 +1,10 @@
+import { getBlogImageForCategory } from '@/data/blogCategoryImages';
 import type { BlogDraft } from '@/lib/blogDrafts';
 
 export default function BlogDraftForm({ draft }: { draft?: BlogDraft | null }) {
   const action = draft ? `/api/admin/blogs/${draft.id}` : '/api/admin/blogs';
+  const category = draft?.category || 'Background Screening';
+  const previewImage = draft?.image_url || getBlogImageForCategory(category);
 
   return (
     <form action={action} method="post" className="space-y-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -19,7 +22,8 @@ export default function BlogDraftForm({ draft }: { draft?: BlogDraft | null }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Category</label>
-          <input name="category" defaultValue={draft?.category || 'Background Screening'} required className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+          <input name="category" defaultValue={category} required className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+          <p className="text-xs text-gray-500 mt-2">If Image URL is blank, this category chooses the default image.</p>
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Author</label>
@@ -31,9 +35,21 @@ export default function BlogDraftForm({ draft }: { draft?: BlogDraft | null }) {
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-bold text-gray-700 mb-2">Image URL</label>
-        <input name="image_url" defaultValue={draft?.image_url || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">Image URL</label>
+          <input name="image_url" defaultValue={draft?.image_url || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+          <p className="text-xs text-gray-500 mt-2">Leave blank to use the category default image. Paste a full image URL here to override it.</p>
+        </div>
+        <div>
+          <p className="block text-sm font-bold text-gray-700 mb-2">Current Image Preview</p>
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+            <img src={previewImage} alt="Blog image preview" className="h-40 w-full rounded-lg object-cover" />
+            <p className="text-xs text-gray-500 mt-2">
+              {draft?.image_url ? 'Using custom image URL.' : `Using default image for ${category}.`}
+            </p>
+          </div>
+        </div>
       </div>
 
       <div>
