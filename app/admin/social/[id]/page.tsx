@@ -1,0 +1,60 @@
+import type { Metadata } from 'next';
+import { notFound, redirect } from 'next/navigation';
+import { getAdminSession } from '@/lib/adminAuth';
+import { getSocialPostDraftById, platformLabel } from '@/lib/socialPostDrafts';
+
+export const metadata: Metadata = {
+  title: 'Edit Social Post Draft',
+  robots: { index: false, follow: false },
+};
+
+export default async function SocialDraftDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const isLoggedIn = await getAdminSession();
+  if (!isLoggedIn) redirect('/admin/login');
+
+  const { id } = await params;
+  const draft = await getSocialPostDraftById(id);
+  if (!draft) notFound();
+
+  return (
+    <main className="min-h-screen bg-slate-50">
+      <div className="max-w-4xl mx-auto px-4 py-10">
+        <a href="/admin/social" className="text-sm font-bold text-green-700 hover:underline">Back to Social Posts</a>
+        <div className="mt-4 mb-8">
+          <p className="text-sm font-bold uppercase tracking-wider text-green-600 mb-2">Edit Social Draft</p>
+          <h1 className="text-4xl font-black text-slate-900">{platformLabel(draft.platform)}</h1>
+          <p className="mt-2 text-gray-600">{draft.blog_title}</p>
+        </div>
+
+        <form action={`/api/admin/social/${draft.id}`} method="post" className="space-y-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-700">
+            <p><strong>Status:</strong> {draft.status.replaceAll('_', ' ')}</p>
+            <p><strong>Platform:</strong> {platformLabel(draft.platform)}</p>
+            <a href={draft.blog_url} target="_blank" rel="noreferrer" className="text-green-700 font-bold hover:underline">View blog</a>
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Post Text</label>
+            <textarea name="post_text" rows={10} defaultValue={draft.post_text} required className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Hashtags</label>
+            <input name="hashtags" defaultValue={draft.hashtags} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Notes</label>
+            <textarea name="notes" rows={3} defaultValue={draft.notes || ''} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <button name="action" value="save" className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800">Save Draft</button>
+            <button name="action" value="approve" className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Approve</button>
+            <button name="action" value="reject" className="rounded-md bg-orange-500 px-5 py-3 text-sm font-bold text-white hover:bg-orange-600">Reject</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  );
+}
