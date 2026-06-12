@@ -20,6 +20,11 @@ export type SocialPostDraft = {
   hashtags: string;
   status: SocialPostStatus;
   notes: string | null;
+  publer_account_id: string | null;
+  publer_post_id: string | null;
+  publer_response: unknown | null;
+  publer_error: string | null;
+  send_attempts: number;
   created_at: string;
   updated_at: string;
   approved_at: string | null;
