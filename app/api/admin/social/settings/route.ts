@@ -7,6 +7,10 @@ function checked(formData: FormData, key: string) {
   return formData.get(key) === 'true';
 }
 
+function text(formData: FormData, key: string) {
+  return String(formData.get(key) || '').trim() || null;
+}
+
 export async function POST(request: Request) {
   const isLoggedIn = await getAdminSession();
   if (!isLoggedIn) return NextResponse.json({ error: 'Not logged in' }, { status: 401 });
@@ -23,7 +27,12 @@ export async function POST(request: Request) {
     id: 'default',
     provider: 'publer',
     publer_api_token: newToken || current.publer_api_token || null,
-    publer_workspace_id: String(formData.get('publer_workspace_id') || '').trim() || null,
+    publer_api_endpoint: text(formData, 'publer_api_endpoint'),
+    publer_workspace_id: text(formData, 'publer_workspace_id'),
+    publer_facebook_account_id: text(formData, 'publer_facebook_account_id'),
+    publer_instagram_account_id: text(formData, 'publer_instagram_account_id'),
+    publer_google_business_account_id: text(formData, 'publer_google_business_account_id'),
+    publer_linkedin_account_id: text(formData, 'publer_linkedin_account_id'),
     default_schedule_delay_minutes: Number.isInteger(delay) && delay >= 0 ? delay : 60,
     default_hashtags: String(formData.get('default_hashtags') || '').trim(),
     timezone: String(formData.get('timezone') || 'America/Chicago'),
