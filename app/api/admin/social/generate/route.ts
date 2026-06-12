@@ -96,11 +96,12 @@ export async function POST(request: Request) {
       blog_slug: blog.slug,
       blog_title: blog.title,
       blog_url: blog.url,
+      image_url: blog.image,
       platform: platform.value,
       post_text: String(draft.post_text || '').trim(),
       hashtags: String(draft.hashtags || '').trim(),
       status: 'draft',
-      notes: 'AI-generated social draft for admin review.',
+      notes: 'AI-generated social draft for admin review. Blog image attached.',
       approved_at: null,
       sent_at: null,
     };
