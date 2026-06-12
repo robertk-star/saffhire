@@ -44,10 +44,18 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       .eq('id', id);
 
     if (updateError) throw updateError;
-
-    return NextResponse.redirect(new URL(`/admin/social/${id}`, request.url), { status: 303 });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Could not generate social image.';
-    return NextResponse.json({ error: message }, { status: 500 });
+    const notes = [
+      draft.notes || '',
+      `AI social image regeneration failed. Existing image was kept. Error: ${message}`,
+    ].filter(Boolean).join('\n\n');
+
+    await supabase
+      .from('social_post_drafts')
+      .update({ notes })
+      .eq('id', id);
   }
+
+  return NextResponse.redirect(new URL(`/admin/social/${id}`, request.url), { status: 303 });
 }
