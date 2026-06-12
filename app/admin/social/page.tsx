@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getAdminSession } from '@/lib/adminAuth';
-import { getPublishedBlogOptions, getSocialPostDrafts, platformLabel } from '@/lib/socialPostDrafts';
+import { getPublishedBlogOptions, getSocialPostDrafts, imageSourceLabel, platformLabel } from '@/lib/socialPostDrafts';
 
 export const metadata: Metadata = {
   title: 'Social Post Drafts',
@@ -18,6 +18,12 @@ function statusBadge(status: string) {
     rejected: 'bg-orange-100 text-orange-800',
   };
   return colors[status] || colors.draft;
+}
+
+function imageBadge(source?: string | null) {
+  if (source === 'ai_generated') return 'bg-green-100 text-green-800';
+  if (source === 'custom') return 'bg-blue-100 text-blue-800';
+  return 'bg-yellow-100 text-yellow-800';
 }
 
 export default async function SocialDraftsPage() {
@@ -39,7 +45,7 @@ export default async function SocialDraftsPage() {
           <div className="flex flex-wrap gap-3">
             <form action="/api/admin/social/generate-missing-image" method="post">
               <button className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
-                Generate Missing AI Image
+                Generate AI Image
               </button>
             </form>
             <a href="/admin/blogs" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Back to Blogs</a>
@@ -57,7 +63,7 @@ export default async function SocialDraftsPage() {
             </select>
             <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Generate Social Posts</button>
           </div>
-          <p className="text-xs text-gray-500 mt-3">This creates the social post text and attaches the blog image first. Use Generate Missing AI Image to create custom post images one at a time.</p>
+          <p className="text-xs text-gray-500 mt-3">This creates the social post text and attaches the blog image first. Use Generate AI Image to create custom post images one at a time.</p>
         </form>
 
         <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
@@ -67,8 +73,8 @@ export default async function SocialDraftsPage() {
                 <th className="text-left px-5 py-4">Image</th>
                 <th className="text-left px-5 py-4">Blog</th>
                 <th className="text-left px-5 py-4">Platform</th>
-                <th className="text-left px-5 py-4">Status</th>
-                <th className="text-left px-5 py-4">Updated</th>
+                <th className="text-left px-5 py-4">Image Status</th>
+                <th className="text-left px-5 py-4">Post Status</th>
                 <th className="text-left px-5 py-4">Action</th>
               </tr>
             </thead>
@@ -76,7 +82,7 @@ export default async function SocialDraftsPage() {
               {drafts.length === 0 ? (
                 <tr><td colSpan={6} className="px-5 py-10 text-center text-gray-500">No social drafts yet.</td></tr>
               ) : drafts.map((draft) => (
-                <tr key={draft.id} className="border-t border-gray-100">
+                <tr key={draft.id} className="border-t border-gray-100 align-top">
                   <td className="px-5 py-4">
                     {draft.image_url ? (
                       <img src={draft.image_url} alt="Social post image" className="h-14 w-20 rounded-md object-cover border border-gray-200" />
@@ -89,8 +95,17 @@ export default async function SocialDraftsPage() {
                     <div className="text-xs text-gray-500">/{draft.blog_slug}</div>
                   </td>
                   <td className="px-5 py-4 text-gray-700">{platformLabel(draft.platform)}</td>
+                  <td className="px-5 py-4">
+                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${imageBadge(draft.image_source)}`}>
+                      {imageSourceLabel(draft.image_source)}
+                    </span>
+                    {draft.image_generation_error ? (
+                      <div className="mt-2 max-w-xs text-xs text-red-700 break-words">
+                        {draft.image_generation_error.slice(0, 220)}
+                      </div>
+                    ) : null}
+                  </td>
                   <td className="px-5 py-4"><span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${statusBadge(draft.status)}`}>{draft.status.replaceAll('_', ' ')}</span></td>
-                  <td className="px-5 py-4 text-gray-600">{new Date(draft.updated_at).toLocaleString()}</td>
                   <td className="px-5 py-4"><a href={`/admin/social/${draft.id}`} className="text-green-700 font-bold hover:underline">Edit</a></td>
                 </tr>
               ))}
