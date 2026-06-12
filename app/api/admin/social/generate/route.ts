@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { getAdminSession } from '@/lib/adminAuth';
-import { generateAndStoreSocialImage } from '@/lib/blogImageGenerator';
 import { getPublishedBlogOptionBySlug, socialPlatforms } from '@/lib/socialPostDrafts';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
@@ -91,42 +90,22 @@ export async function POST(request: Request) {
 
   const generated = await callOpenAI(buildPrompt(blog));
 
-  const rows = await Promise.all(socialPlatforms.map(async (platform) => {
+  const rows = socialPlatforms.map((platform) => {
     const draft = generated[platform.value] || { post_text: '', hashtags: '' };
-    const postText = String(draft.post_text || '').trim();
-    const hashtags = String(draft.hashtags || '').trim();
-    let imageUrl = blog.image;
-    let imageNote = 'Blog image used as fallback.';
-
-    try {
-      const generatedImage = await generateAndStoreSocialImage({
-        platform: platform.label,
-        blogTitle: blog.title,
-        postText,
-        hashtags,
-        slug: `${blog.slug}-${platform.value}`,
-      });
-      imageUrl = generatedImage.imageUrl;
-      imageNote = `AI social image generated and attached. Storage path: ${generatedImage.storagePath}`;
-    } catch (imageError) {
-      const message = imageError instanceof Error ? imageError.message : 'AI social image generation failed.';
-      imageNote = `AI social image failed, so blog image was used. Error: ${message}`;
-    }
-
     return {
       blog_slug: blog.slug,
       blog_title: blog.title,
       blog_url: blog.url,
-      image_url: imageUrl,
+      image_url: blog.image,
       platform: platform.value,
-      post_text: postText,
-      hashtags,
+      post_text: String(draft.post_text || '').trim(),
+      hashtags: String(draft.hashtags || '').trim(),
       status: 'draft',
-      notes: `AI-generated social draft for admin review. ${imageNote}`,
+      notes: 'AI-generated social draft for admin review. Blog image attached as fallback. Use Generate Missing AI Images or Regenerate AI Image to create a custom social image.',
       approved_at: null,
       sent_at: null,
     };
-  }));
+  });
 
   const { error } = await supabase
     .from('social_post_drafts')
