@@ -1,3 +1,4 @@
+import { getBlogImageForCategory } from '@/data/blogCategoryImages';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 export type BlogStatus = 'draft' | 'pending_review' | 'changes_requested' | 'approved' | 'published' | 'rejected';
@@ -34,7 +35,9 @@ export type PublicBlogPost = {
   source: 'database';
 };
 
-const fallbackImage = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/top-industries-screening-hero-WE6rERMRUjdEYRvK8mNf9T.webp';
+function getPublicBlogImage(post: BlogDraft) {
+  return post.image_url || getBlogImageForCategory(post.category);
+}
 
 export function isBlogAdminConfigured() {
   return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.ADMIN_PASSWORD && process.env.ADMIN_SESSION_SECRET);
@@ -86,7 +89,7 @@ export async function getPublishedDbBlogPosts() {
     content: post.content,
     category: post.category,
     author: post.author,
-    image: post.image_url || fallbackImage,
+    image: getPublicBlogImage(post),
     readTime: post.read_time,
     date: post.published_at ? new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date(post.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
     publishedAt: post.published_at,
@@ -115,7 +118,7 @@ export async function getPublishedDbBlogPostBySlug(slug: string) {
     content: post.content,
     category: post.category,
     author: post.author,
-    image: post.image_url || fallbackImage,
+    image: getPublicBlogImage(post),
     readTime: post.read_time,
     date: post.published_at ? new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date(post.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
     publishedAt: post.published_at,
