@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 export type SocialPlatform = 'facebook' | 'instagram' | 'google_business' | 'linkedin';
 export type SocialPostStatus = 'draft' | 'approved' | 'sent_to_publer' | 'scheduled' | 'failed' | 'rejected';
+export type SocialImageSource = 'blog_fallback' | 'ai_generated' | 'custom';
 
 export type SocialPostDraft = {
   id: string;
@@ -11,6 +12,9 @@ export type SocialPostDraft = {
   blog_title: string;
   blog_url: string;
   image_url: string | null;
+  image_source: SocialImageSource;
+  image_generation_error: string | null;
+  image_generated_at: string | null;
   platform: SocialPlatform;
   post_text: string;
   hashtags: string;
@@ -41,6 +45,12 @@ export const socialPlatforms: Array<{ value: SocialPlatform; label: string }> = 
 
 export function platformLabel(platform: string) {
   return socialPlatforms.find((item) => item.value === platform)?.label || platform;
+}
+
+export function imageSourceLabel(source?: string | null) {
+  if (source === 'ai_generated') return 'AI image';
+  if (source === 'custom') return 'Custom image';
+  return 'Blog fallback';
 }
 
 export async function getPublishedBlogOptions() {
