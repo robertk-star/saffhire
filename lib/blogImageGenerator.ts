@@ -38,20 +38,21 @@ Style requirements:
 }
 
 function buildSocialImagePrompt(input: { platform: string; blogTitle: string; postText: string; hashtags?: string }) {
-  return `Create a professional social media image for a business services company.
+  return `Create a professional image for a background screening company social media post.
 
-Platform: ${input.platform}
-Topic: ${input.blogTitle}
+Social platform: ${input.platform}
+Related blog title: ${input.blogTitle}
 Post summary: ${input.postText.slice(0, 500)}
 
 Style requirements:
-- Clean modern business illustration
-- Professional, trustworthy, polished, corporate feel
-- Suitable for business social media
-- Show abstract business concepts like teamwork, documents, technology, checklists, dashboards, or professional office work
+- Clean modern business illustration or realistic business-style image
+- Professional, trustworthy, corporate, polished
+- Suitable for an employment background screening website and social media post
 - No text, no letters, no numbers, no logos, no watermarks
-- Avoid close-up faces and avoid identifiable real people
-- Bright, clean, high quality social post image`;
+- No identifiable real people or close-up faces
+- Use themes related to hiring, compliance, verification, documents, security, technology, employer trust, or workforce risk
+- Horizontal hero-style composition
+- High quality website and social media image`;
 }
 
 async function ensureBlogImageBucket() {
@@ -82,26 +83,13 @@ function uniqueAttempts(attempts: ImageAttempt[]) {
 }
 
 function resolveImageAttempts(kind: ImageKind): ImageAttempt[] {
-  if (kind === 'social') {
-    const configuredSocialModel = process.env.OPENAI_SOCIAL_IMAGE_MODEL;
-    const configuredGeneralModel = process.env.OPENAI_IMAGE_MODEL;
-    const configuredSocialSize = process.env.OPENAI_SOCIAL_IMAGE_SIZE || '1024x1024';
-
-    return uniqueAttempts([
-      ...(configuredSocialModel ? [{ model: configuredSocialModel, size: configuredSocialSize, label: 'configured social model' }] : []),
-      ...(configuredGeneralModel ? [{ model: configuredGeneralModel, size: configuredSocialSize, label: 'configured general image model' }] : []),
-      { model: 'dall-e-3', size: '1024x1024', label: 'dall-e-3 fallback' },
-      { model: 'gpt-image-1', size: '1024x1024', label: 'gpt-image-1 fallback' },
-    ]);
-  }
-
-  const configuredBlogModel = process.env.OPENAI_IMAGE_MODEL;
-  const configuredBlogSize = process.env.OPENAI_IMAGE_SIZE || '1536x1024';
+  const configuredModel = process.env.OPENAI_IMAGE_MODEL;
+  const configuredSize = process.env.OPENAI_IMAGE_SIZE || '1536x1024';
 
   return uniqueAttempts([
-    ...(configuredBlogModel ? [{ model: configuredBlogModel, size: configuredBlogSize, label: 'configured blog image model' }] : []),
+    ...(configuredModel ? [{ model: configuredModel, size: configuredSize, label: 'configured image model' }] : []),
     { model: 'gpt-image-1', size: '1536x1024', label: 'gpt-image-1 fallback' },
-    { model: 'dall-e-3', size: '1792x1024', label: 'dall-e-3 fallback' },
+    { model: 'dall-e-3', size: kind === 'social' ? '1024x1024' : '1792x1024', label: 'dall-e-3 fallback' },
   ]);
 }
 
@@ -112,10 +100,6 @@ function buildImageBody(attempt: ImageAttempt, prompt: string) {
     size: attempt.size,
     n: 1,
   };
-
-  if (attempt.model.startsWith('dall-e')) {
-    body.response_format = 'b64_json';
-  }
 
   return body;
 }
