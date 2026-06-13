@@ -89,5 +89,6 @@ export async function getActiveBlogGenerationTopics(): Promise<BlogGenerationTop
       keywords: topic.keywords,
     }));
 
-  return activeTopics.length ? activeTopics : blogGenerationTopics;
+  if (activeTopics.length) return activeTopics;
+  return result.usingFallback ? blogGenerationTopics : [];
 }
