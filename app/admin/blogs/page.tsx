@@ -40,6 +40,9 @@ export default async function BlogAdminPage() {
             <a href="/admin/social" className="rounded-md bg-indigo-500 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-600">
               Social Posts
             </a>
+            <a href="/admin/blogs/topics" className="rounded-md bg-emerald-600 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-700">
+              Blog Topics
+            </a>
             <a href="/admin/blogs/schedule" className="rounded-md bg-purple-500 px-5 py-3 text-sm font-bold text-white hover:bg-purple-600">
               Schedule Settings
             </a>
