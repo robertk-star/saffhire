@@ -5,10 +5,6 @@ import { publerAccountIdForPlatform } from '@/lib/socialPostingSettings';
 
 const PUBLER_BASE_URL = 'https://app.publer.com/api/v1';
 
-function buildScheduledAt(delayMinutes: number) {
-  return new Date(Date.now() + Math.max(0, delayMinutes) * 60 * 1000).toISOString();
-}
-
 function normalizeEndpoint(endpoint: string | null | undefined) {
   const value = (endpoint || '').trim();
   if (!value) return `${PUBLER_BASE_URL}/posts/schedule`;
@@ -29,7 +25,6 @@ function buildPostText(draft: SocialPostDraft) {
 export function buildPublerPayload(input: { draft: SocialPostDraft; settings: SocialPostingSettings }) {
   const accountId = publerAccountIdForPlatform(input.settings, input.draft.platform);
   const text = buildPostText(input.draft);
-  const scheduledAt = buildScheduledAt(input.settings.default_schedule_delay_minutes);
   const key = networkKey(input.draft.platform);
 
   return {
@@ -37,7 +32,6 @@ export function buildPublerPayload(input: { draft: SocialPostDraft; settings: So
       state: 'scheduled',
       posts: [
         {
-          state: 'scheduled',
           networks: {
             [key]: {
               type: 'status',
@@ -47,8 +41,7 @@ export function buildPublerPayload(input: { draft: SocialPostDraft; settings: So
           accounts: [
             {
               id: accountId,
-              scheduled_at: scheduledAt,
-              previewed_media: true,
+              auto_schedule: true,
             },
           ],
         },
