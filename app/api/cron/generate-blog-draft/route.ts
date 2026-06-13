@@ -31,6 +31,7 @@ function estimateReadTime(content: string) {
 async function chooseTopic() {
   const supabase = getSupabaseAdmin();
   const topics = await getActiveBlogGenerationTopics();
+  if (!topics.length) throw new Error('No active blog generation topics are available.');
   if (!supabase) return topics[0];
 
   const { count } = await supabase.from('blog_generation_runs').select('id', { count: 'exact', head: true });
