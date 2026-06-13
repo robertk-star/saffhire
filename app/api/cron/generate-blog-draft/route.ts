@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getBlogImageForCategory } from '@/data/blogCategoryImages';
-import { blogGenerationTopics } from '@/data/blogGenerationTopics';
 import { getAdminSession } from '@/lib/adminAuth';
 import { getBlogGenerationSettings, shouldRunForSettings } from '@/lib/blogGenerationSettings';
+import { getActiveBlogGenerationTopics } from '@/lib/blogGenerationTopicAdmin';
 import { generateAndStoreBlogImage } from '@/lib/blogImageGenerator';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
@@ -30,11 +30,12 @@ function estimateReadTime(content: string) {
 
 async function chooseTopic() {
   const supabase = getSupabaseAdmin();
-  if (!supabase) return blogGenerationTopics[0];
+  const topics = await getActiveBlogGenerationTopics();
+  if (!supabase) return topics[0];
 
   const { count } = await supabase.from('blog_generation_runs').select('id', { count: 'exact', head: true });
-  const index = (count || 0) % blogGenerationTopics.length;
-  return blogGenerationTopics[index];
+  const index = (count || 0) % topics.length;
+  return topics[index];
 }
 
 async function callOpenAI(prompt: string) {
