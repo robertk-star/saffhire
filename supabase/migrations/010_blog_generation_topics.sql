@@ -1,6 +1,8 @@
 -- Phase 17: Admin-managed blog generation topics
 -- Safe to run multiple times.
 
+create extension if not exists pgcrypto;
+
 create table if not exists public.blog_generation_topics (
   id uuid primary key default gen_random_uuid(),
   slug text not null unique,
