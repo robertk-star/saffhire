@@ -37,6 +37,8 @@ const priceCategories: { key: PriceKey; label: string }[] = [
   { key: 'general_price', label: 'General Price' },
 ];
 
+const salesCoverageMultiplier = 1.1;
+
 function makeId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
@@ -48,6 +50,11 @@ function money(value: number) {
 function priceLabel(value: number | null | undefined) {
   if (value === null || value === undefined || Number.isNaN(Number(value))) return 'N/A';
   return money(Number(value));
+}
+
+function applySalesCoverage(value: number, enabled: boolean) {
+  if (!enabled) return value;
+  return Number((value * salesCoverageMultiplier).toFixed(2));
 }
 
 function newLine(): QuoteLine {
@@ -71,6 +78,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
   const [state, setState] = useState('');
   const [quoteNotes, setQuoteNotes] = useState('');
   const [selectedPriceKey, setSelectedPriceKey] = useState<PriceKey>('general_price');
+  const [salesCoverageEnabled, setSalesCoverageEnabled] = useState(false);
   const [packages, setPackages] = useState<QuotePackage[]>([newPackage()]);
 
   useEffect(() => {
@@ -112,6 +120,12 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
     }
     return next;
   }, [itemsById, packages]);
+
+  const quoteTotals = useMemo(() => {
+    return Object.fromEntries(
+      priceCategories.map((category) => [category.key, applySalesCoverage(totals[category.key], salesCoverageEnabled)]),
+    ) as Record<PriceKey, number>;
+  }, [salesCoverageEnabled, totals]);
 
   function updatePackage(packageId: string, updates: Partial<QuotePackage>) {
     setPackages((current) => current.map((item) => (item.id === packageId ? { ...item, ...updates } : item)));
@@ -155,17 +169,19 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
     setState('');
     setQuoteNotes('');
     setSelectedPriceKey('general_price');
+    setSalesCoverageEnabled(false);
     setPackages([newPackage()]);
     sessionStorage.removeItem('saffhire_quote_preview');
   }
 
-  function packageTotal(quotePackage: QuotePackage, key: PriceKey) {
-    return quotePackage.lines.reduce((sum, line) => {
+  function packageTotal(quotePackage: QuotePackage, key: PriceKey, useSalesCoverage = false) {
+    const baseTotal = quotePackage.lines.reduce((sum, line) => {
       const item = itemsById.get(line.pricingItemId);
       const price = item?.[key];
       if (price === null || price === undefined) return sum;
       return sum + Number(price) * Math.max(0, Number(line.quantity || 0));
     }, 0);
+    return applySalesCoverage(baseTotal, useSalesCoverage);
   }
 
   function buildQuotePreview() {
@@ -173,13 +189,14 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
     const quotePackages = packages.map((quotePackage) => ({
       name: quotePackage.name,
       description: quotePackage.description,
-      total: packageTotal(quotePackage, selectedPriceKey),
+      total: packageTotal(quotePackage, selectedPriceKey, salesCoverageEnabled),
       lines: quotePackage.lines
         .map((line) => {
           const item = itemsById.get(line.pricingItemId);
           if (!item) return null;
           const rawPrice = item[selectedPriceKey];
-          const unitPrice = rawPrice === null || rawPrice === undefined ? null : Number(rawPrice);
+          const baseUnitPrice = rawPrice === null || rawPrice === undefined ? null : Number(rawPrice);
+          const unitPrice = baseUnitPrice === null ? null : applySalesCoverage(baseUnitPrice, salesCoverageEnabled);
           return {
             service: item.service,
             state: item.state,
@@ -199,8 +216,9 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
         state,
         quoteNotes,
         selectedCategory: selectedCategory.label,
+        salesCoverageEnabled,
         packages: quotePackages,
-        quoteTotal: totals[selectedPriceKey],
+        quoteTotal: quoteTotals[selectedPriceKey],
         createdAt: new Date().toISOString(),
       }),
     );
@@ -318,11 +336,16 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
                   </div>
                   {selectedItem ? (
                     <div className="md:col-span-4 grid gap-2 text-xs text-slate-600 sm:grid-cols-5">
-                      {priceCategories.map((category) => (
-                        <div key={category.key} className={`rounded-lg p-2 ${selectedPriceKey === category.key ? 'bg-green-50 ring-1 ring-green-200' : 'bg-white'}`}>
-                          <b>{category.label}:</b> {priceLabel(selectedItem[category.key])}
-                        </div>
-                      ))}
+                      {priceCategories.map((category) => {
+                        const basePrice = selectedItem[category.key];
+                        const adjustedPrice = basePrice === null || basePrice === undefined ? null : applySalesCoverage(Number(basePrice), salesCoverageEnabled);
+                        return (
+                          <div key={category.key} className={`rounded-lg p-2 ${selectedPriceKey === category.key ? 'bg-green-50 ring-1 ring-green-200' : 'bg-white'}`}>
+                            <b>{category.label}:</b> {salesCoverageEnabled ? priceLabel(adjustedPrice) : priceLabel(basePrice)}
+                            {salesCoverageEnabled && selectedPriceKey === category.key ? <div className="mt-1 text-[11px] font-bold text-green-700">Includes 10% sales coverage</div> : null}
+                          </div>
+                        );
+                      })}
                     </div>
                   ) : null}
                 </div>
@@ -336,7 +359,8 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
             {priceCategories.map((category) => (
               <div key={category.key} className={`rounded-xl border p-3 ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white'}`}>
                 <div className="text-xs font-bold uppercase tracking-wide text-slate-500">{category.label}</div>
-                <div className="mt-1 text-lg font-black text-slate-900">{money(packageTotal(quotePackage, category.key))}</div>
+                <div className="mt-1 text-lg font-black text-slate-900">{money(salesCoverageEnabled ? packageTotal(quotePackage, category.key, true) : packageTotal(quotePackage, category.key))}</div>
+                {salesCoverageEnabled ? <div className="mt-1 text-xs text-slate-500">Base: {money(packageTotal(quotePackage, category.key))}</div> : null}
                 {selectedPriceKey === category.key ? <div className="mt-1 text-xs font-bold text-green-700">Selected category</div> : null}
               </div>
             ))}
@@ -354,14 +378,30 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           </div>
           <div className="rounded-xl bg-slate-900 px-5 py-3 text-white">
             <div className="text-xs font-bold uppercase tracking-wide text-slate-300">Selected total</div>
-            <div className="text-2xl font-black">{money(totals[selectedPriceKey])}</div>
+            <div className="text-2xl font-black">{money(quoteTotals[selectedPriceKey])}</div>
+            {salesCoverageEnabled ? <div className="mt-1 text-xs text-slate-300">Base: {money(totals[selectedPriceKey])}</div> : null}
           </div>
         </div>
+
+        <label className="mt-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-slate-800">
+          <input
+            type="checkbox"
+            checked={salesCoverageEnabled}
+            onChange={(event) => setSalesCoverageEnabled(event.target.checked)}
+            className="mt-1 h-4 w-4"
+          />
+          <span>
+            <span className="block font-bold text-slate-900">Add 10% sales coverage</span>
+            <span className="block text-slate-600">Use this when the quote needs to cover salesperson cost. The formal quote will show only the final client price.</span>
+          </span>
+        </label>
+
         <div className="mt-5 grid gap-3 sm:grid-cols-5">
           {priceCategories.map((category) => (
             <button key={category.key} type="button" onClick={() => setSelectedPriceKey(category.key)} className={`rounded-xl border p-4 text-left ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50 shadow-sm' : 'border-gray-200 bg-white hover:bg-gray-50'}`}>
               <div className="text-xs font-bold uppercase tracking-wide text-slate-500">{category.label}</div>
-              <div className="mt-1 text-2xl font-black text-slate-900">{money(totals[category.key])}</div>
+              <div className="mt-1 text-2xl font-black text-slate-900">{money(quoteTotals[category.key])}</div>
+              {salesCoverageEnabled ? <div className="mt-1 text-xs text-slate-500">Base: {money(totals[category.key])}</div> : null}
               <div className="mt-2 text-xs font-bold text-green-700">{selectedPriceKey === category.key ? 'Selected for quote' : 'Use this price'}</div>
             </button>
           ))}
