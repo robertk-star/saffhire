@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { getAdminSession } from '@/lib/adminAuth';
+import { hasAdminPermission } from '@/lib/adminAuth';
 import { getPublishedBlogOptions, getSocialPostDrafts, imageSourceLabel, platformLabel } from '@/lib/socialPostDrafts';
 
 export const metadata: Metadata = {
@@ -27,8 +27,8 @@ function imageBadge(source?: string | null) {
 }
 
 export default async function SocialDraftsPage() {
-  const isLoggedIn = await getAdminSession();
-  if (!isLoggedIn) redirect('/admin/login');
+  const canView = await hasAdminPermission('social');
+  if (!canView) redirect('/admin/login');
 
   const blogs = await getPublishedBlogOptions();
   const drafts = await getSocialPostDrafts();
@@ -43,6 +43,7 @@ export default async function SocialDraftsPage() {
             <p className="text-gray-600 mt-2">Generate, edit, and approve social media drafts from published blogs.</p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <a href="/admin" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Admin Home</a>
             <a href="/admin/social/settings" className="rounded-md bg-purple-500 px-5 py-3 text-sm font-bold text-white hover:bg-purple-600">
               Posting Settings
             </a>
@@ -87,29 +88,13 @@ export default async function SocialDraftsPage() {
               ) : drafts.map((draft) => (
                 <tr key={draft.id} className="border-t border-gray-100 align-top">
                   <td className="px-5 py-4">
-                    {draft.image_url ? (
-                      <img src={draft.image_url} alt="Social post image" className="h-14 w-20 rounded-md object-cover border border-gray-200" />
-                    ) : (
-                      <span className="text-xs text-red-600 font-bold">No image</span>
-                    )}
+                    {draft.image_url ? <img src={draft.image_url} alt="" className="h-14 w-20 rounded object-cover" /> : <div className="h-14 w-20 rounded bg-gray-100" />}
                   </td>
-                  <td className="px-5 py-4">
-                    <div className="font-bold text-slate-900">{draft.blog_title}</div>
-                    <div className="text-xs text-gray-500">/{draft.blog_slug}</div>
-                  </td>
-                  <td className="px-5 py-4 text-gray-700">{platformLabel(draft.platform)}</td>
-                  <td className="px-5 py-4">
-                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${imageBadge(draft.image_source)}`}>
-                      {imageSourceLabel(draft.image_source)}
-                    </span>
-                    {draft.image_generation_error ? (
-                      <div className="mt-2 max-w-xs text-xs text-red-700 break-words">
-                        {draft.image_generation_error.slice(0, 220)}
-                      </div>
-                    ) : null}
-                  </td>
+                  <td className="px-5 py-4"><div className="font-bold text-slate-900">{draft.blog_title}</div></td>
+                  <td className="px-5 py-4 text-gray-600">{platformLabel(draft.platform)}</td>
+                  <td className="px-5 py-4"><span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${imageBadge(draft.image_source)}`}>{imageSourceLabel(draft.image_source)}</span></td>
                   <td className="px-5 py-4"><span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${statusBadge(draft.status)}`}>{draft.status.replaceAll('_', ' ')}</span></td>
-                  <td className="px-5 py-4"><a href={`/admin/social/${draft.id}`} className="text-green-700 font-bold hover:underline">Edit</a></td>
+                  <td className="px-5 py-4"><a href={`/admin/social/${draft.id}`} className="text-green-700 font-bold hover:underline">Review</a></td>
                 </tr>
               ))}
             </tbody>
