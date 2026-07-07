@@ -72,7 +72,7 @@ function newPackage(index = 1): QuotePackage {
 
 export default function PricingQuoteBuilder({ initialItems }: { initialItems: PricingItem[] }) {
   const [items, setItems] = useState<PricingItem[]>(initialItems);
-  const [isLoading, setIsLoading] = useState(initialItems.length === 0);
+  const [isLoading, setIsLoading] = useState(true);
   const [clientName, setClientName] = useState('');
   const [contactName, setContactName] = useState('');
   const [state, setState] = useState('');
@@ -84,8 +84,9 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
   useEffect(() => {
     let cancelled = false;
     async function loadItems() {
+      setIsLoading(true);
       try {
-        const response = await fetch('/api/admin/pricing/items');
+        const response = await fetch('/api/admin/pricing/items', { cache: 'no-store' });
         if (!response.ok) return;
         const payload = await response.json();
         if (!cancelled && Array.isArray(payload.items)) setItems(payload.items);
@@ -93,12 +94,11 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
         if (!cancelled) setIsLoading(false);
       }
     }
-    if (initialItems.length === 0) loadItems();
-    else setIsLoading(false);
+    loadItems();
     return () => {
       cancelled = true;
     };
-  }, [initialItems.length]);
+  }, []);
 
   const states = useMemo(() => Array.from(new Set(items.map((item) => item.state).filter(Boolean))).sort(), [items]);
   const filteredItems = useMemo(() => items.filter((item) => item.state === state), [items, state]);
@@ -138,6 +138,16 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           ? { ...quotePackage, lines: quotePackage.lines.map((line) => (line.id === lineId ? { ...line, ...updates } : line)) }
           : quotePackage,
       ),
+    );
+  }
+
+  function handleStateChange(nextState: string) {
+    setState(nextState);
+    setPackages((current) =>
+      current.map((quotePackage) => ({
+        ...quotePackage,
+        lines: quotePackage.lines.map((line) => ({ ...line, pricingItemId: '', searchText: '' })),
+      })),
     );
   }
 
@@ -257,7 +267,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           </label>
           <label className="block">
             <span className="mb-2 block text-sm font-bold text-slate-700">Majority search state</span>
-            <select value={state} onChange={(event) => setState(event.target.value)} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none">
+            <select value={state} onChange={(event) => handleStateChange(event.target.value)} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none">
               <option value="">Select state</option>
               {states.map((stateName) => (
                 <option key={stateName} value={stateName}>{stateName}</option>
@@ -304,7 +314,8 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           <div className="space-y-3">
             {quotePackage.lines.map((line) => {
               const selectedItem = itemsById.get(line.pricingItemId);
-              const lineMatches = filteredItems.filter((item) => item.service.toLowerCase().includes(line.searchText.trim().toLowerCase())).slice(0, 75);
+              const rawMatches = filteredItems.filter((item) => item.service.toLowerCase().includes(line.searchText.trim().toLowerCase())).slice(0, 75);
+              const lineMatches = selectedItem && !rawMatches.some((item) => item.id === selectedItem.id) ? [selectedItem, ...rawMatches] : rawMatches;
               return (
                 <div key={line.id} className="grid gap-3 rounded-xl border border-gray-100 bg-slate-50 p-4 md:grid-cols-[1fr_1fr_120px_110px]">
                   <label className="block">
@@ -312,15 +323,15 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
                     <input
                       value={line.searchText}
                       onChange={(event) => updateLine(quotePackage.id, line.id, { searchText: event.target.value })}
-                      disabled={!state}
+                      disabled={!state || isLoading}
                       className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100"
                       placeholder={state ? 'Type county, federal, MVR, drug...' : 'Select state first'}
                     />
                   </label>
                   <label className="block">
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Search needed</span>
-                    <select value={line.pricingItemId} onChange={(event) => updateLine(quotePackage.id, line.id, { pricingItemId: event.target.value })} disabled={!state} className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100">
-                      <option value="">{state ? 'Select search' : 'Select state first'}</option>
+                    <select value={line.pricingItemId} onChange={(event) => updateLine(quotePackage.id, line.id, { pricingItemId: event.target.value })} disabled={!state || isLoading} className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100">
+                      <option value="">{isLoading ? 'Loading searches...' : state ? 'Select search' : 'Select state first'}</option>
                       {lineMatches.map((item) => (
                         <option key={item.id} value={item.id}>{item.service}</option>
                       ))}
