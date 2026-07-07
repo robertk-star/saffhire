@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { getAdminSession, isAdminConfigured } from '@/lib/adminAuth';
+import { hasAdminPermission, isAdminConfigured } from '@/lib/adminAuth';
 import { getBlogDrafts } from '@/lib/blogDrafts';
 
 export const metadata: Metadata = {
@@ -21,8 +21,8 @@ function statusBadge(status: string) {
 }
 
 export default async function BlogAdminPage() {
-  const isLoggedIn = await getAdminSession();
-  if (!isLoggedIn) redirect('/admin/login');
+  const canView = await hasAdminPermission('blogs');
+  if (!canView) redirect('/admin/login');
 
   const drafts = await getBlogDrafts();
   const configured = isAdminConfigured();
@@ -37,6 +37,7 @@ export default async function BlogAdminPage() {
             <p className="text-gray-600 mt-2">Review, approve, and publish blog drafts.</p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <a href="/admin" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Admin Home</a>
             <a href="/admin/pricing" className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800">
               Pricing Tool
             </a>
