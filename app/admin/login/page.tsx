@@ -17,15 +17,22 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
         <p className="text-gray-600 mb-6">Log in to manage internal SaffHire tools.</p>
         {hasError ? (
           <div className="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            Invalid password. Please try again.
+            Invalid login. Please try again.
           </div>
         ) : null}
-        <label className="block text-sm font-bold text-gray-700 mb-2">Admin Password</label>
+        <label className="block text-sm font-bold text-gray-700 mb-2">Username</label>
+        <input
+          type="text"
+          name="username"
+          className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
+          placeholder="Leave blank for owner password"
+        />
+        <label className="mt-4 block text-sm font-bold text-gray-700 mb-2">Password</label>
         <input
           type="password"
           name="password"
           className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
-          placeholder="Enter admin password"
+          placeholder="Enter password"
           required
         />
         <button type="submit" className="mt-6 w-full rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
