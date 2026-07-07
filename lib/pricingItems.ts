@@ -4,6 +4,8 @@ export type PricingItem = {
   id: string;
   service: string;
   state: string;
+  cost: number | null;
+  total_cost: number | null;
   church_price: number | null;
   staffing_price: number | null;
   trucking_price: number | null;
@@ -11,13 +13,17 @@ export type PricingItem = {
   general_price: number | null;
 };
 
+function numberOrNull(value: unknown) {
+  return value === null || value === undefined || value === '' ? null : Number(value);
+}
+
 export async function getPricingItems(): Promise<PricingItem[]> {
   const supabase = getSupabaseAdmin();
   if (!supabase) return [];
 
   const { data, error } = await supabase
     .from('pricing_items')
-    .select('id, service, state, church_price, staffing_price, trucking_price, high_volume_price, general_price')
+    .select('id, service, state, cost, total_cost, church_price, staffing_price, trucking_price, high_volume_price, general_price')
     .order('service', { ascending: true })
     .order('state', { ascending: true });
 
@@ -30,10 +36,12 @@ export async function getPricingItems(): Promise<PricingItem[]> {
     id: item.id,
     service: item.service,
     state: item.state,
-    church_price: item.church_price === null ? null : Number(item.church_price),
-    staffing_price: item.staffing_price === null ? null : Number(item.staffing_price),
-    trucking_price: item.trucking_price === null ? null : Number(item.trucking_price),
-    high_volume_price: item.high_volume_price === null ? null : Number(item.high_volume_price),
-    general_price: item.general_price === null ? null : Number(item.general_price),
+    cost: numberOrNull(item.cost),
+    total_cost: numberOrNull(item.total_cost),
+    church_price: numberOrNull(item.church_price),
+    staffing_price: numberOrNull(item.staffing_price),
+    trucking_price: numberOrNull(item.trucking_price),
+    high_volume_price: numberOrNull(item.high_volume_price),
+    general_price: numberOrNull(item.general_price),
   }));
 }
