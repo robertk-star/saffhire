@@ -37,6 +37,9 @@ export default async function BlogAdminPage() {
             <p className="text-gray-600 mt-2">Review, approve, and publish blog drafts.</p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <a href="/admin/pricing" className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800">
+              Pricing Tool
+            </a>
             <a href="/admin/social" className="rounded-md bg-indigo-500 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-600">
               Social Posts
             </a>
