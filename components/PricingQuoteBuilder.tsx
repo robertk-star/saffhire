@@ -19,11 +19,13 @@ type QuoteLine = {
   id: string;
   pricingItemId: string;
   quantity: number;
+  searchText: string;
 };
 
 type QuotePackage = {
   id: string;
   name: string;
+  description: string;
   lines: QuoteLine[];
 };
 
@@ -43,12 +45,22 @@ function money(value: number) {
   return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
 
+function priceLabel(value: number | null | undefined) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return 'N/A';
+  return money(Number(value));
+}
+
 function newLine(): QuoteLine {
-  return { id: makeId('line'), pricingItemId: '', quantity: 1 };
+  return { id: makeId('line'), pricingItemId: '', quantity: 1, searchText: '' };
 }
 
 function newPackage(index = 1): QuotePackage {
-  return { id: makeId('package'), name: index === 1 ? 'Basic Package' : `Package ${index}`, lines: [newLine()] };
+  return {
+    id: makeId('package'),
+    name: index === 1 ? 'Basic Package' : `Package ${index}`,
+    description: '',
+    lines: [newLine()],
+  };
 }
 
 export default function PricingQuoteBuilder({ initialItems }: { initialItems: PricingItem[] }) {
@@ -57,6 +69,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
   const [clientName, setClientName] = useState('');
   const [contactName, setContactName] = useState('');
   const [state, setState] = useState('');
+  const [quoteNotes, setQuoteNotes] = useState('');
   const [selectedPriceKey, setSelectedPriceKey] = useState<PriceKey>('general_price');
   const [packages, setPackages] = useState<QuotePackage[]>([newPackage()]);
 
@@ -90,7 +103,10 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
         const item = itemsById.get(line.pricingItemId);
         if (!item) continue;
         for (const category of priceCategories) {
-          next[category.key] += Number(item[category.key] || 0) * Math.max(0, Number(line.quantity || 0));
+          const price = item[category.key];
+          if (price !== null && price !== undefined) {
+            next[category.key] += Number(price) * Math.max(0, Number(line.quantity || 0));
+          }
         }
       }
     }
@@ -117,9 +133,11 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
 
   function removeLine(packageId: string, lineId: string) {
     setPackages((current) =>
-      current.map((quotePackage) =>
-        quotePackage.id === packageId ? { ...quotePackage, lines: quotePackage.lines.filter((line) => line.id !== lineId) || [newLine()] } : quotePackage,
-      ),
+      current.map((quotePackage) => {
+        if (quotePackage.id !== packageId) return quotePackage;
+        const remainingLines = quotePackage.lines.filter((line) => line.id !== lineId);
+        return { ...quotePackage, lines: remainingLines.length > 0 ? remainingLines : [newLine()] };
+      }),
     );
   }
 
@@ -131,10 +149,22 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
     setPackages((current) => (current.length === 1 ? current : current.filter((quotePackage) => quotePackage.id !== packageId)));
   }
 
+  function resetBuilder() {
+    setClientName('');
+    setContactName('');
+    setState('');
+    setQuoteNotes('');
+    setSelectedPriceKey('general_price');
+    setPackages([newPackage()]);
+    sessionStorage.removeItem('saffhire_quote_preview');
+  }
+
   function packageTotal(quotePackage: QuotePackage, key: PriceKey) {
     return quotePackage.lines.reduce((sum, line) => {
       const item = itemsById.get(line.pricingItemId);
-      return sum + Number(item?.[key] || 0) * Math.max(0, Number(line.quantity || 0));
+      const price = item?.[key];
+      if (price === null || price === undefined) return sum;
+      return sum + Number(price) * Math.max(0, Number(line.quantity || 0));
     }, 0);
   }
 
@@ -142,18 +172,20 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
     const selectedCategory = priceCategories.find((category) => category.key === selectedPriceKey) || priceCategories[4];
     const quotePackages = packages.map((quotePackage) => ({
       name: quotePackage.name,
+      description: quotePackage.description,
       total: packageTotal(quotePackage, selectedPriceKey),
       lines: quotePackage.lines
         .map((line) => {
           const item = itemsById.get(line.pricingItemId);
           if (!item) return null;
-          const unitPrice = Number(item[selectedPriceKey] || 0);
+          const rawPrice = item[selectedPriceKey];
+          const unitPrice = rawPrice === null || rawPrice === undefined ? null : Number(rawPrice);
           return {
             service: item.service,
             state: item.state,
             quantity: Math.max(0, Number(line.quantity || 0)),
             unitPrice,
-            total: unitPrice * Math.max(0, Number(line.quantity || 0)),
+            total: unitPrice === null ? null : unitPrice * Math.max(0, Number(line.quantity || 0)),
           };
         })
         .filter(Boolean),
@@ -165,6 +197,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
         clientName,
         contactName,
         state,
+        quoteNotes,
         selectedCategory: selectedCategory.label,
         packages: quotePackages,
         quoteTotal: totals[selectedPriceKey],
@@ -185,6 +218,16 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
       ) : null}
 
       <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-black text-slate-900">Quote setup</h2>
+            <p className="mt-1 text-sm text-slate-600">Enter the client information and choose the state that should drive pricing.</p>
+          </div>
+          <button type="button" onClick={resetBuilder} className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 hover:bg-gray-50">
+            Reset / start over
+          </button>
+        </div>
+
         <div className="grid gap-4 md:grid-cols-3">
           <label className="block">
             <span className="mb-2 block text-sm font-bold text-slate-700">Client name</span>
@@ -204,15 +247,37 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
             </select>
           </label>
         </div>
+
+        <label className="mt-4 block">
+          <span className="mb-2 block text-sm font-bold text-slate-700">Quote notes</span>
+          <textarea
+            value={quoteNotes}
+            onChange={(event) => setQuoteNotes(event.target.value)}
+            rows={3}
+            className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
+            placeholder="Optional notes to show on the formal quote."
+          />
+        </label>
       </section>
 
-      {packages.map((quotePackage, packageIndex) => (
+      {packages.map((quotePackage) => (
         <section key={quotePackage.id} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <label className="block flex-1">
-              <span className="mb-2 block text-sm font-bold text-slate-700">Package name</span>
-              <input value={quotePackage.name} onChange={(event) => updatePackage(quotePackage.id, { name: event.target.value })} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none" />
-            </label>
+          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="grid flex-1 gap-4 md:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block text-sm font-bold text-slate-700">Package name</span>
+                <input value={quotePackage.name} onChange={(event) => updatePackage(quotePackage.id, { name: event.target.value })} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none" />
+              </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-bold text-slate-700">Package description</span>
+                <input
+                  value={quotePackage.description}
+                  onChange={(event) => updatePackage(quotePackage.id, { description: event.target.value })}
+                  className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
+                  placeholder="Optional short description"
+                />
+              </label>
+            </div>
             {packages.length > 1 ? (
               <button type="button" onClick={() => removePackage(quotePackage.id)} className="rounded-md border border-red-200 bg-white px-4 py-3 text-sm font-bold text-red-700 hover:bg-red-50">Remove package</button>
             ) : null}
@@ -221,16 +286,28 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           <div className="space-y-3">
             {quotePackage.lines.map((line) => {
               const selectedItem = itemsById.get(line.pricingItemId);
+              const lineMatches = filteredItems.filter((item) => item.service.toLowerCase().includes(line.searchText.trim().toLowerCase())).slice(0, 75);
               return (
-                <div key={line.id} className="grid gap-3 rounded-xl border border-gray-100 bg-slate-50 p-4 md:grid-cols-[1fr_120px_110px]">
+                <div key={line.id} className="grid gap-3 rounded-xl border border-gray-100 bg-slate-50 p-4 md:grid-cols-[1fr_1fr_120px_110px]">
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Search box</span>
+                    <input
+                      value={line.searchText}
+                      onChange={(event) => updateLine(quotePackage.id, line.id, { searchText: event.target.value })}
+                      disabled={!state}
+                      className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100"
+                      placeholder={state ? 'Type county, federal, MVR, drug...' : 'Select state first'}
+                    />
+                  </label>
                   <label className="block">
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Search needed</span>
                     <select value={line.pricingItemId} onChange={(event) => updateLine(quotePackage.id, line.id, { pricingItemId: event.target.value })} disabled={!state} className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100">
                       <option value="">{state ? 'Select search' : 'Select state first'}</option>
-                      {filteredItems.map((item) => (
+                      {lineMatches.map((item) => (
                         <option key={item.id} value={item.id}>{item.service}</option>
                       ))}
                     </select>
+                    {state && lineMatches.length === 75 ? <span className="mt-1 block text-xs text-slate-500">Showing first 75 matches. Keep typing to narrow the list.</span> : null}
                   </label>
                   <label className="block">
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Quantity</span>
@@ -240,9 +317,11 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
                     <button type="button" onClick={() => removeLine(quotePackage.id, line.id)} className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm font-bold text-slate-700 hover:bg-gray-50">Remove</button>
                   </div>
                   {selectedItem ? (
-                    <div className="md:col-span-3 grid gap-2 text-xs text-slate-600 sm:grid-cols-5">
+                    <div className="md:col-span-4 grid gap-2 text-xs text-slate-600 sm:grid-cols-5">
                       {priceCategories.map((category) => (
-                        <div key={category.key} className="rounded-lg bg-white p-2"><b>{category.label}:</b> {money(Number(selectedItem[category.key] || 0))}</div>
+                        <div key={category.key} className={`rounded-lg p-2 ${selectedPriceKey === category.key ? 'bg-green-50 ring-1 ring-green-200' : 'bg-white'}`}>
+                          <b>{category.label}:</b> {priceLabel(selectedItem[category.key])}
+                        </div>
                       ))}
                     </div>
                   ) : null}
@@ -255,9 +334,10 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
 
           <div className="mt-5 grid gap-3 sm:grid-cols-5">
             {priceCategories.map((category) => (
-              <div key={category.key} className="rounded-xl border border-gray-200 bg-white p-3">
+              <div key={category.key} className={`rounded-xl border p-3 ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white'}`}>
                 <div className="text-xs font-bold uppercase tracking-wide text-slate-500">{category.label}</div>
                 <div className="mt-1 text-lg font-black text-slate-900">{money(packageTotal(quotePackage, category.key))}</div>
+                {selectedPriceKey === category.key ? <div className="mt-1 text-xs font-bold text-green-700">Selected category</div> : null}
               </div>
             ))}
           </div>
@@ -267,13 +347,22 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
       <button type="button" onClick={addPackage} className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 hover:bg-gray-50">Add another package</button>
 
       <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-black text-slate-900">Quote totals</h2>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-black text-slate-900">Quote totals</h2>
+            <p className="mt-1 text-sm text-slate-600">Choose the price category that should be used on the formal quote.</p>
+          </div>
+          <div className="rounded-xl bg-slate-900 px-5 py-3 text-white">
+            <div className="text-xs font-bold uppercase tracking-wide text-slate-300">Selected total</div>
+            <div className="text-2xl font-black">{money(totals[selectedPriceKey])}</div>
+          </div>
+        </div>
         <div className="mt-5 grid gap-3 sm:grid-cols-5">
           {priceCategories.map((category) => (
-            <button key={category.key} type="button" onClick={() => setSelectedPriceKey(category.key)} className={`rounded-xl border p-4 text-left ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:bg-gray-50'}`}>
+            <button key={category.key} type="button" onClick={() => setSelectedPriceKey(category.key)} className={`rounded-xl border p-4 text-left ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50 shadow-sm' : 'border-gray-200 bg-white hover:bg-gray-50'}`}>
               <div className="text-xs font-bold uppercase tracking-wide text-slate-500">{category.label}</div>
               <div className="mt-1 text-2xl font-black text-slate-900">{money(totals[category.key])}</div>
-              <div className="mt-2 text-xs font-bold text-green-700">{selectedPriceKey === category.key ? 'Selected' : 'Use this price'}</div>
+              <div className="mt-2 text-xs font-bold text-green-700">{selectedPriceKey === category.key ? 'Selected for quote' : 'Use this price'}</div>
             </button>
           ))}
         </div>
