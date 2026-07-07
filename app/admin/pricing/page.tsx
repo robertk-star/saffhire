@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import PricingQuoteBuilder from '@/components/PricingQuoteBuilder';
-import { getAdminSession, isAdminConfigured } from '@/lib/adminAuth';
+import { hasAdminPermission, isAdminConfigured } from '@/lib/adminAuth';
 import { getPricingItems } from '@/lib/pricingItems';
 
 export const metadata: Metadata = {
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPricingPage() {
-  const isLoggedIn = await getAdminSession();
-  if (!isLoggedIn) redirect('/admin/login');
+  const canView = await hasAdminPermission('pricing');
+  if (!canView) redirect('/admin/login');
 
   const configured = isAdminConfigured();
   const items = await getPricingItems();
@@ -26,6 +26,7 @@ export default async function AdminPricingPage() {
             <p className="mt-2 text-gray-600">Build internal package pricing and generate a printable quote preview.</p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <a href="/admin" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Admin Home</a>
             <a href="/admin/blogs" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Blog Admin</a>
             <form action="/api/admin/logout" method="post">
               <button className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Log Out</button>
