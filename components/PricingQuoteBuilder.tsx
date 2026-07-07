@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 type PriceKey = 'church_price' | 'staffing_price' | 'trucking_price' | 'high_volume_price' | 'general_price';
 
@@ -71,8 +71,7 @@ function newPackage(index = 1): QuotePackage {
 }
 
 export default function PricingQuoteBuilder({ initialItems }: { initialItems: PricingItem[] }) {
-  const [items, setItems] = useState<PricingItem[]>(initialItems);
-  const [isLoading, setIsLoading] = useState(true);
+  const [items] = useState<PricingItem[]>(initialItems);
   const [clientName, setClientName] = useState('');
   const [contactName, setContactName] = useState('');
   const [state, setState] = useState('');
@@ -80,25 +79,6 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
   const [selectedPriceKey, setSelectedPriceKey] = useState<PriceKey>('general_price');
   const [salesCoverageEnabled, setSalesCoverageEnabled] = useState(false);
   const [packages, setPackages] = useState<QuotePackage[]>([newPackage()]);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function loadItems() {
-      setIsLoading(true);
-      try {
-        const response = await fetch('/api/admin/pricing/items', { cache: 'no-store' });
-        if (!response.ok) return;
-        const payload = await response.json();
-        if (!cancelled && Array.isArray(payload.items)) setItems(payload.items);
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    }
-    loadItems();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const states = useMemo(() => Array.from(new Set(items.map((item) => item.state).filter(Boolean))).sort(), [items]);
   const filteredItems = useMemo(() => items.filter((item) => item.state === state), [items, state]);
@@ -149,6 +129,10 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
         lines: quotePackage.lines.map((line) => ({ ...line, pricingItemId: '', searchText: '' })),
       })),
     );
+  }
+
+  function handleSearchTextChange(packageId: string, lineId: string, searchText: string) {
+    updateLine(packageId, lineId, { searchText, pricingItemId: '' });
   }
 
   function addLine(packageId: string) {
@@ -314,7 +298,8 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           <div className="space-y-3">
             {quotePackage.lines.map((line) => {
               const selectedItem = itemsById.get(line.pricingItemId);
-              const rawMatches = filteredItems.filter((item) => item.service.toLowerCase().includes(line.searchText.trim().toLowerCase())).slice(0, 75);
+              const query = line.searchText.trim().toLowerCase();
+              const rawMatches = (query ? filteredItems.filter((item) => item.service.toLowerCase().includes(query)) : filteredItems).slice(0, 150);
               const lineMatches = selectedItem && !rawMatches.some((item) => item.id === selectedItem.id) ? [selectedItem, ...rawMatches] : rawMatches;
               return (
                 <div key={line.id} className="grid gap-3 rounded-xl border border-gray-100 bg-slate-50 p-4 md:grid-cols-[1fr_1fr_120px_110px]">
@@ -322,21 +307,22 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Search box</span>
                     <input
                       value={line.searchText}
-                      onChange={(event) => updateLine(quotePackage.id, line.id, { searchText: event.target.value })}
-                      disabled={!state || isLoading}
-                      className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100"
+                      onChange={(event) => handleSearchTextChange(quotePackage.id, line.id, event.target.value)}
+                      className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
                       placeholder={state ? 'Type county, federal, MVR, drug...' : 'Select state first'}
                     />
+                    {!state ? <span className="mt-1 block text-xs text-slate-500">Select a state before choosing a search.</span> : null}
                   </label>
                   <label className="block">
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Search needed</span>
-                    <select value={line.pricingItemId} onChange={(event) => updateLine(quotePackage.id, line.id, { pricingItemId: event.target.value })} disabled={!state || isLoading} className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none disabled:bg-gray-100">
-                      <option value="">{isLoading ? 'Loading searches...' : state ? 'Select search' : 'Select state first'}</option>
-                      {lineMatches.map((item) => (
+                    <select value={line.pricingItemId} onChange={(event) => updateLine(quotePackage.id, line.id, { pricingItemId: event.target.value })} className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm focus:border-green-500 focus:outline-none">
+                      <option value="">{state ? 'Select search' : 'Select state first'}</option>
+                      {state ? lineMatches.map((item) => (
                         <option key={item.id} value={item.id}>{item.service}</option>
-                      ))}
+                      )) : null}
                     </select>
-                    {state && lineMatches.length === 75 ? <span className="mt-1 block text-xs text-slate-500">Showing first 75 matches. Keep typing to narrow the list.</span> : null}
+                    {state && lineMatches.length >= 150 ? <span className="mt-1 block text-xs text-slate-500">Showing first 150 matches. Keep typing to narrow the list.</span> : null}
+                    {state && lineMatches.length === 0 ? <span className="mt-1 block text-xs text-red-600">No matches found for this state/search text.</span> : null}
                   </label>
                   <label className="block">
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">Quantity</span>
@@ -417,7 +403,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
             </button>
           ))}
         </div>
-        <button type="button" disabled={!canPreview || isLoading} onClick={buildQuotePreview} className="mt-6 rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-gray-300">Generate formal quote preview</button>
+        <button type="button" disabled={!canPreview} onClick={buildQuotePreview} className="mt-6 rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-gray-300">Generate formal quote preview</button>
       </section>
     </div>
   );
