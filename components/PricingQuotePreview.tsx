@@ -28,6 +28,8 @@ type QuotePreview = {
   createdAt: string;
 };
 
+const saffhireLogoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png';
+
 function money(value: number) {
   return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
@@ -66,33 +68,19 @@ export default function PricingQuotePreview() {
       </div>
 
       <section className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm print:border-0 print:p-0 print:shadow-none">
-        <div className="rounded-2xl bg-slate-950 p-6 text-white print:rounded-none">
+        <div className="rounded-2xl bg-white p-6 text-slate-900 ring-1 ring-gray-200 print:rounded-none print:ring-0">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-sm font-bold uppercase tracking-wider text-green-300">SaffHire</p>
-              <h1 className="mt-2 text-4xl font-black">Service Quote</h1>
-              <p className="mt-3 max-w-2xl text-sm text-slate-300">A package-based pricing estimate prepared for discussion.</p>
+              <img src={saffhireLogoUrl} alt="SaffHire" className="h-16 w-auto object-contain" />
+              <h1 className="mt-5 text-4xl font-black text-slate-900">SaffHire Quote</h1>
+              <p className="mt-3 max-w-2xl text-sm text-slate-600">A package-based pricing estimate prepared for discussion.</p>
             </div>
-            <div className="rounded-xl bg-white/10 p-4 text-sm sm:text-right">
+            <div className="rounded-xl bg-slate-50 p-4 text-sm text-slate-700 sm:text-right">
               <div><b>Prepared for:</b> {quote.clientName}</div>
               <div><b>Contact:</b> {quote.contactName}</div>
               <div><b>Date:</b> {new Date(quote.createdAt).toLocaleDateString()}</div>
+              <div><b>Majority search state:</b> {quote.state}</div>
             </div>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <div className="rounded-xl border border-gray-200 bg-slate-50 p-4">
-            <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Majority search state</div>
-            <div className="mt-1 text-xl font-black text-slate-900">{quote.state}</div>
-          </div>
-          <div className="rounded-xl border border-gray-200 bg-slate-50 p-4">
-            <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Selected pricing category</div>
-            <div className="mt-1 text-xl font-black text-slate-900">{quote.selectedCategory}</div>
-          </div>
-          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
-            <div className="text-xs font-bold uppercase tracking-wide text-green-700">Quote total</div>
-            <div className="mt-1 text-3xl font-black text-slate-900">{money(quote.quoteTotal)}</div>
           </div>
         </div>
 
@@ -134,19 +122,17 @@ export default function PricingQuotePreview() {
           ))}
         </div>
 
+        <div className="mt-6 border-t border-gray-200 pt-5 text-right">
+          <span className="text-sm font-bold uppercase tracking-wide text-slate-500">Quote total</span>
+          <span className="ml-4 text-2xl font-black text-slate-900">{money(quote.quoteTotal)}</span>
+        </div>
+
         {quote.quoteNotes ? (
           <div className="mt-8 rounded-xl border border-gray-200 bg-white p-5">
             <div className="text-sm font-bold uppercase tracking-wide text-slate-500">Notes</div>
             <p className="mt-2 whitespace-pre-wrap text-sm text-slate-700">{quote.quoteNotes}</p>
           </div>
         ) : null}
-
-        <div className="mt-8 flex justify-end">
-          <div className="w-full max-w-sm rounded-xl bg-green-50 p-5 text-right">
-            <div className="text-sm font-bold uppercase tracking-wide text-green-700">Quote total</div>
-            <div className="mt-2 text-4xl font-black text-slate-900">{money(quote.quoteTotal)}</div>
-          </div>
-        </div>
 
         <div className="mt-8 rounded-xl border border-gray-200 bg-slate-50 p-5 text-sm text-slate-600">
           Pricing is based on the package selections and majority search state shown above. This quote is intended for discussion and must be confirmed in a final client agreement.
