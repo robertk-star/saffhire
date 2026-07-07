@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import PricingQuotePreview from '@/components/PricingQuotePreview';
-import { getAdminSession } from '@/lib/adminAuth';
+import { hasAdminPermission } from '@/lib/adminAuth';
 
 export const metadata: Metadata = {
   title: 'Quote Preview | SaffHire Admin',
@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminQuotePreviewPage() {
-  const isLoggedIn = await getAdminSession();
-  if (!isLoggedIn) redirect('/admin/login');
+  const canView = await hasAdminPermission('pricing');
+  if (!canView) redirect('/admin/login');
 
   return (
     <main className="min-h-screen bg-slate-50">
