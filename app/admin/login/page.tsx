@@ -13,8 +13,8 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
     <main className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
       <form action="/api/admin/login" method="post" className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
         <p className="text-sm font-bold uppercase tracking-wider text-green-600 mb-3">SaffHire Admin</p>
-        <h1 className="text-3xl font-black text-slate-900 mb-3">Blog Approval Login</h1>
-        <p className="text-gray-600 mb-6">Log in to review, approve, and publish blog drafts.</p>
+        <h1 className="text-3xl font-black text-slate-900 mb-3">Admin Login</h1>
+        <p className="text-gray-600 mb-6">Log in to manage internal SaffHire tools.</p>
         {hasError ? (
           <div className="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
             Invalid password. Please try again.
