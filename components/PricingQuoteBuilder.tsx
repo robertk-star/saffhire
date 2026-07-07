@@ -8,6 +8,8 @@ type PricingItem = {
   id: string;
   service: string;
   state: string;
+  cost: number | null;
+  total_cost: number | null;
   church_price: number | null;
   staffing_price: number | null;
   trucking_price: number | null;
@@ -55,6 +57,10 @@ function priceLabel(value: number | null | undefined) {
 function applySalesCoverage(value: number, enabled: boolean) {
   if (!enabled) return value;
   return Number((value * salesCoverageMultiplier).toFixed(2));
+}
+
+function itemInternalCost(item: PricingItem) {
+  return Number(item.total_cost ?? item.cost ?? 0);
 }
 
 function newLine(): QuoteLine {
@@ -176,6 +182,18 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
       return sum + Number(price) * Math.max(0, Number(line.quantity || 0));
     }, 0);
     return applySalesCoverage(baseTotal, useSalesCoverage);
+  }
+
+  function packageCostTotal(quotePackage: QuotePackage) {
+    return quotePackage.lines.reduce((sum, line) => {
+      const item = itemsById.get(line.pricingItemId);
+      if (!item) return sum;
+      return sum + itemInternalCost(item) * Math.max(0, Number(line.quantity || 0));
+    }, 0);
+  }
+
+  function packageProfit(quotePackage: QuotePackage, key: PriceKey) {
+    return packageTotal(quotePackage, key, salesCoverageEnabled) - packageCostTotal(quotePackage);
   }
 
   function buildQuotePreview() {
@@ -353,14 +371,21 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
           <button type="button" onClick={() => addLine(quotePackage.id)} className="mt-4 rounded-md bg-slate-900 px-4 py-3 text-sm font-bold text-white hover:bg-slate-800">Add search to package</button>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-5">
-            {priceCategories.map((category) => (
-              <div key={category.key} className={`rounded-xl border p-3 ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white'}`}>
-                <div className="text-xs font-bold uppercase tracking-wide text-slate-500">{category.label}</div>
-                <div className="mt-1 text-lg font-black text-slate-900">{money(salesCoverageEnabled ? packageTotal(quotePackage, category.key, true) : packageTotal(quotePackage, category.key))}</div>
-                {salesCoverageEnabled ? <div className="mt-1 text-xs text-slate-500">Base: {money(packageTotal(quotePackage, category.key))}</div> : null}
-                {selectedPriceKey === category.key ? <div className="mt-1 text-xs font-bold text-green-700">Selected category</div> : null}
-              </div>
-            ))}
+            {priceCategories.map((category) => {
+              const displayPrice = salesCoverageEnabled ? packageTotal(quotePackage, category.key, true) : packageTotal(quotePackage, category.key);
+              const displayCost = packageCostTotal(quotePackage);
+              const displayProfit = packageProfit(quotePackage, category.key);
+              return (
+                <div key={category.key} className={`rounded-xl border p-3 ${selectedPriceKey === category.key ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white'}`}>
+                  <div className="text-xs font-bold uppercase tracking-wide text-slate-500">{category.label}</div>
+                  <div className="mt-1 text-lg font-black text-slate-900">{money(displayPrice)}</div>
+                  <div className="mt-2 text-sm text-slate-600">Cost: {money(displayCost)}</div>
+                  <div className="text-sm font-bold text-slate-800">Profit: {money(displayProfit)}</div>
+                  {salesCoverageEnabled ? <div className="mt-1 text-xs text-slate-500">Base: {money(packageTotal(quotePackage, category.key))}</div> : null}
+                  {selectedPriceKey === category.key ? <div className="mt-1 text-xs font-bold text-green-700">Selected category</div> : null}
+                </div>
+              );
+            })}
           </div>
         </section>
       ))}
