@@ -196,6 +196,22 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
     return packageTotal(quotePackage, key, salesCoverageEnabled) - packageCostTotal(quotePackage);
   }
 
+  function lineCostTotal(item: PricingItem, line: QuoteLine) {
+    return itemInternalCost(item) * Math.max(0, Number(line.quantity || 0));
+  }
+
+  function linePriceTotal(item: PricingItem, line: QuoteLine, key: PriceKey) {
+    const price = item[key];
+    if (price === null || price === undefined) return null;
+    return applySalesCoverage(Number(price), salesCoverageEnabled) * Math.max(0, Number(line.quantity || 0));
+  }
+
+  function lineProfit(item: PricingItem, line: QuoteLine, key: PriceKey) {
+    const price = linePriceTotal(item, line, key);
+    if (price === null) return null;
+    return price - lineCostTotal(item, line);
+  }
+
   function buildQuotePreview() {
     const selectedCategory = priceCategories.find((category) => category.key === selectedPriceKey) || priceCategories[4];
     const quotePackages = packages.map((quotePackage) => ({
@@ -319,6 +335,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
               const query = line.searchText.trim().toLowerCase();
               const rawMatches = (query ? filteredItems.filter((item) => item.service.toLowerCase().includes(query)) : filteredItems).slice(0, 150);
               const lineMatches = selectedItem && !rawMatches.some((item) => item.id === selectedItem.id) ? [selectedItem, ...rawMatches] : rawMatches;
+              const selectedLineCost = selectedItem ? lineCostTotal(selectedItem, line) : 0;
               return (
                 <div key={line.id} className="grid gap-3 rounded-xl border border-gray-100 bg-slate-50 p-4 md:grid-cols-[1fr_1fr_120px_110px]">
                   <label className="block">
@@ -354,9 +371,14 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
                       {priceCategories.map((category) => {
                         const basePrice = selectedItem[category.key];
                         const adjustedPrice = basePrice === null || basePrice === undefined ? null : applySalesCoverage(Number(basePrice), salesCoverageEnabled);
+                        const displayPrice = linePriceTotal(selectedItem, line, category.key);
+                        const displayProfit = lineProfit(selectedItem, line, category.key);
                         return (
                           <div key={category.key} className={`rounded-lg p-2 ${selectedPriceKey === category.key ? 'bg-green-50 ring-1 ring-green-200' : 'bg-white'}`}>
-                            <b>{category.label}:</b> {salesCoverageEnabled ? priceLabel(adjustedPrice) : priceLabel(basePrice)}
+                            <div className="font-bold text-slate-700">{category.label}: {priceLabel(displayPrice)}</div>
+                            <div className="mt-1">Cost: {money(selectedLineCost)}</div>
+                            <div className="font-bold text-slate-800">Profit: {displayProfit === null ? 'N/A' : money(displayProfit)}</div>
+                            {Number(line.quantity || 0) > 1 ? <div className="mt-1 text-[11px] text-slate-500">Unit: {salesCoverageEnabled ? priceLabel(adjustedPrice) : priceLabel(basePrice)}</div> : null}
                             {salesCoverageEnabled && selectedPriceKey === category.key ? <div className="mt-1 text-[11px] font-bold text-green-700">Includes 10% sales coverage</div> : null}
                           </div>
                         );
