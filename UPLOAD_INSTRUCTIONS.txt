@@ -1,0 +1,9 @@
+Fix for Vercel build error:
+TypeError: Cannot read properties of undefined (reading 'fileExists')
+
+Upload next.config.js to the root of the GitHub repo.
+Then DELETE next.config.ts from the root of the repo.
+
+Do not keep both files. The failing file is next.config.ts.
+
+This keeps the same config values, redirects, image settings, TypeScript ignore setting, and ESLint ignore setting.
