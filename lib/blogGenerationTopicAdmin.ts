@@ -44,3 +44,11 @@ export async function getBlogGenerationTopicRecords() {
     errorMessage: null,
   };
 }
+
+
+export async function getActiveBlogGenerationTopics() {
+  const result = await getBlogGenerationTopicRecords();
+  return result.topics
+    .filter((topic) => topic.active)
+    .sort((a, b) => a.sort_order - b.sort_order);
+}
