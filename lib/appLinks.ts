@@ -41,6 +41,36 @@ function cleanUrl(value: string) {
   }
 }
 
+function cleanSortOrder(value: unknown) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 100;
+}
+
+function cleanLinkInput(input: {
+  category: string;
+  name: string;
+  description?: string;
+  url: string;
+  sort_order?: number;
+}) {
+  const category = input.category.trim();
+  if (!isValidAppLinkCategory(category)) throw new Error('Invalid category.');
+
+  const name = input.name.trim();
+  if (!name) throw new Error('Name is required.');
+
+  const url = cleanUrl(input.url);
+  if (!url) throw new Error('A valid http or https URL is required.');
+
+  return {
+    category,
+    name,
+    description: input.description?.trim() || null,
+    url,
+    sort_order: cleanSortOrder(input.sort_order),
+  };
+}
+
 export async function getAppLinks() {
   const supabase = getSupabaseAdmin();
   if (!supabase) return { links: defaultAppLinks, usingFallback: true, errorMessage: 'Supabase is not configured.' };
@@ -73,25 +103,27 @@ export async function createAppLink(input: {
   const supabase = getSupabaseAdmin();
   if (!supabase) throw new Error('Supabase is not configured.');
 
-  const category = input.category.trim();
-  if (!isValidAppLinkCategory(category)) throw new Error('Invalid category.');
+  const cleaned = cleanLinkInput(input);
+  const { error } = await supabase.from('app_links').insert(cleaned);
+  if (error) throw error;
+}
 
-  const name = input.name.trim();
-  if (!name) throw new Error('Name is required.');
+export async function updateAppLink(input: {
+  id: string;
+  category: string;
+  name: string;
+  description?: string;
+  url: string;
+  sort_order?: number;
+}) {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) throw new Error('Supabase is not configured.');
 
-  const url = cleanUrl(input.url);
-  if (!url) throw new Error('A valid http or https URL is required.');
+  const id = input.id.trim();
+  if (!id) throw new Error('Missing link ID.');
 
-  const sortOrder = Number.isFinite(input.sort_order) ? Number(input.sort_order) : 100;
-
-  const { error } = await supabase.from('app_links').insert({
-    category,
-    name,
-    description: input.description?.trim() || null,
-    url,
-    sort_order: sortOrder,
-  });
-
+  const cleaned = cleanLinkInput(input);
+  const { error } = await supabase.from('app_links').update(cleaned).eq('id', id);
   if (error) throw error;
 }
 
