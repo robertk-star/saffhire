@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { hasAdminPermission, isAdminConfigured } from '@/lib/adminAuth';
-import { getBlogDrafts } from '@/lib/blogDrafts';
+import { hasAdminPermission, isAdminConfigured } from '../../../lib/adminAuth';
+import { getBlogDrafts } from '../../../lib/blogDrafts';
 
 export const metadata: Metadata = {
   title: 'Blog Drafts Admin',
