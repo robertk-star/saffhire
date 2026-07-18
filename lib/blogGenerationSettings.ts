@@ -1,4 +1,4 @@
-import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
+import { getSupabaseAdmin } from './supabaseAdmin';
 
 export type BlogGenerationSettings = {
   id: string;
