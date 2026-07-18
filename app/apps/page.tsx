@@ -32,16 +32,36 @@ export default async function AppsPage({ searchParams }: { searchParams?: Promis
     <main className="min-h-screen bg-slate-50 px-6 py-10">
       <div className="mx-auto max-w-5xl">
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-sm font-bold uppercase tracking-wide text-green-700">SaffHire</p>
-          <h1 className="mt-2 text-3xl font-black text-slate-900">App Links</h1>
-          <p className="mt-2 text-sm text-slate-600">
-            Internal list of apps being built. This page is set to noindex and nofollow.
-          </p>
-          {!isAdmin ? (
-            <p className="mt-4 text-sm text-slate-500">
-              To add or delete links, log in at <a className="font-bold text-green-700 hover:underline" href="/admin/login">Admin Login</a>, then come back to this page.
-            </p>
-          ) : null}
+          <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wide text-green-700">SaffHire</p>
+              <h1 className="mt-2 text-3xl font-black text-slate-900">App Links</h1>
+              <p className="mt-2 text-sm text-slate-600">
+                Internal list of apps being built. This page is set to noindex and nofollow.
+              </p>
+              {!isAdmin ? (
+                <p className="mt-4 text-sm text-slate-500">
+                  To add or delete links, log in at <a className="font-bold text-green-700 hover:underline" href="/admin/login">Admin Login</a>, then come back to this page.
+                </p>
+              ) : null}
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="/apps/add"
+                className="inline-flex rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600"
+              >
+                Add Links
+              </a>
+              {!isAdmin ? (
+                <a
+                  href="/admin/login"
+                  className="inline-flex rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50"
+                >
+                  Admin Login
+                </a>
+              ) : null}
+            </div>
+          </div>
         </section>
 
         {result.usingFallback ? (
@@ -66,43 +86,6 @@ export default async function AppsPage({ searchParams }: { searchParams?: Promis
         {params?.deleted ? (
           <section className="mt-5 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
             Link deleted.
-          </section>
-        ) : null}
-
-        {isAdmin ? (
-          <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-black text-slate-900">Add app link</h2>
-            <form action="/api/admin/app-links" method="post" className="mt-5 grid gap-4 md:grid-cols-2">
-              <label className="block">
-                <span className="mb-2 block text-sm font-bold text-slate-700">Category</span>
-                <select name="category" className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm" required>
-                  {appLinkCategories.map((category) => (
-                    <option key={category} value={category}>{category}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-bold text-slate-700">Name</span>
-                <input name="name" className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm" required placeholder="Example: Monitoring App" />
-              </label>
-              <label className="block md:col-span-2">
-                <span className="mb-2 block text-sm font-bold text-slate-700">URL</span>
-                <input name="url" type="url" className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm" required placeholder="https://example.vercel.app/" />
-              </label>
-              <label className="block md:col-span-2">
-                <span className="mb-2 block text-sm font-bold text-slate-700">Description</span>
-                <input name="description" className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm" placeholder="Short note about what this app does" />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-sm font-bold text-slate-700">Sort order</span>
-                <input name="sort_order" type="number" defaultValue="100" className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm" />
-              </label>
-              <div className="flex items-end">
-                <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
-                  Add link
-                </button>
-              </div>
-            </form>
           </section>
         ) : null}
 
