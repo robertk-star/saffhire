@@ -1,5 +1,5 @@
-import { getBlogImageForCategory } from '@/data/blogCategoryImages';
-import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
+import { getBlogImageForCategory } from '../data/blogCategoryImages';
+import { getSupabaseAdmin } from './supabaseAdmin';
 
 export type BlogStatus = 'draft' | 'pending_review' | 'changes_requested' | 'approved' | 'published' | 'rejected';
 
