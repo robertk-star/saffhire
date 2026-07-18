@@ -89,37 +89,37 @@ export default async function AppsPage({ searchParams }: { searchParams?: Promis
           </section>
         ) : null}
 
-        <div className="mt-8 grid gap-8">
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
           {linksByCategory.map(({ category, links }) => (
-            <section key={category}>
-              <div className="mb-4 flex items-center justify-between">
+            <section key={category} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="mb-4 flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
                 <h2 className="text-2xl font-black text-slate-900">{category}</h2>
-                <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-500 ring-1 ring-slate-200">
+                <span className="rounded-full bg-slate-50 px-3 py-1 text-xs font-bold text-slate-500 ring-1 ring-slate-200">
                   {links.length} {links.length === 1 ? 'link' : 'links'}
                 </span>
               </div>
 
               {links.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
+                <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">
                   No links added yet.
                 </div>
               ) : (
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid gap-3">
                   {links.map((app) => (
                     <a
                       key={app.id}
                       href={app.url}
                       target="_blank"
                       rel="nofollow noopener noreferrer"
-                      className="block rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-green-300 hover:shadow-md"
+                      className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-green-300 hover:bg-white hover:shadow-md"
                     >
-                      <h3 className="line-clamp-1 text-base font-black text-slate-900">{app.name}</h3>
-                      {app.description ? (
-                        <p className="mt-2 line-clamp-2 min-h-[40px] text-xs leading-5 text-slate-600">{app.description}</p>
-                      ) : (
-                        <p className="mt-2 min-h-[40px] text-xs leading-5 text-slate-400">No description added.</p>
-                      )}
-                      <div className="mt-3 text-xs font-bold text-green-700">Open app →</div>
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="min-w-0">
+                          <h3 className="truncate text-base font-black text-slate-900">{app.name}</h3>
+                          {app.description ? <p className="mt-1 line-clamp-1 text-sm text-slate-600">{app.description}</p> : null}
+                        </div>
+                        <span className="shrink-0 text-lg font-black text-green-700">→</span>
+                      </div>
                     </a>
                   ))}
                 </div>
