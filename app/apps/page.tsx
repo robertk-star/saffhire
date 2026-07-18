@@ -30,7 +30,7 @@ export default async function AppsPage({ searchParams }: { searchParams?: Promis
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
             <div>
@@ -100,33 +100,27 @@ export default async function AppsPage({ searchParams }: { searchParams?: Promis
               </div>
 
               {links.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
+                <div className="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
                   No links added yet.
                 </div>
               ) : (
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {links.map((app) => (
-                    <article key={app.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                      <a
-                        href={app.url}
-                        target="_blank"
-                        rel="nofollow noopener noreferrer"
-                        className="block transition hover:text-green-700"
-                      >
-                        <h3 className="text-xl font-black text-slate-900">{app.name}</h3>
-                        {app.description ? <p className="mt-2 text-sm leading-6 text-slate-600">{app.description}</p> : null}
-                        <div className="mt-5 text-sm font-bold text-green-700">Open app →</div>
-                      </a>
-
-                      {isAdmin ? (
-                        <form action="/api/admin/app-links/delete" method="post" className="mt-4 border-t border-slate-100 pt-4">
-                          <input type="hidden" name="id" value={app.id} />
-                          <button className="text-sm font-bold text-red-600 hover:underline">
-                            Delete link
-                          </button>
-                        </form>
-                      ) : null}
-                    </article>
+                    <a
+                      key={app.id}
+                      href={app.url}
+                      target="_blank"
+                      rel="nofollow noopener noreferrer"
+                      className="block rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-green-300 hover:shadow-md"
+                    >
+                      <h3 className="line-clamp-1 text-base font-black text-slate-900">{app.name}</h3>
+                      {app.description ? (
+                        <p className="mt-2 line-clamp-2 min-h-[40px] text-xs leading-5 text-slate-600">{app.description}</p>
+                      ) : (
+                        <p className="mt-2 min-h-[40px] text-xs leading-5 text-slate-400">No description added.</p>
+                      )}
+                      <div className="mt-3 text-xs font-bold text-green-700">Open app →</div>
+                    </a>
                   ))}
                 </div>
               )}
