@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -30,6 +32,15 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname),
+      '@shared': path.resolve(__dirname, 'shared'),
+      '@/pages': path.resolve(__dirname, 'legacy'),
+    };
+    return config;
   },
 };
 
