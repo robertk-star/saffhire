@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { hasAdminPermission } from '@/lib/adminAuth';
-import { dayOptions, getBlogGenerationSettings } from '@/lib/blogGenerationSettings';
+import { hasAdminPermission } from '../../../../lib/adminAuth';
+import { dayOptions, getBlogGenerationSettings } from '../../../../lib/blogGenerationSettings';
 
 export const metadata: Metadata = {
   title: 'Blog Generation Schedule',
