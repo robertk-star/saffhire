@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { getAdminSession } from '@/lib/adminAuth';
-import BlogDraftForm from '@/components/BlogDraftForm';
+import { getAdminSession } from '../../../../lib/adminAuth';
+import BlogDraftForm from '../../../../components/BlogDraftForm';
 
 export const metadata: Metadata = {
   title: 'New Blog Draft',
