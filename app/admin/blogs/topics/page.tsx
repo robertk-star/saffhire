@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { getAdminSession } from '@/lib/adminAuth';
-import { getBlogGenerationTopicRecords } from '@/lib/blogGenerationTopicAdmin';
+import { getAdminSession } from '../../../../lib/adminAuth';
+import { getBlogGenerationTopicRecords } from '../../../../lib/blogGenerationTopicAdmin';
 
 export const metadata: Metadata = {
   title: 'Blog Topic Settings',
