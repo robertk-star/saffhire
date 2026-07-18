@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { getAdminSession } from '@/lib/adminAuth';
-import { getBlogDraftById } from '@/lib/blogDrafts';
-import BlogDraftForm from '@/components/BlogDraftForm';
+import { getAdminSession } from '../../../../lib/adminAuth';
+import { getBlogDraftById } from '../../../../lib/blogDrafts';
+import BlogDraftForm from '../../../../components/BlogDraftForm';
 
 export const metadata: Metadata = {
   title: 'Review Blog Draft',
