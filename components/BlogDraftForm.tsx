@@ -1,5 +1,5 @@
-import { getBlogImageForCategory } from '@/data/blogCategoryImages';
-import type { BlogDraft } from '@/lib/blogDrafts';
+import { getBlogImageForCategory } from '../data/blogCategoryImages';
+import type { BlogDraft } from '../lib/blogDrafts';
 
 export default function BlogDraftForm({ draft }: { draft?: BlogDraft | null }) {
   const action = draft ? `/api/admin/blogs/${draft.id}` : '/api/admin/blogs';
