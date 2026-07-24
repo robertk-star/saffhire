@@ -75,11 +75,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            <a href="https://solutions.saffhire.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              <span className="text-gray-700 hover:text-green-600 font-medium text-sm transition-colors">Solutions</span>
-              <span className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</span>
-            </a>
-
             <div className="relative group">
               <button className="text-gray-700 hover:text-green-600 font-medium text-sm transition-colors flex items-center gap-1">
                 Resources
@@ -145,11 +140,6 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-
-            <a href="https://solutions.saffhire.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-sm font-semibold text-gray-700 hover:text-green-600 transition-colors flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-              Solutions
-              <span className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</span>
-            </a>
 
             <div>
               <button onClick={() => setResourcesOpen(!resourcesOpen)} className="w-full text-left py-2 text-sm font-semibold text-gray-700 hover:text-green-600 transition-colors flex items-center justify-between">
