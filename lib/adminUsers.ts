@@ -95,3 +95,55 @@ export async function createAdminUser(input: { username: string; displayName?: s
   });
   if (error) throw new Error(error.message);
 }
+
+export async function updateAdminUser(
+  id: string,
+  input: {
+    username?: string;
+    displayName?: string | null;
+    password?: string;
+    permissions?: string[];
+    isActive?: boolean;
+  },
+) {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) throw new Error('Supabase is not configured.');
+  if (!id) throw new Error('User id is required.');
+
+  const update: Record<string, unknown> = {};
+
+  if (input.username !== undefined) {
+    const username = input.username.trim().toLowerCase();
+    if (!username) throw new Error('Username is required.');
+    update.username = username;
+  }
+
+  if (input.displayName !== undefined) {
+    update.display_name = input.displayName?.trim() || null;
+  }
+
+  if (input.password !== undefined && input.password !== '') {
+    if (input.password.length < 8) throw new Error('Password must be at least 8 characters.');
+    update.password_hash = hashAdminPassword(input.password);
+  }
+
+  if (input.permissions !== undefined) {
+    update.permissions = cleanPermissions(input.permissions);
+  }
+
+  if (input.isActive !== undefined) {
+    update.is_active = Boolean(input.isActive);
+  }
+
+  if (Object.keys(update).length === 0) throw new Error('No changes provided.');
+
+  const { data, error } = await supabase
+    .from('admin_users')
+    .update(update)
+    .eq('id', id)
+    .select('id, username, display_name, permissions, is_active, created_at, updated_at')
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data as AdminUser;
+}
