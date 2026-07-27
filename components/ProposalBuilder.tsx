@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import type { PriceRow as StoredPriceRow, ProposalPricingPage } from '@/lib/proposalPricingPages';
 
 type SectionKey =
   | 'cover'
@@ -16,14 +17,6 @@ type PriceRow = {
   price: string;
 };
 
-type PricingPreset = {
-  id: string;
-  name: string;
-  description: string;
-  minimumPackage: PriceRow[];
-  individual: PriceRow[];
-};
-
 const sectionOptions: { key: SectionKey; label: string; description: string }[] = [
   { key: 'cover', label: 'Cover page', description: 'Title page with SaffHire branding' },
   { key: 'whySaffhire', label: 'Why SaffHire', description: 'Mission, veteran-owned commitment, and differentiators' },
@@ -37,104 +30,25 @@ function makeId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-function row(label: string, price: string): PriceRow {
-  return { id: makeId('price'), label, price };
+function toEditableRows(rows: StoredPriceRow[]): PriceRow[] {
+  return (rows || []).map((item) => ({
+    id: makeId('price'),
+    label: item.label,
+    price: item.price,
+  }));
 }
 
-const pricingPresets: PricingPreset[] = [
-  {
-    id: 'direct',
-    name: 'SaffHire Direct Pricing',
-    description: 'Standard direct client pricing from the sample proposal.',
-    minimumPackage: [
-      row('Social Security Trace', '$5.00'),
-      row('Sex Offender Registry', 'Included'),
-      row('Global Security Watch List', 'Included'),
-      row('National Database Search', 'Included'),
-    ],
-    individual: [
-      row('Federal Search', '$5.00'),
-      row('MVR', '$4.50'),
-      row('Safety Performance', '$10.00'),
-      row('DOT Verification', '$5.00'),
-      row('1 County Criminal Search', '$6.00'),
-      row('3 County Criminal Searches', '$16.50'),
-      row('Civil Search Upper Only', '$6.50'),
-      row('Civil Search Lower Only', '$6.50'),
-      row('Civil Search Upper & Lower', '$11.00'),
-      row('Education Verification', '$9.00'),
-      row('Employment Verification', '$9.00'),
-      row('WOTC', '$5.00'),
-      row('Drug Screening', '$28.50'),
-      row('State Database Search', '$3.00'),
-      row('Healthcare/MedEx/OIG', '$8.00'),
-      row('Medical License Verification', '$9.00'),
-      row('Continuous Monitoring', '$2.00'),
-    ],
-  },
-  {
-    id: 'staffing',
-    name: 'Staffing Company Pricing',
-    description: 'Pricing oriented for staffing company clients.',
-    minimumPackage: [
-      row('Social Security Trace', '$5.00'),
-      row('Sex Offender Registry', 'Included'),
-      row('Global Security Watch List', 'Included'),
-      row('National Database Search', 'Included'),
-    ],
-    individual: [
-      row('Federal Search', '$5.00'),
-      row('MVR', '$4.50'),
-      row('Safety Performance', '$10.00'),
-      row('DOT Verification', '$5.00'),
-      row('1 County Criminal Search', '$6.00'),
-      row('3 County Criminal Searches', '$16.50'),
-      row('Civil Search Upper Only', '$6.50'),
-      row('Civil Search Lower Only', '$6.50'),
-      row('Civil Search Upper & Lower', '$11.00'),
-      row('Education Verification', '$9.00'),
-      row('Employment Verification', '$9.00'),
-      row('WOTC', '$5.00'),
-      row('Drug Screening', '$28.50'),
-      row('State Database Search', '$3.00'),
-      row('Healthcare/MedEx/OIG', '$8.00'),
-      row('Medical License Verification', '$9.00'),
-      row('Continuous Monitoring', '$2.00'),
-    ],
-  },
-  {
-    id: 'staffing-sales',
-    name: 'Staffing + 10% Sales Coverage',
-    description: 'Staffing pricing with a 10% uplift to cover salesperson cost.',
-    minimumPackage: [
-      row('Social Security Trace', '$5.50'),
-      row('Sex Offender Registry', 'Included'),
-      row('Global Security Watch List', 'Included'),
-      row('National Database Search', 'Included'),
-    ],
-    individual: [
-      row('Federal Search', '$5.50'),
-      row('MVR', '$4.95'),
-      row('Safety Performance', '$11.00'),
-      row('DOT Verification', '$5.50'),
-      row('1 County Criminal Search', '$6.60'),
-      row('3 County Criminal Searches', '$18.15'),
-      row('Civil Search Upper Only', '$7.15'),
-      row('Civil Search Lower Only', '$7.15'),
-      row('Civil Search Upper & Lower', '$12.10'),
-      row('Education Verification', '$9.90'),
-      row('Employment Verification', '$9.90'),
-      row('WOTC', '$5.50'),
-      row('Drug Screening', '$31.35'),
-      row('State Database Search', '$3.30'),
-      row('Healthcare/MedEx/OIG', '$8.80'),
-      row('Medical License Verification', '$9.90'),
-      row('Continuous Monitoring', '$2.20'),
-    ],
-  },
-];
+function toStoredRows(rows: PriceRow[]): StoredPriceRow[] {
+  return rows
+    .map((item) => ({ label: item.label.trim(), price: item.price.trim() }))
+    .filter((item) => item.label);
+}
 
-export default function ProposalBuilder() {
+function blankRows(): PriceRow[] {
+  return [{ id: makeId('price'), label: '', price: '' }];
+}
+
+export default function ProposalBuilder({ initialPricingPages }: { initialPricingPages: ProposalPricingPage[] }) {
   const [clientName, setClientName] = useState('');
   const [contactName, setContactName] = useState('');
   const [proposalNotes, setProposalNotes] = useState('');
@@ -146,21 +60,57 @@ export default function ProposalBuilder() {
     pricing: true,
     process: true,
   });
-  const [presetId, setPresetId] = useState(pricingPresets[0].id);
-  const [minimumPackage, setMinimumPackage] = useState<PriceRow[]>(pricingPresets[0].minimumPackage);
-  const [individualPricing, setIndividualPricing] = useState<PriceRow[]>(pricingPresets[0].individual);
 
-  const activePreset = useMemo(() => pricingPresets.find((preset) => preset.id === presetId) || pricingPresets[0], [presetId]);
+  const [pricingPages, setPricingPages] = useState<ProposalPricingPage[]>(initialPricingPages);
+  const [presetId, setPresetId] = useState(initialPricingPages[0]?.id || '');
+  const [pageName, setPageName] = useState(initialPricingPages[0]?.name || '');
+  const [pageDescription, setPageDescription] = useState(initialPricingPages[0]?.description || '');
+  const [minimumPackage, setMinimumPackage] = useState<PriceRow[]>(
+    initialPricingPages[0] ? toEditableRows(initialPricingPages[0].minimum_package) : blankRows(),
+  );
+  const [individualPricing, setIndividualPricing] = useState<PriceRow[]>(
+    initialPricingPages[0] ? toEditableRows(initialPricingPages[0].individual_pricing) : blankRows(),
+  );
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const activePage = useMemo(
+    () => pricingPages.find((page) => page.id === presetId) || pricingPages[0] || null,
+    [pricingPages, presetId],
+  );
+
+  const isPersistedPage = Boolean(activePage && !['direct', 'staffing', 'staffing-sales'].includes(activePage.id));
 
   function toggleSection(key: SectionKey) {
     setSelectedSections((current) => ({ ...current, [key]: !current[key] }));
   }
 
-  function applyPreset(nextPresetId: string) {
-    const preset = pricingPresets.find((item) => item.id === nextPresetId) || pricingPresets[0];
-    setPresetId(preset.id);
-    setMinimumPackage(preset.minimumPackage.map((item) => ({ ...item, id: makeId('price') })));
-    setIndividualPricing(preset.individual.map((item) => ({ ...item, id: makeId('price') })));
+  function loadPage(page: ProposalPricingPage) {
+    setPresetId(page.id);
+    setPageName(page.name);
+    setPageDescription(page.description || '');
+    setMinimumPackage(toEditableRows(page.minimum_package));
+    setIndividualPricing(toEditableRows(page.individual_pricing));
+    setStatusMessage('');
+    setErrorMessage('');
+  }
+
+  function applyPage(nextId: string) {
+    const page = pricingPages.find((item) => item.id === nextId);
+    if (!page) return;
+    loadPage(page);
+  }
+
+  function startNewPage() {
+    setPresetId('');
+    setPageName('');
+    setPageDescription('');
+    setMinimumPackage(blankRows());
+    setIndividualPricing(blankRows());
+    setStatusMessage('Editing a new pricing page. Save to keep it.');
+    setErrorMessage('');
   }
 
   function updateMinimumRow(id: string, updates: Partial<PriceRow>) {
@@ -172,11 +122,11 @@ export default function ProposalBuilder() {
   }
 
   function addMinimumRow() {
-    setMinimumPackage((current) => [...current, row('New line item', '')]);
+    setMinimumPackage((current) => [...current, { id: makeId('price'), label: '', price: '' }]);
   }
 
   function addIndividualRow() {
-    setIndividualPricing((current) => [...current, row('New service', '')]);
+    setIndividualPricing((current) => [...current, { id: makeId('price'), label: '', price: '' }]);
   }
 
   function removeMinimumRow(id: string) {
@@ -185,6 +135,77 @@ export default function ProposalBuilder() {
 
   function removeIndividualRow(id: string) {
     setIndividualPricing((current) => (current.length <= 1 ? current : current.filter((rowItem) => rowItem.id !== id)));
+  }
+
+  async function savePricingPage() {
+    setIsSaving(true);
+    setStatusMessage('');
+    setErrorMessage('');
+
+    try {
+      const payload = {
+        name: pageName.trim(),
+        description: pageDescription.trim(),
+        minimum_package: toStoredRows(minimumPackage),
+        individual_pricing: toStoredRows(individualPricing),
+      };
+
+      if (!payload.name) throw new Error('Pricing page name is required.');
+
+      const isUpdate = Boolean(presetId && isPersistedPage);
+      const response = await fetch(
+        isUpdate ? `/api/admin/proposals/pricing-pages/${presetId}` : '/api/admin/proposals/pricing-pages',
+        {
+          method: isUpdate ? 'PATCH' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to save pricing page.');
+
+      const saved = data.page as ProposalPricingPage;
+      setPricingPages((current) => {
+        const without = current.filter((page) => page.id !== saved.id && !['direct', 'staffing', 'staffing-sales'].includes(page.id));
+        const next = [...without, saved].sort((a, b) => a.sort_order - b.sort_order || a.name.localeCompare(b.name));
+        return next;
+      });
+      loadPage(saved);
+      setStatusMessage(isUpdate ? 'Pricing page updated.' : 'Pricing page created.');
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Unable to save pricing page.');
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  async function deletePricingPage() {
+    if (!presetId || !isPersistedPage) return;
+    if (!window.confirm(`Delete pricing page "${pageName || 'Untitled'}"? This cannot be undone.`)) return;
+
+    setIsDeleting(true);
+    setStatusMessage('');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(`/api/admin/proposals/pricing-pages/${presetId}`, { method: 'DELETE' });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to delete pricing page.');
+
+      const remaining = pricingPages.filter((page) => page.id !== presetId);
+      setPricingPages(remaining);
+      if (remaining[0]) {
+        loadPage(remaining[0]);
+      } else {
+        startNewPage();
+      }
+      setStatusMessage('Pricing page deleted.');
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Unable to delete pricing page.');
+    } finally {
+      setIsDeleting(false);
+    }
   }
 
   function resetBuilder() {
@@ -199,7 +220,7 @@ export default function ProposalBuilder() {
       pricing: true,
       process: true,
     });
-    applyPreset('direct');
+    if (pricingPages[0]) loadPage(pricingPages[0]);
     sessionStorage.removeItem('saffhire_proposal_preview');
   }
 
@@ -212,9 +233,9 @@ export default function ProposalBuilder() {
         contactName: contactName.trim(),
         proposalNotes: proposalNotes.trim(),
         sections,
-        pricingPresetName: activePreset.name,
-        minimumPackage: minimumPackage.filter((item) => item.label.trim()),
-        individualPricing: individualPricing.filter((item) => item.label.trim()),
+        pricingPresetName: pageName.trim() || activePage?.name || 'Pricing',
+        minimumPackage: toStoredRows(minimumPackage),
+        individualPricing: toStoredRows(individualPricing),
         createdAt: new Date().toISOString(),
       }),
     );
@@ -279,22 +300,81 @@ export default function ProposalBuilder() {
 
       {selectedSections.pricing ? (
         <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h2 className="text-2xl font-black text-slate-900">Pricing page</h2>
-              <p className="mt-1 text-sm text-slate-600">Choose a price sheet template, then edit any line items before generating the proposal.</p>
+              <h2 className="text-2xl font-black text-slate-900">Pricing pages</h2>
+              <p className="mt-1 text-sm text-slate-600">Create, edit, or delete reusable price sheets for proposals.</p>
             </div>
-            <label className="block min-w-[260px]">
-              <span className="mb-2 block text-sm font-bold text-slate-700">Price sheet</span>
-              <select value={presetId} onChange={(event) => applyPreset(event.target.value)} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none">
-                {pricingPresets.map((preset) => (
-                  <option key={preset.id} value={preset.id}>{preset.name}</option>
-                ))}
-              </select>
+            <div className="flex flex-wrap gap-3">
+              <label className="block min-w-[240px]">
+                <span className="mb-2 block text-sm font-bold text-slate-700">Saved price sheet</span>
+                <select
+                  value={presetId}
+                  onChange={(event) => applyPage(event.target.value)}
+                  className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
+                >
+                  <option value="">New unsaved page</option>
+                  {pricingPages.map((page) => (
+                    <option key={page.id} value={page.id}>{page.name}</option>
+                  ))}
+                </select>
+              </label>
+              <button type="button" onClick={startNewPage} className="rounded-md border border-gray-300 bg-white px-4 py-3 text-sm font-bold text-slate-700 hover:bg-gray-50">
+                New pricing page
+              </button>
+            </div>
+          </div>
+
+          <div className="mb-6 grid gap-4 md:grid-cols-2">
+            <label className="block">
+              <span className="mb-2 block text-sm font-bold text-slate-700">Pricing page name</span>
+              <input
+                value={pageName}
+                onChange={(event) => setPageName(event.target.value)}
+                className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
+                placeholder="e.g. Healthcare Pricing"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-2 block text-sm font-bold text-slate-700">Description</span>
+              <input
+                value={pageDescription}
+                onChange={(event) => setPageDescription(event.target.value)}
+                className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
+                placeholder="Optional short description"
+              />
             </label>
           </div>
 
-          <p className="mb-6 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">{activePreset.description}</p>
+          <div className="mb-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={savePricingPage}
+              disabled={isSaving}
+              className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+            >
+              {isSaving ? 'Saving...' : isPersistedPage ? 'Save changes' : 'Save as new pricing page'}
+            </button>
+            {isPersistedPage ? (
+              <button
+                type="button"
+                onClick={deletePricingPage}
+                disabled={isDeleting}
+                className="rounded-md border border-red-200 bg-white px-5 py-3 text-sm font-bold text-red-700 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isDeleting ? 'Deleting...' : 'Delete pricing page'}
+              </button>
+            ) : null}
+          </div>
+
+          {statusMessage ? <div className="mb-4 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">{statusMessage}</div> : null}
+          {errorMessage ? <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{errorMessage}</div> : null}
+
+          {!isPersistedPage && presetId ? (
+            <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              This is a built-in starter sheet. Click <b>Save as new pricing page</b> to create an editable copy in the database.
+            </div>
+          ) : null}
 
           <div className="mb-8">
             <div className="mb-3 flex items-center justify-between">

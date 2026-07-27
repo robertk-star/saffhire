@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import ProposalBuilder from '@/components/ProposalBuilder';
 import { hasAdminPermission, isAdminConfigured } from '@/lib/adminAuth';
+import { getProposalPricingPages } from '@/lib/proposalPricingPages';
 
 export const metadata: Metadata = {
   title: 'Create Proposal | SaffHire Admin',
@@ -13,6 +14,7 @@ export default async function AdminProposalsPage() {
   if (!canView) redirect('/admin/login');
 
   const configured = isAdminConfigured();
+  const pricingPages = await getProposalPricingPages();
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -21,7 +23,7 @@ export default async function AdminProposalsPage() {
           <div>
             <p className="mb-2 text-sm font-bold uppercase tracking-wider text-green-600">SaffHire Admin</p>
             <h1 className="text-4xl font-black text-slate-900">Create Proposal</h1>
-            <p className="mt-2 text-gray-600">Select the sections you want, customize pricing, then generate a printable PDF proposal.</p>
+            <p className="mt-2 text-gray-600">Select the sections you want, manage pricing pages, then generate a printable PDF proposal.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <a href="/admin" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Admin Home</a>
@@ -38,7 +40,7 @@ export default async function AdminProposalsPage() {
           </div>
         ) : null}
 
-        <ProposalBuilder />
+        <ProposalBuilder initialPricingPages={pricingPages} />
       </div>
     </main>
   );
