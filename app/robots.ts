@@ -8,6 +8,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: '*', allow: '/' },
       { userAgent: 'Google-Extended', allow: '/' },
       { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'OAI-SearchBot', allow: '/' },
+      { userAgent: 'ChatGPT-User', allow: '/' },
       { userAgent: 'CCBot', allow: '/' },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
