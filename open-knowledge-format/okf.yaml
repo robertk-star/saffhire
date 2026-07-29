@@ -1,0 +1,32 @@
+okf_version: 1.0
+site:
+  name: SaffHire Background Screening
+  url: https://www.saffhire.com
+  location: Frisco, Texas
+  coverage: United States, all 50 states
+primary_goal: Get employers to request a quote, contact SaffHire, or create an account.
+primary_services:
+  - Criminal Background Checks
+  - County Criminal Background Checks
+  - National Criminal Database Search
+  - Employment Verification
+  - Education Verification
+  - Drug Screening
+  - MVR / Driving Records
+  - Healthcare Sanctions / OIG Checks
+  - Volunteer Background Checks
+  - Small Business Background Checks
+brand_voice:
+  - clear
+  - professional
+  - practical
+  - trustworthy
+  - compliance-aware
+internal_pages:
+  apps: /apps
+  add_edit_links: /apps/add
+  admin: /admin
+  pricing: /admin/pricing
+  blogs: /admin/blogs
+  social: /admin/social
+  proposals: /admin/proposals

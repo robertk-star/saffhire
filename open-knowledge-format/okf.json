@@ -1,0 +1,233 @@
+{
+  "okf_version": "1.0",
+  "generated_from": "saffhire-main (1).zip",
+  "generated_date": "2026-07-29",
+  "site": {
+    "name": "SaffHire Background Screening",
+    "short_name": "SaffHire",
+    "url": "https://www.saffhire.com",
+    "location": "Frisco, Texas",
+    "coverage": "United States, all 50 states",
+    "phone": "(888) 588-1733",
+    "login_url": "https://saffhire.instascreen.net/sso/login.taz",
+    "account_setup_url": "https://intake.saffhire.com/"
+  },
+  "positioning": "Fast, secure, reliable background screening services for employers across all industries.",
+  "services": [
+    {
+      "name": "Criminal Background Checks",
+      "route": "/criminal-background-checks"
+    },
+    {
+      "name": "County Criminal Background Checks",
+      "route": "/county-criminal-background-checks"
+    },
+    {
+      "name": "National Criminal Database Search",
+      "route": "/national-criminal-database-search"
+    },
+    {
+      "name": "Employment Verification",
+      "route": "/employment-verification"
+    },
+    {
+      "name": "Education Verification",
+      "route": "/education-verification"
+    },
+    {
+      "name": "Drug Screening",
+      "route": "/drug-screening"
+    },
+    {
+      "name": "MVR / Driving Records",
+      "route": "/mvr-checks"
+    },
+    {
+      "name": "Healthcare Sanctions / OIG Checks",
+      "route": "/healthcare-sanctions-oig-checks"
+    },
+    {
+      "name": "Volunteer Background Checks",
+      "route": "/volunteer-background-checks"
+    },
+    {
+      "name": "Small Business Background Checks",
+      "route": "/small-business-background-checks"
+    },
+    {
+      "name": "FCRA Compliance News",
+      "route": "/fcra-news"
+    }
+  ],
+  "industries": [
+    {
+      "name": "All Industries",
+      "route": "/industries"
+    },
+    {
+      "name": "Healthcare",
+      "route": "/industries/healthcare"
+    },
+    {
+      "name": "Staffing",
+      "route": "/industries/staffing"
+    },
+    {
+      "name": "Transportation",
+      "route": "/industries/transportation"
+    },
+    {
+      "name": "Manufacturing / Warehousing",
+      "route": "/industries/manufacturing"
+    },
+    {
+      "name": "Hospitality",
+      "route": "/industries/hospitality"
+    },
+    {
+      "name": "Energy",
+      "route": "/industries/energy"
+    },
+    {
+      "name": "Education",
+      "route": "/industries/education"
+    },
+    {
+      "name": "Churches / Non-Profit",
+      "route": "/industries/church-nonprofit"
+    }
+  ],
+  "conversion_goals": [
+    "Get Quote",
+    "Contact request",
+    "Create Account",
+    "Client Login",
+    "Phone call",
+    "Guide engagement"
+  ],
+  "routes": [
+    "/404",
+    "/admin/blogs/[id]",
+    "/admin/blogs/new",
+    "/admin/blogs",
+    "/admin/blogs/schedule",
+    "/admin/blogs/topics",
+    "/admin/login",
+    "/admin",
+    "/admin/pricing",
+    "/admin/pricing/quote-preview",
+    "/admin/proposals",
+    "/admin/proposals/preview",
+    "/admin/social/[id]",
+    "/admin/social",
+    "/admin/social/settings",
+    "/admin/users",
+    "/apps/add",
+    "/apps",
+    "/background-screening-allen-tx",
+    "/background-screening-dallas-tx",
+    "/background-screening-frisco-tx",
+    "/background-screening-guides",
+    "/background-screening-mckinney-tx",
+    "/background-screening-plano-tx",
+    "/blog/[slug]",
+    "/blog/ai-powered-resume-fraud-hiring-challenge",
+    "/blog/gig-economy-background-screening-contingent-workforce-liability",
+    "/blog",
+    "/contact",
+    "/county-criminal-background-checks",
+    "/criminal-background-checks",
+    "/drug-screening",
+    "/education-verification",
+    "/employment-verification",
+    "/faq",
+    "/fcra-news",
+    "/healthcare-sanctions-oig-checks",
+    "/industries/church-nonprofit",
+    "/industries/education",
+    "/industries/energy",
+    "/industries/healthcare",
+    "/industries/hospitality",
+    "/industries/manufacturing",
+    "/industries",
+    "/industries/staffing",
+    "/industries/transportation",
+    "/mvr-checks",
+    "/national-criminal-database-search",
+    "/",
+    "/privacy-policy",
+    "/referral-partners/benefitsme",
+    "/referral-partners/defense-by-design",
+    "/referral-partners/fynn",
+    "/referral-partners/gmg-savings",
+    "/referral-partners/hooray-health",
+    "/referral-partners/level-c-solutions",
+    "/referral-partners/novatech",
+    "/referral-partners",
+    "/referral-partners/sandene-strategies",
+    "/referral-partners/staffing-for-healthcare",
+    "/referral-partners/workshield",
+    "/services",
+    "/small-business-background-checks",
+    "/terms-of-service",
+    "/test-signup",
+    "/volunteer-background-checks",
+    "/why-saffhire"
+  ],
+  "tech_stack": {
+    "framework": "Next.js 15 App Router",
+    "react": "React 19",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "database": "Supabase",
+    "hosting": "Vercel"
+  },
+  "compliance_rules": {
+    "avoid": [
+      "guaranteed compliance",
+      "guaranteed safe hires",
+      "we make hiring decisions",
+      "national search finds every record"
+    ],
+    "use_carefully": [
+      "instant results",
+      "fully compliant",
+      "complete background check"
+    ],
+    "preferred": [
+      "FCRA-compliant background screening services",
+      "compliance-aware workflows",
+      "helps employers make informed hiring decisions"
+    ]
+  },
+  "internal_tools": [
+    {
+      "name": "App Links",
+      "route": "/apps"
+    },
+    {
+      "name": "App Links Add/Edit",
+      "route": "/apps/add"
+    },
+    {
+      "name": "Admin Home",
+      "route": "/admin"
+    },
+    {
+      "name": "Pricing Tool",
+      "route": "/admin/pricing"
+    },
+    {
+      "name": "Blog Drafts",
+      "route": "/admin/blogs"
+    },
+    {
+      "name": "Social Posts",
+      "route": "/admin/social"
+    },
+    {
+      "name": "Proposal Builder",
+      "route": "/admin/proposals"
+    }
+  ]
+}
