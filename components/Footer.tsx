@@ -10,6 +10,7 @@ function getFooterConversion(label: string) {
   if (label === "Create Account") return "create_account_click";
   if (label === "Contact") return "contact_click";
   if (label === "Background Screening Guides") return "guide_hub_click";
+  if (label === "Company Information") return "company_information_click";
   return "footer_link_click";
 }
 
@@ -21,6 +22,7 @@ export default function Footer() {
     { label: "Services", href: "/services" },
     { label: "Industries", href: "/industries" },
     { label: "Background Screening Guides", href: "/background-screening-guides" },
+    { label: "Company Information", href: "/company-information" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Referral Partners", href: "/referral-partners" },
