@@ -290,6 +290,14 @@
     justify-content: center;
     flex-shrink: 0;
   }
+
+  /* Proposal pages: never show an outer frame */
+  .proposal-page {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
 }
 
 /* Proposal print/PDF styles */
@@ -309,7 +317,6 @@
     color-adjust: exact !important;
   }
 
-  /* Hide site chat widget and any fixed overlays */
   #chatarai-widget-script,
   [id*='chatarai' i],
   [class*='chatarai' i],
@@ -317,13 +324,11 @@
   [class*='chat-widget' i],
   iframe[src*='chatarai' i],
   iframe[src*='chat' i],
-  .proposal-toolbar,
-  .print\\:hidden {
+  .proposal-toolbar {
     display: none !important;
     visibility: hidden !important;
   }
 
-  /* Catch floating chat buttons / fixed UI chrome */
   body > div[style*='position: fixed'],
   body > div[style*='position:fixed'],
   [style*='position: fixed'][style*='z-index'],
@@ -356,19 +361,15 @@
     color-adjust: exact !important;
   }
 
-  /*
-   * One proposal section = one printed page.
-   * Do NOT use break-inside:avoid on large sections — that is what
-   * doubles the page count when content is near the page height limit.
-   */
   .proposal-page {
     display: block;
     width: 100%;
     margin: 0 !important;
     padding: 0.35in !important;
     box-shadow: none !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 0.5rem !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
     background: white !important;
     overflow: visible !important;
     height: auto !important;
@@ -386,15 +387,6 @@
     page-break-after: auto;
   }
 
-  .proposal-page-header {
-    margin-bottom: 0.35rem !important;
-  }
-
-  .proposal-page-footer {
-    margin-top: 0.5rem !important;
-  }
-
-  /* Cover: center without forcing a height larger than the printable area */
   .proposal-cover {
     min-height: 0 !important;
     height: auto !important;
@@ -402,7 +394,6 @@
     padding-bottom: 1.75in !important;
   }
 
-  /* Force multi-column layouts in print */
   .proposal-document .sm\\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
