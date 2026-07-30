@@ -337,7 +337,7 @@ export default function ProposalPreview() {
           <div className="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-3">
             <div>
               <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Phone</div>
-              <div className="mt-1 font-bold text-slate-900">888-250-1033</div>
+              <div className="mt-1 font-bold text-slate-900">888-588-1733</div>
             </div>
             <div>
               <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Email</div>
