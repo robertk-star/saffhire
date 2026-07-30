@@ -292,23 +292,61 @@
   }
 }
 
-/* Proposal print/PDF styles — keep on-screen look when printing */
+/* Proposal print/PDF styles */
 @media print {
   @page {
-    size: letter;
-    margin: 0.5in;
+    size: letter portrait;
+    margin: 0.4in;
   }
 
   html,
   body {
     background: white !important;
+    height: auto !important;
+    overflow: visible !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
   }
 
+  /* Hide site chat widget and any fixed overlays */
+  #chatarai-widget-script,
+  [id*='chatarai' i],
+  [class*='chatarai' i],
+  [id*='chat-widget' i],
+  [class*='chat-widget' i],
+  iframe[src*='chatarai' i],
+  iframe[src*='chat' i],
+  .proposal-toolbar,
+  .print\\:hidden {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Catch floating chat buttons / fixed UI chrome */
+  body > div[style*='position: fixed'],
+  body > div[style*='position:fixed'],
+  [style*='position: fixed'][style*='z-index'],
+  [style*='position:fixed'][style*='z-index'] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
   .proposal-print-root {
     background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .proposal-print-root > div {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .proposal-document {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .proposal-document,
@@ -318,15 +356,24 @@
     color-adjust: exact !important;
   }
 
+  /*
+   * One proposal section = one printed page.
+   * Do NOT use break-inside:avoid on large sections — that is what
+   * doubles the page count when content is near the page height limit.
+   */
   .proposal-page {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    display: block;
+    width: 100%;
     margin: 0 !important;
+    padding: 0.35in !important;
     box-shadow: none !important;
     border: 1px solid #e5e7eb !important;
-    border-radius: 0.75rem !important;
+    border-radius: 0.5rem !important;
     background: white !important;
-    padding: 1.75rem !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
   }
 
   .proposal-page-break {
@@ -334,20 +381,36 @@
     page-break-after: always;
   }
 
-  .proposal-cover {
-    min-height: 9in !important;
+  .proposal-page-last {
+    break-after: auto;
+    page-break-after: auto;
   }
 
-  /* Force multi-column layouts in print (sm: breakpoints don't apply) */
-  .proposal-document .sm\:grid-cols-2 {
+  .proposal-page-header {
+    margin-bottom: 0.35rem !important;
+  }
+
+  .proposal-page-footer {
+    margin-top: 0.5rem !important;
+  }
+
+  /* Cover: center without forcing a height larger than the printable area */
+  .proposal-cover {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-top: 1.75in !important;
+    padding-bottom: 1.75in !important;
+  }
+
+  /* Force multi-column layouts in print */
+  .proposal-document .sm\\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
-  .proposal-document .sm\:grid-cols-3 {
+  .proposal-document .sm\\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
-  /* Preserve table header and alternating row colors */
   .proposal-document thead,
   .proposal-document thead th {
     background-color: #0f172a !important;
@@ -373,12 +436,5 @@
 
   .proposal-document img {
     max-width: 100% !important;
-    print-color-adjust: exact !important;
-    -webkit-print-color-adjust: exact !important;
-  }
-
-  /* Hide non-proposal UI chrome if any leaks through */
-  .print\:hidden {
-    display: none !important;
   }
 }
