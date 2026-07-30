@@ -26,7 +26,7 @@ const saffhireLogoUrl = '/api/logo';
 
 function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNumber: number }) {
   return (
-    <section className="proposal-page mb-8 rounded-2xl border border-gray-200 bg-white p-10 shadow-sm">
+    <section className="proposal-page mb-8 rounded-none border-0 bg-white p-10 shadow-none">
       <div className="proposal-page-header mb-6 flex items-center justify-between text-xs font-medium uppercase tracking-wide text-slate-400">
         <span>SaffHire Background Screening | Proposal</span>
         <span>Page {pageNumber}</span>
@@ -148,11 +148,23 @@ export default function ProposalPreview() {
       for (let i = 0; i < pages.length; i += 1) {
         const page = pages[i];
 
+        // Extra safety: strip any residual frame styles during capture
+        const prevBorder = page.style.border;
+        const prevShadow = page.style.boxShadow;
+        const prevOutline = page.style.outline;
+        page.style.border = 'none';
+        page.style.boxShadow = 'none';
+        page.style.outline = 'none';
+
         const imgData = await domToJpeg(page, {
           quality: 0.95,
           scale: 2,
           backgroundColor: '#ffffff',
         });
+
+        page.style.border = prevBorder;
+        page.style.boxShadow = prevShadow;
+        page.style.outline = prevOutline;
 
         // Load image dimensions so we can fit it into portrait letter
         const dimensions = await new Promise<{ w: number; h: number }>((resolve, reject) => {
