@@ -24,23 +24,43 @@ type ProposalPreviewData = {
 // Same-origin proxy so PDF capture is not blocked by CORS
 const saffhireLogoUrl = '/api/logo';
 
-function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNumber: number }) {
+function PageShell({
+  children,
+  pageNumber,
+  isCover = false,
+}: {
+  children: React.ReactNode;
+  pageNumber: number;
+  isCover?: boolean;
+}) {
   return (
     <section
-      className="proposal-page mb-8 bg-white p-10"
+      className="proposal-page mb-8 flex flex-col bg-white p-10"
       style={{
         border: 'none',
         outline: 'none',
         boxShadow: 'none',
         borderRadius: 0,
+        // Letter aspect ratio so header stays top and footer stays bottom
+        minHeight: 'calc(100vw * 11 / 8.5 * 0.55)',
       }}
     >
-      <div className="proposal-page-header mb-6 flex items-center justify-between text-xs font-medium uppercase tracking-wide text-slate-400">
+      <div className="proposal-page-header mb-6 flex shrink-0 items-center justify-between text-xs font-medium uppercase tracking-wide text-slate-400">
         <span>SaffHire Background Screening | Proposal</span>
         <span>Page {pageNumber}</span>
       </div>
-      <div className="proposal-page-body">{children}</div>
-      <div className="proposal-page-footer mt-8 text-center text-xs text-slate-400">— {pageNumber} —</div>
+
+      <div
+        className={
+          isCover
+            ? 'proposal-page-body flex flex-1 flex-col items-center justify-center'
+            : 'proposal-page-body flex-1'
+        }
+      >
+        {children}
+      </div>
+
+      <div className="proposal-page-footer mt-8 shrink-0 text-center text-xs text-slate-400">— {pageNumber} —</div>
     </section>
   );
 }
@@ -95,6 +115,25 @@ export default function ProposalPreview() {
     setExporting(true);
     setExportError(null);
 
+    const pages = Array.from(documentRef.current.querySelectorAll<HTMLElement>('.proposal-page'));
+    if (pages.length === 0) {
+      setExporting(false);
+      setExportError('No proposal pages found to export.');
+      return;
+    }
+
+    // Snapshot original styles so we can restore after capture
+    const originals = pages.map((page) => ({
+      height: page.style.height,
+      minHeight: page.style.minHeight,
+      maxHeight: page.style.maxHeight,
+      width: page.style.width,
+      border: page.style.border,
+      outline: page.style.outline,
+      boxShadow: page.style.boxShadow,
+      borderRadius: page.style.borderRadius,
+    }));
+
     try {
       let embeddedLogo = logoSrc;
       if (!embeddedLogo.startsWith('data:')) {
@@ -134,11 +173,6 @@ export default function ProposalPreview() {
       const { domToJpeg } = await import('modern-screenshot');
       const { jsPDF } = await import('jspdf');
 
-      const pages = Array.from(documentRef.current.querySelectorAll<HTMLElement>('.proposal-page'));
-      if (pages.length === 0) {
-        throw new Error('No proposal pages found to export.');
-      }
-
       const pageWidthIn = 8.5;
       const pageHeightIn = 11;
 
@@ -152,15 +186,31 @@ export default function ProposalPreview() {
       for (let i = 0; i < pages.length; i += 1) {
         const page = pages[i];
 
+        // Force each captured page to exact letter proportions so:
+        // - header stays at the top
+        // - footer stays at the bottom
+        // - cover body is vertically centered in the middle
+        const captureWidth = page.offsetWidth || 800;
+        const captureHeight = Math.round(captureWidth * (pageHeightIn / pageWidthIn));
+
         page.style.border = 'none';
         page.style.outline = 'none';
         page.style.boxShadow = 'none';
         page.style.borderRadius = '0';
+        page.style.width = `${captureWidth}px`;
+        page.style.height = `${captureHeight}px`;
+        page.style.minHeight = `${captureHeight}px`;
+        page.style.maxHeight = `${captureHeight}px`;
+
+        // Allow layout to settle
+        await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
         const imgData = await domToJpeg(page, {
           quality: 0.98,
           scale: 2,
           backgroundColor: '#ffffff',
+          width: captureWidth,
+          height: captureHeight,
           style: {
             border: 'none',
             outline: 'none',
@@ -169,25 +219,12 @@ export default function ProposalPreview() {
           },
         });
 
-        const dimensions = await new Promise<{ w: number; h: number }>((resolve, reject) => {
-          const image = new Image();
-          image.onload = () => resolve({ w: image.width, h: image.height });
-          image.onerror = () => reject(new Error('Unable to read captured page image.'));
-          image.src = imgData;
-        });
-
-        // Scale to full page width, top-align so the header is always at the top
-        const scale = Math.min(pageWidthIn / dimensions.w, pageHeightIn / dimensions.h);
-        const drawWidth = dimensions.w * scale;
-        const drawHeight = dimensions.h * scale;
-        const x = (pageWidthIn - drawWidth) / 2;
-        const y = 0; // top of the page — never vertically center
-
         if (i > 0) {
           pdf.addPage('letter', 'portrait');
         }
 
-        pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight, undefined, 'FAST');
+        // Full letter page, top-left origin
+        pdf.addImage(imgData, 'JPEG', 0, 0, pageWidthIn, pageHeightIn, undefined, 'FAST');
       }
 
       const client = proposal?.clientName?.trim().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'proposal';
@@ -197,6 +234,18 @@ export default function ProposalPreview() {
       console.error(error);
       setExportError(error instanceof Error ? error.message : 'Unable to create PDF.');
     } finally {
+      // Restore original page styles
+      pages.forEach((page, index) => {
+        const o = originals[index];
+        page.style.height = o.height;
+        page.style.minHeight = o.minHeight;
+        page.style.maxHeight = o.maxHeight;
+        page.style.width = o.width;
+        page.style.border = o.border;
+        page.style.outline = o.outline;
+        page.style.boxShadow = o.boxShadow;
+        page.style.borderRadius = o.borderRadius;
+      });
       setExporting(false);
     }
   }
@@ -232,8 +281,8 @@ export default function ProposalPreview() {
 
       <div ref={documentRef}>
         {has('cover') ? (
-          <PageShell pageNumber={++pageNumber}>
-            <div className="proposal-cover flex min-h-[70vh] flex-col items-center justify-center text-center">
+          <PageShell pageNumber={++pageNumber} isCover>
+            <div className="proposal-cover flex flex-col items-center justify-center text-center">
               <img
                 src={logoSrc}
                 alt="SaffHire"
