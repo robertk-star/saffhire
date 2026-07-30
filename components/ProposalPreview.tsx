@@ -21,7 +21,8 @@ type ProposalPreviewData = {
   createdAt: string;
 };
 
-const saffhireLogoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png';
+// Same-origin proxy so PDF capture is not blocked by CORS
+const saffhireLogoUrl = '/api/logo';
 
 function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNumber: number }) {
   return (
@@ -36,10 +37,27 @@ function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNu
   );
 }
 
+async function imageToDataUrl(src: string): Promise<string | null> {
+  try {
+    const res = await fetch(src, { cache: 'force-cache' });
+    if (!res.ok) return null;
+    const blob = await res.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : null);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(blob);
+    });
+  } catch {
+    return null;
+  }
+}
+
 export default function ProposalPreview() {
   const [proposal, setProposal] = useState<ProposalPreviewData | null>(null);
   const [exporting, setExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
+  const [logoSrc, setLogoSrc] = useState(saffhireLogoUrl);
   const documentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,6 +70,18 @@ export default function ProposalPreview() {
     }
   }, []);
 
+  // Prefetch logo as a data URL so PDF export always has an embedded image
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const dataUrl = await imageToDataUrl(saffhireLogoUrl);
+      if (!cancelled && dataUrl) setLogoSrc(dataUrl);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   async function downloadPdf() {
     if (!documentRef.current || exporting) return;
 
@@ -59,6 +89,44 @@ export default function ProposalPreview() {
     setExportError(null);
 
     try {
+      // Ensure logo is embedded as data URL before capture
+      let embeddedLogo = logoSrc;
+      if (!embeddedLogo.startsWith('data:')) {
+        const dataUrl = await imageToDataUrl(saffhireLogoUrl);
+        if (dataUrl) {
+          embeddedLogo = dataUrl;
+          setLogoSrc(dataUrl);
+          // Give React a tick to update the img src in the DOM
+          await new Promise((r) => setTimeout(r, 50));
+        }
+      }
+
+      const logoImgs = documentRef.current.querySelectorAll<HTMLImageElement>('img[data-proposal-logo="true"]');
+      logoImgs.forEach((img) => {
+        if (embeddedLogo.startsWith('data:')) {
+          img.src = embeddedLogo;
+        }
+      });
+
+      await Promise.all(
+        Array.from(documentRef.current.querySelectorAll('img')).map(
+          (img) =>
+            new Promise<void>((resolve) => {
+              if (img.complete && img.naturalWidth > 0) {
+                resolve();
+                return;
+              }
+              img.onload = () => resolve();
+              img.onerror = () => resolve();
+              // Force reload if needed
+              if (img.src) {
+                const current = img.src;
+                img.src = current;
+              }
+            }),
+        ),
+      );
+
       const { domToJpeg } = await import('modern-screenshot');
       const { jsPDF } = await import('jspdf');
 
@@ -66,21 +134,6 @@ export default function ProposalPreview() {
       if (pages.length === 0) {
         throw new Error('No proposal pages found to export.');
       }
-
-      const images = Array.from(documentRef.current.querySelectorAll('img'));
-      await Promise.all(
-        images.map(
-          (img) =>
-            new Promise<void>((resolve) => {
-              if (img.complete) {
-                resolve();
-                return;
-              }
-              img.onload = () => resolve();
-              img.onerror = () => resolve();
-            }),
-        ),
-      );
 
       let pdf: InstanceType<typeof jsPDF> | null = null;
 
@@ -91,29 +144,8 @@ export default function ProposalPreview() {
           quality: 0.95,
           scale: 2,
           backgroundColor: '#ffffff',
-          // Fetch stylesheet text and let the library embed styles without
-          // relying on html2canvas's oklch-unaware color parser.
-          fetchFn: async (url) => {
-            try {
-              const res = await fetch(url, { mode: 'cors' });
-              if (!res.ok) return '';
-              return await res.text();
-            } catch {
-              return '';
-            }
-          },
-          filter: (node) => {
-            if (!(node instanceof HTMLElement)) return true;
-            // Keep proposal content only
-            return true;
-          },
-          style: {
-            // Ensure the captured node is fully opaque white
-            backgroundColor: '#ffffff',
-          },
         });
 
-        // Measure the rendered page for aspect ratio
         const width = page.offsetWidth || page.scrollWidth || 800;
         const height = page.offsetHeight || page.scrollHeight || 1000;
 
@@ -181,9 +213,9 @@ export default function ProposalPreview() {
           <PageShell pageNumber={++pageNumber}>
             <div className="proposal-cover flex min-h-[70vh] flex-col items-center justify-center text-center">
               <img
-                src={saffhireLogoUrl}
+                src={logoSrc}
                 alt="SaffHire"
-                crossOrigin="anonymous"
+                data-proposal-logo="true"
                 className="mb-10 h-20 w-auto object-contain"
               />
               <h1 className="text-5xl font-black tracking-tight text-slate-900">SAFFHIRE</h1>
