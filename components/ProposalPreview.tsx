@@ -23,9 +23,9 @@ type ProposalPreviewData = {
 
 const saffhireLogoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png';
 
-function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNumber: number }) {
+function PageShell({ children, pageNumber, isLast }: { children: React.ReactNode; pageNumber: number; isLast?: boolean }) {
   return (
-    <section className="mb-8 break-after-page rounded-2xl border border-gray-200 bg-white p-10 shadow-sm print:mb-0 print:break-after-page print:rounded-none print:border-0 print:p-12 print:shadow-none">
+    <section className={`proposal-page mb-8 rounded-2xl border border-gray-200 bg-white p-10 shadow-sm ${isLast ? '' : 'proposal-page-break'}`}>
       <div className="mb-8 flex items-center justify-between text-xs font-medium uppercase tracking-wide text-slate-400">
         <span>SaffHire Background Screening | Proposal</span>
         <span className="print:hidden">Page {pageNumber}</span>
@@ -58,18 +58,23 @@ export default function ProposalPreview() {
   }
 
   const has = (key: SectionKey) => proposal.sections.includes(key);
+  const sectionKeys = proposal.sections;
   let pageNumber = 0;
 
+  function isLastSection(key: SectionKey) {
+    return sectionKeys[sectionKeys.length - 1] === key;
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="proposal-document space-y-6 print:space-y-0">
       <div className="flex flex-col gap-3 print:hidden sm:flex-row sm:items-center sm:justify-between">
         <a href="/admin/proposals" className="text-sm font-bold text-green-700 hover:underline">Back to proposal builder</a>
         <button onClick={() => window.print()} className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Print / Save as PDF</button>
       </div>
 
       {has('cover') ? (
-        <PageShell pageNumber={++pageNumber}>
-          <div className="flex min-h-[70vh] flex-col items-center justify-center text-center">
+        <PageShell pageNumber={++pageNumber} isLast={isLastSection('cover')}>
+          <div className="proposal-cover flex min-h-[70vh] flex-col items-center justify-center text-center print:min-h-[9.5in]">
             <img src={saffhireLogoUrl} alt="SaffHire" className="mb-10 h-20 w-auto object-contain" />
             <h1 className="text-5xl font-black tracking-tight text-slate-900">SAFFHIRE</h1>
             <h2 className="mt-4 text-2xl font-bold text-slate-800">BACKGROUND SCREENING</h2>
@@ -87,7 +92,7 @@ export default function ProposalPreview() {
       ) : null}
 
       {has('whySaffhire') ? (
-        <PageShell pageNumber={++pageNumber}>
+        <PageShell pageNumber={++pageNumber} isLast={isLastSection('whySaffhire')}>
           <h2 className="text-3xl font-black text-slate-900">Why SaffHire</h2>
           <p className="mt-4 text-slate-700 leading-relaxed">
             SaffHire Background Screening helps employers make confident hiring decisions through accurate, compliant, and timely background screening solutions.
@@ -103,7 +108,7 @@ export default function ProposalPreview() {
           <p className="mt-3 text-slate-700 leading-relaxed">
             SaffHire is proud to be a <span className="font-bold">Veteran-Owned Small Business</span>. Military service instills values that directly benefit our clients:
           </p>
-          <ul className="mt-4 grid gap-2 text-slate-700 sm:grid-cols-2">
+          <ul className="mt-4 grid grid-cols-1 gap-2 text-slate-700 sm:grid-cols-2">
             <li>• Integrity in every report we deliver</li>
             <li>• Accountability and dependable service</li>
             <li>• Attention to detail and accuracy</li>
@@ -115,7 +120,7 @@ export default function ProposalPreview() {
           </p>
 
           <h3 className="mt-10 text-2xl font-black text-slate-900">Why Employers Choose SaffHire</h3>
-          <div className="mt-4 grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-800 sm:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 gap-2 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-800 sm:grid-cols-2">
             <div>✓ Veteran-Owned Small Business</div>
             <div>✓ Mobile-friendly platform</div>
             <div>✓ Fast turnaround times</div>
@@ -132,9 +137,9 @@ export default function ProposalPreview() {
       ) : null}
 
       {has('services') ? (
-        <PageShell pageNumber={++pageNumber}>
+        <PageShell pageNumber={++pageNumber} isLast={isLastSection('services')}>
           <h2 className="text-3xl font-black text-slate-900">Our Services</h2>
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
               <h3 className="text-lg font-black text-slate-900">Criminal Background Screening</h3>
               <ul className="mt-2 space-y-1 text-sm text-slate-700">
@@ -203,7 +208,7 @@ export default function ProposalPreview() {
       ) : null}
 
       {has('packages') ? (
-        <PageShell pageNumber={++pageNumber}>
+        <PageShell pageNumber={++pageNumber} isLast={isLastSection('packages')}>
           <h2 className="text-3xl font-black text-slate-900">Service Packages</h2>
           <div className="mt-6 overflow-hidden rounded-xl border border-slate-200">
             <table className="w-full text-sm">
@@ -262,7 +267,7 @@ export default function ProposalPreview() {
       ) : null}
 
       {has('pricing') ? (
-        <PageShell pageNumber={++pageNumber}>
+        <PageShell pageNumber={++pageNumber} isLast={isLastSection('pricing')}>
           <h2 className="text-3xl font-black text-slate-900">Pricing</h2>
           {proposal.pricingPresetName ? <p className="mt-2 text-sm font-bold text-slate-500">{proposal.pricingPresetName}</p> : null}
 
@@ -316,7 +321,7 @@ export default function ProposalPreview() {
       ) : null}
 
       {has('process') ? (
-        <PageShell pageNumber={++pageNumber}>
+        <PageShell pageNumber={++pageNumber} isLast={isLastSection('process')}>
           <h2 className="text-3xl font-black text-slate-900">Our Process</h2>
           <ol className="mt-6 space-y-4">
             {[
@@ -334,7 +339,7 @@ export default function ProposalPreview() {
           </ol>
 
           <h3 className="mt-12 text-2xl font-black text-slate-900">Customer Support</h3>
-          <div className="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-3">
+          <div className="mt-4 grid grid-cols-1 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-3">
             <div>
               <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Phone</div>
               <div className="mt-1 font-bold text-slate-900">888-588-1733</div>

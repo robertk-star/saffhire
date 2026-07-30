@@ -13,7 +13,7 @@ export default async function AdminProposalPreviewPage() {
   if (!canView) redirect('/admin/login');
 
   return (
-    <main className="min-h-screen bg-slate-50 print:bg-white">
+    <main className="proposal-print-root min-h-screen bg-slate-50 print:bg-white">
       <div className="mx-auto max-w-4xl px-4 py-10 print:max-w-none print:px-0 print:py-0">
         <ProposalPreview />
       </div>

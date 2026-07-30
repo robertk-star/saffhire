@@ -291,3 +291,94 @@
     flex-shrink: 0;
   }
 }
+
+/* Proposal print/PDF styles — keep on-screen look when printing */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  .proposal-print-root {
+    background: white !important;
+  }
+
+  .proposal-document,
+  .proposal-document * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  .proposal-page {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.75rem !important;
+    background: white !important;
+    padding: 1.75rem !important;
+  }
+
+  .proposal-page-break {
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .proposal-cover {
+    min-height: 9in !important;
+  }
+
+  /* Force multi-column layouts in print (sm: breakpoints don't apply) */
+  .proposal-document .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .proposal-document .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  /* Preserve table header and alternating row colors */
+  .proposal-document thead,
+  .proposal-document thead th {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+  }
+
+  .proposal-document .bg-slate-50 {
+    background-color: #f8fafc !important;
+  }
+
+  .proposal-document .bg-slate-900 {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+  }
+
+  .proposal-document .bg-white {
+    background-color: #ffffff !important;
+  }
+
+  .proposal-document .text-white {
+    color: #ffffff !important;
+  }
+
+  .proposal-document img {
+    max-width: 100% !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Hide non-proposal UI chrome if any leaks through */
+  .print\:hidden {
+    display: none !important;
+  }
+}
