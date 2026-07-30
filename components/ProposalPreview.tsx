@@ -176,12 +176,12 @@ export default function ProposalPreview() {
           image.src = imgData;
         });
 
-        // Fill the full letter page (edge to edge) — no inset card frame
+        // Scale to full page width, top-align so the header is always at the top
         const scale = Math.min(pageWidthIn / dimensions.w, pageHeightIn / dimensions.h);
         const drawWidth = dimensions.w * scale;
         const drawHeight = dimensions.h * scale;
         const x = (pageWidthIn - drawWidth) / 2;
-        const y = (pageHeightIn - drawHeight) / 2;
+        const y = 0; // top of the page — never vertically center
 
         if (i > 0) {
           pdf.addPage('letter', 'portrait');
