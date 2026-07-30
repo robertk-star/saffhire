@@ -36,35 +36,6 @@ function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNu
   );
 }
 
-/**
- * html2canvas cannot parse modern CSS color functions like oklch().
- * Copy computed RGB/RGBA values onto the clone and strip stylesheets
- * so the library never has to parse oklch from CSS.
- */
-function prepareCloneForCapture(sourceRoot: HTMLElement, cloneRoot: HTMLElement, cloneDoc: Document) {
-  const sourceNodes = [sourceRoot, ...Array.from(sourceRoot.querySelectorAll('*'))];
-  const cloneNodes = [cloneRoot, ...Array.from(cloneRoot.querySelectorAll('*'))];
-  const count = Math.min(sourceNodes.length, cloneNodes.length);
-
-  for (let i = 0; i < count; i += 1) {
-    const source = sourceNodes[i];
-    const clone = cloneNodes[i];
-    if (!(clone instanceof HTMLElement) || !(source instanceof Element)) continue;
-
-    const computed = window.getComputedStyle(source);
-    let cssText = '';
-    for (let j = 0; j < computed.length; j += 1) {
-      const prop = computed[j];
-      cssText += `${prop}:${computed.getPropertyValue(prop)};`;
-    }
-    clone.style.cssText = cssText;
-  }
-
-  cloneDoc.querySelectorAll('style, link[rel="stylesheet"]').forEach((node) => {
-    node.remove();
-  });
-}
-
 export default function ProposalPreview() {
   const [proposal, setProposal] = useState<ProposalPreviewData | null>(null);
   const [exporting, setExporting] = useState(false);
@@ -88,7 +59,7 @@ export default function ProposalPreview() {
     setExportError(null);
 
     try {
-      const html2canvas = (await import('html2canvas')).default;
+      const { domToJpeg } = await import('modern-screenshot');
       const { jsPDF } = await import('jspdf');
 
       const pages = Array.from(documentRef.current.querySelectorAll<HTMLElement>('.proposal-page'));
@@ -116,23 +87,38 @@ export default function ProposalPreview() {
       for (let i = 0; i < pages.length; i += 1) {
         const page = pages[i];
 
-        const canvas = await html2canvas(page, {
+        const imgData = await domToJpeg(page, {
+          quality: 0.95,
           scale: 2,
-          useCORS: true,
-          allowTaint: true,
           backgroundColor: '#ffffff',
-          logging: false,
-          windowWidth: page.scrollWidth,
-          windowHeight: page.scrollHeight,
-          onclone: (cloneDoc, cloneElement) => {
-            prepareCloneForCapture(page, cloneElement as HTMLElement, cloneDoc);
+          // Fetch stylesheet text and let the library embed styles without
+          // relying on html2canvas's oklch-unaware color parser.
+          fetchFn: async (url) => {
+            try {
+              const res = await fetch(url, { mode: 'cors' });
+              if (!res.ok) return '';
+              return await res.text();
+            } catch {
+              return '';
+            }
+          },
+          filter: (node) => {
+            if (!(node instanceof HTMLElement)) return true;
+            // Keep proposal content only
+            return true;
+          },
+          style: {
+            // Ensure the captured node is fully opaque white
+            backgroundColor: '#ffffff',
           },
         });
 
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        // Measure the rendered page for aspect ratio
+        const width = page.offsetWidth || page.scrollWidth || 800;
+        const height = page.offsetHeight || page.scrollHeight || 1000;
 
         const pageWidthIn = 8.5;
-        const pageHeightIn = Math.max(pageWidthIn * (canvas.height / canvas.width), 1);
+        const pageHeightIn = Math.max(pageWidthIn * (height / width), 1);
 
         if (!pdf) {
           pdf = new jsPDF({
