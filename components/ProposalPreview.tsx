@@ -26,7 +26,15 @@ const saffhireLogoUrl = '/api/logo';
 
 function PageShell({ children, pageNumber }: { children: React.ReactNode; pageNumber: number }) {
   return (
-    <section className="proposal-page mb-8 rounded-none border-0 bg-white p-10 shadow-none">
+    <section
+      className="proposal-page mb-8 bg-white p-10"
+      style={{
+        border: 'none',
+        outline: 'none',
+        boxShadow: 'none',
+        borderRadius: 0,
+      }}
+    >
       <div className="proposal-page-header mb-6 flex items-center justify-between text-xs font-medium uppercase tracking-wide text-slate-400">
         <span>SaffHire Background Screening | Proposal</span>
         <span>Page {pageNumber}</span>
@@ -70,7 +78,6 @@ export default function ProposalPreview() {
     }
   }, []);
 
-  // Prefetch logo as a data URL so PDF export always has an embedded image
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -89,7 +96,6 @@ export default function ProposalPreview() {
     setExportError(null);
 
     try {
-      // Ensure logo is embedded as data URL before capture
       let embeddedLogo = logoSrc;
       if (!embeddedLogo.startsWith('data:')) {
         const dataUrl = await imageToDataUrl(saffhireLogoUrl);
@@ -133,10 +139,8 @@ export default function ProposalPreview() {
         throw new Error('No proposal pages found to export.');
       }
 
-      // Always portrait letter
       const pageWidthIn = 8.5;
       const pageHeightIn = 11;
-      const marginIn = 0.35;
 
       const pdf = new jsPDF({
         orientation: 'portrait',
@@ -148,25 +152,23 @@ export default function ProposalPreview() {
       for (let i = 0; i < pages.length; i += 1) {
         const page = pages[i];
 
-        // Extra safety: strip any residual frame styles during capture
-        const prevBorder = page.style.border;
-        const prevShadow = page.style.boxShadow;
-        const prevOutline = page.style.outline;
         page.style.border = 'none';
-        page.style.boxShadow = 'none';
         page.style.outline = 'none';
+        page.style.boxShadow = 'none';
+        page.style.borderRadius = '0';
 
         const imgData = await domToJpeg(page, {
-          quality: 0.95,
+          quality: 0.98,
           scale: 2,
           backgroundColor: '#ffffff',
+          style: {
+            border: 'none',
+            outline: 'none',
+            boxShadow: 'none',
+            borderRadius: '0',
+          },
         });
 
-        page.style.border = prevBorder;
-        page.style.boxShadow = prevShadow;
-        page.style.outline = prevOutline;
-
-        // Load image dimensions so we can fit it into portrait letter
         const dimensions = await new Promise<{ w: number; h: number }>((resolve, reject) => {
           const image = new Image();
           image.onload = () => resolve({ w: image.width, h: image.height });
@@ -174,13 +176,12 @@ export default function ProposalPreview() {
           image.src = imgData;
         });
 
-        const usableWidth = pageWidthIn - marginIn * 2;
-        const usableHeight = pageHeightIn - marginIn * 2;
-        const scale = Math.min(usableWidth / dimensions.w, usableHeight / dimensions.h);
+        // Fill the full letter page (edge to edge) — no inset card frame
+        const scale = Math.min(pageWidthIn / dimensions.w, pageHeightIn / dimensions.h);
         const drawWidth = dimensions.w * scale;
         const drawHeight = dimensions.h * scale;
         const x = (pageWidthIn - drawWidth) / 2;
-        const y = marginIn; // top-align content in portrait page
+        const y = (pageHeightIn - drawHeight) / 2;
 
         if (i > 0) {
           pdf.addPage('letter', 'portrait');
