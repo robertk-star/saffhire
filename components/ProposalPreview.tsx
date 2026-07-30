@@ -96,7 +96,6 @@ export default function ProposalPreview() {
         if (dataUrl) {
           embeddedLogo = dataUrl;
           setLogoSrc(dataUrl);
-          // Give React a tick to update the img src in the DOM
           await new Promise((r) => setTimeout(r, 50));
         }
       }
@@ -118,7 +117,6 @@ export default function ProposalPreview() {
               }
               img.onload = () => resolve();
               img.onerror = () => resolve();
-              // Force reload if needed
               if (img.src) {
                 const current = img.src;
                 img.src = current;
@@ -135,7 +133,17 @@ export default function ProposalPreview() {
         throw new Error('No proposal pages found to export.');
       }
 
-      let pdf: InstanceType<typeof jsPDF> | null = null;
+      // Always portrait letter
+      const pageWidthIn = 8.5;
+      const pageHeightIn = 11;
+      const marginIn = 0.35;
+
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'in',
+        format: 'letter',
+        compress: true,
+      });
 
       for (let i = 0; i < pages.length; i += 1) {
         const page = pages[i];
@@ -146,27 +154,28 @@ export default function ProposalPreview() {
           backgroundColor: '#ffffff',
         });
 
-        const width = page.offsetWidth || page.scrollWidth || 800;
-        const height = page.offsetHeight || page.scrollHeight || 1000;
+        // Load image dimensions so we can fit it into portrait letter
+        const dimensions = await new Promise<{ w: number; h: number }>((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => resolve({ w: image.width, h: image.height });
+          image.onerror = () => reject(new Error('Unable to read captured page image.'));
+          image.src = imgData;
+        });
 
-        const pageWidthIn = 8.5;
-        const pageHeightIn = Math.max(pageWidthIn * (height / width), 1);
+        const usableWidth = pageWidthIn - marginIn * 2;
+        const usableHeight = pageHeightIn - marginIn * 2;
+        const scale = Math.min(usableWidth / dimensions.w, usableHeight / dimensions.h);
+        const drawWidth = dimensions.w * scale;
+        const drawHeight = dimensions.h * scale;
+        const x = (pageWidthIn - drawWidth) / 2;
+        const y = marginIn; // top-align content in portrait page
 
-        if (!pdf) {
-          pdf = new jsPDF({
-            orientation: pageHeightIn >= pageWidthIn ? 'portrait' : 'landscape',
-            unit: 'in',
-            format: [pageWidthIn, pageHeightIn],
-            compress: true,
-          });
-        } else {
-          pdf.addPage([pageWidthIn, pageHeightIn], pageHeightIn >= pageWidthIn ? 'portrait' : 'landscape');
+        if (i > 0) {
+          pdf.addPage('letter', 'portrait');
         }
 
-        pdf.addImage(imgData, 'JPEG', 0, 0, pageWidthIn, pageHeightIn, undefined, 'FAST');
+        pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight, undefined, 'FAST');
       }
-
-      if (!pdf) throw new Error('Unable to build PDF.');
 
       const client = proposal?.clientName?.trim().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'proposal';
       const date = new Date().toISOString().slice(0, 10);
