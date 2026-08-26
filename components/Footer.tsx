@@ -1,6 +1,7 @@
 /*
  * Footer Component SaffHire Background Screening
  * Design: Dark navy background, social icons, phone, copyright
+ * 2026-08-26: Logo moved to local public/images after Manus CDN 403
  */
 
 import { Facebook, Linkedin, Phone } from "lucide-react";
@@ -54,7 +55,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-5">
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png"
+                src="/images/saffhire-logo.png"
                 alt="SaffHire Background Screening"
                 className="h-12 w-auto object-contain"
                 style={{ filter: "brightness(0) invert(1)" }}
