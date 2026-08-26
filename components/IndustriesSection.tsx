@@ -2,6 +2,7 @@
  * IndustriesSection Component SaffHire Background Screening
  * Design: 3-column card grid with image overlays and hover effects
  * 8 industries: Healthcare, Staffing, Transportation, Manufacturing, Hospitality, Energy, Education, Churches/Non-Profit
+ * 2026-08-26: Replaced all broken Manus CDN images with local assets
  */
 
 import { ArrowRight } from "lucide-react";
@@ -10,50 +11,50 @@ const industries = [
   {
     name: "Healthcare",
     description: "Comprehensive screening solutions for healthcare providers and medical facilities.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/healthcare-doctor-nTFoqwwszBNffvezvpUdxY.webp",
+    image: "/images/industry-healthcare.webp",
     href: "/industries/healthcare",
   },
   {
     name: "Staffing",
     href: "/industries/staffing",
     description: "Streamlined background checks to help staffing agencies place candidates faster.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/staffing-recruiting-HQ8peYmxmBwDN6V8FFHabf.webp",
+    image: "/images/industry-staffing.webp",
   },
   {
     name: "Transportation",
     href: "/industries/transportation",
     description: "DOT-compliant screening for drivers and transportation professionals.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/transportation-trucking-e5XVJsb3NqKq7bBzpvWYdp.webp",
+    image: "/images/industry-transportation.webp",
   },
   {
     name: "Manufacturing / Warehousing",
     href: "/industries/manufacturing",
     description: "Reliable screening for warehouse, logistics, and manufacturing roles.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/manufacturing-warehouse-MRbE6ngTRYM7etAtYgJE2K.webp",
+    image: "/images/industry-manufacturing.webp",
   },
   {
     name: "Hospitality",
     href: "/industries/hospitality",
     description: "Protect your guests and staff with thorough hospitality industry checks.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/hospitality-hotel-hPwjFumDVuE53coRNdmCA5.webp",
+    image: "/images/industry-hospitality.webp",
   },
   {
     name: "Energy",
     href: "/industries/energy",
     description: "Safety-first screening for energy sector workers and contractors.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/energy-worker-6uXbGGHeWEWGLof37q9FAz.webp",
+    image: "/images/industry-energy.webp",
   },
   {
     name: "Education",
     href: "/industries/education",
     description: "Protect students and staff with thorough educator background checks.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/education-teacher-ZXUK3NiRcgkPtpdCJ6LBUf.webp",
+    image: "/images/industry-education.webp",
   },
   {
     name: "Churches / Non-Profit",
     href: "/industries/church-nonprofit",
     description: "Affordable screening solutions for faith-based and non-profit organizations.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/church-nonprofit-i472wLXW7cpcTt6sne5C2x.webp",
+    image: "/images/industry-church-nonprofit.webp",
   },
 ];
 
