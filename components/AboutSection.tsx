@@ -3,6 +3,7 @@
  * Design: Two-column layout, story text left, image right
  * Features: Stay Compliant, Candidate Screening icons below
  * Green CTA box with consultation CTA
+ * 2026-08-26: Replaced broken Manus CDN image with local asset
  */
 
 import { RefreshCw, BarChart2, Shield } from "lucide-react";
@@ -107,7 +108,7 @@ export default function AboutSection() {
           {/* Right: Image */}
           <div className="relative">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/about-team-8AFNB2E4esUoJ24YqrXYDQ.webp"
+              src="/images/about-team.webp"
               alt="SaffHire team"
               className="w-full rounded-lg shadow-xl object-cover"
               style={{ height: 480 }}
