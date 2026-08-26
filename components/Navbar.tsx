@@ -2,6 +2,7 @@
  * Navbar Component SaffHire Background Screening
  * Design: Clean Professional Trust (Option 1)
  * Updated: Cleaner layout, reduced clutter, Solutions highlighted with NEW badge
+ * 2026-08-26: Logo moved to local public/images after Manus CDN 403
  */
 
 import { useState, useEffect } from "react";
@@ -47,7 +48,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="/" className="flex-shrink-0">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png"
+              src="/images/saffhire-logo.png"
               alt="SaffHire Background Screening"
               className="h-14 w-auto object-contain"
             />
