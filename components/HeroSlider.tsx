@@ -2,6 +2,7 @@
  * HeroSlider Component SaffHire Background Screening
  * Design: Full-viewport hero with 3 slides, dark overlay, green CTA buttons
  * Slide indicators: 01, 02, 03 (bottom right)
+ * 2026-08-26: Replaced broken Manus CDN images with new local assets
  */
 
 import { useState, useEffect, useCallback } from "react";
@@ -13,21 +14,21 @@ const slides = [
     label: "BUSINESS SERVICES",
     title: "The information you need to hire fast, secure and safe, serving Frisco, TX and businesses nationwide",
     cta: "Get Quote",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/hero-business-services-LxTs7NABnHvadLukN46vhX.webp",
+    image: "/images/hero-business-services.webp",
   },
   {
     id: "02",
     label: "DIGITAL SOLUTIONS",
     title: "Data Security and Industry Compliance for Your Business",
     cta: "Get Quote",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/hero-digital-solutions-SooLb3FdgFGDAYyqNJsNt2.webp",
+    image: "/images/hero-digital-solutions.webp",
   },
   {
     id: "03",
     label: "BACKGROUND SCREENING",
     title: "Safely Fulfill and Hire the right people for your business",
     cta: "Get Quote",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/hero-background-screening-ToRFRtdzTw9rE5tadCJNaf.webp",
+    image: "/images/hero-background-screening.webp",
   },
 ];
 
@@ -54,7 +55,7 @@ export default function HeroSlider() {
 
   return (
     <section className="relative w-full overflow-hidden" style={{ height: "100vh", minHeight: 600 }}>
-      {/* Slides */}
+      {/* slides */}
       {slides.map((slide, i) => (
         <div
           key={slide.id}
