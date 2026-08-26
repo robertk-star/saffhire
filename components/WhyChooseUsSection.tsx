@@ -2,6 +2,7 @@
  * WhyChooseUsSection Component SaffHire Background Screening
  * Design: Two-column layout, image left with "Since 2020" badge, feature list right
  * Bottom: Three quality badges
+ * 2026-08-26: Replaced broken Manus CDN image with local asset
  */
 
 import { CheckCircle2, Star, Zap } from "lucide-react";
@@ -44,7 +45,7 @@ export default function WhyChooseUsSection() {
           {/* Left: Image with badge */}
           <div className="relative">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/why-choose-us-professional-TPuNf6QpW4hzwfc3uYMX4k.webp"
+              src="/images/why-choose-us.webp"
               alt="SaffHire team working"
               className="w-full rounded-lg shadow-xl object-cover"
               style={{ height: 500 }}
