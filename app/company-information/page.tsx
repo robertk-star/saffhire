@@ -63,7 +63,7 @@ const organizationSchema = {
   '@id': `${siteUrl}/#organization`,
   name: 'SaffHire Background Screening',
   url: siteUrl,
-  logo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png',
+  logo: `${siteUrl}/images/saffhire-logo.png`,
   telephone: '+1-888-588-1733',
   address: {
     '@type': 'PostalAddress',
@@ -125,7 +125,7 @@ export default function CompanyInformationPage() {
               <div>
                 <h2 className="text-2xl font-black text-slate-950">What SaffHire does</h2>
                 <p className="mt-3 leading-7 text-slate-700">
-                  SaffHire helps employers make informed hiring decisions by providing background screening services such as criminal background checks, verification services, drug screening, motor vehicle record checks, and industry-specific screening workflows. SaffHire serves businesses that need fast, secure, and reliable screening support.
+                  SaffHire helps employers make informed hiring decisions by providing background screening services such as criminal background checks, verification services, drug screening, motor vehicle record checks, and industry-specific screening workflows.
                 </p>
               </div>
 
@@ -142,9 +142,6 @@ export default function CompanyInformationPage() {
 
               <div>
                 <h2 className="text-2xl font-black text-slate-950">Industries served</h2>
-                <p className="mt-3 leading-7 text-slate-700">
-                  SaffHire supports employers across all industries. Common industries served include:
-                </p>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {industries.map((industry) => (
                     <div key={industry} className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700">
@@ -155,21 +152,10 @@ export default function CompanyInformationPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-black text-slate-950">Compliance approach</h2>
-                <p className="mt-3 leading-7 text-slate-700">
-                  SaffHire provides employer-facing background screening services with attention to FCRA-aware workflows and employer screening responsibilities. Background screening laws and hiring requirements can vary by jurisdiction, employer type, job role, and report type. Employers should use background screening reports as part of a compliant hiring process.
-                </p>
-              </div>
-
-              <div>
                 <h2 className="text-2xl font-black text-slate-950">Important website links</h2>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {importantLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-green-700 shadow-sm transition hover:border-green-300 hover:bg-green-50"
-                    >
+                    <a key={link.href} href={link.href} className="rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-green-700 shadow-sm transition hover:border-green-300 hover:bg-green-50">
                       {link.label}
                     </a>
                   ))}
@@ -188,9 +174,7 @@ export default function CompanyInformationPage() {
                   <div>
                     <dt className="font-bold text-slate-950">Website</dt>
                     <dd className="mt-1">
-                      <a className="text-green-700 hover:underline" href="https://www.saffhire.com">
-                        www.saffhire.com
-                      </a>
+                      <a className="text-green-700 hover:underline" href="https://www.saffhire.com">www.saffhire.com</a>
                     </dd>
                   </div>
                   <div>
@@ -198,31 +182,12 @@ export default function CompanyInformationPage() {
                     <dd className="mt-1 text-slate-700">Frisco, Texas</dd>
                   </div>
                   <div>
-                    <dt className="font-bold text-slate-950">Coverage</dt>
-                    <dd className="mt-1 text-slate-700">Serving employers across all 50 states</dd>
-                  </div>
-                  <div>
                     <dt className="font-bold text-slate-950">Phone</dt>
                     <dd className="mt-1">
-                      <a className="text-green-700 hover:underline" href="tel:8885881733">
-                        (888) 588-1733
-                      </a>
+                      <a className="text-green-700 hover:underline" href="tel:8885881733">(888) 588-1733</a>
                     </dd>
                   </div>
                 </dl>
-              </div>
-
-              <div className="rounded-2xl border border-green-200 bg-green-50 p-6 shadow-sm">
-                <h2 className="text-xl font-black text-slate-950">Need a quote?</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-700">
-                  Employers can request background screening pricing or ask about services through the contact page.
-                </p>
-                <a
-                  href="/contact"
-                  className="mt-5 inline-flex rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600"
-                >
-                  Contact SaffHire
-                </a>
               </div>
             </aside>
           </div>
