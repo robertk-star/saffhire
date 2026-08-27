@@ -1,7 +1,7 @@
 /*
  * Referral Partners Page - SaffHire Background Screening
- * Design: Clean Professional Trust - dark navy hero, white content sections, green accents
  * Route: /referral-partners
+ * 2026-08-27: Partner logos moved from broken Manus CDN to local public/images
  */
 
 import Navbar from "@/components/Navbar";
@@ -9,35 +9,16 @@ import Footer from "@/components/Footer";
 import { ArrowRight, HandshakeIcon } from "lucide-react";
 import PageSEO from "@/components/PageSEO";
 
-
-const BENEFITSME_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/benefitsme-logo-clean_2fd281f9.png";
-
-const WORKSHIELD_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/workshield-logo_c864ef78.webp";
-
-const GMGSAVINGS_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/gmgsavings-logo-dark_199a5771.png";
-
-const NOVATECH_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/novatech-logo_3fbfe67d.png";
-
-const DEFENSEBYDESIGN_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/defensebydesign-logo-nav_8b4f9659.webp";
-
-const SANDENE_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/sandene-strategies-logo_622c0e7d.webp";
-
-const FYNN_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fynn-logo_658b6e67.png";
-
-const STAFFING_FOR_HEALTHCARE_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/staffing_for_healthcare_logo_5c1c3710.webp";
-
-const LEVELC_SOLUTIONS_LOGO =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/levelc_solutions_logo_9d966f6e.webp";
-
-const HOORAY_HEALTH_LOGO = "/hooray-health-logo.png";
+const BENEFITSME_LOGO = "/images/partner-benefitsme.png";
+const WORKSHIELD_LOGO = "/images/partner-workshield.png";
+const GMGSAVINGS_LOGO = "/images/partner-gmg-savings.png";
+const NOVATECH_LOGO = "/images/partner-novatech.png";
+const DEFENSEBYDESIGN_LOGO = "/images/partner-defense-by-design.png";
+const SANDENE_LOGO = "/images/partner-sandene.png";
+const FYNN_LOGO = "/images/partner-fynn.png";
+const STAFFING_FOR_HEALTHCARE_LOGO = "/images/partner-staffing-for-healthcare.png";
+const LEVELC_SOLUTIONS_LOGO = "/images/partner-levelc-solutions.png";
+const HOORAY_HEALTH_LOGO = "/images/partner-hooray-health.png";
 
 const partners = [
   {
@@ -140,7 +121,7 @@ const partners = [
     category: "Healthcare Benefits",
     logoInvert: false,
   },
-]
+];
 
 export default function ReferralPartners() {
   return (
@@ -149,7 +130,6 @@ export default function ReferralPartners() {
 
       <Navbar />
 
-      {/* Hero */}
       <section className="pt-20" style={{ backgroundColor: "#0f172a" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <div
@@ -177,7 +157,6 @@ export default function ReferralPartners() {
         </div>
       </section>
 
-      {/* Partners Grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -186,7 +165,6 @@ export default function ReferralPartners() {
                 key={partner.slug}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300 overflow-hidden group flex flex-col"
               >
-                {/* Logo area */}
                 <div
                   className="flex items-center justify-center p-8 border-b border-gray-100"
                   style={{ backgroundColor: "#f8fafc", minHeight: 140 }}
@@ -199,7 +177,6 @@ export default function ReferralPartners() {
                   />
                 </div>
 
-                {/* Content */}
                 <div className="p-7 flex flex-col flex-1">
                   <span
                     className="inline-block text-xs font-bold uppercase tracking-widest mb-3 px-3 py-1 rounded-full"
@@ -217,17 +194,13 @@ export default function ReferralPartners() {
                   >
                     {partner.name}
                   </h2>
-                  <p
-                    className="text-sm font-semibold mb-4"
-                    style={{ color: "#22c55e" }}
-                  >
+                  <p className="text-sm font-semibold mb-4" style={{ color: "#22c55e" }}>
                     {partner.tagline}
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed flex-1">
                     {partner.description}
                   </p>
 
-                  {/* Actions */}
                   <div className="flex items-center gap-3 mt-6 pt-5 border-t border-gray-100">
                     <a
                       href={`/referral-partners/${partner.slug}`}
@@ -236,13 +209,11 @@ export default function ReferralPartners() {
                     >
                       Learn More <ArrowRight size={14} />
                     </a>
-
                   </div>
                 </div>
               </div>
             ))}
 
-            {/* "More coming soon" placeholder card */}
             <div
               className="rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center p-10 text-center"
               style={{ minHeight: 340 }}
@@ -267,7 +238,6 @@ export default function ReferralPartners() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20" style={{ backgroundColor: "#f8fafc" }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
