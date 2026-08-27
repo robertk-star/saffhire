@@ -28,7 +28,7 @@ type QuotePreview = {
   createdAt: string;
 };
 
-const saffhireLogoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/saffhire-logo_fe0fac3a.png';
+const saffhireLogoUrl = '/images/saffhire-logo.png';
 
 function money(value: number) {
   return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
