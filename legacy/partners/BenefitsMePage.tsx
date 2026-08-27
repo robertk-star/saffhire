@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 
 const BENEFITSME_LOGO =
-  "/images/partner-benefitsme.png";
+  "/images/partner-benefitsme.svg";
 
 const features = [
   {
@@ -88,86 +88,7 @@ const howItWorks = [
   },
 ];
 
-const categories = [
-  "Electronics",
-  "Large Appliances",
-  "Furniture",
-  "Computers and Laptops",
-  "Smartphones and Tablets",
-  "Home and Kitchen",
-  "Gaming and Entertainment",
-  "Fitness and Wellness",
-];
-
-const employeeCountOptions = [
-  "1 to 10",
-  "11 to 50",
-  "51 to 200",
-  "201 to 500",
-  "501 to 1,000",
-  "1,000+",
-];
-
-type FormState = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  company: string;
-  employeeCount: string;
-  message: string;
-};
-
-const EMPTY_FORM: FormState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  company: "",
-  employeeCount: "",
-  message: "",
-};
-
 export default function BenefitsMePage() {
-  const [form, setForm] = useState<FormState>(EMPTY_FORM);
-  const [submitted, setSubmitted] = useState(false);
-  const [formError, setFormError] = useState("");
-
-  const submitLead = trpc.referral.submitLead.useMutation({
-    onSuccess: () => {
-      setSubmitted(true);
-      setForm(EMPTY_FORM);
-      setFormError("");
-    },
-    onError: (err) => {
-      setFormError(err.message || "Something went wrong. Please try again.");
-    },
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormError("");
-    if (!form.firstName || !form.lastName || !form.email) {
-      setFormError("Please fill in all required fields.");
-      return;
-    }
-    submitLead.mutate({
-      partnerSlug: "benefitsme",
-      partnerName: "BenefitsMe",
-      ...form,
-    });
-  };
-
-  const inputClass =
-    "w-full px-4 py-3 rounded-sm border border-gray-200 text-gray-800 text-sm focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-colors bg-white";
-  const labelClass = "block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5";
-
   return (
     <div className="min-h-screen bg-white">
       <PageSEO path="/referral-partners/benefitsme" title="BenefitsMe Referral Partner" description="SaffHire and BenefitsMe partnership. Streamlined background screening for BenefitsMe clients." />
@@ -184,13 +105,29 @@ export default function BenefitsMePage() {
               <h1 className="text-4xl lg:text-5xl font-black text-white mb-4 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>BenefitsMe</h1>
               <p className="text-lg font-semibold mb-5" style={{ color: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}>Employer-Sponsored Purchasing Assistance Program</p>
               <p className="text-gray-300 leading-relaxed mb-8 max-w-lg">BenefitsMe gives your employees instant access to thousands of brand-name products paid over time through convenient payroll deduction. No credit check, no interest, and no hidden fees. Available for companies with 200 or more employees.</p>
-              <a href="#request-intro" className="inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold border border-gray-600 text-white hover:border-green-400 hover:text-green-400 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}><Send size={15} />Request an Introduction</a>
+              <a href="/#contact" className="inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold border border-gray-600 text-white hover:border-green-400 hover:text-green-400 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}><Send size={15} />Request an Introduction</a>
             </div>
             <div className="flex items-center justify-center">
               <div className="rounded-2xl p-12 flex items-center justify-center shadow-2xl" style={{ backgroundColor: "#ffffff", width: "100%", maxWidth: 420, minHeight: 220 }}>
                 <img src={BENEFITSME_LOGO} alt="BenefitsMe logo" className="max-h-20 max-w-full object-contain" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f) => {
+              const Icon = f.icon;
+              return (
+                <div key={f.title} className="p-7 rounded-xl border border-gray-100 bg-gray-50">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#f0fdf4" }}><Icon size={22} style={{ color: "#22c55e" }} /></div>
+                  <h3 className="font-bold text-gray-900 mb-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>{f.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{f.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
