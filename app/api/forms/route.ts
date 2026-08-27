@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
+const DEFAULT_FROM = 'SaffHire <beth.t@example.com>';
+const DEFAULT_TO = 'info@saffhire.com';
+
 function getSupabaseAdmin() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -8,11 +11,17 @@ function getSupabaseAdmin() {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
+function normalizeFrom(value?: string | null) {
+  const from = String(value || '').trim();
+  if (!from || /chatarai\.com/i.test(from)) return DEFAULT_FROM;
+  return from;
+}
+
 function getEmailConfig() {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  const to = process.env.CONTACT_TO_EMAIL || 'info@saffhire.com';
-  return { apiKey, from, to, configured: Boolean(apiKey && from) };
+  const from = normalizeFrom(process.env.CONTACT_FROM_EMAIL);
+  const to = process.env.CONTACT_TO_EMAIL || DEFAULT_TO;
+  return { apiKey, from, to, configured: Boolean(apiKey) };
 }
 
 function buildEmailText(payload: Record<string, string>) {
@@ -36,8 +45,8 @@ function buildEmailText(payload: Record<string, string>) {
 
 async function sendEmail(payload: Record<string, string>) {
   const { apiKey, to, from, configured } = getEmailConfig();
-  if (!configured || !apiKey || !from) {
-    return { sent: false, reason: 'Email delivery is not configured. Add RESEND_API_KEY and CONTACT_FROM_EMAIL in Vercel.' };
+  if (!configured || !apiKey) {
+    return { sent: false, reason: 'Email delivery is not configured. Add RESEND_API_KEY in Vercel.' };
   }
 
   const subject = payload.formType === 'quote'
@@ -79,7 +88,7 @@ export async function POST(request: Request) {
 
   if (!emailConfig.configured) {
     return NextResponse.json(
-      { error: 'Email delivery is not configured yet. Add RESEND_API_KEY and CONTACT_FROM_EMAIL in Vercel, then redeploy.' },
+      { error: 'Email delivery is not configured yet. Add RESEND_API_KEY in Vercel, then redeploy.' },
       { status: 503 }
     );
   }
@@ -113,7 +122,7 @@ export async function POST(request: Request) {
     reason: error instanceof Error ? error.message : 'Email send failed.',
   }));
 
-  if (!emailResult.sent) {
+  if (!emailResult.sent && !saved) {
     return NextResponse.json(
       {
         error: `Email did not send. ${emailResult.reason || 'Please check Resend and Vercel email settings.'}`,
@@ -125,5 +134,11 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({ ok: true, saved, saveError, emailSent: true });
+  return NextResponse.json({
+    ok: true,
+    saved,
+    saveError,
+    emailSent: emailResult.sent,
+    emailError: emailResult.sent ? null : emailResult.reason,
+  });
 }
