@@ -29,7 +29,7 @@ const partners = [
       "BenefitsMe is an employer-sponsored purchasing assistance program that gives employees instant access to thousands of brand-name products, paid over time through convenient payroll deduction. No credit check required, no interest, and no hidden fees. Available for companies with 200 or more employees.",
     logo: BENEFITSME_LOGO,
     category: "Employee Benefits",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "Work Shield",
@@ -39,7 +39,7 @@ const partners = [
       "Work Shield delivers technology-driven, human-led workplace misconduct resolution. Unbiased third-party investigations, faster resolutions, and stronger compliance so your HR team can focus on the business, not the fallout.",
     logo: WORKSHIELD_LOGO,
     category: "Workplace Compliance",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "GMG Savings",
@@ -49,7 +49,7 @@ const partners = [
       "Growth Management Group (GMG) helps small and mid-sized companies grow smarter through tax strategy, AI-driven automation, and operational advisory. For over 23 years, GMG has partnered with 200,000+ businesses and captured over $37 billion in value.",
     logo: GMGSAVINGS_LOGO,
     category: "Business Growth",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "NovaTech",
@@ -59,7 +59,7 @@ const partners = [
       "NovaTech is a full-service managed office technology provider delivering IT support, cybersecurity, cloud solutions, and print management. One partner, one point of contact, and 24/7 support for everything your business needs to run.",
     logo: NOVATECH_LOGO,
     category: "Managed IT Services",
-    logoInvert: false,
+    logoBg: "#0f172a",
   },
   {
     name: "Defense By Design",
@@ -69,7 +69,7 @@ const partners = [
       "Defense By Design helps organizations turn foresight into 20/20 safety through engaging workplace safety training, conference keynotes, and client value-add events. Led by Jeff McKissack, programs teach employees to spot trouble before it spots them.",
     logo: DEFENSEBYDESIGN_LOGO,
     category: "Workplace Safety Training",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "Sandene Strategies",
@@ -79,7 +79,7 @@ const partners = [
       "Sandene Strategies is a comprehensive financial planning firm serving entrepreneurs, executives, and wealth builders. Their proprietary Your 360 Future Blueprint process looks at the entirety of your finances and your life, creating a plan built around what matters most to you.",
     logo: SANDENE_LOGO,
     category: "Financial Planning",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "Fynn",
@@ -89,7 +89,7 @@ const partners = [
       "Fynn is an intelligent electronic health record platform built by operators for Assisted Living and Memory Care facilities. It unites clinical, operational, and family engagement tools to streamline operations, enhance care quality, and strengthen relationships with residents and families.",
     logo: FYNN_LOGO,
     category: "Healthcare Technology",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "Staffing for Healthcare",
@@ -99,7 +99,7 @@ const partners = [
       "Staffing for Healthcare helps healthcare business owners solve their people problems to facilitate strategic growth and profitability. With specialty recruiting, flexible staffing, and back-office solutions across Medical Facilities, Dentistry, Behavioral Health, and Vision segments.",
     logo: STAFFING_FOR_HEALTHCARE_LOGO,
     category: "Healthcare Staffing",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "Level-C Solutions",
@@ -109,7 +109,7 @@ const partners = [
       "Level-C Solutions guides business owners and leaders with P&L responsibility on growing their business and improving profitability. With 30+ years of expertise in recruiting, staffing, and business consulting, we help solve difficult people-problems and overcome challenging business issues.",
     logo: LEVELC_SOLUTIONS_LOGO,
     category: "Business Consulting",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
   {
     name: "Hooray Health",
@@ -119,7 +119,7 @@ const partners = [
       "Hooray Health provides guaranteed-issue healthcare plans designed for businesses with hourly, part-time, and full-time employees. With $25 urgent care visits, $0 virtual primary care, and an industry-leading NPS of 86, Hooray Health helps employers attract and retain talent while meeting ACA compliance requirements.",
     logo: HOORAY_HEALTH_LOGO,
     category: "Healthcare Benefits",
-    logoInvert: false,
+    logoBg: "#f8fafc",
   },
 ];
 
@@ -149,7 +149,7 @@ export default function ReferralPartners() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {partners.map((partner) => (
               <div key={partner.slug} className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300 overflow-hidden group flex flex-col">
-                <div className="flex items-center justify-center p-8 border-b border-gray-100" style={{ backgroundColor: "#f8fafc", minHeight: 140 }}>
+                <div className="flex items-center justify-center p-8 border-b border-gray-100" style={{ backgroundColor: partner.logoBg, minHeight: 140 }}>
                   <img src={partner.logo} alt={`${partner.name} logo`} className="max-h-20 max-w-full object-contain" />
                 </div>
                 <div className="p-7 flex flex-col flex-1">
