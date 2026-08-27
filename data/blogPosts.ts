@@ -1,9 +1,6 @@
 /**
  * Blog Posts Data - Single Source of Truth
- * Used by:
- * - Blog page (client/src/pages/Blog.tsx)
- * - RSS generator (scripts/generate-rss.ts)
- * - Blog registry (client/src/pages/blogRegistry.tsx)
+ * 2026-08-27: Local images replacing broken Manus CDN URLs
  */
 
 export interface BlogPost {
@@ -27,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 25, 2026",
     readTime: "8 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/Screenshot2026-04-30at2.37.09PM_978eaaef.png",
+    image: "/images/blog-ai-resume-fraud.webp",
   },
   {
     slug: "gig-economy-background-screening-contingent-workforce-liability",
@@ -38,7 +35,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 22, 2026",
     readTime: "9 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/top-industries-screening-hero-WE6rERMRUjdEYRvK8mNf9T.webp",
+    image: "/images/blog-gig-economy.webp",
   },
   {
     slug: "why-warehousing-companies-cant-afford-hiring-mistakes",
@@ -49,7 +46,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 21, 2026",
     readTime: "10 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/warehousing-hiring-mistakes-hero-Sm4ZTHLcr6uwf7ukGLxsUh.webp",
+    image: "/images/blog-warehousing.webp",
   },
   {
     slug: "trucking-companies-bad-hiring-decisions",
@@ -60,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 18, 2026",
     readTime: "12 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/trucking-bad-hire-hero-GofKsS6GbaNL9HsuaMrxE2.webp",
+    image: "/images/blog-trucking.webp",
   },
   {
     slug: "fcra-compliance-checklist-employers-2026",
@@ -71,7 +68,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 10, 2026",
     readTime: "8 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fcra-checklist-blog-hero-RuTByNnDXXWqjAKqZs6sW9.webp",
+    image: "/images/blog-fcra-checklist.webp",
   },
   {
     slug: "eeoc-guidance-criminal-records-employers",
@@ -82,7 +79,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 16, 2026",
     readTime: "9 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/eeoc-criminal-records-blog-hero-5pfApzDoAMU4s5WfbSooVw.webp",
+    image: "/images/blog-eeoc-criminal.webp",
   },
   {
     slug: "ban-the-box-laws-by-state-employer-guide",
@@ -93,7 +90,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 23, 2026",
     readTime: "10 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/ban-the-box-blog-hero-EFcf5z8yzZtFAPfmVoSoXi.webp",
+    image: "/images/blog-ban-the-box.webp",
   },
   {
     slug: "roi-of-speed-5-minute-background-checks-time-to-hire",
@@ -104,7 +101,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 26, 2026",
     readTime: "9 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/roi-speed-background-checks-blog-hero-bPJuHRWgUsr5pcVwmFfDrh.webp",
+    image: "/images/blog-roi-speed.webp",
   },
   {
     slug: "ongoing-employee-screening-long-term-risk-management",
@@ -115,7 +112,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 30, 2026",
     readTime: "9 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/ongoing-employee-screening-blog-hero-96awRDR6NxKQcuSdzJqFAx.webp",
+    image: "/images/blog-ongoing-screening.webp",
   },
   {
     slug: "what-oig-expects-healthcare-organizations",
@@ -126,7 +123,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 2, 2026",
     readTime: "8 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/oig-healthcare-compliance-blog-hero-emwEM2MDQQNZe97joqH4us.webp",
+    image: "/images/blog-oig-healthcare.webp",
   },
   {
     slug: "birthdate-redaction-background-check-delays",
@@ -137,7 +134,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 6, 2026",
     readTime: "9 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/birthdate-redaction-secure-database_97af283b.png",
+    image: "/images/blog-birthdate-redaction.webp",
   },
   {
     slug: "how-long-background-checks-go-back-7-year-rule",
@@ -148,7 +145,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 9, 2026",
     readTime: "10 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/7-year-rule-timeline-RNfqFxtfK4odkJVZXaNVE4.webp",
+    image: "/images/blog-7-year-rule.webp",
   },
   {
     slug: "true-cost-of-bad-hire",
@@ -159,7 +156,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 10, 2026",
     readTime: "11 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/true-cost-bad-hire-hero-Z23nN5AZd3DgErExoejp4w.webp",
+    image: "/images/blog-true-cost-bad-hire.webp",
   },
   {
     slug: "top-industries-that-require-most-screening",
@@ -170,7 +167,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 13, 2026",
     readTime: "11 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/top-industries-screening-hero-WE6rERMRUjdEYRvK8mNf9T.webp",
+    image: "/images/blog-top-industries.webp",
   },
   {
     slug: "screening-healthcare-workers-what-employers-must-verify",
@@ -181,7 +178,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 27, 2026",
     readTime: "10 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/healthcare-screening-workers-hero-NbHrLjLNvrWmpCgvpdRJFj.webp",
+    image: "/images/blog-healthcare-workers.webp",
   },
   {
     slug: "ai-in-background-screening-faster-smarter-more-reliable",
@@ -192,7 +189,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 30, 2026",
     readTime: "9 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/Screenshot2026-04-30at2.37.09PM_978eaaef.png",
+    image: "/images/blog-ai-resume-fraud.webp",
   },
   {
     slug: "fcra-compliance-2026-background-screening-employers",
@@ -203,7 +200,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 4, 2026",
     readTime: "12 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fcra-2026-compliance-hero-g324ywwzt2UJGqNbxmxm5L.webp",
+    image: "/images/blog-fcra-2026.webp",
   },
   {
     slug: "fcra-adverse-action-two-step-notice-requirements-2026",
@@ -214,7 +211,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 7, 2026",
     readTime: "10 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fcra-adverse-action-two-step-notice-hero-P5Pu9omj9Kr5XpeHgCiXd9.webp",
+    image: "/images/blog-fcra-adverse-two-step.webp",
   },
   {
     slug: "fcra-adverse-action-rules-2025-employer-compliance",
@@ -225,7 +222,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 9, 2026",
     readTime: "11 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fcra-adverse-action-hero-5mvgUmg89CKUWpiCdaeV6L.webp",
+    image: "/images/blog-fcra-adverse-action.webp",
   },
   {
     slug: "fcra-enforcement-2026-employer-background-screening-compliance",
@@ -236,29 +233,19 @@ export const blogPosts: BlogPost[] = [
     date: "May 14, 2026",
     readTime: "10 min read",
     author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/bad-hire-client-relationship-hero-hjyshZQ43uR2h48dJNuT3D.webp",
+    image: "/images/blog-bad-hire-clients.webp",
   },
 ];
 
-/**
- * Convert date string like "March 8, 2026" to ISO 8601 format
- */
 export function parseBlogDate(dateStr: string): Date {
   return new Date(dateStr);
 }
 
-/**
- * Format date for RSS (RFC 822)
- */
 export function formatRssDate(date: Date): string {
   return date.toUTCString();
 }
 
-/**
- * Get related posts for a given slug
- */
 export function getRelatedPosts(slug: string): BlogPost[] {
-  // Map of related posts (slug -> array of related slugs)
   const relatedPostsMap: Record<string, string[]> = {
     "ai-powered-resume-fraud-hiring-challenge": [
       "ai-in-background-screening-faster-smarter-more-reliable",
