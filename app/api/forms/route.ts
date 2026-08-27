@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
 const DEFAULT_FROM = 'SaffHire <beth.t@example.com>';
-const DEFAULT_TO = 'info@saffhire.com';
+const CONTACT_TO = 'info@saffhire.com';
 
 function getSupabaseAdmin() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -20,8 +20,7 @@ function normalizeFrom(value?: string | null) {
 function getEmailConfig() {
   const apiKey = process.env.RESEND_API_KEY;
   const from = normalizeFrom(process.env.CONTACT_FROM_EMAIL);
-  const to = process.env.CONTACT_TO_EMAIL || DEFAULT_TO;
-  return { apiKey, from, to, configured: Boolean(apiKey) };
+  return { apiKey, from, to: CONTACT_TO, configured: Boolean(apiKey) };
 }
 
 function buildEmailText(payload: Record<string, string>) {
