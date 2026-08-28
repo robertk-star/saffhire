@@ -1,9 +1,5 @@
 /*
  * AboutSection Component SaffHire Background Screening
- * Design: Two-column layout, story text left, image right
- * Features: Stay Compliant, Candidate Screening icons below
- * Green CTA box with consultation CTA
- * 2026-08-26: Replaced broken Manus CDN image with local asset
  */
 
 import { RefreshCw, BarChart2, Shield } from "lucide-react";
@@ -12,15 +8,10 @@ export default function AboutSection() {
   return (
     <section id="why-saffhire" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Two-column About */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-20">
-          {/* Left: Text */}
           <div>
             <p className="section-label mb-3">ABOUT US</p>
-            <h2
-              className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               A Journey of Resilience and Growth
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
@@ -33,39 +24,23 @@ export default function AboutSection() {
               <p>
                 Like many businesses, we faced uncertainty, challenges, and moments where we weren't
                 sure how we would push through. But through it all, we remained committed to our
-                mission, adapted quickly, and found ways to continue serving our clients. It wasn't
-                easy, but thanks to our incredible team, loyal clients, and unwavering determination,
-                we not only survived we thrived.
+                mission, adapted quickly, and found ways to continue serving our clients.
               </p>
               <p>
-                We look back with gratitude and pride. From those early, uncertain days to the strong
-                and growing business we are today, we've learned valuable lessons about perseverance,
-                innovation, and the power of community.
-              </p>
-              <p>
-                To our clients thank you for believing in us, supporting us, and growing with us.
-                Your trust has been the driving force behind everything we do.
-              </p>
-              <p>
-                Headquartered in Frisco, Texas, SaffHire serves clients across all 50 states with the same commitment to excellence and compliance that has defined our mission from day one.
+                Headquartered in Frisco, Texas, SaffHire serves clients across all 50 states with a
+                commitment to practical, compliance-aware background screening.
               </p>
             </div>
 
-            {/* Feature Icons */}
             <div className="mt-8 space-y-4">
               <div className="flex items-start gap-4">
                 <div className="feature-icon-box">
                   <RefreshCw size={20} style={{ color: "#22c55e" }} />
                 </div>
                 <div>
-                  <h4
-                    className="font-bold text-gray-900 mb-1"
-                    style={{ fontFamily: "'Montserrat', sans-serif" }}
-                  >
-                    Stay Compliant
-                  </h4>
+                  <h4 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Stay Compliant</h4>
                   <p className="text-sm text-gray-600">
-                    SaffHire complies with all FCRA and EEOC requirements.
+                    SaffHire supports FCRA-compliant screening workflows and EEOC-aware hiring practices.
                   </p>
                 </div>
               </div>
@@ -74,15 +49,9 @@ export default function AboutSection() {
                   <BarChart2 size={20} style={{ color: "#22c55e" }} />
                 </div>
                 <div>
-                  <h4
-                    className="font-bold text-gray-900 mb-1"
-                    style={{ fontFamily: "'Montserrat', sans-serif" }}
-                  >
-                    Candidate Screening
-                  </h4>
+                  <h4 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Candidate Screening</h4>
                   <p className="text-sm text-gray-600">
-                    Find out quickly and efficiently if a candidate is going to be a good fit for
-                    your company.
+                    Find out quickly and efficiently if a candidate is going to be a good fit for your company.
                   </p>
                 </div>
               </div>
@@ -91,12 +60,7 @@ export default function AboutSection() {
                   <Shield size={20} style={{ color: "#22c55e" }} />
                 </div>
                 <div>
-                  <h4
-                    className="font-bold text-gray-900 mb-1"
-                    style={{ fontFamily: "'Montserrat', sans-serif" }}
-                  >
-                    Data Compliance
-                  </h4>
+                  <h4 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Data Compliance</h4>
                   <p className="text-sm text-gray-600">
                     Bank-level encrypted security with 24/7 access to your screening portal.
                   </p>
@@ -105,61 +69,26 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right: Image */}
           <div className="relative">
-            <img
-              src="/images/about-team.webp"
-              alt="SaffHire team"
-              className="w-full rounded-lg shadow-xl object-cover"
-              style={{ height: 480 }}
-            />
-            {/* Green accent box */}
-            <div
-              className="absolute -bottom-6 -left-6 rounded-lg p-6 shadow-lg"
-              style={{ backgroundColor: "#22c55e" }}
-            >
-              <p
-                className="text-white text-4xl font-black"
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
-              >
-                5+
-              </p>
+            <img src="/images/about-team.webp" alt="SaffHire team" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 480 }} />
+            <div className="absolute -bottom-6 -left-6 rounded-lg p-6 shadow-lg" style={{ backgroundColor: "#22c55e" }}>
+              <p className="text-white text-4xl font-black" style={{ fontFamily: "'Montserrat', sans-serif" }}>5+</p>
               <p className="text-white text-sm font-semibold mt-1">Years of Success</p>
               <p className="text-green-100 text-xs mt-1">Since 2020</p>
             </div>
           </div>
         </div>
 
-        {/* Consultation CTA */}
-        <div
-          className="rounded-xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8"
-          style={{ backgroundColor: "#22c55e" }}
-        >
+        <div className="rounded-xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8" style={{ backgroundColor: "#22c55e" }}>
           <div>
-            <p
-              className="text-white text-sm font-bold tracking-widest mb-2"
-              style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.12em" }}
-            >
-              FREE CONSULTATION
-            </p>
-            <h3
-              className="text-white text-2xl lg:text-3xl font-bold"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
-              Schedule for Free Consultation
-            </h3>
+            <p className="text-white text-sm font-bold tracking-widest mb-2" style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.12em" }}>FREE CONSULTATION</p>
+            <h3 className="text-white text-2xl lg:text-3xl font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>Schedule for Free Consultation</h3>
             <p className="text-green-100 mt-2">
               Call us at{" "}
-              <a href="tel:8885881733" className="text-white font-bold underline">
-                888-588-1733
-              </a>
+              <a href="tel:8885881733" className="text-white font-bold underline">888-588-1733</a>
             </p>
           </div>
-          <a
-            href="/#contact"
-            className="flex-shrink-0 bg-white text-green-600 font-bold px-8 py-3 rounded-sm hover:bg-gray-100 transition-colors"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
+          <a href="/#contact" className="flex-shrink-0 bg-white text-green-600 font-bold px-8 py-3 rounded-sm hover:bg-gray-100 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Contact Us
           </a>
         </div>
