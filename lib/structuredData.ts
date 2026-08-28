@@ -22,9 +22,9 @@ export const organizationSchema = {
   },
   sameAs: ["https://www.linkedin.com/company/saffhire"],
   description:
-    "SaffHire provides fast, secure, and FCRA-compliant background screening services for employers across the United States.",
+    "SaffHire provides fast, secure background screening services and FCRA-compliant screening workflows for employers across the United States.",
   knowsAbout: [
-    "FCRA-compliant background screening",
+    "FCRA-compliant screening workflows",
     "criminal background checks",
     "employment verification",
     "education verification",
