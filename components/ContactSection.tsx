@@ -1,8 +1,3 @@
-/*
- * ContactSection Component SaffHire Background Screening
- * Design: Dark navy background CTA banner + contact form
- */
-
 import { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 
@@ -67,15 +62,9 @@ export default function ContactSection() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 Looking for the Best Consumer Reporting Solution?
               </h2>
-              <p className="text-gray-400 mt-2">Join hundreds of businesses that trust SaffHire for their background screening needs.</p>
+              <p className="text-gray-400 mt-2">Join employers nationwide who use SaffHire for background screening.</p>
             </div>
-            <a
-              href="#contact"
-              className="flex-shrink-0 btn-green rounded-sm px-8 py-3 text-base font-bold"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-              data-conversion="quote_cta_click"
-              data-location="contact_cta_banner"
-            >
+            <a href="#contact" className="flex-shrink-0 btn-green rounded-sm px-8 py-3 text-base font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }} data-conversion="quote_cta_click" data-location="contact_cta_banner">
               Get Quote
             </a>
           </div>
@@ -87,34 +76,25 @@ export default function ContactSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             <div>
               <p className="section-label mb-3">CONTACT US</p>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                Get in Touch
-              </h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>Get in Touch</h2>
               <p className="text-gray-600 mb-10 leading-relaxed">
                 Ready to streamline your hiring process? Contact our team for a free consultation and custom quote tailored to your business needs.
               </p>
-
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="feature-icon-box"><Phone size={18} style={{ color: "#22c55e" }} /></div>
                   <div>
                     <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Phone</p>
-                    <a href="tel:8885881733" className="text-gray-600 hover:text-green-600 transition-colors" data-conversion="phone_click" data-location="contact_section">
-                      (888) 588-1733
-                    </a>
+                    <a href="tel:8885881733" className="text-gray-600 hover:text-green-600 transition-colors" data-conversion="phone_click" data-location="contact_section">(888) 588-1733</a>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <div className="feature-icon-box"><Mail size={18} style={{ color: "#22c55e" }} /></div>
                   <div>
                     <p className="font-bold text-gray-900 text-sm mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Email</p>
-                    <a href="mailto:info@saffhire.com" className="text-gray-600 hover:text-green-600 transition-colors" data-conversion="email_click" data-location="contact_section">
-                      info@saffhire.com
-                    </a>
+                    <a href="mailto:info@saffhire.com" className="text-gray-600 hover:text-green-600 transition-colors" data-conversion="email_click" data-location="contact_section">info@saffhire.com</a>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <div className="feature-icon-box"><MapPin size={18} style={{ color: "#22c55e" }} /></div>
                   <div>
@@ -137,7 +117,6 @@ export default function ContactSection() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" data-form="contact" data-conversion="contact_form_submit">
                   {errorMessage ? <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{errorMessage}</div> : null}
-
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>Full Name *</label>
@@ -148,7 +127,6 @@ export default function ContactSection() {
                       <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full border border-gray-200 rounded-sm px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 transition-colors" placeholder="john@company.com" />
                     </div>
                   </div>
-
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>Company</label>
@@ -159,12 +137,10 @@ export default function ContactSection() {
                       <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full border border-gray-200 rounded-sm px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 transition-colors" placeholder="(555) 000-0000" />
                     </div>
                   </div>
-
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>Message</label>
                     <textarea rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full border border-gray-200 rounded-sm px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 transition-colors resize-none" placeholder="Tell us about your screening needs..." />
                   </div>
-
                   <button type="submit" disabled={isSubmitting} className="w-full btn-green rounded-sm py-3 text-base font-bold flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                     <Send size={16} />
                     {isSubmitting ? "Sending..." : "Send Message"}
