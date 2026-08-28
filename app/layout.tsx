@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'SaffHire Background Pre-Employment Screening',
     template: '%s | SaffHire',
   },
-  description: 'Fast, secure, and FCRA-compliant background screening services for businesses. Criminal checks, employment verification, drug screening, and MVR checks.',
+  description: 'Fast, secure background screening services with FCRA-compliant screening workflows. Criminal checks, employment verification, drug screening, and MVR checks.',
   alternates: {
     types: {
       'application/rss+xml': '/rss.xml',
