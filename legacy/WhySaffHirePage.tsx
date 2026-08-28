@@ -1,9 +1,3 @@
-/*
- * WhySaffHirePage - Standalone /why-saffhire route
- * Renders the About and Why Choose Us sections so Google can index it.
- * Previously only accessible as /#why-saffhire (hash anchor on the homepage).
- */
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AboutSection from "@/components/AboutSection";
@@ -17,25 +11,18 @@ export default function WhySaffHirePage() {
       <PageSEO
         path="/why-saffhire"
         title="Why Choose SaffHire"
-        description="Learn why hundreds of businesses trust SaffHire for background screening. FCRA-compliant, results in 5 minutes, no setup fees, no minimums, and 5-star customer satisfaction."
+        description="Learn why employers nationwide use SaffHire for background screening. FCRA-compliant screening workflows, no setup fees, no minimums, and practical hiring support."
       />
       <Navbar />
 
-      {/* Hero */}
       <section className="pt-32 pb-16" style={{ backgroundColor: "#0f172a" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="section-label mb-3" style={{ color: "#22c55e" }}>
-            WHY SAFFHIRE
-          </p>
-          <h1
-            className="text-4xl lg:text-5xl font-black text-white mb-6"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
+          <p className="section-label mb-3" style={{ color: "#22c55e" }}>WHY SAFFHIRE</p>
+          <h1 className="text-4xl lg:text-5xl font-black text-white mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             A Background Screening Partner You Can Trust
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Fast results, FCRA compliance, no setup fees, and a team that treats every client as a
-            partner. Here is our story and what makes SaffHire different.
+            Fast results, FCRA-compliant screening workflows, no setup fees, and a team that treats every client as a partner.
           </p>
         </div>
       </section>
@@ -44,24 +31,15 @@ export default function WhySaffHirePage() {
       <StatsSection />
       <WhyChooseUsSection />
 
-      {/* CTA */}
       <section className="py-16" style={{ backgroundColor: "#0f172a" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2
-            className="text-3xl font-bold text-white mb-4"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
+          <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Ready to Experience the SaffHire Difference?
           </h2>
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-            Join hundreds of businesses that trust SaffHire for fast, accurate, and compliant
-            background screening.
+            Join employers nationwide who use SaffHire for practical, compliance-aware background screening.
           </p>
-          <a
-            href="/contact"
-            className="btn-green rounded-sm px-10 py-4 text-base font-bold inline-block"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
+          <a href="/contact" className="btn-green rounded-sm px-10 py-4 text-base font-bold inline-block" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Get a Free Quote
           </a>
         </div>
