@@ -1,8 +1,3 @@
-/*
- * Criminal Background Checks Service Page
- * Route: /criminal-background-checks
- */
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
@@ -10,7 +5,6 @@ import PageSEO from "@/components/PageSEO";
 import {
   ArrowRight,
   ArrowLeft,
-  CheckCircle2,
   ShieldCheck,
   Clock,
   FileSearch,
@@ -34,14 +28,14 @@ const searchTypes = [
 const stats = [
   { value: "Minutes", label: "National Search Results" },
   { value: "24-48 hrs", label: "County Search Turnaround" },
-  { value: "100%", label: "FCRA Compliant" },
+  { value: "FCRA-aware", label: "Screening Workflows" },
   { value: "24/7", label: "Portal Access" },
 ];
 
 export default function CriminalBackgroundChecksPage() {
   return (
     <div className="min-h-screen bg-white">
-      <PageSEO path="/criminal-background-checks" title="Criminal Background Check Services for Employers | SaffHire" description="FCRA-compliant criminal background checks for businesses of all sizes. National, state, federal, and county-level searches." />
+      <PageSEO path="/criminal-background-checks" title="Criminal Background Check Services for Employers | SaffHire" description="FCRA-compliant criminal background check workflows for businesses of all sizes. National, state, federal, and county-level searches." />
       <Navbar />
       <section className="relative pt-20 overflow-hidden" style={{ backgroundColor: "#0f172a" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +44,7 @@ export default function CriminalBackgroundChecksPage() {
               <a href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm mb-8"><ArrowLeft size={14} />Back to Home</a>
               <p className="section-label mb-3" style={{ color: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}>CRIMINAL SCREENING</p>
               <h1 className="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>Criminal Background<br /><span style={{ color: "#22c55e" }}>Check Services</span></h1>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">Fast, accurate, FCRA-compliant criminal screening for employers across every industry.</p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">Fast, accurate, FCRA-compliant criminal screening workflows for employers across every industry.</p>
               <div className="flex flex-wrap gap-4">
                 <a href="/#contact" className="btn-green inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>Get a Free Quote <ArrowRight size={16} /></a>
                 <a href="tel:8885881733" className="inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold border border-gray-600 text-white hover:border-green-400 hover:text-green-400 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}><Phone size={16} />888-588-1733</a>
