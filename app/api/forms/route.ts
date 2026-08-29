@@ -14,9 +14,9 @@ function getSupabaseAdmin() {
 function normalizeFrom(value?: string | null) {
   const from = String(value || '').trim();
   if (!from) return DEFAULT_FROM;
-  if (/chatarai\.com/i.test(from)) return DEFAULT_FROM;
-  if (/resend\.dev/i.test(from)) return from;
-  if (/saffhire\.com/i.test(from)) return from;
+  if (/(chatarai\.com|example\.com|test\.com|localhost)/i.test(from)) return DEFAULT_FROM;
+  if (/resend\.dev/i.test(from)) return from.includes('<') ? from : `SaffHire <${from}>`;
+  if (/@saffhire\.com/i.test(from)) return from.includes('<') ? from : `SaffHire <${from}>`;
   return DEFAULT_FROM;
 }
 
@@ -26,7 +26,7 @@ function getEmailConfig() {
   const extraTo = String(process.env.CONTACT_TO_EMAIL || '')
     .split(',')
     .map((item) => item.trim())
-    .filter((item) => item && !/chatarai\.com/i.test(item) && item.toLowerCase() !== CONTACT_TO);
+    .filter((item) => item && !/chatarai\.com|example\.com/i.test(item) && item.toLowerCase() !== CONTACT_TO);
   const to = [CONTACT_TO, ...extraTo];
   return { apiKey, from, to, configured: Boolean(apiKey) };
 }
