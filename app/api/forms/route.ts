@@ -13,14 +13,22 @@ function getSupabaseAdmin() {
 
 function normalizeFrom(value?: string | null) {
   const from = String(value || '').trim();
-  if (!from || /chatarai\.com/i.test(from)) return DEFAULT_FROM;
-  return from;
+  if (!from) return DEFAULT_FROM;
+  if (/chatarai\.com/i.test(from)) return DEFAULT_FROM;
+  if (/resend\.dev/i.test(from)) return from;
+  if (/saffhire\.com/i.test(from)) return from;
+  return DEFAULT_FROM;
 }
 
 function getEmailConfig() {
   const apiKey = process.env.RESEND_API_KEY;
   const from = normalizeFrom(process.env.CONTACT_FROM_EMAIL);
-  return { apiKey, from, to: CONTACT_TO, configured: Boolean(apiKey) };
+  const extraTo = String(process.env.CONTACT_TO_EMAIL || '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter((item) => item && !/chatarai\.com/i.test(item) && item.toLowerCase() !== CONTACT_TO);
+  const to = [CONTACT_TO, ...extraTo];
+  return { apiKey, from, to, configured: Boolean(apiKey) };
 }
 
 function buildEmailText(payload: Record<string, string>) {
@@ -65,12 +73,12 @@ async function sendEmail(payload: Record<string, string>) {
     }),
   });
 
+  const details = await response.text().catch(() => 'Unknown email error');
   if (!response.ok) {
-    const details = await response.text().catch(() => 'Unknown email error');
     return { sent: false, reason: details };
   }
 
-  return { sent: true, reason: null };
+  return { sent: true, reason: details };
 }
 
 export async function POST(request: Request) {
@@ -121,15 +129,15 @@ export async function POST(request: Request) {
     reason: error instanceof Error ? error.message : 'Email send failed.',
   }));
 
-  if (!emailResult.sent && !saved) {
+  if (!emailResult.sent) {
     return NextResponse.json(
       {
-        error: `Email did not send. ${emailResult.reason || 'Please check Resend and Vercel email settings.'}`,
+        error: `Email did not send to ${CONTACT_TO}. ${emailResult.reason || 'Check Resend domain verification and Vercel env vars.'}`,
         saved,
         saveError,
         emailSent: false,
       },
-      { status: 500 }
+      { status: 502 }
     );
   }
 
@@ -137,7 +145,7 @@ export async function POST(request: Request) {
     ok: true,
     saved,
     saveError,
-    emailSent: emailResult.sent,
-    emailError: emailResult.sent ? null : emailResult.reason,
+    emailSent: true,
+    deliveredTo: CONTACT_TO,
   });
 }
