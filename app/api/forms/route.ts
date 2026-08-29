@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const FROM = 'SaffHire <beth.t@example.com>';
+const FROM = 'SaffHire <info@saffhire.com>';
 const CONTACT_TO = 'info@saffhire.com';
 
 function getSupabaseAdmin() {
