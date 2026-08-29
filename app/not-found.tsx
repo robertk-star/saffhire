@@ -1,5 +1,5 @@
-import LegacyClientPage from '@/components/next-bridge/LegacyClientPage';
+import { redirect } from 'next/navigation';
 
 export default function NotFound() {
-  return <LegacyClientPage page="notFound" path="/404" />;
+  redirect('/contact');
 }
