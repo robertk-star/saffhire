@@ -1,7 +1,5 @@
 import type { MetadataRoute } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
-
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -18,7 +16,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'PerplexityBot', allow: '/' },
       { userAgent: 'Applebot-Extended', allow: '/' },
     ],
-    sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl,
+    sitemap: 'https://saffhire.com/sitemap.xml',
+    host: 'https://saffhire.com',
   };
 }
