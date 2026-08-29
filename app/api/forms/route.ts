@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const DEFAULT_FROM = 'SaffHire <beth.t@example.com>';
+const FROM = 'SaffHire <beth.t@example.com>';
 const CONTACT_TO = 'info@saffhire.com';
 
 function getSupabaseAdmin() {
@@ -11,24 +11,14 @@ function getSupabaseAdmin() {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
-function normalizeFrom(value?: string | null) {
-  const from = String(value || '').trim();
-  if (!from) return DEFAULT_FROM;
-  if (/(chatarai\.com|example\.com|test\.com|localhost)/i.test(from)) return DEFAULT_FROM;
-  if (/resend\.dev/i.test(from)) return from.includes('<') ? from : `SaffHire <${from}>`;
-  if (/@saffhire\.com/i.test(from)) return from.includes('<') ? from : `SaffHire <${from}>`;
-  return DEFAULT_FROM;
-}
-
 function getEmailConfig() {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = normalizeFrom(process.env.CONTACT_FROM_EMAIL);
-  const extraTo = String(process.env.CONTACT_TO_EMAIL || '')
-    .split(',')
-    .map((item) => item.trim())
-    .filter((item) => item && !/chatarai\.com|example\.com/i.test(item) && item.toLowerCase() !== CONTACT_TO);
-  const to = [CONTACT_TO, ...extraTo];
-  return { apiKey, from, to, configured: Boolean(apiKey) };
+  return {
+    apiKey,
+    from: FROM,
+    to: [CONTACT_TO],
+    configured: Boolean(apiKey),
+  };
 }
 
 function buildEmailText(payload: Record<string, string>) {
@@ -132,7 +122,7 @@ export async function POST(request: Request) {
   if (!emailResult.sent) {
     return NextResponse.json(
       {
-        error: `Email did not send to ${CONTACT_TO}. ${emailResult.reason || 'Check Resend domain verification and Vercel env vars.'}`,
+        error: `Email did not send to ${CONTACT_TO}. ${emailResult.reason || 'Check Resend logs.'}`,
         saved,
         saveError,
         emailSent: false,
