@@ -1,15 +1,12 @@
-import type { Metadata } from 'next';
-import SaffhireVsCheckrStaffingPage from '@/components/SaffhireVsCheckrStaffingPage';
+import { notFound } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'SaffHire vs Checkr for Staffing Agencies',
-  description:
-    'Compare SaffHire and Checkr for staffing agencies. See differences in pricing model, minimums, county searches, support, and FCRA-compliant screening workflows.',
-  alternates: {
-    canonical: '/saffhire-vs-checkr-for-staffing-agencies',
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
   },
 };
 
 export default function Page() {
-  return <SaffhireVsCheckrStaffingPage />;
+  notFound();
 }
