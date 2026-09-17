@@ -7,7 +7,7 @@ import ChataraiWidget from '@/components/ChataraiWidget';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com'),
   title: {
     default: 'SaffHire Background Pre-Employment Screening',
     template: '%s | SaffHire',
@@ -25,6 +25,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: 'img{max-width:100%;height:auto;}header img{max-height:56px;width:auto;}body{margin:0;font-family:Arial,Helvetica,sans-serif;}' }} />
+      </head>
       <body>
         {gtmId ? (
           <noscript>
