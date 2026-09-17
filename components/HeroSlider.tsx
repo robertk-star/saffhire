@@ -1,10 +1,3 @@
-/*
- * HeroSlider Component SaffHire Background Screening
- * Design: Full-viewport hero with 3 slides, dark overlay, green CTA buttons
- * Slide indicators: 01, 02, 03 (bottom right)
- * 2026-08-26: Replaced broken Manus CDN images with new local assets
- */
-
 import { useState, useEffect, useCallback } from "react";
 import { ChevronRight } from "lucide-react";
 
@@ -54,39 +47,35 @@ export default function HeroSlider() {
   }, [current, goTo]);
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: "100vh", minHeight: 600 }}>
-      {/* slides */}
+    <section style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#0f172a" }}>
       {slides.map((slide, i) => (
         <div
           key={slide.id}
-          className="absolute inset-0 transition-opacity duration-700"
-          style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
+          style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, transition: "opacity 0.7s ease" }}
         >
-          {/* Background Image */}
           <img
             src={slide.image}
             alt={slide.label}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ transform: i === current ? "scale(1.03)" : "scale(1)", transition: "transform 6s ease-out" }}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: i === current ? "scale(1.03)" : "scale(1)", transition: "transform 6s ease-out" }}
           />
-          {/* Dark Overlay */}
           <div
-            className="absolute inset-0"
             style={{
+              position: "absolute",
+              inset: 0,
               background: "linear-gradient(to right, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.55) 50%, rgba(15,23,42,0.25) 100%)",
             }}
           />
-
-          {/* Content */}
-          <div className="relative z-10 h-full flex items-center">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <div className="max-w-2xl">
+          <div style={{ position: "relative", zIndex: 10, height: "100%", display: "flex", alignItems: "center" }}>
+            <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", width: "100%" }}>
+              <div style={{ maxWidth: 680 }}>
                 <p
-                  className="text-sm font-bold tracking-widest mb-4"
                   style={{
                     color: "#22c55e",
                     fontFamily: "'Montserrat', sans-serif",
                     letterSpacing: "0.15em",
+                    fontWeight: 700,
+                    fontSize: 14,
+                    marginBottom: 16,
                     opacity: i === current ? 1 : 0,
                     transform: i === current ? "translateY(0)" : "translateY(20px)",
                     transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
@@ -95,9 +84,13 @@ export default function HeroSlider() {
                   {slide.label}
                 </p>
                 <h1
-                  className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-8"
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
+                    color: "#fff",
+                    fontWeight: 900,
+                    fontSize: "clamp(32px, 5vw, 60px)",
+                    lineHeight: 1.1,
+                    margin: "0 0 32px",
                     opacity: i === current ? 1 : 0,
                     transform: i === current ? "translateY(0)" : "translateY(30px)",
                     transition: "opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s",
@@ -114,7 +107,8 @@ export default function HeroSlider() {
                 >
                   <a
                     href="/#contact"
-                    className="inline-flex items-center gap-2 btn-green rounded-sm text-base px-8 py-3"
+                    className="btn-green"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#22c55e", color: "#fff", textDecoration: "none", fontWeight: 700, padding: "12px 32px" }}
                   >
                     {slide.cta}
                     <ChevronRight size={18} />
@@ -125,14 +119,11 @@ export default function HeroSlider() {
           </div>
         </div>
       ))}
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
+      <div style={{ position: "absolute", bottom: 32, right: 32, zIndex: 20, display: "flex", gap: 12 }}>
         {slides.map((slide, i) => (
           <button
             key={slide.id}
             onClick={() => goTo(i)}
-            className="flex items-center justify-center transition-all duration-300"
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 700,
@@ -141,20 +132,17 @@ export default function HeroSlider() {
               borderBottom: i === current ? "2px solid #22c55e" : "2px solid transparent",
               paddingBottom: "2px",
               letterSpacing: "0.05em",
+              background: "transparent",
+              borderLeft: 0,
+              borderRight: 0,
+              borderTop: 0,
+              cursor: "pointer",
             }}
             aria-label={`Go to slide ${slide.id}`}
           >
             {slide.id}
           </button>
         ))}
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-        <div
-          className="w-px h-12 animate-pulse"
-          style={{ background: "linear-gradient(to bottom, transparent, #22c55e)" }}
-        />
       </div>
     </section>
   );
