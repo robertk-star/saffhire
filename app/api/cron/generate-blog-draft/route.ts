@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getBlogImageForCategory } from '@/data/blogCategoryImages';
+import { autoPublishSocialFromBlog } from '@/lib/autoPublishSocialFromBlog';
 import { getAdminSession } from '@/lib/adminAuth';
 import { getBlogGenerationSettings, shouldRunForSettings } from '@/lib/blogGenerationSettings';
 import { getActiveBlogGenerationTopics } from '@/lib/blogGenerationTopicAdmin';
@@ -208,6 +209,16 @@ export async function GET(request: Request) {
       category: savedDraft.category,
     }).catch((error) => ({ sent: false, reason: error instanceof Error ? error.message : 'Email failed' }));
 
+    const publicUrl = `https://saffhire.com/blog/${savedDraft.slug}`;
+    const socialResults = await autoPublishSocialFromBlog({
+      slug: savedDraft.slug,
+      title: savedDraft.title,
+      excerpt: savedDraft.excerpt,
+      category: savedDraft.category,
+      url: publicUrl,
+      image: imageUrl,
+    }).catch((error) => ([{ platform: 'facebook', status: 'failed', error: error instanceof Error ? error.message : 'Social publish failed' }]));
+
     if (runId) {
       await supabase.from('blog_generation_runs').update({
         slug,
@@ -229,10 +240,11 @@ export async function GET(request: Request) {
       ok: true,
       topic: topic.topic,
       post: savedDraft,
-      publicUrl: `https://saffhire.com/blog/${savedDraft.slug}`,
+      publicUrl,
       editUrl: `https://saffhire.com/admin/blogs/${savedDraft.id}`,
       emailSent: emailResult.sent,
       emailError: emailResult.sent ? null : emailResult.reason,
+      socialResults,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Blog generation failed.';
