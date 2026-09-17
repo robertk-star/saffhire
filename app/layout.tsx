@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <link rel="stylesheet" href="/saffhire-fallback.css" />
-        <style dangerouslySetInnerHTML={{ __html: 'img{max-width:100%;height:auto;}header img{max-height:56px;width:auto;}body{margin:0;font-family:Arial,Helvetica,sans-serif;}' }} />
+        <style dangerouslySetInnerHTML={{ __html: 'header img{max-height:56px;width:auto;height:auto;}body{margin:0;font-family:Arial,Helvetica,sans-serif;}' }} />
       </head>
       <body>
         {gtmId ? (
