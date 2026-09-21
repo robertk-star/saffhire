@@ -1,15 +1,5 @@
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:#fff}
-a{color:#15803d}
-header{position:relative;z-index:50;background:#fff}
-header img{max-height:56px;width:auto;height:auto}
-header [style*="#0f172a"]{background:#0f172a;color:#fff}
-header .bg-green-500,a.bg-green-500{background:#22c55e;color:#fff;text-decoration:none;padding:8px 14px;border-radius:6px;display:inline-block}
-header .opacity-0,header .invisible{display:none !important}
-header nav.hidden{display:none}
-header button.lg\\:hidden{display:block}
-@media (min-width:1024px){
-  header nav.hidden.lg\\:flex,header nav.lg\\:flex{display:flex !important;align-items:center;gap:20px}
-  header .hidden.lg\\:flex{display:flex !important;align-items:center;gap:16px}
-  header button.lg\\:hidden{display:none !important}
-  header .max-w-7xl > div{display:flex;align-items:center;justify-content:space-between;gap:24px}
+/* Intentionally minimal. Do not override Tailwind header visibility. */
+header img {
+  max-height: 56px;
+  width: auto;
 }
