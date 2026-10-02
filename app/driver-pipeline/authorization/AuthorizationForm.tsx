@@ -162,9 +162,9 @@ export default function AuthorizationForm() {
             </select>
           </label>
           <div className="sm:col-span-2"><Field label="Current address" value={form.currentAddress} onChange={(value) => setField('currentAddress', value)} required /></div>
-          <Field label="Dates lived here" value={form.datesLivedHere} onChange={(value) => setField('datesLivedHere', value)} />
+          <Field label="Approximate date moved in" type="date" value={form.datesLivedHere} onChange={(value) => setField('datesLivedHere', value)} />
           <Field label="Other names used, including maiden name" value={form.otherNames} onChange={(value) => setField('otherNames', value)} />
-          <Field label="Years used" value={form.yearsUsed} onChange={(value) => setField('yearsUsed', value)} />
+          <Field label="Years known by other names" value={form.yearsUsed} onChange={(value) => setField('yearsUsed', value)} />
         </div>
       </section>
 

@@ -46,9 +46,9 @@ export async function GET(_request: Request, context: { params: Promise<{ id: st
     ['License expiration', row.license_expiration || ''],
     ['Issuing state', row.issuing_state],
     ['Current address', row.current_address],
-    ['Dates lived here', row.dates_lived_here || ''],
+    ['Approximate date moved in', row.dates_lived_here || ''],
     ['Other names used', row.other_names || ''],
-    ['Years used', row.years_used || ''],
+    ['Years known by other names', row.years_used || ''],
     ['Typed signature', row.signature_name],
     ['IP address', row.ip_address || ''],
   ];
