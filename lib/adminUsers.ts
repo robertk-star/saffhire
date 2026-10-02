@@ -7,6 +7,7 @@ export const adminPermissionOptions = [
   { key: 'scheduler', label: 'Blog Scheduler', href: '/admin/blogs/schedule' },
   { key: 'pricing', label: 'Pricing Tool', href: '/admin/pricing' },
   { key: 'proposals', label: 'Create Proposal', href: '/admin/proposals' },
+  { key: 'authorizations', label: 'Driver Pipeline Authorizations', href: '/admin/authorizations' },
   { key: 'users', label: 'Admin Users', href: '/admin/users' },
 ] as const;
 
