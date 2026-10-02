@@ -9,7 +9,7 @@ export default function AccessLog() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('/api/driver-pipeline/admin')
+    fetch('/api/driver-pipeline/log')
       .then((response) => response.json().then((data) => ({ ok: response.ok, data })))
       .then(({ ok, data }) => {
         if (!ok) {

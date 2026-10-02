@@ -22,6 +22,7 @@ export default async function DriverPipelineAuthorizationsPage() {
             <p className="mt-2 text-gray-600">Search by name and download the signed PDF. Downloads are logged with the signed-in user and time.</p>
           </div>
           <div className="flex gap-3">
+            <a href="/driver-pipeline/admin/log" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">{isPortalAdmin(session) ? 'Access log' : 'My log'}</a>
             {isPortalAdmin(session) ? <a href="/driver-pipeline/admin" className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white">Admin</a> : null}
             <form action="/api/driver-pipeline/logout" method="post">
               <button className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Log Out</button>

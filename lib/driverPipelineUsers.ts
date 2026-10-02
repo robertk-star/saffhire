@@ -102,14 +102,16 @@ export async function logPortalAccess(session: DriverPipelineSession, input: { a
   });
 }
 
-export async function listPortalAccessLog() {
+export async function listPortalAccessLog(username?: string) {
   const supabase = getSupabaseAdmin();
   if (!supabase) return [];
-  const { data, error } = await supabase
+  let request = supabase
     .from('driver_pipeline_access_log')
     .select('id, username, display_name, role, action, authorization_id, ip_address, created_at')
     .order('created_at', { ascending: false })
     .limit(300);
+  if (username) request = request.eq('username', username);
+  const { data, error } = await request;
   if (error) throw new Error(error.message);
   return data || [];
 }
