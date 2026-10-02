@@ -13,6 +13,7 @@ type Row = {
   issuing_state: string;
   ssn_last4: string;
   signed_at: string;
+  locale?: string | null;
 };
 
 export default function AuthorizationsAdmin({
@@ -75,7 +76,10 @@ export default function AuthorizationsAdmin({
                 <td className="px-4 py-3">{row.issuing_state}</td>
                 <td className="px-4 py-3">***-**-{row.ssn_last4}</td>
                 <td className="px-4 py-3">
-                  <a className="font-bold text-green-700 underline" href={`${pdfPath}/${row.id}/pdf`}>Download</a>
+                  <div className="flex flex-col gap-2">
+                    <a className="font-bold text-green-700 underline" href={`${pdfPath}/${row.id}/pdf`}>Saffhire/applicant download</a>
+                    {row.locale === 'es' ? <a className="font-bold text-green-700 underline" href={`${pdfPath}/${row.id}/pdf?lang=es`}>applicant spanish download</a> : null}
+                  </div>
                 </td>
               </tr>
             ))}

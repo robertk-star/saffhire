@@ -46,6 +46,7 @@ export type AuthorizationInput = {
   disclosureAcknowledged: boolean;
   rightsAcknowledged: boolean;
   esignAcknowledged: boolean;
+  locale?: string;
 };
 
 const states = new Set([
@@ -119,6 +120,7 @@ export async function insertAuthorization(input: AuthorizationInput, meta: { ipA
       disclosure_acknowledged: true,
       rights_acknowledged: true,
       esign_acknowledged: true,
+      locale: input.locale === 'es' ? 'es' : 'en',
     })
     .select('id, reference_code, signed_at')
     .single();
@@ -131,7 +133,7 @@ export async function listAuthorizations(query: string) {
   if (!supabase) return [];
   let request = supabase
     .from('driver_pipeline_authorizations')
-    .select('id, reference_code, first_name, middle_name, last_name, email, phone, issuing_state, ssn_last4, signed_at')
+    .select('id, reference_code, first_name, middle_name, last_name, email, phone, issuing_state, ssn_last4, signed_at, locale')
     .order('signed_at', { ascending: false })
     .limit(200);
   const q = query.trim();
