@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import PortalAdmin from './PortalAdmin';
+import AccessLog from './AccessLog';
 import { getDriverPipelineSession, isPortalAdmin } from '@/lib/driverPipelinePortal';
 
 export const metadata: Metadata = {
-  title: 'Driver Pipeline Portal Admin',
+  title: 'Driver Pipeline Access Log',
   robots: { index: false, follow: false },
 };
 
-export default async function DriverPipelineAdminPage() {
+export default async function DriverPipelineAccessLogPage() {
   const session = await getDriverPipelineSession();
   if (!session) redirect('/driver-pipeline/login');
   if (!isPortalAdmin(session)) redirect('/driver-pipeline/authorizations');
@@ -19,18 +19,15 @@ export default async function DriverPipelineAdminPage() {
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="mb-2 text-sm font-bold uppercase tracking-wider text-green-600">Driver Pipeline</p>
-            <h1 className="text-4xl font-black text-slate-900">Portal admin</h1>
-            <p className="mt-2 text-gray-600">Signed in as {session.displayName}. Create admins and users. Access history is on the log page.</p>
+            <h1 className="text-4xl font-black text-slate-900">Access log</h1>
+            <p className="mt-2 text-gray-600">Who opened the list or downloaded a form, and when. Times are Central.</p>
           </div>
           <div className="flex gap-3">
-            <a href="/driver-pipeline/admin/log" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">Access log</a>
+            <a href="/driver-pipeline/admin" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">Admin</a>
             <a href="/driver-pipeline/authorizations" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">Authorizations</a>
-            <form action="/api/driver-pipeline/logout" method="post">
-              <button className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">Log Out</button>
-            </form>
           </div>
         </div>
-        <PortalAdmin />
+        <AccessLog />
       </div>
     </main>
   );

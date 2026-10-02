@@ -3,11 +3,9 @@
 import { FormEvent, useEffect, useState } from 'react';
 
 type User = { id: string; username: string; display_name: string | null; email: string; role: string; is_active: boolean; created_at: string; last_login_at: string | null };
-type Log = { id: string; username: string; display_name: string | null; role: string | null; action: string; authorization_id: string | null; ip_address: string | null; created_at: string };
 
 export default function PortalAdmin() {
   const [users, setUsers] = useState<User[]>([]);
-  const [accessLog, setAccessLog] = useState<Log[]>([]);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [form, setForm] = useState({ username: '', displayName: '', email: '', role: 'user' });
@@ -20,7 +18,6 @@ export default function PortalAdmin() {
       return;
     }
     setUsers(data.users || []);
-    setAccessLog(data.accessLog || []);
   }
 
   useEffect(() => { load(); }, []);
@@ -98,24 +95,6 @@ export default function PortalAdmin() {
         </table>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <h2 className="px-4 py-3 text-lg font-black text-slate-900">Access log</h2>
-        <p className="px-4 pb-3 text-sm text-slate-500">Who opened the list or downloaded a form, and when. Times are Central.</p>
-        <table className="w-full text-left text-sm">
-          <thead className="bg-slate-100 text-slate-600"><tr><th className="px-4 py-3">When</th><th className="px-4 py-3">Who</th><th className="px-4 py-3">Action</th><th className="px-4 py-3">IP</th></tr></thead>
-          <tbody>
-            {accessLog.map((entry) => (
-              <tr key={entry.id} className="border-t border-slate-100">
-                <td className="px-4 py-3">{new Date(entry.created_at).toLocaleString('en-US', { timeZone: 'America/Chicago' })}</td>
-                <td className="px-4 py-3">{entry.display_name || entry.username} <span className="text-slate-400">({entry.role})</span></td>
-                <td className="px-4 py-3">{entry.action.replaceAll('_', ' ')}{entry.authorization_id ? ` · ${entry.authorization_id.slice(0, 8)}` : ''}</td>
-                <td className="px-4 py-3">{entry.ip_address || ''}</td>
-              </tr>
-            ))}
-            {accessLog.length === 0 ? <tr><td className="px-4 py-6 text-slate-500" colSpan={4}>No access recorded yet.</td></tr> : null}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 }
