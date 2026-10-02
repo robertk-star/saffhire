@@ -164,7 +164,7 @@ export default function AuthorizationForm() {
           <Field label="DL number (required)" value={form.dlNumber} onChange={(value) => setField('dlNumber', value)} required />
           <Field label="License expiration date (required)" type="date" value={form.licenseExpiration} onChange={(value) => setField('licenseExpiration', value)} required />
           <Field label="Date issued (required)" type="date" value={form.licenseIssued} onChange={(value) => setField('licenseIssued', value)} required />
-          <label className="block text-sm font-bold text-slate-800">Issuing state
+          <label className="block text-sm font-bold text-slate-800">Issuing state (required)
             <select required value={form.issuingState} onChange={(event) => setField('issuingState', event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 font-normal">
               <option value="">Select</option>
               {states.map((state) => <option key={state} value={state}>{state}</option>)}
