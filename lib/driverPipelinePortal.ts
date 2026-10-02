@@ -4,6 +4,16 @@ import { createHmac, timingSafeEqual } from 'crypto';
 const cookieName = 'driver_pipeline_session';
 const maxAgeSeconds = 60 * 60 * 12;
 
+export type DriverPipelineRole = 'owner' | 'admin' | 'user';
+
+export type DriverPipelineSession = {
+  userId: string;
+  username: string;
+  displayName: string;
+  role: DriverPipelineRole;
+  iat?: number;
+};
+
 function getSecret() {
   return process.env.ADMIN_SESSION_SECRET || '';
 }
@@ -13,7 +23,7 @@ function sign(value: string) {
 }
 
 export function isDriverPipelinePortalConfigured() {
-  return Boolean(process.env.DRIVER_PIPELINE_PASSWORD && process.env.ADMIN_SESSION_SECRET);
+  return Boolean(process.env.ADMIN_SESSION_SECRET && (process.env.DRIVER_PIPELINE_PASSWORD || process.env.SUPABASE_SERVICE_ROLE_KEY));
 }
 
 export function isCorrectDriverPipelineLogin(username: string, password: string) {
@@ -28,9 +38,9 @@ export function isCorrectDriverPipelineLogin(username: string, password: string)
   }
 }
 
-export async function setDriverPipelineSession() {
+export async function setDriverPipelineSession(session: Omit<DriverPipelineSession, 'iat'>) {
   const cookieStore = await cookies();
-  const encoded = Buffer.from(JSON.stringify({ role: 'driver-pipeline', iat: Date.now() })).toString('base64url');
+  const encoded = Buffer.from(JSON.stringify({ ...session, iat: Date.now() })).toString('base64url');
   cookieStore.set(cookieName, `${encoded}.${sign(encoded)}`, {
     httpOnly: true,
     sameSite: 'lax',
@@ -51,19 +61,28 @@ export async function clearDriverPipelineSession() {
   });
 }
 
-export async function hasDriverPipelineSession() {
+export async function getDriverPipelineSession(): Promise<DriverPipelineSession | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get(cookieName)?.value;
-  if (!token || !getSecret()) return false;
+  if (!token || !getSecret()) return null;
   const [encoded, signature] = token.split('.');
-  if (!encoded || !signature) return false;
+  if (!encoded || !signature) return null;
   const expected = sign(encoded);
   try {
-    if (!timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return false;
-    const payload = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8')) as { iat?: number };
-    if (!payload.iat) return false;
-    return Date.now() - payload.iat < maxAgeSeconds * 1000;
+    if (!timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
+    const payload = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8')) as DriverPipelineSession;
+    if (!payload.iat || !payload.username || !payload.role) return null;
+    if (Date.now() - payload.iat >= maxAgeSeconds * 1000) return null;
+    return payload;
   } catch {
-    return false;
+    return null;
   }
+}
+
+export async function hasDriverPipelineSession() {
+  return Boolean(await getDriverPipelineSession());
+}
+
+export function isPortalAdmin(session: DriverPipelineSession | null) {
+  return session?.role === 'owner' || session?.role === 'admin';
 }

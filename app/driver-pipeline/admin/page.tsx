@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import AuthorizationsAdmin from '@/app/admin/authorizations/AuthorizationsAdmin';
+import PortalAdmin from './PortalAdmin';
 import { getDriverPipelineSession, isPortalAdmin } from '@/lib/driverPipelinePortal';
 
 export const metadata: Metadata = {
-  title: 'Driver Pipeline Authorizations',
+  title: 'Driver Pipeline Portal Admin',
   robots: { index: false, follow: false },
 };
 
-export default async function DriverPipelineAuthorizationsPage() {
+export default async function DriverPipelineAdminPage() {
   const session = await getDriverPipelineSession();
   if (!session) redirect('/driver-pipeline/login');
+  if (!isPortalAdmin(session)) redirect('/driver-pipeline/authorizations');
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -18,17 +19,17 @@ export default async function DriverPipelineAuthorizationsPage() {
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="mb-2 text-sm font-bold uppercase tracking-wider text-green-600">Driver Pipeline</p>
-            <h1 className="text-4xl font-black text-slate-900">Completed authorizations</h1>
-            <p className="mt-2 text-gray-600">Search by name and download the signed PDF. Downloads are logged with the signed-in user and time.</p>
+            <h1 className="text-4xl font-black text-slate-900">Portal admin</h1>
+            <p className="mt-2 text-gray-600">Signed in as {session.displayName}. Create admins and users, and review who accessed applicant information.</p>
           </div>
           <div className="flex gap-3">
-            {isPortalAdmin(session) ? <a href="/driver-pipeline/admin" className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white">Admin</a> : null}
+            <a href="/driver-pipeline/authorizations" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">Authorizations</a>
             <form action="/api/driver-pipeline/logout" method="post">
-              <button className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Log Out</button>
+              <button className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700">Log Out</button>
             </form>
           </div>
         </div>
-        <AuthorizationsAdmin listPath="/api/driver-pipeline/authorizations" pdfPath="/api/driver-pipeline/authorizations" />
+        <PortalAdmin />
       </div>
     </main>
   );
