@@ -38,13 +38,14 @@ export async function GET(_request: Request, context: { params: Promise<{ id: st
   y = line(doc, 'Acknowledgment of Rights: I acknowledge receipt of the documents entitled "FCRA Disclosure Regarding Background Investigation" and "A Summary of Your Rights Under the Fair Credit Reporting Act" and certify that I have read and understand my rights. I also agree to sign this authorization electronically.', y);
   y += 2;
   const fields = [
-    ['Applicant', `${row.first_name} ${row.middle_name || ''} ${row.last_name}`.replace(/\s+/g, ' ')],
+    ['Applicant', `${row.first_name} ${row.no_middle_name ? '(no legal middle name)' : (row.middle_name || '')} ${row.last_name}`.replace(/\s+/g, ' ')],
     ['Email', row.email],
     ['Phone', row.phone || ''],
     ['Date of birth', row.date_of_birth],
     ['Social Security number', row.ssn],
     ['DL number', row.dl_number],
     ['License expiration', row.license_expiration || ''],
+    ['Date issued', row.license_issued || ''],
     ['Issuing state', row.issuing_state],
     ['Current address', row.current_address],
     ['Approximate date moved in', row.dates_lived_here || ''],

@@ -6,7 +6,7 @@ const states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID'
 
 const empty = {
   firstName: '', middleName: '', lastName: '', email: '', phone: '', dateOfBirth: '', ssn: '', dlNumber: '',
-  licenseExpiration: '', issuingState: '', currentAddress: '', datesLivedHere: '', otherNames: '', yearsUsed: '', signatureName: '',
+  licenseExpiration: '', licenseIssued: '', issuingState: '', currentAddress: '', datesLivedHere: '', otherNames: '', yearsUsed: '', signatureName: '',
 };
 
 export default function AuthorizationForm() {
@@ -16,6 +16,7 @@ export default function AuthorizationForm() {
   const [disclosureAcknowledged, setDisclosureAcknowledged] = useState(false);
   const [rightsAcknowledged, setRightsAcknowledged] = useState(false);
   const [esignAcknowledged, setEsignAcknowledged] = useState(false);
+  const [noMiddleName, setNoMiddleName] = useState(false);
   const [signed, setSigned] = useState(false);
   const [error, setError] = useState('');
   const [pending, setPending] = useState(false);
@@ -91,6 +92,7 @@ export default function AuthorizationForm() {
         disclosureAcknowledged,
         rightsAcknowledged,
         esignAcknowledged,
+        noMiddleName,
       }),
     });
     const data = await response.json().catch(() => ({}));
@@ -146,22 +148,29 @@ export default function AuthorizationForm() {
           <p>This authorization remains in effect during my employment unless revoked in writing.</p>
         </div>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          <Field label="First name" value={form.firstName} onChange={(value) => setField('firstName', value)} required />
-          <Field label="Last name" value={form.lastName} onChange={(value) => setField('lastName', value)} required />
-          <Field label="Middle name" value={form.middleName} onChange={(value) => setField('middleName', value)} />
-          <Field label="Date of birth" type="date" value={form.dateOfBirth} onChange={(value) => setField('dateOfBirth', value)} required />
-          <Field label="Social Security number" value={form.ssn} onChange={(value) => setField('ssn', value)} required autoComplete="off" />
-          <Field label="Email address" type="email" value={form.email} onChange={(value) => setField('email', value)} required />
-          <Field label="Phone" value={form.phone} onChange={(value) => setField('phone', value)} />
-          <Field label="DL number" value={form.dlNumber} onChange={(value) => setField('dlNumber', value)} required />
-          <Field label="License expiration date" type="date" value={form.licenseExpiration} onChange={(value) => setField('licenseExpiration', value)} />
+          <Field label="First name (required)" value={form.firstName} onChange={(value) => setField('firstName', value)} required />
+          <Field label="Last name (required)" value={form.lastName} onChange={(value) => setField('lastName', value)} required />
+          <div>
+            <Field label="Middle name (required)" value={form.middleName} onChange={(value) => setField('middleName', value)} required={!noMiddleName} disabled={noMiddleName} />
+            <label className="mt-2 flex items-start gap-2 text-sm font-normal text-slate-700">
+              <input type="checkbox" checked={noMiddleName} onChange={(event) => { setNoMiddleName(event.target.checked); if (event.target.checked) setField('middleName', ''); }} className="mt-1" />
+              <span>Click here if you do not have a legal middle name.</span>
+            </label>
+          </div>
+          <Field label="Date of birth (required)" type="date" value={form.dateOfBirth} onChange={(value) => setField('dateOfBirth', value)} required />
+          <Field label="Social Security number (required)" value={form.ssn} onChange={(value) => setField('ssn', value)} required autoComplete="off" />
+          <Field label="Email address (required)" type="email" value={form.email} onChange={(value) => setField('email', value)} required />
+          <Field label="Phone (required)" value={form.phone} onChange={(value) => setField('phone', value)} required />
+          <Field label="DL number (required)" value={form.dlNumber} onChange={(value) => setField('dlNumber', value)} required />
+          <Field label="License expiration date (required)" type="date" value={form.licenseExpiration} onChange={(value) => setField('licenseExpiration', value)} required />
+          <Field label="Date issued (required)" type="date" value={form.licenseIssued} onChange={(value) => setField('licenseIssued', value)} required />
           <label className="block text-sm font-bold text-slate-800">Issuing state
             <select required value={form.issuingState} onChange={(event) => setField('issuingState', event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 font-normal">
               <option value="">Select</option>
               {states.map((state) => <option key={state} value={state}>{state}</option>)}
             </select>
           </label>
-          <div className="sm:col-span-2"><Field label="Current address" value={form.currentAddress} onChange={(value) => setField('currentAddress', value)} required /></div>
+          <div className="sm:col-span-2"><Field label="Current address (required)" value={form.currentAddress} onChange={(value) => setField('currentAddress', value)} required /></div>
           <Field label="Approximate date moved in" type="date" value={form.datesLivedHere} onChange={(value) => setField('datesLivedHere', value)} />
           <Field label="Other names used, including maiden name" value={form.otherNames} onChange={(value) => setField('otherNames', value)} />
           <Field label="Years known by other names" value={form.yearsUsed} onChange={(value) => setField('yearsUsed', value)} />
@@ -196,10 +205,10 @@ export default function AuthorizationForm() {
   );
 }
 
-function Field({ label, value, onChange, type = 'text', required = false, autoComplete }: { label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean; autoComplete?: string }) {
+function Field({ label, value, onChange, type = 'text', required = false, autoComplete, disabled = false }: { label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean; autoComplete?: string; disabled?: boolean }) {
   return (
     <label className="block text-sm font-bold text-slate-800">{label}
-      <input required={required} type={type} value={value} autoComplete={autoComplete} onChange={(event) => onChange(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 font-normal" />
+      <input required={required} disabled={disabled} type={type} value={value} autoComplete={autoComplete} onChange={(event) => onChange(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 font-normal disabled:bg-slate-100" />
     </label>
   );
 }

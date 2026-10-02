@@ -34,7 +34,9 @@ export type AuthorizationInput = {
   ssn: string;
   dlNumber: string;
   licenseExpiration: string;
+  licenseIssued: string;
   issuingState: string;
+  noMiddleName: boolean;
   currentAddress: string;
   datesLivedHere: string;
   otherNames: string;
@@ -58,11 +60,15 @@ export function validateAuthorization(input: AuthorizationInput) {
   const errors: string[] = [];
   if (!input.firstName.trim()) errors.push('First name is required.');
   if (!input.lastName.trim()) errors.push('Last name is required.');
+  if (!input.noMiddleName && !input.middleName.trim()) errors.push('Middle name is required, or check that you do not have a legal middle name.');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email.trim())) errors.push('A valid email is required.');
+  if (!input.phone.trim()) errors.push('Phone is required.');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(input.dateOfBirth)) errors.push('Date of birth is required.');
   const ssn = digitsOnly(input.ssn);
   if (ssn.length !== 9) errors.push('Social Security number must be 9 digits.');
   if (!input.dlNumber.trim()) errors.push('Driver license number is required.');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(input.licenseExpiration)) errors.push('License expiration date is required.');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(input.licenseIssued)) errors.push('License date issued is required.');
   if (!states.has(input.issuingState)) errors.push('Issuing state is required.');
   if (!input.currentAddress.trim()) errors.push('Current address is required.');
   if (!input.signatureName.trim()) errors.push('Type your full legal name to sign.');
@@ -90,15 +96,17 @@ export async function insertAuthorization(input: AuthorizationInput, meta: { ipA
     .insert({
       reference_code: referenceCode,
       first_name: input.firstName.trim(),
-      middle_name: input.middleName.trim() || null,
+      middle_name: input.noMiddleName ? null : input.middleName.trim(),
+      no_middle_name: Boolean(input.noMiddleName),
       last_name: input.lastName.trim(),
       email: input.email.trim().toLowerCase(),
-      phone: input.phone.trim() || null,
+      phone: input.phone.trim(),
       date_of_birth: input.dateOfBirth,
       ssn: encryptSensitive(ssn),
       ssn_last4: ssn.slice(-4),
       dl_number: input.dlNumber.trim(),
-      license_expiration: input.licenseExpiration || null,
+      license_expiration: input.licenseExpiration,
+      license_issued: input.licenseIssued,
       issuing_state: input.issuingState,
       current_address: input.currentAddress.trim(),
       dates_lived_here: input.datesLivedHere.trim() || null,
