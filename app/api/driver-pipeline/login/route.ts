@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isCorrectDriverPipelineLogin, isDriverPipelinePortalConfigured, setDriverPipelineSession } from '@/lib/driverPipelinePortal';
-import { emailAccessEvent, findPortalUser, logPortalAccess, markPortalLogin, verifyPortalPassword } from '@/lib/driverPipelineUsers';
+import { findPortalUser, logPortalAccess, markPortalLogin, verifyPortalPassword } from '@/lib/driverPipelineUsers';
 
 function clientIp(request: Request) {
   return (request.headers.get('x-forwarded-for') || '').split(',')[0]?.trim() || request.headers.get('x-real-ip') || null;
@@ -20,7 +20,6 @@ export async function POST(request: Request) {
     const session = { userId: 'owner', username: username.trim().toLowerCase(), displayName: 'Owner', role: 'owner' as const };
     await setDriverPipelineSession(session);
     await logPortalAccess(session, { action: 'login', ipAddress, userAgent });
-    await emailAccessEvent({ username: session.username, displayName: session.displayName, role: session.role, action: 'login', ipAddress });
     return NextResponse.redirect(new URL('/driver-pipeline/authorizations', request.url), { status: 303 });
   }
 
@@ -35,7 +34,6 @@ export async function POST(request: Request) {
     await setDriverPipelineSession(session);
     await markPortalLogin(user.id);
     await logPortalAccess(session, { action: 'login', ipAddress, userAgent });
-    await emailAccessEvent({ username: session.username, displayName: session.displayName, role: session.role, action: 'login', ipAddress });
     return NextResponse.redirect(new URL('/driver-pipeline/authorizations', request.url), { status: 303 });
   }
 

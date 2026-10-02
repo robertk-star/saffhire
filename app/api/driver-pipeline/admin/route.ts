@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getDriverPipelineSession, isPortalAdmin } from '@/lib/driverPipelinePortal';
-import { createPortalUser, emailAccessEvent, listPortalAccessLog, listPortalUsers, logPortalAccess, sendPortalInvite, setPortalUserActive } from '@/lib/driverPipelineUsers';
+import { createPortalUser, listPortalAccessLog, listPortalUsers, logPortalAccess, sendPortalInvite, setPortalUserActive } from '@/lib/driverPipelineUsers';
 
 function clientIp(request: Request) {
   return (request.headers.get('x-forwarded-for') || '').split(',')[0]?.trim() || null;
@@ -29,7 +29,6 @@ export async function POST(request: Request) {
     await setPortalUserActive(body.userId, Boolean(body.isActive));
     const action = body.isActive ? 'reactivated_user' : 'deactivated_user';
     await logPortalAccess(session, { action, ipAddress: clientIp(request), userAgent: request.headers.get('user-agent') });
-    await emailAccessEvent({ username: session.username, displayName: session.displayName, role: session.role, action, ipAddress: clientIp(request) });
     return NextResponse.json({ ok: true });
   }
 
@@ -48,6 +47,5 @@ export async function POST(request: Request) {
   });
   const action = created.user.role === 'admin' ? 'created_admin' : 'invited_user';
   await logPortalAccess(session, { action, ipAddress: clientIp(request), userAgent: request.headers.get('user-agent') });
-  await emailAccessEvent({ username: session.username, displayName: session.displayName, role: session.role, action: `${action} ${created.user.username}`, ipAddress: clientIp(request) });
   return NextResponse.json({ ok: true, invited, user: created.user, temporaryPassword: created.temporaryPassword });
 }

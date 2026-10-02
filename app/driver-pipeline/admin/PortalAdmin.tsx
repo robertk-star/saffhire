@@ -39,7 +39,7 @@ export default function PortalAdmin() {
       setError(data.error || 'Unable to create user.');
       return;
     }
-    setNotice(`${data.user.display_name} can log in as ${data.user.username}. Temporary password: ${data.temporaryPassword}. ${data.invited ? 'Invite email sent.' : 'Invite email was not sent. Share this password directly.'}`);
+    setNotice(data.invited ? `Invite emailed to ${data.user.email}. Temporary password, if the email is delayed: ${data.temporaryPassword}` : `Email is not configured, so share this password with ${data.user.email} directly: ${data.temporaryPassword}`);
     setForm({ username: '', displayName: '', email: '', role: 'user' });
     load();
   }
@@ -57,7 +57,7 @@ export default function PortalAdmin() {
     <div className="space-y-8">
       <form onSubmit={onCreate} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-black text-slate-900">Create or invite a user</h2>
-        <p className="mt-2 text-sm text-slate-600">Give Wes the Admin role so he can add people who can view and download authorizations. A temporary password is created and emailed when email is configured.</p>
+        <p className="mt-2 text-sm text-slate-600">Give Wes the Admin role so he can add people who can view and download authorizations. The invite and temporary password are emailed only to that person.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className="text-sm font-bold text-slate-800">Name
             <input required value={form.displayName} onChange={(event) => setForm({ ...form, displayName: event.target.value })} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 font-normal" />
