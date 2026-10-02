@@ -129,8 +129,7 @@ export default function AuthorizationForm() {
 
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-black text-slate-900">2. Summary of Your Rights</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-700">Federal law requires that you receive A Summary of Your Rights Under the Fair Credit Reporting Act before a background check is ordered. Read the official summary, then acknowledge it below.</p>
-        <a className="mt-3 inline-flex text-sm font-bold text-green-700 underline" href="https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/fair-credit-reporting-act/" target="_blank" rel="noreferrer">Open the CFPB Summary of Your Rights</a>
+        <p className="mt-3 text-sm leading-6 text-slate-700">Federal law requires that you receive A Summary of Your Rights Under the Fair Credit Reporting Act before a background check is ordered. Acknowledge that you have received it below.</p>
         <label className="mt-4 flex items-start gap-3 text-sm text-slate-800">
           <input type="checkbox" checked={rightsAcknowledged} onChange={(event) => setRightsAcknowledged(event.target.checked)} className="mt-1" />
           <span>I acknowledge receipt of A Summary of Your Rights Under the Fair Credit Reporting Act and certify that I have read and understand my rights.</span>
