@@ -15,7 +15,13 @@ type Row = {
   signed_at: string;
 };
 
-export default function AuthorizationsAdmin() {
+export default function AuthorizationsAdmin({
+  listPath = '/api/admin/authorizations',
+  pdfPath = '/api/admin/authorizations',
+}: {
+  listPath?: string;
+  pdfPath?: string;
+}) {
   const [query, setQuery] = useState('');
   const [rows, setRows] = useState<Row[]>([]);
   const [error, setError] = useState('');
@@ -24,7 +30,7 @@ export default function AuthorizationsAdmin() {
   useEffect(() => {
     const handle = setTimeout(async () => {
       setLoading(true);
-      const response = await fetch(`/api/admin/authorizations?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${listPath}?q=${encodeURIComponent(query)}`);
       const data = await response.json().catch(() => ({}));
       setLoading(false);
       if (!response.ok) {
@@ -35,7 +41,7 @@ export default function AuthorizationsAdmin() {
       setRows(data.rows || []);
     }, 250);
     return () => clearTimeout(handle);
-  }, [query]);
+  }, [query, listPath]);
 
   return (
     <div>
@@ -69,7 +75,7 @@ export default function AuthorizationsAdmin() {
                 <td className="px-4 py-3">{row.issuing_state}</td>
                 <td className="px-4 py-3">***-**-{row.ssn_last4}</td>
                 <td className="px-4 py-3">
-                  <a className="font-bold text-green-700 underline" href={`/api/admin/authorizations/${row.id}/pdf`}>Download</a>
+                  <a className="font-bold text-green-700 underline" href={`${pdfPath}/${row.id}/pdf`}>Download</a>
                 </td>
               </tr>
             ))}
