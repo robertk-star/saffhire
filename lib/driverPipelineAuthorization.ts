@@ -1,4 +1,28 @@
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
+
+function encryptionKey() {
+  const secret = process.env.AUTHORIZATION_ENCRYPTION_KEY || process.env.ADMIN_SESSION_SECRET || '';
+  if (!secret) throw new Error('AUTHORIZATION_ENCRYPTION_KEY is not configured.');
+  return createHash('sha256').update(secret).digest();
+}
+
+export function encryptSensitive(value: string) {
+  const iv = randomBytes(12);
+  const cipher = createCipheriv('aes-256-gcm', encryptionKey(), iv);
+  const encrypted = Buffer.concat([cipher.update(value, 'utf8'), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return `v1:${iv.toString('base64url')}:${tag.toString('base64url')}:${encrypted.toString('base64url')}`;
+}
+
+export function decryptSensitive(value: string | null) {
+  if (!value) return '';
+  if (!value.startsWith('v1:')) return value;
+  const [, iv, tag, encrypted] = value.split(':');
+  const decipher = createDecipheriv('aes-256-gcm', encryptionKey(), Buffer.from(iv, 'base64url'));
+  decipher.setAuthTag(Buffer.from(tag, 'base64url'));
+  return Buffer.concat([decipher.update(Buffer.from(encrypted, 'base64url')), decipher.final()]).toString('utf8');
+}
 
 export type AuthorizationInput = {
   firstName: string;
@@ -71,7 +95,7 @@ export async function insertAuthorization(input: AuthorizationInput, meta: { ipA
       email: input.email.trim().toLowerCase(),
       phone: input.phone.trim() || null,
       date_of_birth: input.dateOfBirth,
-      ssn,
+      ssn: encryptSensitive(ssn),
       ssn_last4: ssn.slice(-4),
       dl_number: input.dlNumber.trim(),
       license_expiration: input.licenseExpiration || null,
@@ -117,5 +141,6 @@ export async function getAuthorization(id: string) {
   if (!supabase) return null;
   const { data, error } = await supabase.from('driver_pipeline_authorizations').select('*').eq('id', id).maybeSingle();
   if (error) throw new Error(error.message);
-  return data;
+  if (!data) return null;
+  return { ...data, ssn: decryptSensitive(data.ssn), dl_number: data.dl_number };
 }

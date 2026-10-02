@@ -6,6 +6,11 @@ import { getAuthorization } from '@/lib/driverPipelineAuthorization';
 function line(doc: jsPDF, text: string, y: number, size = 10) {
   doc.setFontSize(size);
   const lines = doc.splitTextToSize(text, 180);
+  const next = y + lines.length * (size * 0.45) + 2;
+  if (next > 275) {
+    doc.addPage();
+    y = 16;
+  }
   doc.text(lines, 15, y);
   return y + lines.length * (size * 0.45) + 2;
 }
