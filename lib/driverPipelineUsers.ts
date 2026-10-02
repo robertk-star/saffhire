@@ -138,3 +138,29 @@ export async function sendPortalInvite(input: { email: string; username: string;
   });
   return response.ok;
 }
+
+export async function emailAccessEvent(input: { username: string; displayName: string; role: string; action: string; ipAddress?: string | null }) {
+  const key = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL;
+  const to = process.env.DRIVER_PIPELINE_ACCESS_EMAIL || process.env.CONTACT_TO_EMAIL;
+  if (!key || !from || !to) return false;
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from,
+      to: [to],
+      subject: `Driver Pipeline access: ${input.displayName} ${input.action.replaceAll('_', ' ')}`,
+      text: [
+        'Driver Pipeline portal access notice.',
+        `Who: ${input.displayName} (${input.username})`,
+        `Role: ${input.role}`,
+        `Action: ${input.action.replaceAll('_', ' ')}`,
+        `When: ${new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })} Central`,
+        `IP: ${input.ipAddress || 'not available'}`,
+        'This email does not include applicant information or a downloaded form.',
+      ].join('\n'),
+    }),
+  });
+  return response.ok;
+}
