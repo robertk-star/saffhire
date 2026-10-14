@@ -366,7 +366,8 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
   }
 
   const needsState = proposal.base.kind === 'category' && !proposal.state;
-  const sectionCount = Object.values(proposal.sections).filter(Boolean).length;
+  const alacarte = Boolean(proposal.aLaCarteOnly);
+  const sectionCount = sectionOptions.filter((s) => proposal.sections[s.key] && !(alacarte && s.key === 'packages')).length;
 
   function renderLines(pkg: BuilderPackage, list: 'minimumItems' | 'lines') {
     const rows = pkg[list];
@@ -514,18 +515,31 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         </label>
       </section>
 
+      <section className={`${card} ${alacarte ? 'border-green-500 ring-1 ring-green-200' : ''}`}>
+        <label className="flex cursor-pointer items-start gap-3">
+          <input type="checkbox" name="aLaCarteOnly" checked={alacarte} onChange={(e) => update({ aLaCarteOnly: e.target.checked })} className="mt-1.5 h-5 w-5" />
+          <span>
+            <span className="block text-2xl font-black text-slate-900">À la carte price list only</span>
+            <span className="mt-1 block text-sm text-slate-600">Send just the individual price list. Packages are hidden and not required, and the Service Packages page, package pricing tables and package totals are left out of the preview and PDF. Cover and the other sections still follow the toggles below.</span>
+          </span>
+        </label>
+      </section>
+
       <section className={card}>
         <h2 className="text-2xl font-black text-slate-900">Proposal sections</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {sectionOptions.map((section) => (
-            <label key={section.key} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 ${proposal.sections[section.key] ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:bg-gray-50'}`}>
-              <input type="checkbox" checked={proposal.sections[section.key]} onChange={() => update({ sections: { ...proposal.sections, [section.key]: !proposal.sections[section.key] } })} className="mt-1 h-4 w-4" />
+          {sectionOptions.map((section) => {
+            const off = alacarte && section.key === 'packages';
+            return (
+            <label key={section.key} className={`flex items-start gap-3 rounded-xl border p-4 ${off ? 'cursor-not-allowed border-gray-200 bg-gray-50 opacity-60' : proposal.sections[section.key] ? 'cursor-pointer border-green-500 bg-green-50' : 'cursor-pointer border-gray-200 bg-white hover:bg-gray-50'}`}>
+              <input type="checkbox" disabled={off} checked={off ? false : proposal.sections[section.key]} onChange={() => update({ sections: { ...proposal.sections, [section.key]: !proposal.sections[section.key] } })} className="mt-1 h-4 w-4" />
               <span>
                 <span className="block font-bold text-slate-900">{section.label}</span>
-                <span className="mt-1 block text-sm text-slate-600">{section.description}</span>
+                <span className="mt-1 block text-sm text-slate-600">{off ? 'Not used in à la carte mode' : section.key === 'pricing' && alacarte ? 'Individual (à la carte) price list' : section.description}</span>
               </span>
             </label>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -574,7 +588,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         </label>
       </section>
 
-      {proposal.packages.map((pkg, index) => {
+      {!alacarte && proposal.packages.map((pkg, index) => {
         const t = totals.perPackage[index];
         return (
           <section key={pkg.id} className={card} data-package-index={index}>
@@ -628,12 +642,12 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         );
       })}
 
-      <button type="button" onClick={addPackage} className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 hover:bg-gray-50">Add another package</button>
+      {alacarte ? null : <button type="button" onClick={addPackage} className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 hover:bg-gray-50">Add another package</button>}
 
       <section className={card}>
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <label className="flex items-center gap-3">
-            <input type="checkbox" checked={proposal.includeIndividual} onChange={(e) => update({ includeIndividual: e.target.checked })} className="h-4 w-4" />
+            {alacarte ? null : <input type="checkbox" checked={proposal.includeIndividual} onChange={(e) => update({ includeIndividual: e.target.checked })} className="h-4 w-4" />}
             <span className="text-2xl font-black text-slate-900">Individual (à la carte) pricing</span>
           </label>
           <div className="flex gap-2">
@@ -641,8 +655,8 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
             <button type="button" className={btn} onClick={() => update({ individual: [...proposal.individual, { id: makeId('ind'), label: '', catalogKey: '', priceOverride: 0 }] })}>Add row</button>
           </div>
         </div>
-        {proposal.includeIndividual ? (
-          <div className="space-y-2">
+        {alacarte || proposal.includeIndividual ? (
+          <div className="space-y-2" data-individual-table>
             {proposal.individual.map((row) => {
               const entry = catalog.get(row.catalogKey);
               const base = individualBaseUnit(row, catalog, proposal.salesCoverage);
@@ -664,6 +678,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
                     {edited ? (
                       <button type="button" onClick={() => updateIndividual(row.id, { priceOverride: null })} className="font-bold text-amber-700">edited · reset to {base === null ? 'base' : money(base)}</button>
                     ) : entry ? <span className="text-slate-500">from base</span> : base !== null ? <span className="text-slate-500">from sheet</span> : <span className="text-slate-500">manual</span>}
+                    {entry && entry.internalCost !== null && unit !== null ? <span className="ml-2 text-amber-800">cost {money(entry.internalCost)} · profit {money(unit - entry.internalCost)}</span> : null}
                   </div>
                   <button type="button" onClick={() => update({ individual: proposal.individual.filter((r) => r.id !== row.id) })} className={btn}>Remove</button>
                 </div>
@@ -675,6 +690,12 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
       </section>
 
       <section className={card}>
+        {alacarte ? (
+          <div>
+            <h2 className="text-2xl font-black text-slate-900">À la carte price list</h2>
+            <p className="mt-1 text-sm text-slate-600">{proposal.individual.filter((r) => r.label.trim()).length} services will be listed. No package totals are shown in this mode.</p>
+          </div>
+        ) : (
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="text-2xl font-black text-slate-900">Totals</h2>
@@ -691,9 +712,10 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
             {proposal.salesCoverage ? <div className="mt-1 text-xs text-slate-300">Includes 10% sales coverage</div> : null}
           </div>
         </div>
+        )}
         <div className="mt-6 flex flex-wrap gap-3">
           <button type="button" disabled={!sectionCount} onClick={openPreview} className="rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:bg-gray-300">Preview proposal</button>
-          <button type="button" disabled={busy} onClick={savePackagesAsSheets} className={btn}>Save packages as new price sheet(s)</button>
+          {alacarte ? null : <button type="button" disabled={busy} onClick={savePackagesAsSheets} className={btn}>Save packages as new price sheet(s)</button>}
         </div>
       </section>
     </div>

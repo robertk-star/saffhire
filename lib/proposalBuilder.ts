@@ -95,6 +95,8 @@ export type BuilderProposal = {
   salesCoverage: boolean;
   packages: BuilderPackage[];
   includeIndividual: boolean;
+  /** "À la carte price list only": no packages; the Pricing page shows only the individual table. */
+  aLaCarteOnly?: boolean;
   individual: IndividualRow[];
 };
 
@@ -262,6 +264,7 @@ export type ClientPreview = {
   notes: string;
   sections: SectionKey[];
   baseLabel: string;
+  mode: 'packages' | 'alacarte';
   packages: {
     name: string;
     description: string;
@@ -275,7 +278,8 @@ export type ClientPreview = {
 };
 
 export function buildClientPreview(p: BuilderProposal, catalog: Map<string, CatalogEntry>, baseLabel: string, now = new Date()): ClientPreview {
-  const packages = p.packages.map((pkg) => {
+  const alacarte = Boolean(p.aLaCarteOnly);
+  const packages = alacarte ? [] : p.packages.map((pkg) => {
     const all = [...pkg.minimumItems, ...pkg.lines].filter((line) => line.label.trim());
     const rows = all.map((line) => {
       const calc = calcLine(line, catalog.get(line.catalogKey), p.salesCoverage);
@@ -296,7 +300,7 @@ export function buildClientPreview(p: BuilderProposal, catalog: Map<string, Cata
       total: packageTotals(pkg, catalog, p.salesCoverage).total,
     };
   });
-  const individual = p.includeIndividual
+  const individual = alacarte || p.includeIndividual
     ? p.individual
         .filter((row) => row.label.trim())
         .map((row) => {
@@ -308,8 +312,9 @@ export function buildClientPreview(p: BuilderProposal, catalog: Map<string, Cata
     clientName: p.clientName.trim(),
     contactName: p.contactName.trim(),
     notes: p.notes.trim(),
-    sections: sectionOptions.filter((s) => p.sections[s.key]).map((s) => s.key),
+    sections: sectionOptions.filter((s) => p.sections[s.key] && !(alacarte && s.key === 'packages')).map((s) => s.key),
     baseLabel,
+    mode: alacarte ? 'alacarte' : 'packages',
     packages,
     individual,
     grandTotal: round2(packages.reduce((sum, pkg) => sum + pkg.total, 0)),
@@ -341,6 +346,7 @@ export function emptyProposal(base: BaseSource): BuilderProposal {
     salesCoverage: false,
     packages: [newPackage(1)],
     includeIndividual: true,
+    aLaCarteOnly: false,
     individual: [],
   };
 }
@@ -386,6 +392,7 @@ export function normalizeProposal(value: unknown, fallbackBase: BaseSource): Bui
     salesCoverage: Boolean(v.salesCoverage),
     packages,
     includeIndividual: v.includeIndividual === undefined ? true : Boolean(v.includeIndividual),
+    aLaCarteOnly: Boolean(v.aLaCarteOnly),
     individual: Array.isArray(v.individual)
       ? v.individual.map((r: any) => ({ id: str(r?.id) || makeId('ind'), label: str(r?.label), catalogKey: str(r?.catalogKey), fallbackPrice: num(r?.fallbackPrice), priceOverride: num(r?.priceOverride) }))
       : [],

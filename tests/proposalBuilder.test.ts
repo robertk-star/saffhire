@@ -109,3 +109,38 @@ test('reorder, sheet rows and draft normalization', () => {
   assert.equal(p.sections.cover, true);
   assert.deepEqual(packageToSheetRows(p.packages[0], new Map(), false), [{ label: 'MVR (x2)', price: '$4.50' }]);
 });
+
+test('à la carte only: no packages, no Service Packages section, individual table with coverage, no cost', () => {
+  const p = emptyProposal({ kind: 'category', priceKey: 'staffing_price' });
+  p.state = 'Texas';
+  p.salesCoverage = true;
+  p.aLaCarteOnly = true;
+  p.includeIndividual = false; // ignored in à la carte mode
+  const cat = buildCatalog(p.base, [sheet], items, p.state);
+  const map = new Map(cat.map((c) => [c.key, c]));
+  p.packages[0].lines = [{ id: '1', catalogKey: cat[0].key, label: cat[0].label, quantity: 1, priceOverride: null, included: false }];
+  p.individual = seedIndividual(p.base, [sheet], cat, sheet);
+  p.individual[1].priceOverride = 9.99; // edited row
+  const preview = buildClientPreview(p, map, 'Staffing pricing');
+  assert.equal(preview.mode, 'alacarte');
+  assert.equal(preview.packages.length, 0);
+  assert.ok(!preview.sections.includes('packages'));
+  assert.ok(preview.sections.includes('cover') && preview.sections.includes('pricing'));
+  assert.deepEqual(preview.individual, [
+    { label: 'Federal Search', price: '$5.50' },
+    { label: '1 County Criminal Search', price: '$9.99' },
+    { label: '3 County Criminal Searches', price: '$18.15' },
+  ]);
+  assert.equal(preview.grandTotal, 0);
+  assert.ok(!/cost|profit|internal/i.test(JSON.stringify(preview)));
+  // Section toggles still apply
+  p.sections.cover = false;
+  assert.ok(!buildClientPreview(p, map, 'x').sections.includes('cover'));
+  // Mode persists through draft JSON
+  const restored = normalizeProposal(JSON.parse(JSON.stringify(p)), p.base);
+  assert.equal(restored.aLaCarteOnly, true);
+  assert.equal(normalizeProposal({}, p.base).aLaCarteOnly, false);
+  // Package mode unchanged
+  p.aLaCarteOnly = false;
+  assert.equal(buildClientPreview(p, map, 'x').mode, 'packages');
+});
