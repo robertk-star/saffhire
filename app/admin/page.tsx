@@ -13,6 +13,8 @@ export default async function AdminHomePage() {
   if (!session) redirect('/admin/login');
 
   const visibleTools = adminPermissionOptions.filter((tool) => session.role === 'admin' || session.permissions?.includes(tool.key));
+  const canUseProposals = session.role === 'admin' || session.permissions?.includes('proposals');
+  const extraTools = canUseProposals ? [{ key: 'proposal-builder', label: 'Proposal Builder', href: '/admin/proposals/builder' }] : [];
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -29,7 +31,7 @@ export default async function AdminHomePage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleTools.map((tool) => (
+          {[...visibleTools, ...extraTools].map((tool) => (
             <a key={tool.key} href={tool.href} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
               <div className="text-xl font-black text-slate-900">{tool.label}</div>
               <div className="mt-2 text-sm text-slate-500">Open {tool.label}</div>
