@@ -28,6 +28,7 @@ export default async function AdminProposalsPage() {
           <div className="flex flex-wrap gap-3">
             <a href="/admin" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Admin Home</a>
             <a href="/admin/pricing" className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Pricing Tool</a>
+            <a href="/admin/proposals/builder" className="rounded-md border border-green-500 bg-white px-5 py-3 text-sm font-bold text-green-700 hover:bg-green-50">Proposal Builder</a>
             <form action="/api/admin/logout" method="post">
               <button className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">Log Out</button>
             </form>
