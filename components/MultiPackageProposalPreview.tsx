@@ -114,7 +114,7 @@ export function paginatePricing(p: ClientPreview): PricingBlock[][] {
       continued = true;
     }
   }
-  push({ kind: 'grand' }, 3);
+  if (p.packages.length) push({ kind: 'grand' }, 3);
   return pages;
 }
 
@@ -455,7 +455,7 @@ export default function MultiPackageProposalPreview() {
           </PageShell>
         ) : null}
 
-        {has('packages') ? (
+        {has('packages') && proposal.mode !== 'alacarte' && proposal.packages.length ? (
           <PageShell pageNumber={++pageNumber}>
             <h2 className="text-3xl font-black text-slate-900">Service Packages</h2>
             <div className="mt-6 overflow-hidden rounded-xl border border-slate-200">
@@ -493,6 +493,7 @@ export default function MultiPackageProposalPreview() {
         {pricingPages.map((blocks, pageIndex) => (
           <PageShell key={`pricing-${pageIndex}`} pageNumber={++pageNumber}>
             <h2 className="text-3xl font-black text-slate-900">{pageIndex === 0 ? 'Pricing' : 'Pricing (continued)'}</h2>
+            {pageIndex === 0 && proposal.mode === 'alacarte' ? <p className="mt-2 text-sm text-slate-600">À la carte price list: order any service individually at the prices below.</p> : null}
             {blocks.map((block, blockIndex) => {
               if (block.kind === 'package') {
                 const pkg = proposal.packages[block.index];
