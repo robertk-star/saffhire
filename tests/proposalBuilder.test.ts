@@ -14,6 +14,7 @@ import {
   seedIndividual,
   moveItem,
   duplicatePackage,
+  individualUnit,
 } from '../lib/proposalBuilder';
 
 const items: CatalogPricingItem[] = [
@@ -92,7 +93,11 @@ test('individual table seeds from sheet; 3-county row keeps sheet price', () => 
   assert.ok(rows[0].catalogKey && rows[0].priceOverride === null);
   assert.ok(rows[1].catalogKey); // 1 County -> County Criminal Search
   assert.equal(rows[2].catalogKey, '');
-  assert.equal(rows[2].priceOverride, 16.5);
+  assert.equal(rows[2].priceOverride, null);
+  assert.equal(rows[2].fallbackPrice, 16.5);
+  const map = new Map(cat.map((c) => [c.key, c]));
+  assert.equal(individualUnit(rows[2], map, true), 18.15); // sheet price still gets sales coverage
+  assert.equal(individualUnit(rows[0], map, true), 5.5); // Federal staffing 5 * 1.1
 });
 
 test('reorder, sheet rows and draft normalization', () => {

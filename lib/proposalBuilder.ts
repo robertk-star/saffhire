@@ -78,6 +78,9 @@ export type IndividualRow = {
   id: string;
   label: string;
   catalogKey: string;
+  /** Base price taken from the seed sheet when no catalog entry matches (sales coverage still applies). */
+  fallbackPrice?: number | null;
+  /** Client price typed by the admin. null = use base. */
   priceOverride: number | null;
 };
 
@@ -235,13 +238,21 @@ export function seedIndividual(base: BaseSource, sheets: BaseSheet[], catalog: C
   return rows.map((row) => {
     const entry = byLabel.get(normName(row.label)) || (normName(row.label) === '1 county criminal search' ? byLabel.get('county criminal search') : undefined);
     const parsed = parsePrice(row.price);
-    // When no catalog entry matches, keep the sheet price as an explicit client price.
-    return { id: makeId('ind'), label: row.label, catalogKey: entry?.key || '', priceOverride: entry ? null : parsed.price };
+    // When no catalog entry matches, the sheet price becomes the row's base price.
+    return { id: makeId('ind'), label: row.label, catalogKey: entry?.key || '', fallbackPrice: parsed.price, priceOverride: null };
   });
 }
 
+export function individualBaseUnit(row: IndividualRow, catalog: Map<string, CatalogEntry>, coverage: boolean): number | null {
+  const entry = catalog.get(row.catalogKey);
+  if (entry && entry.basePrice !== null) return applyCoverage(entry.basePrice, coverage);
+  if (row.fallbackPrice !== null && row.fallbackPrice !== undefined) return applyCoverage(row.fallbackPrice, coverage);
+  return null;
+}
+
 export function individualUnit(row: IndividualRow, catalog: Map<string, CatalogEntry>, coverage: boolean) {
-  return lineUnitPrice({ priceOverride: row.priceOverride, included: false }, catalog.get(row.catalogKey), coverage);
+  if (row.priceOverride !== null && row.priceOverride !== undefined) return round2(row.priceOverride);
+  return individualBaseUnit(row, catalog, coverage);
 }
 
 /** Client-safe payload for preview/PDF. Contains no internal cost or profit. */
@@ -376,7 +387,7 @@ export function normalizeProposal(value: unknown, fallbackBase: BaseSource): Bui
     packages,
     includeIndividual: v.includeIndividual === undefined ? true : Boolean(v.includeIndividual),
     individual: Array.isArray(v.individual)
-      ? v.individual.map((r: any) => ({ id: str(r?.id) || makeId('ind'), label: str(r?.label), catalogKey: str(r?.catalogKey), priceOverride: num(r?.priceOverride) }))
+      ? v.individual.map((r: any) => ({ id: str(r?.id) || makeId('ind'), label: str(r?.label), catalogKey: str(r?.catalogKey), fallbackPrice: num(r?.fallbackPrice), priceOverride: num(r?.priceOverride) }))
       : [],
   };
 }

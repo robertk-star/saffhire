@@ -16,6 +16,7 @@ import {
   calcLine,
   duplicatePackage,
   emptyProposal,
+  individualBaseUnit,
   individualUnit,
   lineBaseUnitPrice,
   makeId,
@@ -151,8 +152,9 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
       ...next,
       packages: next.packages.map((pkg) => ({ ...pkg, minimumItems: pkg.minimumItems.map(remap), lines: pkg.lines.map(remap) })),
       individual: next.individual.map((row) => {
-        if (!row.catalogKey || keys.has(row.catalogKey)) return row;
-        const entry = byLabel.get(normLabel(row.label));
+        if (row.catalogKey && keys.has(row.catalogKey)) return row;
+        const label = normLabel(row.label);
+        const entry = byLabel.get(label) || (label === '1 county criminal search' ? byLabel.get('county criminal search') : undefined);
         return { ...row, catalogKey: entry ? entry.key : '' };
       }),
     };
@@ -643,9 +645,9 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           <div className="space-y-2">
             {proposal.individual.map((row) => {
               const entry = catalog.get(row.catalogKey);
-              const base = lineBaseUnitPrice(entry, proposal.salesCoverage);
+              const base = individualBaseUnit(row, catalog, proposal.salesCoverage);
               const unit = individualUnit(row, catalog, proposal.salesCoverage);
-              const edited = row.priceOverride !== null && Boolean(entry);
+              const edited = row.priceOverride !== null && base !== null;
               return (
                 <div key={row.id} className="grid items-center gap-2 rounded-xl border border-gray-100 bg-slate-50 p-3 md:grid-cols-[1fr_180px_auto_90px]">
                   <input value={row.label} onChange={(e) => updateIndividual(row.id, { label: e.target.value })} className={input} placeholder="Service" />
@@ -661,7 +663,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
                   <div className="text-xs">
                     {edited ? (
                       <button type="button" onClick={() => updateIndividual(row.id, { priceOverride: null })} className="font-bold text-amber-700">edited · reset to {base === null ? 'base' : money(base)}</button>
-                    ) : entry ? <span className="text-slate-500">from base</span> : <span className="text-slate-500">manual</span>}
+                    ) : entry ? <span className="text-slate-500">from base</span> : base !== null ? <span className="text-slate-500">from sheet</span> : <span className="text-slate-500">manual</span>}
                   </div>
                   <button type="button" onClick={() => update({ individual: proposal.individual.filter((r) => r.id !== row.id) })} className={btn}>Remove</button>
                 </div>
