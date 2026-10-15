@@ -82,6 +82,8 @@ export type IndividualRow = {
   fallbackPrice?: number | null;
   /** Client price typed by the admin. null = use base. */
   priceOverride: number | null;
+  /** True when fallbackPrice came from a sheet that already includes 10% sales coverage; the checkbox is not applied again. */
+  coverageIncluded?: boolean;
 };
 
 export type BuilderProposal = {
@@ -232,20 +234,65 @@ export function moveItem<T>(list: T[], index: number, delta: number): T[] {
   return next;
 }
 
+export const COVERAGE_SEED_SHEET_NAME = 'Staffing + 10% Sales Coverage';
+
+/** True when a sheet name says its prices already include the 10% sales coverage uplift. */
+export function sheetIncludesCoverage(name: string | undefined | null) {
+  const n = String(name || '');
+  return /\+\s*10\s*%/.test(n) || /10\s*%\s*sales/i.test(n) || /sales\s+coverage/i.test(n);
+}
+
+/**
+ * Sheet that seeds the Individual (à la carte) table in category mode: "Staffing + 10% Sales Coverage" by name,
+ * then any sheet whose name indicates +10%/sales coverage, then SaffHire Direct Pricing, then the first sheet.
+ */
+export function findIndividualSeedSheet(sheets: BaseSheet[]): BaseSheet | undefined {
+  const norm = (v: string) => v.toLowerCase().replace(/\s+/g, ' ').trim();
+  const withRows = sheets.filter((s) => (s.individual_pricing || []).length);
+  const pool = withRows.length ? withRows : sheets;
+  return (
+    pool.find((s) => norm(s.name) === norm(COVERAGE_SEED_SHEET_NAME)) ||
+    pool.find((s) => sheetIncludesCoverage(s.name)) ||
+    pool.find((s) => /direct/i.test(s.name)) ||
+    pool[0]
+  );
+}
+
+/** Non-blocking warnings shown when the 10% sales coverage would be (or could be) applied twice. */
+export function coverageWarnings(p: Pick<BuilderProposal, 'base' | 'salesCoverage' | 'individual'>, sheets: BaseSheet[], aLaCarteOnly = false): string[] {
+  if (!p.salesCoverage) return [];
+  const out: string[] = [];
+  if (p.base.kind === 'sheet') {
+    const sheet = sheets.find((s) => s.id === (p.base as { sheetId: string }).sheetId);
+    if (sheet && sheetIncludesCoverage(sheet.name)) {
+      out.push(`The base price sheet "${sheet.name}" already includes 10% sales coverage. With "Add 10% sales coverage" ticked, 10% is applied twice (×1.21 overall). Untick the checkbox, or choose a sheet without coverage, unless that is intended.`);
+    }
+  } else if (p.individual.some((r) => r.coverageIncluded)) {
+    out.push(`The Individual (à la carte) prices are seeded from a sheet that already includes 10% sales coverage, so the checkbox is not applied to them again${aLaCarteOnly ? '' : '; it only raises package prices'}. Typed prices are used exactly as entered.`);
+  }
+  return out;
+}
+
 /** Individual (a la carte) rows seeded from the base sheet (or the default sheet when a category is the base). */
-export function seedIndividual(base: BaseSource, sheets: BaseSheet[], catalog: CatalogEntry[], fallbackSheet: BaseSheet | undefined): IndividualRow[] {
+export function seedIndividual(base: BaseSource, sheets: BaseSheet[], catalog: CatalogEntry[], fallbackSheet: BaseSheet | undefined = findIndividualSeedSheet(sheets)): IndividualRow[] {
   const sheet = base.kind === 'sheet' ? sheets.find((s) => s.id === base.sheetId) : fallbackSheet;
+  // Category mode + a coverage-inclusive seed sheet: use that sheet's prices as-is (coverage already in them).
+  const useSheetPrices = base.kind === 'category' && sheetIncludesCoverage(sheet?.name);
   const rows = sheet?.individual_pricing || [];
   const byLabel = new Map(catalog.map((entry) => [normName(entry.label), entry]));
   return rows.map((row) => {
     const entry = byLabel.get(normName(row.label)) || (normName(row.label) === '1 county criminal search' ? byLabel.get('county criminal search') : undefined);
     const parsed = parsePrice(row.price);
+    if (useSheetPrices && parsed.price !== null) {
+      return { id: makeId('ind'), label: row.label, catalogKey: entry?.key || '', fallbackPrice: parsed.price, priceOverride: null, coverageIncluded: true };
+    }
     // When no catalog entry matches, the sheet price becomes the row's base price.
     return { id: makeId('ind'), label: row.label, catalogKey: entry?.key || '', fallbackPrice: parsed.price, priceOverride: null };
   });
 }
 
 export function individualBaseUnit(row: IndividualRow, catalog: Map<string, CatalogEntry>, coverage: boolean): number | null {
+  if (row.coverageIncluded && row.fallbackPrice !== null && row.fallbackPrice !== undefined) return round2(row.fallbackPrice);
   const entry = catalog.get(row.catalogKey);
   if (entry && entry.basePrice !== null) return applyCoverage(entry.basePrice, coverage);
   if (row.fallbackPrice !== null && row.fallbackPrice !== undefined) return applyCoverage(row.fallbackPrice, coverage);
@@ -394,7 +441,7 @@ export function normalizeProposal(value: unknown, fallbackBase: BaseSource): Bui
     includeIndividual: v.includeIndividual === undefined ? true : Boolean(v.includeIndividual),
     aLaCarteOnly: Boolean(v.aLaCarteOnly),
     individual: Array.isArray(v.individual)
-      ? v.individual.map((r: any) => ({ id: str(r?.id) || makeId('ind'), label: str(r?.label), catalogKey: str(r?.catalogKey), fallbackPrice: num(r?.fallbackPrice), priceOverride: num(r?.priceOverride) }))
+      ? v.individual.map((r: any) => ({ id: str(r?.id) || makeId('ind'), label: str(r?.label), catalogKey: str(r?.catalogKey), fallbackPrice: num(r?.fallbackPrice), priceOverride: num(r?.priceOverride), ...(r?.coverageIncluded ? { coverageIncluded: true } : {}) }))
       : [],
   };
 }
