@@ -29,6 +29,8 @@ import {
   priceCategories,
   proposalTotals,
   seedIndividual,
+  findIndividualSeedSheet,
+  coverageWarnings,
   sectionOptions,
 } from '@/lib/proposalBuilder';
 
@@ -77,7 +79,8 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
   const catalogList = useMemo(() => buildCatalog(proposal.base, sheets, items, proposal.state), [proposal.base, sheets, items, proposal.state]);
   const catalog = useMemo(() => new Map(catalogList.map((entry) => [entry.key, entry])), [catalogList]);
   const totals = useMemo(() => proposalTotals(proposal, catalog), [proposal, catalog]);
-  const fallbackSheet = useMemo(() => sheets.find((s) => /staffing/i.test(s.name) && !/sales/i.test(s.name)) || sheets[0], [sheets]);
+  const fallbackSheet = useMemo(() => findIndividualSeedSheet(sheets), [sheets]);
+  const warnings = useMemo(() => coverageWarnings(proposal, sheets, Boolean(proposal.aLaCarteOnly)), [proposal, sheets]);
 
   const baseLabel = useMemo(() => {
     const base = proposal.base;
@@ -586,6 +589,12 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
             <span className="block text-slate-600">Multiplies base client prices by 1.10. Internal cost is unchanged. Prices you type by hand are used exactly as entered.</span>
           </span>
         </label>
+        {warnings.map((w) => (
+          <div key={w} role="alert" data-coverage-warning className="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+            <span className="block font-bold">Check sales coverage</span>
+            <span className="block">{w}</span>
+          </div>
+        ))}
       </section>
 
       {!alacarte && proposal.packages.map((pkg, index) => {
@@ -655,6 +664,9 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
             <button type="button" className={btn} onClick={() => update({ individual: [...proposal.individual, { id: makeId('ind'), label: '', catalogKey: '', priceOverride: 0 }] })}>Add row</button>
           </div>
         </div>
+        {proposal.base.kind === 'category' && fallbackSheet ? (
+          <p className="mb-3 text-xs text-slate-500" data-individual-seed>Seeded from the “{fallbackSheet.name}” price sheet{proposal.individual.some((r) => r.coverageIncluded) ? ' (prices already include 10% sales coverage)' : ''}. Use “Reload from base” to reseed.</p>
+        ) : null}
         {alacarte || proposal.includeIndividual ? (
           <div className="space-y-2" data-individual-table>
             {proposal.individual.map((row) => {

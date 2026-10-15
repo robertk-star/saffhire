@@ -15,6 +15,9 @@ import {
   moveItem,
   duplicatePackage,
   individualUnit,
+  findIndividualSeedSheet,
+  sheetIncludesCoverage,
+  coverageWarnings,
 } from '../lib/proposalBuilder';
 
 const items: CatalogPricingItem[] = [
@@ -143,4 +146,39 @@ test('à la carte only: no packages, no Service Packages section, individual tab
   // Package mode unchanged
   p.aLaCarteOnly = false;
   assert.equal(buildClientPreview(p, map, 'x').mode, 'packages');
+});
+
+test('coverage seed sheet: lookup by name, graceful fallback, no double coverage, warnings', () => {
+  const mk = (id: string, name: string, price: string): BaseSheet => ({ id, name, description: '', minimum_package: [], individual_pricing: [{ label: 'Federal Search', price }, { label: 'Drug Screen', price: 'Included' }] });
+  const direct = mk('d', 'SaffHire Direct Pricing', '$5.00');
+  const cov = mk('c', 'Staffing + 10% Sales Coverage', '$6.05');
+  const other = mk('o', 'Church Pricing (+10%)', '$7.00');
+  assert.equal(findIndividualSeedSheet([direct, other, cov])?.id, 'c');
+  assert.equal(findIndividualSeedSheet([direct, other])?.id, 'o');
+  assert.equal(findIndividualSeedSheet([mk('x', 'Zeta', '$1'), direct])?.id, 'd');
+  assert.equal(findIndividualSeedSheet([])?.id, undefined);
+  assert.ok(sheetIncludesCoverage('Staffing + 10% Sales Coverage') && sheetIncludesCoverage('X +10%') && !sheetIncludesCoverage('SaffHire Direct Pricing'));
+
+  const base = { kind: 'category' as const, priceKey: 'staffing_price' as const };
+  const cat = buildCatalog(base, [direct, cov], items, 'Texas');
+  const map = new Map(cat.map((c) => [c.key, c]));
+  const rows = seedIndividual(base, [direct, cov], cat);
+  assert.equal(rows[0].coverageIncluded, true);
+  // Sheet price used as-is, checkbox on or off: no double coverage.
+  assert.equal(individualUnit(rows[0], map, false), 6.05);
+  assert.equal(individualUnit(rows[0], map, true), 6.05);
+  // Fallback to Direct pricing keeps old behaviour (coverage applied by checkbox).
+  const dRows = seedIndividual(base, [direct], cat);
+  assert.ok(!dRows[0].coverageIncluded);
+  assert.equal(individualUnit(dRows[0], map, true), 5.5);
+
+  // Warnings
+  assert.deepEqual(coverageWarnings({ base, salesCoverage: false, individual: rows }, [cov]), []);
+  assert.equal(coverageWarnings({ base, salesCoverage: true, individual: dRows }, [direct]).length, 0);
+  assert.match(coverageWarnings({ base, salesCoverage: true, individual: rows }, [cov])[0], /already includes 10%/);
+  assert.match(coverageWarnings({ base: { kind: 'sheet', sheetId: 'c' }, salesCoverage: true, individual: [] }, [cov])[0], /applied twice/);
+  assert.equal(coverageWarnings({ base: { kind: 'sheet', sheetId: 'd' }, salesCoverage: true, individual: [] }, [direct]).length, 0);
+  // Persisted through drafts
+  const p = emptyProposal(base); p.individual = rows;
+  assert.equal(normalizeProposal(JSON.parse(JSON.stringify(p)), base).individual[0].coverageIncluded, true);
 });
