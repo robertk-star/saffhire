@@ -33,6 +33,7 @@ const extraPublicRoutes = [
   '/open-knowledge.md',
   '/open-knowledge/okf.json',
   '/referral-partners/benefitsme',
+  '/referral-partners/corporate-talent-finder',
   '/referral-partners/defense-by-design',
   '/referral-partners/fynn',
   '/referral-partners/gmg-savings',

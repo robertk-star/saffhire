@@ -28,6 +28,7 @@ import FynnPartner from '@/legacy/FynnPartner';
 import HoorayHealthPartner from '@/legacy/HoorayHealthPartner';
 import StaffingForHealthcarePage from '@/legacy/StaffingForHealthcarePage';
 import LevelCSolutionsPage from '@/legacy/LevelCSolutionsPage';
+import CorporateTalentFinderPage from '@/legacy/CorporateTalentFinderPage';
 import CriminalBackgroundChecksPage from '@/legacy/CriminalBackgroundChecksPage';
 import EmploymentVerificationPage from '@/legacy/EmploymentVerificationPage';
 import DrugScreeningPage from '@/legacy/DrugScreeningPage';
@@ -51,7 +52,7 @@ import NotFound from '@/legacy/NotFound';
 
 type PageKey =
   | 'home' | 'blog' | 'blogPost' | 'healthcare' | 'staffing' | 'transportation' | 'manufacturing' | 'hospitality' | 'energy' | 'education' | 'churchNonprofit'
-  | 'referralPartners' | 'benefitsMe' | 'workShield' | 'gmgSavings' | 'novaTech' | 'defenseByDesign' | 'sandeneStrategies' | 'fynn' | 'hoorayHealth' | 'staffingForHealthcare' | 'levelC'
+  | 'referralPartners' | 'benefitsMe' | 'workShield' | 'gmgSavings' | 'novaTech' | 'defenseByDesign' | 'sandeneStrategies' | 'fynn' | 'hoorayHealth' | 'staffingForHealthcare' | 'levelC' | 'corporateTalentFinder'
   | 'criminal' | 'employment' | 'drug' | 'educationVerification' | 'mvr' | 'privacy' | 'terms' | 'fcraNews' | 'services' | 'industries' | 'contact' | 'why' | 'accountSetup' | 'faq'
   | 'frisco' | 'dallas' | 'plano' | 'mckinney' | 'allen' | 'notFound';
 
@@ -78,6 +79,7 @@ const pageMap: Record<PageKey, () => ReactNode> = {
   hoorayHealth: () => <HoorayHealthPartner />,
   staffingForHealthcare: () => <StaffingForHealthcarePage />,
   levelC: () => <LevelCSolutionsPage />,
+  corporateTalentFinder: () => <CorporateTalentFinderPage />,
   criminal: () => <CriminalBackgroundChecksPage />,
   employment: () => <EmploymentVerificationPage />,
   drug: () => <DrugScreeningPage />,
