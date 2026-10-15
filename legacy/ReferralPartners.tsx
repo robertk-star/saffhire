@@ -19,6 +19,7 @@ const FYNN_LOGO = "/images/partner-fynn.svg";
 const STAFFING_FOR_HEALTHCARE_LOGO = "/images/partner-staffing-for-healthcare.png";
 const LEVELC_SOLUTIONS_LOGO = "/images/partner-levelc-solutions.png";
 const HOORAY_HEALTH_LOGO = "/images/partner-hooray-health.png";
+const CORPORATE_TALENT_FINDER_LOGO = "/images/partner-corporate-talent-finder.png";
 
 const partners = [
   {
@@ -119,6 +120,16 @@ const partners = [
       "Hooray Health provides guaranteed-issue healthcare plans designed for businesses with hourly, part-time, and full-time employees. With $25 urgent care visits, $0 virtual primary care, and an industry-leading NPS of 86, Hooray Health helps employers attract and retain talent while meeting ACA compliance requirements.",
     logo: HOORAY_HEALTH_LOGO,
     category: "Healthcare Benefits",
+    logoBg: "#f8fafc",
+  },
+  {
+    name: "Corporate Talent Finder",
+    slug: "corporate-talent-finder",
+    tagline: "Boutique Recruiting Across Corporate Functions",
+    description:
+      "Corporate Talent Finder is a DFW-based boutique recruiting firm that connects employers nationwide with high-impact corporate talent through connection and strategy. We take on fewer searches, so every role gets our full attention, and we rely on real conversations and human judgment, not keyword filtering. Our team recruits across Sales, Marketing, HR, Accounting & Finance, Legal, IT, Operations, and other corporate functions.",
+    logo: CORPORATE_TALENT_FINDER_LOGO,
+    category: "Corporate Recruiting",
     logoBg: "#f8fafc",
   },
 ];

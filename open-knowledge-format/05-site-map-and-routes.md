@@ -53,6 +53,7 @@ The following routes were found in the uploaded `app` directory.
 - `/`
 - `/privacy-policy`
 - `/referral-partners/benefitsme`
+- `/referral-partners/corporate-talent-finder`
 - `/referral-partners/defense-by-design`
 - `/referral-partners/fynn`
 - `/referral-partners/gmg-savings`
