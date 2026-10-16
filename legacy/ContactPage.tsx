@@ -8,6 +8,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import PageSEO from "@/components/PageSEO";
+import PageFAQ from "@/components/PageFAQ";
+import { contactFaqs } from "@/data/pageFaqs";
 
 export default function ContactPage() {
   return (
@@ -39,6 +41,29 @@ export default function ContactPage() {
       </section>
 
       <ContactSection />
+
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-gray-700 leading-relaxed">
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>How to Get a Custom Quote</h2>
+            <p>Tell us about the positions you hire for, the states where your candidates live or work, and any client, insurance or regulatory requirements. We will recommend a package and send a custom quote. Packages are customized to each client&apos;s needs, and the <a href="/packages" className="font-bold text-green-600 underline">standard packages</a> are good starting points.</p>
+          </div>
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Ways to Reach SaffHire</h2>
+            <ul className="list-disc pl-6 space-y-1">
+              <li>Phone: <a href="tel:8885881733" className="text-green-600 underline">888-588-1733</a></li>
+              <li>Email: <a href="mailto:info@saffhire.com" className="text-green-600 underline">info@saffhire.com</a></li>
+              <li>Headquarters: Frisco, TX, serving employers nationwide</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Before You Order Your First Background Check</h2>
+            <p>Under the FCRA, employers must give candidates a standalone written disclosure and get their written authorization before ordering a background check, and must follow the pre-adverse and adverse action steps before acting on a report. SaffHire&apos;s FCRA-compliant workflows support those steps. Have questions first? Visit our <a href="/faq" className="font-bold text-green-600 underline">FAQ</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <PageFAQ title="Contact and Account Questions" items={contactFaqs} />
 
       <Footer />
     </div>

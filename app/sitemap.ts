@@ -5,6 +5,7 @@ import { seoAuthorityPages } from '@/data/seoAuthorityPages';
 import { getPublishedDbBlogPosts } from '@/lib/blogDrafts';
 import { openKnowledgePages } from '@/data/openKnowledgePages';
 import { SITE_URL } from '@/lib/siteUrl';
+import { routeLastModified } from '@/data/routeLastModified';
 
 const excludedRoutes = new Set([
   '/404',
@@ -46,6 +47,12 @@ const extraPublicRoutes = [
   '/referral-partners/workshield',
 ];
 
+function parseDate(value: unknown): Date | undefined {
+  if (!value) return undefined;
+  const d = new Date(value as string);
+  return Number.isNaN(d.getTime()) ? undefined : d;
+}
+
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -57,6 +64,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const authorityRoutes = seoAuthorityPages.map((page) => page.path);
   const openKnowledgeRoutes = openKnowledgePages.map((page) => `/open-knowledge/${page.slug}`);
 
+  const blogDates = new Map<string, Date | undefined>();
+  for (const post of blogPosts) blogDates.set(`/blog/${post.slug}`, parseDate(post.date));
+  for (const post of dbPosts as unknown as Array<Record<string, unknown> & { slug: string }>) {
+    const d = parseDate(post.updated_at ?? post.published_at ?? post.publishedAt ?? post.date);
+    if (d) blogDates.set(`/blog/${post.slug}`, d);
+  }
+  const lastModifiedFor = (route: string): Date =>
+    blogDates.get(route) ?? parseDate(routeLastModified[route]) ?? new Date(routeLastModified.__default);
+
   const routes = Array.from(new Set([
     ...staticRoutes,
     ...extraPublicRoutes,
@@ -67,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return routes.map((route) => ({
     url: `${SITE_URL}${route}`,
-    lastModified: new Date(),
+    lastModified: lastModifiedFor(route),
     changeFrequency: route === '/' || route === '/blog' || route.startsWith('/open-knowledge') || route === '/background-screening-guides' ? 'weekly' as const : 'monthly' as const,
     priority: route === '/' ? 1 : route === '/blog' || route === '/contact' || route === '/services' ? 0.9 : route.startsWith('/blog/') ? 0.65 : 0.75,
   }));
