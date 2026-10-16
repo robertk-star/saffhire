@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
   description: 'Fast, secure background screening services with FCRA-compliant screening workflows. Criminal checks, employment verification, drug screening, and MVR checks.',
   alternates: {
+    canonical: './',
     types: {
       'application/rss+xml': '/rss.xml',
     },

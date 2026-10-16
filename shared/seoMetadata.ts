@@ -35,6 +35,12 @@ export const seoMetadata: Record<string, PageMetadata> = {
     ogImageAlt: "SaffHire Industries",
     keywords: "industry background screening, healthcare screening, staffing screening, transportation screening",
   },
+  "/faq": {
+    title: "Background Screening FAQ - Turnaround, FCRA Compliance & Quotes",
+    description: "Answers to common questions about SaffHire background checks: how screening works, FCRA-compliant workflows, turnaround, and how to request a custom quote.",
+    ogImageAlt: "SaffHire Background Screening FAQ",
+    keywords: "background check FAQ, background screening questions, FCRA compliance, background check turnaround",
+  },
   "/contact": {
     title: "Contact SaffHire - Get a Background Screening Quote",
     description: "Contact SaffHire for a free background screening quote. Talk with the team about your hiring needs.",

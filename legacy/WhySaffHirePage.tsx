@@ -22,7 +22,7 @@ export default function WhySaffHirePage() {
             A Background Screening Partner You Can Trust
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Fast results, FCRA-compliant screening workflows, no setup fees, and a team that treats every client as a partner.
+            A Veteran-Owned company delivering fast results, FCRA-compliant screening workflows, no setup fees, and a team that treats every client as a partner.
           </p>
         </div>
       </section>

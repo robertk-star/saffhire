@@ -48,7 +48,9 @@ export default function HeroSlider() {
 
   return (
     <section style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#0f172a" }}>
-      {slides.map((slide, i) => (
+      {slides.map((slide, i) => {
+        const HeadingTag = (i === 0 ? "h1" : "h2") as "h1" | "h2";
+        return (
         <div
           key={slide.id}
           style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, transition: "opacity 0.7s ease" }}
@@ -83,7 +85,7 @@ export default function HeroSlider() {
                 >
                   {slide.label}
                 </p>
-                <h1
+                <HeadingTag
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
                     color: "#fff",
@@ -97,7 +99,7 @@ export default function HeroSlider() {
                   }}
                 >
                   {slide.title}
-                </h1>
+                </HeadingTag>
                 <div
                   style={{
                     opacity: i === current ? 1 : 0,
@@ -118,7 +120,8 @@ export default function HeroSlider() {
             </div>
           </div>
         </div>
-      ))}
+        );
+      })}
       <div style={{ position: "absolute", bottom: 32, right: 32, zIndex: 20, display: "flex", gap: 12 }}>
         {slides.map((slide, i) => (
           <button
