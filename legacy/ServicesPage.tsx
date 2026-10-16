@@ -137,6 +137,10 @@ export default function ServicesPage() {
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">
             No setup fees, no minimums. Get a custom quote tailored to your business in minutes.
           </p>
+          <p className="text-gray-300 mb-8">
+            Compare our{" "}
+            <a href="/packages" className="text-green-400 font-bold underline">Standard Packages &amp; Turnaround</a>
+          </p>
           <a
             href="/contact"
             className="btn-green rounded-sm px-10 py-4 text-base font-bold inline-block"
