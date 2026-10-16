@@ -79,7 +79,7 @@ export default function ServicesPage() {
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Fast, FCRA-compliant background screening services built for businesses of every size
-            and industry. Results in as little as 5 minutes.
+            and industry. Instant searches like SSN Trace, Sex Offender, Global Watch List, MVR and the National Criminal Database usually return in minutes.
           </p>
         </div>
       </section>

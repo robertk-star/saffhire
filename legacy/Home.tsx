@@ -49,8 +49,10 @@ export default function Home() {
       "email": "info@saffhire.com",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "3245 Main St., Suite 235-200",
         "addressLocality": "Frisco",
         "addressRegion": "TX",
+        "postalCode": "75034",
         "addressCountry": "US"
       },
       "areaServed": {
@@ -72,7 +74,8 @@ export default function Home() {
       "sameAs": [
         "https://www.linkedin.com/company/saffhire-background-screening",
         "https://www.facebook.com/saffhire",
-        "https://www.instagram.com/saffhire"
+        "https://www.instagram.com/saffhire",
+        "https://www.google.com/search?q=Saffhire+Background+Screening&stick=H4sIAAAAAAAA_-NgU1I1qLAwM0k2TjKxMEi2SLFITbW0MqgwMUxKMzU2TTVPMUk0MzW0XMQqG5yYlpaRWZSq4JSYnJ1elF-al6IQnFyUmpqXmZcOAPfw2MJJAAAA"
       ]
     });
     document.head.appendChild(schemaScript);

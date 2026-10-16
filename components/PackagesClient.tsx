@@ -11,7 +11,7 @@ export const baseItems = [
 ];
 
 const addOns = [
-  "Motor Vehicle Report (MVR) ‡",
+  "Motor Vehicle Report (MVR) §",
   "State Search † ‡",
   "County Search † ‡",
   "Drug Screening",
@@ -49,6 +49,10 @@ export default function PackagesClient() {
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={font}>Included in every package</h2>
           <p className="text-gray-700 mb-10">
             All packages include SSN Trace, Address History, National Criminal Database, Global Security Watch List and Federal Search.
+            The National Criminal Database search also includes a Sex Offender registry search.
+          </p>
+          <p className="text-gray-700 mb-10">
+            Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Full packages average the turnaround shown below.
           </p>
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6" style={font}>Compare packages</h2>
           <div className="overflow-x-auto">
@@ -78,6 +82,7 @@ export default function PackagesClient() {
           <ul className="mt-6 space-y-1 text-sm text-gray-600">
             <li>† Searches all jurisdictions where the applicant has lived.</li>
             <li>‡ Court access fees may apply (pass-through).</li>
+            <li>§ State fees may apply.</li>
           </ul>
           <div className="mt-12">
             <a href="/contact" className="btn-green inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold" style={font}>Get a Custom Quote</a>

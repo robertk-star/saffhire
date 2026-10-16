@@ -63,7 +63,7 @@ export default function BackgroundScreeningDallasPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#22c55e" }} />
-                    <span className="text-gray-700">Instant results for national searches</span>
+                    <span className="text-gray-700">National Criminal Database results usually in minutes</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#22c55e" }} />

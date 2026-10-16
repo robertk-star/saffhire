@@ -25,7 +25,7 @@ const badges = [
   {
     icon: Zap,
     title: "Fast Response",
-    description: "Many results return in minutes, with fuller verification often completed within 48 hours.",
+    description: "Instant searches like the National Criminal Database, SSN Trace and MVR usually return in minutes. Full packages average 1 to 5 days.",
   },
 ];
 

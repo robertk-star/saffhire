@@ -40,17 +40,17 @@ const faqSections: FAQSection[] = [
       {
         question: "How long does a background check take?",
         answer:
-          "Average turnaround depends on the package. Packages 1-3 (base searches, plus Motor Vehicle Report and State Search) average 1 day. Package 4 (adds County Search) averages 1-2 days. Packages 5 and 6 (add Drug Screening, and Employment and Education Verification) average 2-5 days. See Standard Packages & Turnaround at saffhire.com/packages.",
+          "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, the National Criminal Database, state database searches and MVR) usually return in minutes. Full packages average the listed days: Packages 1-3 (base searches, plus Motor Vehicle Report and State Search) average 1 day. Package 4 (adds County Search) averages 1-2 days. Packages 5 and 6 (add Drug Screening, and Employment and Education Verification) average 2-5 days. See Standard Packages & Turnaround at saffhire.com/packages.",
       },
       {
         question: "What is included in every background check package?",
         answer:
-          "All standard packages include SSN Trace, Address History, National Criminal Database, Global Security Watch List and Federal Search. Packages are customized to each client's needs; the standard packages are starting points.",
+          "All standard packages include SSN Trace, Address History, National Criminal Database (which includes a Sex Offender registry search), Global Security Watch List and Federal Search. Packages are customized to each client's needs; the standard packages are starting points.",
       },
       {
         question: "Are there additional fees on some searches?",
         answer:
-          "Federal, State and County searches cover all jurisdictions where the applicant has lived. Court access fees may apply to some searches; these are pass-through fees.",
+          "Federal, State and County searches cover all jurisdictions where the applicant has lived. Court access fees may apply to State and County searches; these are pass-through fees. State fees may apply to Motor Vehicle Reports (MVR).",
       },
       {
         question: "Why do some background checks take longer than others?",

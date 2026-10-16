@@ -23,15 +23,20 @@ export const organizationSchema = {
   keywords: "Veteran-Owned, background screening, pre-employment screening",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "3245 Main St., Suite 235-200",
     addressLocality: "Frisco",
     addressRegion: "TX",
+    postalCode: "75034",
     addressCountry: "US",
   },
   areaServed: {
     "@type": "Country",
     name: "United States",
   },
-  sameAs: ["https://www.linkedin.com/company/saffhire"],
+  sameAs: [
+    "https://www.linkedin.com/company/saffhire",
+    "https://www.google.com/search?q=Saffhire+Background+Screening&stick=H4sIAAAAAAAA_-NgU1I1qLAwM0k2TjKxMEi2SLFITbW0MqgwMUxKMzU2TTVPMUk0MzW0XMQqG5yYlpaRWZSq4JSYnJ1elF-al6IQnFyUmpqXmZcOAPfw2MJJAAAA",
+  ],
   description:
     "SaffHire is a Veteran-Owned company that provides fast, secure background screening services and FCRA-compliant screening workflows for employers across the United States.",
   knowsAbout: [
