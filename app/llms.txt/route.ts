@@ -1,34 +1,53 @@
-import { seoMetadata } from '@/shared/seoMetadata';
-import { seoAuthorityPages } from '@/data/seoAuthorityPages';
-import { blogPosts } from '@/data/blogPosts';
-import { getPublishedDbBlogPosts } from '@/lib/blogDrafts';
-import { openKnowledgePages } from '@/data/openKnowledgePages';
+export const dynamic = 'force-static';
 
-export const dynamic = 'force-dynamic';
+const U = 'https://saffhire.com';
 
-export async function GET() {
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace('https://www.saffhire.com', 'https://saffhire.com');
+const body = `# SaffHire Background Screening
 
-  const mainPages = Object.entries(seoMetadata)
-    .map(([path, meta]) => `- ${siteUrl}${path}: ${meta.title} — ${meta.description}`)
-    .join('\n');
+> SaffHire is a Veteran-Owned, FCRA-compliant pre-employment background screening company based in Frisco, TX, serving employers nationwide. Founded by Robert Krebsbach, John Waak and Jody Thigpen, SaffHire provides criminal background checks, employment and education verification, drug screening and MVR checks, with screening packages customized to each client's needs.
 
-  const authorityPages = seoAuthorityPages
-    .map((page) => `- ${siteUrl}${page.path}: ${page.title} — ${page.heroAnswer}`)
-    .join('\n');
+## Services
 
-  const knowledgePages = openKnowledgePages
-    .map((page) => `- ${siteUrl}/open-knowledge/${page.slug}: ${page.title} — ${page.description}`)
-    .join('\n');
+- [Background Screening Services](${U}/services): Overview of all SaffHire screening services for employers.
+- [Criminal Background Checks](${U}/criminal-background-checks): County, state and federal criminal record searches for hiring decisions.
+- [National Criminal Database Search](${U}/national-criminal-database-search): Multi-jurisdiction criminal database search including sex offender registries and watch lists.
+- [County Criminal Background Checks](${U}/county-criminal-background-checks): Direct county court record searches in every jurisdiction where an applicant has lived.
+- [Employment Verification](${U}/employment-verification): Confirmation of past employers, dates and job titles.
+- [Education Verification](${U}/education-verification): Confirmation of degrees, diplomas and attendance.
+- [Drug Screening](${U}/drug-screening): Pre-employment and ongoing drug testing programs.
+- [MVR Checks](${U}/mvr-checks): Motor vehicle record reports for driving positions.
+- [Healthcare Sanctions and OIG Checks](${U}/healthcare-sanctions-oig-checks): Exclusion and sanctions list screening for healthcare employers.
+- [Standard Packages and Turnaround](${U}/packages): Standard screening packages and typical turnaround times, customized per client.
 
-  const dbPosts = await getPublishedDbBlogPosts();
-  const allPosts = [...dbPosts, ...blogPosts]
-    .filter((post, index, array) => array.findIndex((item) => item.slug === post.slug) === index)
-    .slice(0, 25)
-    .map((post) => `- ${siteUrl}/blog/${post.slug}: ${post.title} — ${post.excerpt}`)
-    .join('\n');
+## Industries
 
-  const content = `# SaffHire Background Screening\n\nSaffHire Background Screening provides employer background screening services for businesses across the United States. Services include criminal background checks, employment verification, education verification, drug screening, MVR checks, healthcare sanctions checks, volunteer screening, small business screening, and industry-specific screening support.\n\nPhone: 888-588-1733\nEmail: info@saffhire.com\nLocation: Frisco, Texas\nService area: United States\nFounded: 2020\nCompliance focus: FCRA-compliant employment background screening\n\n## What SaffHire does\nSaffHire helps employers build background screening packages based on role, industry, risk level, and compliance needs. SaffHire serves businesses nationwide and supports industries including healthcare, staffing, transportation, manufacturing, hospitality, energy, education, churches, nonprofits, and small businesses.\n\n## Open Knowledge Format\n- ${siteUrl}/open-knowledge: Public Open Knowledge Format hub for SaffHire\n- ${siteUrl}/open-knowledge/okf.json: Machine-readable Open Knowledge file\n- ${siteUrl}/company-information: Authoritative company information page\n${knowledgePages}\n\n## Primary resource hub\n- ${siteUrl}/background-screening-guides: Background Screening Guides for Employers\n\n## Important pages\n${mainPages}\n\n## Background screening guides\n${authorityPages}\n\n## Latest blog posts\n${allPosts}\n`;
+- [Industries Served](${U}/industries): Overview of the industries SaffHire screens for.
+- [Staffing](${U}/industries/staffing): High-volume, fast-turnaround screening for staffing agencies.
+- [Healthcare](${U}/industries/healthcare): Screening and sanctions checks for healthcare organizations.
+- [Transportation](${U}/industries/transportation): Driver screening including MVR and drug testing.
+- [Manufacturing and Warehousing](${U}/industries/manufacturing): Screening for manufacturing and warehouse workforces.
+- [Hospitality](${U}/industries/hospitality): Screening for hotels, restaurants and hospitality employers.
+- [Energy](${U}/industries/energy): Screening for energy and oilfield employers.
+- [Education](${U}/industries/education): Screening for schools and education employers.
+- [Churches and Non-Profits](${U}/industries/church-nonprofit): Volunteer and staff screening for churches and non-profit organizations.
+- [Small Business Background Checks](${U}/small-business-background-checks): Screening for small employers with no minimums.
+- [Volunteer Background Checks](${U}/volunteer-background-checks): Background checks for volunteer programs.
 
-  return new Response(content, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+## Company
+
+- [Why SaffHire](${U}/why-saffhire): Who we are, our Veteran-Owned leadership and our approach to compliant screening.
+- [FAQ](${U}/faq): Answers to common questions about background checks, turnaround and compliance.
+- [Contact](${U}/contact): Request a custom quote or talk to the SaffHire team.
+
+## Optional
+
+- [Background Screening in Frisco, TX](${U}/background-screening-frisco-tx): Local screening services for Frisco-area employers.
+- [Background Screening Guides](${U}/background-screening-guides): Guides on screening best practices and FCRA compliance.
+- [Blog](${U}/blog): Articles on hiring, screening and FCRA updates.
+`;
+
+export function GET() {
+  return new Response(body, {
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8', 'Cache-Control': 'public, max-age=3600' },
+  });
 }
