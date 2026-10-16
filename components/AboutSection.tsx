@@ -70,7 +70,7 @@ export default function AboutSection() {
           </div>
 
           <div className="relative">
-            <img src="/images/about-team.webp" alt="SaffHire team" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 480 }} />
+            <img loading="lazy" decoding="async" src="/images/about-team.webp" alt="SaffHire team" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 480 }} />
             <div className="absolute -bottom-6 -left-6 rounded-lg p-6 shadow-lg" style={{ backgroundColor: "#22c55e" }}>
               <p className="text-white text-4xl font-black" style={{ fontFamily: "'Montserrat', sans-serif" }}>5+</p>
               <p className="text-white text-sm font-semibold mt-1">Years of Success</p>

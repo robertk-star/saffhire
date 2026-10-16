@@ -14,7 +14,7 @@ export function LatestBlogPost() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
           <div className="rounded-xl overflow-hidden shadow-lg">
-            <img
+            <img loading="lazy" decoding="async"
               src={latestPost.image}
               alt={latestPost.title}
               className="w-full h-80 object-cover"

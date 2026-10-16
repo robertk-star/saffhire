@@ -3,6 +3,7 @@ const path = require('path');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       { protocol: 'https', hostname: 'd2xsxph8kpxj0f.cloudfront.net' },
       { protocol: 'https', hostname: 'saffhire.com' },

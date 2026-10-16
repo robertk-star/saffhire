@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
 const slides = [
@@ -28,6 +29,20 @@ const slides = [
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
+  // Only the first slide's image is in the initial HTML; the others load after
+  // the page has finished loading so they don't compete with the LCP image.
+  const [loadRest, setLoadRest] = useState(false);
+
+  useEffect(() => {
+    const start = () => setLoadRest(true);
+    if (document.readyState === "complete") {
+      const t = setTimeout(start, 1500);
+      return () => clearTimeout(t);
+    }
+    const onLoad = () => setTimeout(start, 1500);
+    window.addEventListener("load", onLoad, { once: true });
+    return () => window.removeEventListener("load", onLoad);
+  }, []);
 
   const goTo = useCallback(
     (index: number) => {
@@ -40,11 +55,12 @@ export default function HeroSlider() {
   );
 
   useEffect(() => {
+    if (!loadRest) return;
     const timer = setInterval(() => {
       goTo((current + 1) % slides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [current, goTo]);
+  }, [current, goTo, loadRest]);
 
   return (
     <section style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#0f172a" }}>
@@ -55,11 +71,18 @@ export default function HeroSlider() {
           key={slide.id}
           style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, transition: "opacity 0.7s ease" }}
         >
-          <img
-            src={slide.image}
-            alt={slide.label}
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: i === current ? "scale(1.03)" : "scale(1)", transition: "transform 6s ease-out" }}
-          />
+          {(i === 0 || loadRest) && (
+            <Image
+              src={slide.image}
+              alt={slide.label}
+              fill
+              sizes="100vw"
+              quality={70}
+              priority={i === 0}
+              fetchPriority={i === 0 ? "high" : "low"}
+              style={{ objectFit: "cover", transform: i === current ? "scale(1.03)" : "scale(1)", transition: "transform 6s ease-out" }}
+            />
+          )}
           <div
             style={{
               position: "absolute",
@@ -127,6 +150,8 @@ export default function HeroSlider() {
           <button
             key={slide.id}
             onClick={() => goTo(i)}
+            type="button"
+            aria-current={i === current ? "true" : undefined}
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 700,
