@@ -63,6 +63,21 @@ const faqSections: FAQSection[] = [
     title: "Compliance",
     items: [
       {
+        question: "Do I need the applicant's permission to run a background check?",
+        answer:
+          "Yes. Under the FCRA, an employer must give the applicant a clear written disclosure, in a document that consists solely of the disclosure, and get the applicant's written authorization before ordering a background check for employment purposes. SaffHire's applicant invitation workflow collects the disclosure acknowledgment and authorization electronically.",
+      },
+      {
+        question: "What is the adverse action process?",
+        answer:
+          "If you may take adverse action, such as not hiring someone, based in whole or in part on a background check, the FCRA requires a pre-adverse action notice with a copy of the report and A Summary of Your Rights Under the Fair Credit Reporting Act, a reasonable waiting period, and then a final adverse action notice. Some states and cities add their own requirements.",
+      },
+      {
+        question: "Can an applicant dispute something on their report?",
+        answer:
+          "Yes. Applicants can dispute information they believe is inaccurate or incomplete. Under the FCRA, the consumer reporting agency must reinvestigate the disputed information, generally within 30 days, and correct or delete information that is inaccurate or cannot be verified.",
+      },
+      {
         question: "Are you FCRA compliant?",
         answer:
           "SaffHire is built around FCRA-compliant screening workflows, including disclosures, authorization, and adverse-action support. Employers remain responsible for following applicable federal, state, and local requirements.",
@@ -100,12 +115,31 @@ const faqSections: FAQSection[] = [
     ],
   },
   {
+    title: "About SaffHire",
+    items: [
+      {
+        question: "Who owns SaffHire?",
+        answer:
+          "SaffHire is a Veteran-Owned company founded by Robert Krebsbach, John Waak and Jody Thigpen.",
+      },
+      {
+        question: "Where is SaffHire located, and what areas do you serve?",
+        answer: "SaffHire is headquartered in Frisco, TX and serves employers nationwide.",
+      },
+      {
+        question: "What industries do you work with?",
+        answer:
+          "We screen for staffing agencies, healthcare, transportation, manufacturing, hospitality, energy, education, churches and nonprofits, and small businesses. Packages are customized to each client's needs.",
+      },
+    ],
+  },
+  {
     title: "Pricing and Accounts",
     items: [
       {
         question: "How much does a background check cost?",
         answer:
-          "Pricing starts at $20 per applicant for a basic screening package. Comprehensive packages can range between $35 and $110 depending on the extent of the screening. Custom packages are available for high-volume clients and nonprofits.",
+          "Cost depends on the searches in your package. Packages are customized to each client's needs, so we provide a custom quote. Court access fees may apply to State and County searches (pass-through), and state fees may apply to Motor Vehicle Reports. There are no setup fees and no minimums. Contact us at saffhire.com/contact for a quote.",
       },
       {
         question: "Do you offer volume discounts?",

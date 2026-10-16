@@ -1,6 +1,8 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageFAQ from "@/components/PageFAQ";
+import { packagesFaqs } from "@/data/pageFaqs";
 
 export const baseItems = [
   "SSN Trace",
@@ -84,11 +86,24 @@ export default function PackagesClient() {
             <li>‡ Court access fees may apply (pass-through).</li>
             <li>§ State fees may apply.</li>
           </ul>
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mt-14 mb-4" style={font}>What each search covers</h2>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <li><strong>SSN Trace and Address History:</strong> helps confirm identity and lists names and addresses associated with the applicant, which guide where other searches are run.</li>
+            <li><strong>National Criminal Database:</strong> an aggregated multi-source records search that includes a Sex Offender registry search. Databases are not complete, which is why many employers add State and County searches.</li>
+            <li><strong>Global Security Watch List:</strong> checks government watch and sanctions lists.</li>
+            <li><strong>Federal Search:</strong> federal court criminal records in the jurisdictions where the applicant has lived.</li>
+            <li><strong>State and County Searches:</strong> state-level and county court criminal records in the jurisdictions where the applicant has lived.</li>
+            <li><strong>Motor Vehicle Report (MVR):</strong> driving history from the state, for roles that involve driving.</li>
+            <li><strong>Drug Screening, Employment Verification and Education Verification:</strong> lab-based drug testing and confirmation of past employment and education.</li>
+          </ul>
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mt-14 mb-4" style={font}>Packages customized to your needs</h2>
+          <p className="text-gray-700">The standard packages are starting points. We can add or remove searches by position, location or client requirement. Every order follows FCRA-compliant workflows, including candidate disclosure and authorization.</p>
           <div className="mt-12">
             <a href="/contact" className="btn-green inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold" style={font}>Get a Custom Quote</a>
           </div>
         </div>
       </section>
+      <PageFAQ title="Package Questions" items={packagesFaqs} />
       <Footer />
     </div>
   );
