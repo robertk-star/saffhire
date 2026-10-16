@@ -11,6 +11,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.saffhire.com' }],
+        destination: 'https://saffhire.com/:path*',
+        permanent: true,
+      },
+      { source: '/pricing', destination: '/contact', permanent: true },
       { source: '/privacy', destination: '/privacy-policy', permanent: true },
       { source: '/terms', destination: '/terms-of-service', permanent: true },
       { source: '/about', destination: '/why-saffhire', permanent: true },

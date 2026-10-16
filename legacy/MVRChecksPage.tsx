@@ -37,7 +37,7 @@ export default function MVRChecksPage() {
             <div className="flex flex-col justify-center py-16 pr-0 lg:pr-12">
               <a href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm mb-8"><ArrowLeft size={14} />Back to Home</a>
               <p className="section-label mb-3" style={{ color: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}>DRIVER SCREENING</p>
-              <h1 className="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>MVR Checks<br /><span style={{ color: "#22c55e" }}>for Employers</span></h1>
+              <h1 className="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>MVR Checks{" "}<br /><span style={{ color: "#22c55e" }}>for Employers</span></h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">Confirm license status and driving history before you put someone behind the wheel.</p>
               <div className="flex flex-wrap gap-4">
                 <a href="/#contact" className="btn-green inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>Get a Free Quote <ArrowRight size={16} /></a>

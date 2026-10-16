@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
+import { SITE_URL } from '@/lib/siteUrl';
+const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
   title: 'Company Information for SaffHire Background Screening',

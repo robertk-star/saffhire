@@ -1484,7 +1484,7 @@ function ROIOfSpeed() {
               <tr style={{ backgroundColor: "#0f172a" }}>
                 <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Scenario</th>
                 <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Slow Screening (5 days)</th>
-                <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Fast Screening (5 minutes)</th>
+                <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Fast Screening (same day)</th>
                 <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Impact</th>
               </tr>
             </thead>

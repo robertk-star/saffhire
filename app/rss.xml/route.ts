@@ -23,7 +23,7 @@ function tag(name: string, value: string) {
 }
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace('https://www.saffhire.com', 'https://saffhire.com');
   const dbPosts = await getPublishedDbBlogPosts();
   const allPosts = [...dbPosts, ...blogPosts]
     .filter((post, index, array) => array.findIndex((item) => item.slug === post.slug) === index)

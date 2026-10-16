@@ -16,6 +16,7 @@ const excludedRoutes = new Set([
 
 const extraPublicRoutes = [
   '/faq',
+  '/packages',
   '/company-information',
   '/background-screening-guides',
   '/background-screening-frisco-tx',

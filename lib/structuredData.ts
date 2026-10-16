@@ -1,4 +1,12 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.saffhire.com";
+import { SITE_URL } from "./siteUrl";
+
+const siteUrl = SITE_URL;
+
+const founders = ["Robert Krebsbach", "John Waak", "Jody Thigpen"].map((name) => ({
+  "@type": "Person",
+  name,
+  worksFor: { "@id": `${siteUrl}/#organization` },
+}));
 
 export const organizationSchema = {
   "@context": "https://schema.org",
@@ -10,6 +18,9 @@ export const organizationSchema = {
   telephone: "+1-888-588-1733",
   email: "info@saffhire.com",
   foundingDate: "2020",
+  founder: founders,
+  slogan: "Veteran-Owned Small Business",
+  keywords: "Veteran-Owned, background screening, pre-employment screening",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Frisco",
@@ -20,9 +31,12 @@ export const organizationSchema = {
     "@type": "Country",
     name: "United States",
   },
-  sameAs: ["https://www.linkedin.com/company/saffhire"],
+  sameAs: [
+    "https://www.linkedin.com/company/saffhire",
+    "https://www.google.com/search?q=Saffhire+Background+Screening&stick=H4sIAAAAAAAA_-NgU1I1qLAwM0k2TjKxMEi2SLFITbW0MqgwMUxKMzU2TTVPMUk0MzW0XMQqG5yYlpaRWZSq4JSYnJ1elF-al6IQnFyUmpqXmZcOAPfw2MJJAAAA",
+  ],
   description:
-    "SaffHire provides fast, secure background screening services and FCRA-compliant screening workflows for employers across the United States.",
+    "SaffHire is a Veteran-Owned company that provides fast, secure background screening services and FCRA-compliant screening workflows for employers across the United States.",
   knowsAbout: [
     "FCRA-compliant screening workflows",
     "criminal background checks",

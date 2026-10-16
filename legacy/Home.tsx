@@ -72,7 +72,8 @@ export default function Home() {
       "sameAs": [
         "https://www.linkedin.com/company/saffhire-background-screening",
         "https://www.facebook.com/saffhire",
-        "https://www.instagram.com/saffhire"
+        "https://www.instagram.com/saffhire",
+        "https://www.google.com/search?q=Saffhire+Background+Screening&stick=H4sIAAAAAAAA_-NgU1I1qLAwM0k2TjKxMEi2SLFITbW0MqgwMUxKMzU2TTVPMUk0MzW0XMQqG5yYlpaRWZSq4JSYnJ1elF-al6IQnFyUmpqXmZcOAPfw2MJJAAAA"
       ]
     });
     document.head.appendChild(schemaScript);
@@ -161,6 +162,11 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSlider />
+        <section style={{ backgroundColor: "#22c55e" }} className="py-3">
+          <p className="text-center text-white font-bold tracking-wide" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+            Veteran-Owned Small Business &middot; Headquartered in Frisco, TX &middot; Serving Employers Nationwide
+          </p>
+        </section>
         <IndustriesSection />
         <AboutSection />
         <StatsSection />

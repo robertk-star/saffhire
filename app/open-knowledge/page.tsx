@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import { openKnowledgePages } from '@/data/openKnowledgePages';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace('https://www.saffhire.com', 'https://saffhire.com');
 
 export const metadata: Metadata = {
   title: 'Open Knowledge Format for SaffHire Background Screening',
