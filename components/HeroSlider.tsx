@@ -29,6 +29,9 @@ const slides = [
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
+  // The first slide's text renders fully visible on first paint (it is the LCP
+  // element), with no fade-in. Text transitions only run once slides change.
+  const [hasChanged, setHasChanged] = useState(false);
   // Only the first slide's image is in the initial HTML; the others load after
   // the page has finished loading so they don't compete with the LCP image.
   const [loadRest, setLoadRest] = useState(false);
@@ -48,6 +51,7 @@ export default function HeroSlider() {
     (index: number) => {
       if (animating || index === current) return;
       setAnimating(true);
+      setHasChanged(true);
       setCurrent(index);
       setTimeout(() => setAnimating(false), 800);
     },
@@ -69,7 +73,7 @@ export default function HeroSlider() {
         return (
         <div
           key={slide.id}
-          style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, transition: "opacity 0.7s ease" }}
+          style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, transition: hasChanged ? "opacity 0.7s ease" : "none" }}
         >
           {(i === 0 || loadRest) && (
             <Image
@@ -103,7 +107,7 @@ export default function HeroSlider() {
                     marginBottom: 16,
                     opacity: i === current ? 1 : 0,
                     transform: i === current ? "translateY(0)" : "translateY(20px)",
-                    transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
+                    transition: hasChanged ? "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s" : "none",
                   }}
                 >
                   {slide.label}
@@ -118,7 +122,7 @@ export default function HeroSlider() {
                     margin: "0 0 32px",
                     opacity: i === current ? 1 : 0,
                     transform: i === current ? "translateY(0)" : "translateY(30px)",
-                    transition: "opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s",
+                    transition: hasChanged ? "opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s" : "none",
                   }}
                 >
                   {slide.title}
@@ -127,7 +131,7 @@ export default function HeroSlider() {
                   style={{
                     opacity: i === current ? 1 : 0,
                     transform: i === current ? "translateY(0)" : "translateY(20px)",
-                    transition: "opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s",
+                    transition: hasChanged ? "opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s" : "none",
                   }}
                 >
                   <a
