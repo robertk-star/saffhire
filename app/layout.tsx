@@ -22,12 +22,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const gtmId = rawGtmId && rawGtmId.startsWith('GTM-') ? rawGtmId : undefined;
 
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="/saffhire-fallback.css" />
         <style dangerouslySetInnerHTML={{ __html: 'header img{max-height:56px;width:auto;height:auto;}body{margin:0;font-family:Arial,Helvetica,sans-serif;}' }} />
       </head>
       <body>

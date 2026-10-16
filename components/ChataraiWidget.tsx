@@ -15,13 +15,32 @@ export default function ChataraiWidget() {
     const existingScript = document.getElementById(widgetScriptId);
     if (existingScript) return;
 
-    const script = document.createElement("script");
-    script.id = widgetScriptId;
-    script.src = widgetSrc;
-    script.setAttribute("data-site-id", "saffhire");
-    script.async = true;
-
-    document.body.appendChild(script);
+    // Defer the third-party widget until after the page has loaded and the
+    // browser is idle, so it never delays the hero (LCP).
+    let cancelled = false;
+    let idleId: number | undefined;
+    const inject = () => {
+      if (cancelled || document.getElementById(widgetScriptId)) return;
+      const script = document.createElement("script");
+      script.id = widgetScriptId;
+      script.src = widgetSrc;
+      script.setAttribute("data-site-id", "saffhire");
+      script.async = true;
+      document.body.appendChild(script);
+    };
+    const schedule = () => {
+      const w = window as any;
+      if (w.requestIdleCallback) idleId = w.requestIdleCallback(inject, { timeout: 4000 });
+      else idleId = window.setTimeout(inject, 2000);
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", schedule);
+      const w = window as any;
+      if (idleId !== undefined) (w.cancelIdleCallback ? w.cancelIdleCallback(idleId) : clearTimeout(idleId));
+    };
   }, [hidden]);
 
   return null;

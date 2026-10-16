@@ -1,5 +1,0 @@
-/* Intentionally minimal. Do not override Tailwind header visibility. */
-header img {
-  max-height: 56px;
-  width: auto;
-}
