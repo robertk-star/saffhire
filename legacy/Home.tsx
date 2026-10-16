@@ -5,17 +5,18 @@
  */
 
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";
-import IndustriesSection from "@/components/IndustriesSection";
-import AboutSection from "@/components/AboutSection";
-import StatsSection from "@/components/StatsSection";
-import WhyChooseUsSection from "@/components/WhyChooseUsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
+const IndustriesSection = dynamic(() => import("@/components/IndustriesSection"));
+const AboutSection = dynamic(() => import("@/components/AboutSection"));
+const StatsSection = dynamic(() => import("@/components/StatsSection"));
+const WhyChooseUsSection = dynamic(() => import("@/components/WhyChooseUsSection"));
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
+const ContactSection = dynamic(() => import("@/components/ContactSection"));
+const Footer = dynamic(() => import("@/components/Footer"));
 import PageSEO from "@/components/PageSEO";
-import { LatestBlogPost } from "@/components/LatestBlogPost";
+const LatestBlogPost = dynamic(() => import("@/components/LatestBlogPost").then((m) => m.LatestBlogPost));
 
 
 export default function Home() {

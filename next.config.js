@@ -35,6 +35,11 @@ const nextConfig = {
       { source: '/industries/churches-and-nonprofits', destination: '/industries/church-nonprofit', permanent: true },
     ];
   },
+  experimental: {
+    // Inline the (Tailwind) CSS into the HTML <head> instead of a render-blocking
+    // <link rel=stylesheet>, removing an extra round trip before first paint.
+    inlineCss: true,
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
