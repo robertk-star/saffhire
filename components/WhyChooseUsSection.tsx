@@ -35,7 +35,7 @@ export default function WhyChooseUsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-20">
           <div className="relative">
-            <img src="/images/why-choose-us.webp" alt="SaffHire team working" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 500 }} />
+            <img loading="lazy" decoding="async" src="/images/why-choose-us.webp" alt="SaffHire team working" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 500 }} />
             <div className="absolute bottom-6 left-6 bg-white rounded-lg shadow-xl p-5" style={{ borderLeft: "4px solid #22c55e" }}>
               <p className="text-3xl font-black" style={{ fontFamily: "'Montserrat', sans-serif", color: "#22c55e" }}>Since</p>
               <p className="text-2xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>2020</p>

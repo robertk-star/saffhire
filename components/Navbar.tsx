@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 
 export default function Navbar() {
@@ -49,7 +50,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <a href="/" className="flex-shrink-0">
-              <img src="/images/saffhire-logo.png" alt="SaffHire Background Screening" className="h-14 w-auto object-contain" />
+              <Image src="/images/saffhire-logo.png" alt="SaffHire Background Screening" width={2637} height={683} sizes="200px" className="h-14 w-auto object-contain" />
             </a>
 
             <nav className="hidden lg:flex items-center gap-7">
@@ -79,7 +80,7 @@ export default function Navbar() {
               <a href="https://intake.saffhire.com/" target="_blank" rel="noopener noreferrer" className="bg-green-500 hover:bg-green-600 text-white font-medium text-sm px-5 py-2 rounded-md transition-colors">Create Account</a>
             </div>
 
-            <button className="lg:hidden p-2 text-gray-700" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+            <button className="lg:hidden p-2 text-gray-700" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu" aria-expanded={mobileOpen}>
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>

@@ -86,7 +86,7 @@ export default function IndustriesSection() {
               href={(industry as any).href || "#contact"}
               className="industry-card group block"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={industry.image}
                 alt={industry.name}
                 className="w-full object-cover"

@@ -54,8 +54,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="mb-5">
-              <img
-                src="/images/saffhire-logo.png"
+              <img loading="lazy" decoding="async"
+                src="/images/saffhire-logo.png" width={2637} height={683}
                 alt="SaffHire Background Screening"
                 className="h-12 w-auto object-contain"
                 style={{ filter: "brightness(0) invert(1)" }}
