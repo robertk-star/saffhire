@@ -186,7 +186,7 @@ export default function AppLinksManager() {
             </label>
 
             <div className="flex flex-wrap gap-3 md:col-span-2">
-              <button type="submit" className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+              <button type="submit" className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
                 Add link
               </button>
               <button type="button" onClick={resetLinks} className="rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">

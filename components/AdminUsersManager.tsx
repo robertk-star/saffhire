@@ -37,7 +37,7 @@ export default function AdminUsersManager({ initialUsers }: { initialUsers: Admi
           </div>
         </div>
 
-        <button className="mt-6 rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Create user</button>
+        <button className="mt-6 rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">Create user</button>
       </form>
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
@@ -135,7 +135,7 @@ function UserRow({
               Account is active
             </label>
 
-            <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Save changes</button>
+            <button className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">Save changes</button>
           </form>
         </td>
       </tr>

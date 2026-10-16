@@ -65,7 +65,7 @@ export default async function SocialDraftsPage() {
                 <option key={blog.slug} value={blog.slug}>{blog.title}</option>
               ))}
             </select>
-            <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Generate Social Posts</button>
+            <button className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">Generate Social Posts</button>
           </div>
           <p className="text-xs text-gray-500 mt-3">This creates the social post text and attaches the blog image first. Use Generate AI Image to create custom post images one at a time.</p>
         </form>

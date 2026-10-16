@@ -137,7 +137,7 @@ export default function HeroSlider() {
                   <a
                     href="/#contact"
                     className="btn-green"
-                    style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#22c55e", color: "#fff", textDecoration: "none", fontWeight: 700, padding: "12px 32px" }}
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#17843f", color: "#fff", textDecoration: "none", fontWeight: 700, padding: "12px 32px" }}
                   >
                     {slide.cta}
                     <ChevronRight size={18} />

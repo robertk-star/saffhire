@@ -163,7 +163,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSlider />
-        <section style={{ backgroundColor: "#22c55e" }} className="py-3">
+        <section style={{ backgroundColor: "#17843f" }} className="py-3">
           <p className="text-center text-white font-bold tracking-wide" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Veteran-Owned Small Business &middot; Headquartered in Frisco, TX &middot; Serving Employers Nationwide
           </p>

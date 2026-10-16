@@ -43,7 +43,7 @@ export default function ManufacturingPage() {
           </div>
         </div>
       </section>
-      <section style={{ backgroundColor: "#22c55e" }}>
+      <section style={{ backgroundColor: "#17843f" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-green-400">
             {stats.map((stat) => (

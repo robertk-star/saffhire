@@ -136,7 +136,7 @@ export default async function SocialPostingSettingsPage() {
             <p><strong>Last updated:</strong> {settings.updated_at ? new Date(settings.updated_at).toLocaleString() : 'Not saved yet'}</p>
           </div>
 
-          <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+          <button className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
             Save Social Posting Settings
           </button>
         </form>

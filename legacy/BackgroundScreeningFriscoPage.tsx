@@ -32,7 +32,7 @@ export default function BackgroundScreeningFriscoPage() {
               </p>
               <a
                 href="/#contact"
-                className="inline-block px-8 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors"
+                className="inline-block px-8 py-3 bg-[#17843f] text-white font-bold rounded-lg hover:bg-[#116b32] transition-colors"
               >
                 Get a Free Quote
               </a>
@@ -106,7 +106,7 @@ export default function BackgroundScreeningFriscoPage() {
                 </div>
                 <a
                   href="/#contact"
-                  className="block w-full text-center px-6 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors"
+                  className="block w-full text-center px-6 py-3 bg-[#17843f] text-white font-bold rounded-lg hover:bg-[#116b32] transition-colors"
                 >
                   Get a Free Quote
                 </a>

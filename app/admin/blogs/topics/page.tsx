@@ -78,7 +78,7 @@ export default async function BlogTopicAdminPage() {
               <label className="block text-sm font-bold text-gray-700 mb-2">Keywords</label>
               <textarea name="keywords" rows={2} className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" placeholder="Separate keywords with commas or new lines." />
             </div>
-            <button className="w-fit rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+            <button className="w-fit rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
               Add Topic
             </button>
           </form>
@@ -105,7 +105,7 @@ export default async function BlogTopicAdminPage() {
                   <p className="text-sm text-gray-500">{topic.category}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <button name="action" value="update" className="rounded-md bg-green-500 px-4 py-2 text-sm font-bold text-white hover:bg-green-600">
+                  <button name="action" value="update" className="rounded-md bg-[#17843f] px-4 py-2 text-sm font-bold text-white hover:bg-[#116b32]">
                     Save
                   </button>
                   <button name="action" value="delete" className="rounded-md border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-700 hover:bg-red-100">

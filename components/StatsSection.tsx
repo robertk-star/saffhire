@@ -11,7 +11,7 @@ export default function StatsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {stats.map((stat, i) => (
             <div key={stat.label} className={`text-center ${i < stats.length - 1 ? "lg:border-r border-gray-200" : ""}`}>
-              <p className="text-4xl lg:text-5xl font-black mb-2" style={{ fontFamily: "'Montserrat', sans-serif", color: "#22c55e" }}>
+              <p className="text-4xl lg:text-5xl font-black mb-2" style={{ fontFamily: "'Montserrat', sans-serif", color: "#17843f" }}>
                 {stat.number}
               </p>
               <p className="font-bold text-gray-900 text-sm mb-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>

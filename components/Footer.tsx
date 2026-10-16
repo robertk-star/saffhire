@@ -94,12 +94,12 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4
+            <h2
               className="text-white font-bold text-sm mb-5 tracking-wider uppercase"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Quick Links
-            </h4>
+            </h2>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -118,12 +118,12 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4
+            <h2
               className="text-white font-bold text-sm mb-5 tracking-wider uppercase"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Our Services
-            </h4>
+            </h2>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.label}>
@@ -142,12 +142,12 @@ export default function Footer() {
 
           {/* Coverage */}
           <div>
-            <h4
+            <h2
               className="text-white font-bold text-sm mb-5 tracking-wider uppercase"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Nationwide Coverage
-            </h4>
+            </h2>
             <div className="space-y-3">
               <p className="text-gray-400 text-sm leading-relaxed">
                 SaffHire provides background screening services nationwide for employers across all 50 states.
@@ -160,12 +160,12 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4
+            <h2
               className="text-white font-bold text-sm mb-5 tracking-wider uppercase"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Contact
-            </h4>
+            </h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <div
@@ -184,7 +184,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="mt-6">
-                <p className="text-gray-500 text-xs mb-3">FCRA & EEOC Compliant</p>
+                <p className="text-gray-400 text-xs mb-3">FCRA & EEOC Compliant</p>
                 <div
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
                   style={{ backgroundColor: "rgba(34,197,94,0.15)", color: "#22c55e" }}
@@ -204,17 +204,17 @@ export default function Footer() {
         style={{ borderColor: "rgba(255,255,255,0.08)" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-400 text-sm">
             © {currentYear}. All Rights Reserved. SaffHire Background Screening
           </p>
           <div className="flex items-center gap-6">
-            <a href="/privacy-policy" className="text-gray-500 text-xs hover:text-gray-300 transition-colors">
+            <a href="/privacy-policy" className="text-gray-400 text-xs hover:text-gray-300 transition-colors">
               Privacy Policy
             </a>
-            <a href="/terms-of-service" className="text-gray-500 text-xs hover:text-gray-300 transition-colors">
+            <a href="/terms-of-service" className="text-gray-400 text-xs hover:text-gray-300 transition-colors">
               Terms of Service
             </a>
-            <a href="/fcra-news" className="text-gray-500 text-xs hover:text-gray-300 transition-colors">
+            <a href="/fcra-news" className="text-gray-400 text-xs hover:text-gray-300 transition-colors">
               FCRA Notice
             </a>
           </div>

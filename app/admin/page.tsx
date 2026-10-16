@@ -35,7 +35,7 @@ export default async function AdminHomePage() {
             <a key={tool.key} href={tool.href} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
               <div className="text-xl font-black text-slate-900">{tool.label}</div>
               <div className="mt-2 text-sm text-slate-500">Open {tool.label}</div>
-              <div className="mt-5 inline-flex rounded-md bg-green-500 px-4 py-2 text-sm font-bold text-white">Open</div>
+              <div className="mt-5 inline-flex rounded-md bg-[#17843f] px-4 py-2 text-sm font-bold text-white">Open</div>
             </a>
           ))}
         </div>

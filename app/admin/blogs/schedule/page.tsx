@@ -80,7 +80,7 @@ export default async function BlogSchedulePage() {
             <p><strong>Hour:</strong> {hourLabel(settings.hour_local)}</p>
           </div>
 
-          <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Save Schedule</button>
+          <button className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">Save Schedule</button>
         </form>
       </div>
     </main>

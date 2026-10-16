@@ -17,7 +17,7 @@ export default async function DriverPipelineResetPage({ searchParams }: { search
         <input type="hidden" name="token" value={params.token || ''} />
         <label className="block text-sm font-bold text-gray-700 mb-2">New password</label>
         <input type="password" name="password" minLength={8} required className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm" />
-        <button type="submit" className="mt-6 w-full rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white">Save password</button>
+        <button type="submit" className="mt-6 w-full rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white">Save password</button>
       </form>
     </main>
   );

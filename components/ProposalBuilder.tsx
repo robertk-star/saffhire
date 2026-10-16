@@ -416,7 +416,7 @@ export default function ProposalBuilder({ initialPricingPages }: { initialPricin
             <h2 className="text-2xl font-black text-slate-900">Generate proposal</h2>
             <p className="mt-1 text-sm text-slate-600">{selectedCount} section{selectedCount === 1 ? '' : 's'} selected. Open the preview, review it, then use Print to save as PDF.</p>
           </div>
-          <button type="button" disabled={!canPreview} onClick={buildPreview} className="rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-gray-300">
+          <button type="button" disabled={!canPreview} onClick={buildPreview} className="rounded-md bg-[#17843f] px-6 py-3 text-sm font-bold text-white hover:bg-[#116b32] disabled:cursor-not-allowed disabled:bg-gray-300">
             Preview proposal
           </button>
         </div>

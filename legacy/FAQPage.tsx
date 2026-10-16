@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
-import { ChevronDown } from "lucide-react";
 
 interface FAQItem {
   question: string;
@@ -28,6 +26,11 @@ const faqSections: FAQSection[] = [
         answer: "No. SaffHire has no setup fees and no monthly minimums. You only pay for the screens you run.",
       },
       {
+        question: "What information do I need from the applicant?",
+        answer:
+          "Just the applicant's name and email address. SaffHire sends the applicant a secure link to provide their own personal information and sign the required disclosure and authorization, so you don't have to collect sensitive details yourself.",
+      },
+      {
         question: "How do I submit a background check request?",
         answer:
           "Enter your applicant's name and email address in your SaffHire portal. We send them a secure digital link to complete their authorization and personal information. You receive the results directly in your portal.",
@@ -37,6 +40,11 @@ const faqSections: FAQSection[] = [
   {
     title: "Turnaround Times",
     items: [
+      {
+        question: "Which searches come back in minutes?",
+        answer:
+          "Instant searches usually return in minutes: Motor Vehicle Reports (MVR), Sex Offender registry, Global Security Watch List, SSN Trace, state database searches and the National Criminal Database search. State fees may apply to MVRs.",
+      },
       {
         question: "How long does a background check take?",
         answer:
@@ -93,6 +101,21 @@ const faqSections: FAQSection[] = [
     title: "Types of Searches",
     items: [
       {
+        question: "What is included in the National Criminal Database search?",
+        answer:
+          "The National Criminal Database search is usually our minimum package. It includes an SSN Trace, a Sex Offender registry search, the Global Security Watch List and the National Criminal Database search itself. These searches usually return in minutes.",
+      },
+      {
+        question: "Does a national database search replace a county criminal search?",
+        answer:
+          "No. National criminal databases are aggregated from many sources and are incomplete. A county criminal search goes directly to the court for that jurisdiction, so many employers add county searches for the places an applicant has lived.",
+      },
+      {
+        question: "What does an MVR check show?",
+        answer:
+          "A Motor Vehicle Report (MVR) shows an applicant's driving record from the state, such as license status and driving history. MVRs usually return in minutes. State fees may apply.",
+      },
+      {
         question: "What is the difference between a national criminal search and a county criminal search?",
         answer:
           "A national criminal database search checks a large aggregated database of records from across the country. National databases are incomplete. A county criminal search goes directly to the courthouse and retrieves court records for that jurisdiction.",
@@ -123,6 +146,10 @@ const faqSections: FAQSection[] = [
           "SaffHire is a Veteran-Owned company founded by Robert Krebsbach, John Waak and Jody Thigpen.",
       },
       {
+        question: "Do you screen applicants outside of Texas?",
+        answer: "Yes. SaffHire is based in Frisco, TX and screens applicants nationwide for employers across the country.",
+      },
+      {
         question: "Where is SaffHire located, and what areas do you serve?",
         answer: "SaffHire is headquartered in Frisco, TX and serves employers nationwide.",
       },
@@ -146,6 +173,10 @@ const faqSections: FAQSection[] = [
         answer: "Yes. We offer custom pricing for high-volume clients, staffing agencies, and nonprofits. Contact us for a custom quote.",
       },
       {
+        question: "Can I see my results any time?",
+        answer: "Yes. Your SaffHire portal is available 24/7, so you can order searches, check status and view completed reports whenever you need to.",
+      },
+      {
         question: "Is my data secure?",
         answer: "SaffHire uses bank-level encryption to protect applicant and client data. Our portal is available 24/7 with secure access.",
       },
@@ -164,23 +195,19 @@ const generateFAQSchema = () => {
   return { "@context": "https://schema.org", "@type": "FAQPage", mainEntity };
 };
 
-function FAQAccordion({ section }: { section: FAQSection }) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+function FAQList({ section }: { section: FAQSection }) {
   return (
     <div className="mb-12">
       <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>{section.title}</h2>
       <div className="space-y-3">
-        {section.items.map((item, index) => (
+        {section.items.map((item) => (
           <div key={item.question} className="border border-gray-200 rounded-lg overflow-hidden hover:border-green-400 transition-colors">
-            <button onClick={() => setExpandedIndex(expandedIndex === index ? null : index)} className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors">
+            <div className="px-6 py-4 bg-white">
               <h3 className="text-left font-semibold text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>{item.question}</h3>
-              <ChevronDown size={20} className={`text-green-500 flex-shrink-0 transition-transform ${expandedIndex === index ? "rotate-180" : ""}`} />
-            </button>
-            {expandedIndex === index && (
-              <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                <p className="text-gray-700 leading-relaxed">{item.answer}</p>
-              </div>
-            )}
+            </div>
+            <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+              <p className="text-gray-700 leading-relaxed">{item.answer}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -207,10 +234,10 @@ export default function FAQPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="mb-12 p-4 border-l-4 border-green-500 bg-gray-50 text-gray-800">
             Looking for what each package includes and how long it takes? See{" "}
-            <a href="/packages" className="font-bold text-green-600 underline">Standard Packages &amp; Turnaround</a>.
+            <a href="/packages" className="font-bold text-green-700 underline">Standard Packages &amp; Turnaround</a>.
           </p>
           {faqSections.map((section) => (
-            <FAQAccordion key={section.title} section={section} />
+            <FAQList key={section.title} section={section} />
           ))}
         </div>
       </section>

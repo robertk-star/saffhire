@@ -64,7 +64,7 @@ export default function PricingQuotePreview() {
     <div className="space-y-6">
       <div className="flex flex-col gap-3 print:hidden sm:flex-row sm:items-center sm:justify-between">
         <a href="/admin/pricing" className="text-sm font-bold text-green-700 hover:underline">Back to pricing builder</a>
-        <button onClick={() => window.print()} className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Print quote</button>
+        <button onClick={() => window.print()} className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">Print quote</button>
       </div>
 
       <section className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm print:border-0 print:p-0 print:shadow-none">

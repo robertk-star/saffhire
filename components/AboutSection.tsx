@@ -38,7 +38,7 @@ export default function AboutSection() {
                   <RefreshCw size={20} style={{ color: "#22c55e" }} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Stay Compliant</h4>
+                  <h3 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Stay Compliant</h3>
                   <p className="text-sm text-gray-600">
                     SaffHire supports FCRA-compliant screening workflows and EEOC-aware hiring practices.
                   </p>
@@ -49,7 +49,7 @@ export default function AboutSection() {
                   <BarChart2 size={20} style={{ color: "#22c55e" }} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Candidate Screening</h4>
+                  <h3 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Candidate Screening</h3>
                   <p className="text-sm text-gray-600">
                     Find out quickly and efficiently if a candidate is going to be a good fit for your company.
                   </p>
@@ -60,7 +60,7 @@ export default function AboutSection() {
                   <Shield size={20} style={{ color: "#22c55e" }} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Data Compliance</h4>
+                  <h3 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Data Compliance</h3>
                   <p className="text-sm text-gray-600">
                     Bank-level encrypted security with 24/7 access to your screening portal.
                   </p>
@@ -71,24 +71,24 @@ export default function AboutSection() {
 
           <div className="relative">
             <img loading="lazy" decoding="async" src="/images/about-team.webp" alt="SaffHire team" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 480 }} />
-            <div className="absolute -bottom-6 -left-6 rounded-lg p-6 shadow-lg" style={{ backgroundColor: "#22c55e" }}>
+            <div className="absolute -bottom-6 -left-6 rounded-lg p-6 shadow-lg" style={{ backgroundColor: "#17843f" }}>
               <p className="text-white text-4xl font-black" style={{ fontFamily: "'Montserrat', sans-serif" }}>5+</p>
               <p className="text-white text-sm font-semibold mt-1">Years of Success</p>
-              <p className="text-green-100 text-xs mt-1">Since 2020</p>
+              <p className="text-white text-xs mt-1">Since 2020</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8" style={{ backgroundColor: "#22c55e" }}>
+        <div className="rounded-xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8" style={{ backgroundColor: "#17843f" }}>
           <div>
             <p className="text-white text-sm font-bold tracking-widest mb-2" style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.12em" }}>FREE CONSULTATION</p>
             <h3 className="text-white text-2xl lg:text-3xl font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>Schedule for Free Consultation</h3>
-            <p className="text-green-100 mt-2">
+            <p className="text-white mt-2">
               Call us at{" "}
               <a href="tel:8885881733" className="text-white font-bold underline">888-588-1733</a>
             </p>
           </div>
-          <a href="/#contact" className="flex-shrink-0 bg-white text-green-600 font-bold px-8 py-3 rounded-sm hover:bg-gray-100 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          <a href="/#contact" className="flex-shrink-0 bg-white text-green-700 font-bold px-8 py-3 rounded-sm hover:bg-gray-100 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Contact Us
           </a>
         </div>

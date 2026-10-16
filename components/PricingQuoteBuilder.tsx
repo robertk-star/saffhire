@@ -450,7 +450,7 @@ export default function PricingQuoteBuilder({ initialItems }: { initialItems: Pr
             </button>
           ))}
         </div>
-        <button type="button" disabled={!canPreview} onClick={buildQuotePreview} className="mt-6 rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-gray-300">Generate formal quote preview</button>
+        <button type="button" disabled={!canPreview} onClick={buildQuotePreview} className="mt-6 rounded-md bg-[#17843f] px-6 py-3 text-sm font-bold text-white hover:bg-[#116b32] disabled:cursor-not-allowed disabled:bg-gray-300">Generate formal quote preview</button>
       </section>
     </div>
   );

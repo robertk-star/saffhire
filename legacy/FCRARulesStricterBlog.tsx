@@ -44,7 +44,7 @@ function NumberedCard({
     <div className="flex gap-5 p-5 rounded-xl border border-gray-100 bg-white shadow-sm">
       <div
         className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-white text-sm"
-        style={{ backgroundColor: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}
+        style={{ backgroundColor: "#17843f", fontFamily: "'Montserrat', sans-serif" }}
       >
         {number}
       </div>

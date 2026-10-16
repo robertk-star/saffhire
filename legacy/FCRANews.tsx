@@ -265,7 +265,7 @@ export default function FCRANews() {
           <a
             href="/#contact"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-sm font-bold text-white"
-            style={{ backgroundColor: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}
+            style={{ backgroundColor: "#17843f", fontFamily: "'Montserrat', sans-serif" }}
           >
             Contact Us <ArrowRight size={16} />
           </a>

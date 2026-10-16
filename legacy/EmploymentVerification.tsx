@@ -45,7 +45,7 @@ export default function EmploymentVerification() {
             <a
               href="/#contact"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-sm font-bold text-white"
-              style={{ backgroundColor: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}
+              style={{ backgroundColor: "#17843f", fontFamily: "'Montserrat', sans-serif" }}
             >
               Get a Quote <ArrowRight size={16} />
             </a>
@@ -256,7 +256,7 @@ export default function EmploymentVerification() {
           <a
             href="/#contact"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-sm font-bold text-white"
-            style={{ backgroundColor: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}
+            style={{ backgroundColor: "#17843f", fontFamily: "'Montserrat', sans-serif" }}
           >
             Get Started <ArrowRight size={16} />
           </a>
