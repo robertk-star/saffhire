@@ -49,10 +49,8 @@ export default function Home() {
       "email": "info@saffhire.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "3245 Main St., Suite 235-200",
         "addressLocality": "Frisco",
         "addressRegion": "TX",
-        "postalCode": "75034",
         "addressCountry": "US"
       },
       "areaServed": {

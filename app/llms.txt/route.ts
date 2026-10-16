@@ -7,7 +7,7 @@ import { openKnowledgePages } from '@/data/openKnowledgePages';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com';
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace('https://www.saffhire.com', 'https://saffhire.com');
 
   const mainPages = Object.entries(seoMetadata)
     .map(([path, meta]) => `- ${siteUrl}${path}: ${meta.title} — ${meta.description}`)

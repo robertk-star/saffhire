@@ -23,10 +23,8 @@ export const organizationSchema = {
   keywords: "Veteran-Owned, background screening, pre-employment screening",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "3245 Main St., Suite 235-200",
     addressLocality: "Frisco",
     addressRegion: "TX",
-    postalCode: "75034",
     addressCountry: "US",
   },
   areaServed: {
