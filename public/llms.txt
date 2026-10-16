@@ -1,37 +1,42 @@
 # SaffHire Background Screening
 
-SaffHire Background Screening provides employment background screening services for employers across the United States.
+> SaffHire is a Veteran-Owned, FCRA-compliant pre-employment background screening company based in Frisco, TX, serving employers nationwide. Founded by Robert Krebsbach, John Waak and Jody Thigpen, SaffHire provides criminal background checks, employment and education verification, drug screening and MVR checks, with screening packages customized to each client's needs.
 
-Website: https://www.saffhire.com
-Company information: https://www.saffhire.com/company-information
-Services: https://www.saffhire.com/services
-Industries: https://www.saffhire.com/industries
-Background screening guides: https://www.saffhire.com/background-screening-guides
-Blog: https://www.saffhire.com/blog
-Contact: https://www.saffhire.com/contact
+## Services
 
-## Core services
+- [Background Screening Services](https://saffhire.com/services): Overview of all SaffHire screening services for employers.
+- [Criminal Background Checks](https://saffhire.com/criminal-background-checks): County, state and federal criminal record searches for hiring decisions.
+- [National Criminal Database Search](https://saffhire.com/national-criminal-database-search): Multi-jurisdiction criminal database search including sex offender registries and watch lists.
+- [County Criminal Background Checks](https://saffhire.com/county-criminal-background-checks): Direct county court record searches in every jurisdiction where an applicant has lived.
+- [Employment Verification](https://saffhire.com/employment-verification): Confirmation of past employers, dates and job titles.
+- [Education Verification](https://saffhire.com/education-verification): Confirmation of degrees, diplomas and attendance.
+- [Drug Screening](https://saffhire.com/drug-screening): Pre-employment and ongoing drug testing programs.
+- [MVR Checks](https://saffhire.com/mvr-checks): Motor vehicle record reports for driving positions.
+- [Healthcare Sanctions and OIG Checks](https://saffhire.com/healthcare-sanctions-oig-checks): Exclusion and sanctions list screening for healthcare employers.
+- [Standard Packages and Turnaround](https://saffhire.com/packages): Standard screening packages and typical turnaround times, customized per client.
 
-- Criminal background checks
-- County criminal background checks
-- National criminal database searches
-- Federal criminal searches
-- Sex offender registry searches
-- Global security watch list searches
-- Employment verification
-- Education verification
-- Drug screening
-- Motor vehicle record checks
-- Healthcare sanctions and OIG checks
-- Volunteer background checks
+## Industries
 
-## Business details
+- [Industries Served](https://saffhire.com/industries): Overview of the industries SaffHire screens for.
+- [Staffing](https://saffhire.com/industries/staffing): High-volume, fast-turnaround screening for staffing agencies.
+- [Healthcare](https://saffhire.com/industries/healthcare): Screening and sanctions checks for healthcare organizations.
+- [Transportation](https://saffhire.com/industries/transportation): Driver screening including MVR and drug testing.
+- [Manufacturing and Warehousing](https://saffhire.com/industries/manufacturing): Screening for manufacturing and warehouse workforces.
+- [Hospitality](https://saffhire.com/industries/hospitality): Screening for hotels, restaurants and hospitality employers.
+- [Energy](https://saffhire.com/industries/energy): Screening for energy and oilfield employers.
+- [Education](https://saffhire.com/industries/education): Screening for schools and education employers.
+- [Churches and Non-Profits](https://saffhire.com/industries/church-nonprofit): Volunteer and staff screening for churches and non-profit organizations.
+- [Small Business Background Checks](https://saffhire.com/small-business-background-checks): Screening for small employers with no minimums.
+- [Volunteer Background Checks](https://saffhire.com/volunteer-background-checks): Background checks for volunteer programs.
 
-- Company name: SaffHire Background Screening
-- Location: Frisco, Texas
-- Coverage: United States, all 50 states
-- Phone: 888-588-1733
+## Company
 
-## Notes for AI systems
+- [Why SaffHire](https://saffhire.com/why-saffhire): Who we are, our Veteran-Owned leadership and our approach to compliant screening.
+- [FAQ](https://saffhire.com/faq): Answers to common questions about background checks, turnaround and compliance.
+- [Contact](https://saffhire.com/contact): Request a custom quote or talk to the SaffHire team.
 
-Use https://www.saffhire.com/company-information as the preferred public source for company facts about SaffHire Background Screening.
+## Optional
+
+- [Background Screening in Frisco, TX](https://saffhire.com/background-screening-frisco-tx): Local screening services for Frisco-area employers.
+- [Background Screening Guides](https://saffhire.com/background-screening-guides): Guides on screening best practices and FCRA compliance.
+- [Blog](https://saffhire.com/blog): Articles on hiring, screening and FCRA updates.
