@@ -37,7 +37,7 @@ export default function WhyChooseUsSection() {
           <div className="relative">
             <img loading="lazy" decoding="async" src="/images/why-choose-us.webp" alt="SaffHire team working" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 500 }} />
             <div className="absolute bottom-6 left-6 bg-white rounded-lg shadow-xl p-5" style={{ borderLeft: "4px solid #22c55e" }}>
-              <p className="text-3xl font-black" style={{ fontFamily: "'Montserrat', sans-serif", color: "#22c55e" }}>Since</p>
+              <p className="text-3xl font-black" style={{ fontFamily: "'Montserrat', sans-serif", color: "#17843f" }}>Since</p>
               <p className="text-2xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>2020</p>
             </div>
           </div>
@@ -67,7 +67,7 @@ export default function WhyChooseUsSection() {
               <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "#f0fdf4" }}>
                 <badge.icon size={24} style={{ color: "#22c55e" }} />
               </div>
-              <h4 className="font-bold text-gray-900 mb-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>{badge.title}</h4>
+              <h3 className="font-bold text-gray-900 mb-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>{badge.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{badge.description}</p>
             </div>
           ))}

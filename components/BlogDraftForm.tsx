@@ -80,7 +80,7 @@ export default function BlogDraftForm({ draft }: { draft?: BlogDraft | null }) {
             <button name="action" value="approve" className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
               Approve
             </button>
-            <button name="action" value="publish" className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+            <button name="action" value="publish" className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
               Publish
             </button>
             <button name="action" value="changes_requested" className="rounded-md bg-orange-500 px-5 py-3 text-sm font-bold text-white hover:bg-orange-600">

@@ -183,7 +183,7 @@ function RiskCard({ title, body }: { title: string; body: string }) {
 function NumberedStep({ number, title, body }: { number: string; title: string; body: string }) {
   return (
     <div className="flex gap-5 p-5 rounded-xl border border-gray-100 bg-white shadow-sm">
-      <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-white text-sm" style={{ backgroundColor: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}>{number}</div>
+      <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-white text-sm" style={{ backgroundColor: "#17843f", fontFamily: "'Montserrat', sans-serif" }}>{number}</div>
       <div>
         <h4 className="font-bold text-gray-900 mb-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>{title}</h4>
         <p className="text-sm text-gray-600 leading-relaxed">{body}</p>

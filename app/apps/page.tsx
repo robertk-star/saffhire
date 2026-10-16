@@ -48,7 +48,7 @@ export default async function AppsPage({ searchParams }: { searchParams?: Promis
             <div className="flex flex-wrap gap-3">
               <a
                 href="/apps/add"
-                className="inline-flex rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600"
+                className="inline-flex rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]"
               >
                 Add Links
               </a>

@@ -270,7 +270,7 @@ export default function ProposalPreview() {
             type="button"
             onClick={downloadPdf}
             disabled={exporting}
-            className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {exporting ? 'Creating PDF…' : 'Download PDF'}
           </button>

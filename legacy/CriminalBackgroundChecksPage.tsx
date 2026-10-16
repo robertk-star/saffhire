@@ -56,13 +56,13 @@ export default function CriminalBackgroundChecksPage() {
           </div>
         </div>
       </section>
-      <section style={{ backgroundColor: "#22c55e" }}>
+      <section style={{ backgroundColor: "#17843f" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-green-400">
             {stats.map((stat) => (
               <div key={stat.label} className="py-6 px-6 text-center">
                 <p className="text-2xl lg:text-3xl font-black text-white mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>{stat.value}</p>
-                <p className="text-sm text-green-100">{stat.label}</p>
+                <p className="text-sm text-white">{stat.label}</p>
               </div>
             ))}
           </div>

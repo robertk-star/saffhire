@@ -53,7 +53,7 @@ export default async function BlogAdminPage() {
             <a href="/api/cron/generate-blog-draft" className="rounded-md bg-blue-500 px-5 py-3 text-sm font-bold text-white hover:bg-blue-600">
               Generate Blog Draft Now
             </a>
-            <a href="/admin/blogs/new" className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+            <a href="/admin/blogs/new" className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
               New Draft
             </a>
             <form action="/api/admin/logout" method="post">

@@ -95,9 +95,9 @@ export default function IndustriesSection() {
               <div className="overlay">
                 <div className="flex items-end justify-between">
                   <div>
-                    <h4 className="text-white font-bold text-base mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                    <h3 className="text-white font-bold text-base mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                       {industry.name}
-                    </h4>
+                    </h3>
                     <p className="text-gray-300 text-xs leading-relaxed hidden group-hover:block transition-all">
                       {industry.description}
                     </p>

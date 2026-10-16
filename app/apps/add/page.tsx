@@ -99,7 +99,7 @@ export default async function AddAppLinkPage({ searchParams }: { searchParams?: 
               <input name="sort_order" type="number" defaultValue="100" className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm" />
             </label>
             <div className="flex items-end gap-3">
-              <button className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+              <button className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
                 Add link
               </button>
               <a href="/apps" className="rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">

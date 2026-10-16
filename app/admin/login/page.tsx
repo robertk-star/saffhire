@@ -35,7 +35,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
           placeholder="Enter password"
           required
         />
-        <button type="submit" className="mt-6 w-full rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">
+        <button type="submit" className="mt-6 w-full rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">
           Log In
         </button>
       </form>

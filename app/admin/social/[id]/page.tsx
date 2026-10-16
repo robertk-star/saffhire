@@ -107,7 +107,7 @@ export default async function SocialDraftDetailPage({ params }: { params: Promis
 
           <div className="flex flex-wrap gap-3">
             <button name="action" value="save" className="rounded-md bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800">Save Draft</button>
-            <button name="action" value="approve" className="rounded-md bg-green-500 px-5 py-3 text-sm font-bold text-white hover:bg-green-600">Approve</button>
+            <button name="action" value="approve" className="rounded-md bg-[#17843f] px-5 py-3 text-sm font-bold text-white hover:bg-[#116b32]">Approve</button>
             <button name="action" value="reject" className="rounded-md bg-orange-500 px-5 py-3 text-sm font-bold text-white hover:bg-orange-600">Reject</button>
           </div>
         </form>

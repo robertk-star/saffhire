@@ -726,7 +726,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         </div>
         )}
         <div className="mt-6 flex flex-wrap gap-3">
-          <button type="button" disabled={!sectionCount} onClick={openPreview} className="rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white hover:bg-green-600 disabled:bg-gray-300">Preview proposal</button>
+          <button type="button" disabled={!sectionCount} onClick={openPreview} className="rounded-md bg-[#17843f] px-6 py-3 text-sm font-bold text-white hover:bg-[#116b32] disabled:bg-gray-300">Preview proposal</button>
           {alacarte ? null : <button type="button" disabled={busy} onClick={savePackagesAsSheets} className={btn}>Save packages as new price sheet(s)</button>}
         </div>
       </section>
