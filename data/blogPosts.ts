@@ -17,6 +17,9 @@ export interface BlogPost {
   image: string;
 }
 
+import { texasLawsListing } from "@/legacy/blog/TexasBackgroundCheckLaws";
+import { dotClearinghouseListing } from "@/legacy/blog/DotDrugTestingClearinghouse";
+
 export const blogPosts: BlogPost[] = [
   fcraBasicsListing,
   criminalCheckTypesListing,
@@ -64,6 +67,8 @@ export const blogPosts: BlogPost[] = [
     author: "SaffHire Compliance Team",
     image: "/images/blog-trucking.webp",
   },
+  texasLawsListing,
+  dotClearinghouseListing,
   {
     slug: "fcra-compliance-checklist-employers-2026",
     title: "FCRA Compliance Checklist for Employers in 2026",
