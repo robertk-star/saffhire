@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 import PageSEO from "@/components/PageSEO";
 
 import {
@@ -27,7 +28,7 @@ const searchTypes = [
 
 const stats = [
   { value: "Minutes", label: "National Search Results" },
-  { value: "24-48 hrs", label: "County Search Turnaround" },
+  { value: "No Minimums", label: "No Setup Fees" },
   { value: "FCRA-aware", label: "Screening Workflows" },
   { value: "24/7", label: "Portal Access" },
 ];
@@ -84,6 +85,7 @@ export default function CriminalBackgroundChecksPage() {
           </div>
         </div>
       </section>
+      <LegacySlot />
       <Footer />
     </div>
   );

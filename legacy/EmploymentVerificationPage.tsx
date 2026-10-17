@@ -5,6 +5,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 import PageSEO from "@/components/PageSEO";
 
 import {
@@ -66,6 +67,7 @@ export default function EmploymentVerificationPage() {
           </div>
         </div>
       </section>
+      <LegacySlot />
       <Footer />
     </div>
   );

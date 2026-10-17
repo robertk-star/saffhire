@@ -5,6 +5,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 import PageSEO from "@/components/PageSEO";
 
 import {
@@ -23,7 +24,7 @@ const features = [
   { icon: FlaskConical, title: "5, 10, and 12 Panel Testing", description: "Standard and expanded panels for pre-employment and ongoing screening." },
   { icon: Clock, title: "Fast Turnaround", description: "Negative results typically return quickly so hiring stays on schedule." },
   { icon: ShieldCheck, title: "DOT and Non-DOT Options", description: "Screening programs for regulated and non-regulated workforces." },
-  { icon: CheckCircle2, title: "Nationwide Collection Network", description: "Convenient collection sites so candidates can complete testing quickly." },
+  { icon: CheckCircle2, title: "Labcorp Collection Sites", description: "Order in the SaffHire portal; candidates test at Labcorp facilities and results come back through the portal." },
 ];
 
 export default function DrugScreeningPage() {
@@ -66,6 +67,7 @@ export default function DrugScreeningPage() {
           </div>
         </div>
       </section>
+      <LegacySlot />
       <Footer />
     </div>
   );
