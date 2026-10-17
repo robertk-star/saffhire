@@ -3,7 +3,12 @@ import ContentPage from "@/components/ContentPage";
 import { altMeta, altPage, altPath } from "@/data/alternativePage";
 import { breadcrumbSchema, serviceSchema } from "@/lib/structuredData";
 
-export const metadata: Metadata = { title: altMeta.title, description: altMeta.description };
+// noindex for now (Robert, 2026-10-17); also excluded from the sitemap.
+export const metadata: Metadata = {
+  title: altMeta.title,
+  description: altMeta.description,
+  robots: { index: false, follow: true },
+};
 
 export default function Page() {
   const schemas = [

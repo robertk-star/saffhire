@@ -23,6 +23,8 @@ const excludedRoutes = new Set([
   '/saffhire-vs-checkr-for-staffing-agencies',
   // noindex: internal-facing open-knowledge page
   '/open-knowledge/conversion-goals',
+  // noindex for now
+  '/sterling-first-advantage-alternative',
 ]);
 
 const extraPublicRoutes = [
@@ -37,7 +39,6 @@ const extraPublicRoutes = [
   '/background-screening-allen-tx',
   '/volunteer-background-checks',
   '/small-business-background-checks',
-  '/sterling-first-advantage-alternative',
   '/county-criminal-background-checks',
   '/national-criminal-database-search',
   '/healthcare-sanctions-oig-checks',
