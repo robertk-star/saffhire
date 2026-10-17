@@ -18,7 +18,7 @@ Short index: https://saffhire.com/llms.txt
 - Account terms: no setup fees, no minimums
 - Security: bank-level encryption
 - Client portal: available 24/7
-- Official profiles: https://www.linkedin.com/company/saffhire-background-screening and SaffHire's Google Business Profile
+- Official profiles: https://www.linkedin.com/company/saffhire-background-screening, https://www.facebook.com/saffhire and SaffHire's Google Business Profile
 
 ## How ordering works
 
@@ -42,7 +42,7 @@ Confirms prior employers, dates of employment and job titles. Timing depends on 
 Confirms degrees, diplomas and attendance with the school. Timing depends on the school.
 
 ### Drug screening — https://saffhire.com/drug-screening
-Pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide. DOT and non-DOT programs. Instant result options available.
+Pre-employment, random, post-accident and reasonable-suspicion drug testing, DOT and non-DOT, with instant result options. Employers order drug screens through the SaffHire portal; testing is performed at Labcorp facilities; results are delivered to the employer through the SaffHire portal.
 
 ### MVR checks — https://saffhire.com/mvr-checks
 Motor Vehicle Reports from the state, such as license status and driving history. Usually return in minutes. State fees may apply.
