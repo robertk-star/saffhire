@@ -49,7 +49,7 @@ export const blogPosts: BlogPost[] = [
     slug: "fcra-compliance-checklist-employers-2026",
     title: "FCRA Compliance Checklist for Employers in 2026",
     excerpt:
-      "A step-by-step FCRA compliance checklist for high-turnover employers. Covers standalone disclosures, written authorization, adverse action notices, 2026 regulatory updates, and the most common violations that lead to costly lawsuits.",
+      "A step-by-step FCRA compliance checklist for high-turnover employers. Covers standalone disclosures, written authorization, 2026 regulatory updates, and the most common violations that lead to costly lawsuits.",
     category: "Compliance",
     date: "March 10, 2026",
     readTime: "8 min read",

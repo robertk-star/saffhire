@@ -76,11 +76,6 @@ const faqSections: FAQSection[] = [
           "Yes. Under the FCRA, an employer must give the applicant a clear written disclosure, in a document that consists solely of the disclosure, and get the applicant's written authorization before ordering a background check for employment purposes. SaffHire's applicant invitation workflow collects the disclosure acknowledgment and authorization electronically.",
       },
       {
-        question: "What is the adverse action process?",
-        answer:
-          "If you may take adverse action, such as not hiring someone, based in whole or in part on a background check, the FCRA requires a pre-adverse action notice with a copy of the report and A Summary of Your Rights Under the Fair Credit Reporting Act, a reasonable waiting period, and then a final adverse action notice. Some states and cities add their own requirements.",
-      },
-      {
         question: "Can an applicant dispute something on their report?",
         answer:
           "Yes. Applicants can dispute information they believe is inaccurate or incomplete. Under the FCRA, the consumer reporting agency must reinvestigate the disputed information, generally within 30 days, and correct or delete information that is inaccurate or cannot be verified.",
@@ -88,7 +83,7 @@ const faqSections: FAQSection[] = [
       {
         question: "Are you FCRA compliant?",
         answer:
-          "SaffHire is built around FCRA-compliant screening workflows, including disclosures, authorization, and adverse-action support. Employers remain responsible for following applicable federal, state, and local requirements.",
+          "SaffHire is built around FCRA-compliant screening workflows, including disclosures and authorization. Employers remain responsible for following applicable federal, state, and local requirements.",
       },
       {
         question: "What is the FCRA and why does it matter?",
@@ -123,7 +118,7 @@ const faqSections: FAQSection[] = [
       {
         question: "Do you offer drug testing?",
         answer:
-          "Yes. We offer pre-employment, random, post-accident, and reasonable-suspicion drug testing through certified labs nationwide. Instant result options are also available.",
+          "Yes. We offer pre-employment, random, post-accident, and reasonable-suspicion drug testing. You order through the SaffHire portal, testing is performed at Labcorp facilities, and results are delivered through the portal. Instant result options are also available.",
       },
       {
         question: "Do you offer DOT-compliant screening for transportation companies?",

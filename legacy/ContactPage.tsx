@@ -58,7 +58,7 @@ export default function ContactPage() {
           </div>
           <div>
             <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Before You Order Your First Background Check</h2>
-            <p>Under the FCRA, employers must give candidates a standalone written disclosure and get their written authorization before ordering a background check, and must follow the pre-adverse and adverse action steps before acting on a report. SaffHire&apos;s FCRA-compliant workflows support those steps. Have questions first? Visit our <a href="/faq" className="font-bold text-green-600 underline">FAQ</a>.</p>
+            <p>Under the FCRA, employers must give candidates a standalone written disclosure and get their written authorization before ordering a background check. SaffHire&apos;s invitation workflow collects both electronically. Have questions first? Visit our <a href="/faq" className="font-bold text-green-600 underline">FAQ</a>.</p>
           </div>
         </div>
       </section>

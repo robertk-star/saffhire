@@ -182,7 +182,7 @@ export interface FAQItem {
 }
 
 const workflowAnswer =
-  "SaffHire provides FCRA-compliant screening workflows, including disclosures, authorization, and adverse-action support. Employers remain responsible for their own hiring decisions and legal compliance.";
+  "SaffHire provides FCRA-compliant screening workflows, including disclosures and authorization. Employers remain responsible for their own hiring decisions and legal compliance.";
 
 export const serviceFAQs: Record<string, FAQItem[]> = {
   "/criminal-background-checks": [

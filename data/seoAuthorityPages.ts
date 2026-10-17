@@ -250,7 +250,7 @@ export const seoAuthorityPages: SeoAuthorityPage[] = [
       {
         question: "Can small businesses run background checks?",
         answer:
-          "Yes. Small businesses can run background checks when they follow proper disclosure, authorization, and adverse action requirements under the FCRA.",
+          "Yes. Small businesses can run background checks when they provide a proper disclosure and get written authorization under the FCRA.",
       },
       {
         question: "What background check package should a small business use?",

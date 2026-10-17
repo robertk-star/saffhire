@@ -11,18 +11,11 @@ import PageSEO from "@/components/PageSEO";
 
 const articles = [
   {
-    category: "FCRA Compliance",
-    date: "February 2025",
-    title: "Understanding Adverse Action Requirements Under the FCRA",
-    summary:
-      "When an employer intends to take adverse action - such as rescinding a job offer or declining to hire - based on information in a background check report, the FCRA requires a specific two-step process. First, the employer must provide the applicant with a pre-adverse action notice along with a copy of the report and the Summary of Rights. After a reasonable waiting period (typically five business days), the employer may then issue the final adverse action notice. Failure to follow this process can expose employers to significant legal liability.",
-  },
-  {
     category: "Regulatory Update",
     date: "January 2025",
     title: "FTC Enforcement Trends: What Employers Need to Know",
     summary:
-      "The Federal Trade Commission (FTC) continues to actively enforce the FCRA against both consumer reporting agencies and employers. Recent enforcement actions have focused on improper permissible purpose claims, failure to maintain reasonable procedures for accuracy, and inadequate adverse action processes. Employers should review their background check procedures annually to ensure ongoing compliance with FTC guidance.",
+      "The Federal Trade Commission (FTC) continues to actively enforce the FCRA against both consumer reporting agencies and employers. Recent enforcement actions have focused on improper permissible purpose claims, failure to maintain reasonable procedures for accuracy and incomplete authorization processes. Employers should review their background check procedures annually to ensure ongoing compliance with FTC guidance.",
   },
   {
     category: "State Law Update",
@@ -43,14 +36,14 @@ const articles = [
     date: "October 2024",
     title: "Maintaining a Written Background Check Policy",
     summary:
-      "One of the most effective steps an employer can take to protect itself from FCRA liability is to maintain a written background check policy. This policy should define which positions require a background check, what types of searches are conducted, how results are evaluated, and what the adverse action process looks like. A well-documented policy demonstrates that the employer applies its screening criteria consistently and in a non-discriminatory manner.",
+      "One of the most effective steps an employer can take to protect itself from FCRA liability is to maintain a written background check policy. This policy should define which positions require a background check, what types of searches are conducted, and how results are evaluated. A well-documented policy demonstrates that the employer applies its screening criteria consistently and in a non-discriminatory manner.",
   },
   {
     category: "Consumer Rights",
     date: "September 2024",
     title: "Applicant Rights Under the FCRA: A Summary for Employers",
     summary:
-      "Applicants have significant rights under the FCRA that employers must respect. These include the right to be notified when a consumer report is being obtained, the right to receive a copy of the report and the Summary of Rights before adverse action is taken, and the right to dispute inaccurate or incomplete information. Employers who fail to honor these rights face potential civil liability and FTC enforcement action.",
+      "Applicants have significant rights under the FCRA that employers must respect. These include the right to be notified when a consumer report is being obtained, and the right to dispute inaccurate or incomplete information. Employers who fail to honor these rights face potential civil liability and FTC enforcement action.",
   },
 ];
 
@@ -104,7 +97,7 @@ export default function FCRANews() {
               {
                 icon: Bell,
                 title: "Why It Matters for Employers",
-                desc: "Employers who use background checks in hiring must comply with FCRA requirements, including obtaining written authorization, following adverse action procedures, and using reports only for permissible purposes. Non-compliance can result in civil lawsuits and FTC enforcement.",
+                desc: "Employers who use background checks in hiring must comply with FCRA requirements, including providing a disclosure, obtaining written authorization, and using reports only for permissible purposes. Non-compliance can result in civil lawsuits and FTC enforcement.",
               },
               {
                 icon: BookOpen,
@@ -209,7 +202,7 @@ export default function FCRANews() {
               },
               {
                 title: "CFPB: Summary of Consumer Rights",
-                desc: "The official Summary of Your Rights Under the FCRA required for adverse action notices.",
+                desc: "Consumer tools and the official Summary of Your Rights Under the FCRA.",
                 href: "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/",
               },
               {

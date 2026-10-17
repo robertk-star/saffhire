@@ -234,7 +234,7 @@ function LegacyFCRAArticle() {
 
       <Section title="What the FCRA Requires">
         <p>
-          The FCRA requires employers to provide proper disclosure, obtain written authorization, follow adverse action procedures, and use background check information fairly and accurately.
+          The FCRA requires employers to provide proper disclosure, obtain written authorization, and use background check information fairly and accurately.
         </p>
       </Section>
 
@@ -242,7 +242,6 @@ function LegacyFCRAArticle() {
         <CheckList items={[
           "Clear disclosure and authorization workflows",
           "Accurate background screening reports",
-          "Support for pre-adverse and adverse action steps",
           "Secure handling of applicant information",
           "Employer-focused guidance on screening best practices",
         ]} />
