@@ -35,6 +35,7 @@ const extraPublicRoutes = [
   '/background-screening-plano-tx',
   '/background-screening-mckinney-tx',
   '/background-screening-allen-tx',
+  '/background-checks-texas',
   '/volunteer-background-checks',
   '/small-business-background-checks',
   '/county-criminal-background-checks',
