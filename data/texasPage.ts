@@ -31,7 +31,7 @@ export const texasPage: ContentPageData = {
         {
           heading: "The federal FCRA applies in Texas",
           paragraphs: [
-            "When a Texas employer gets a background report from a consumer reporting agency, the FCRA requires a standalone written disclosure and the applicant's written authorization before the report is ordered. If the employer may take adverse action based on the report, it must first send a pre-adverse action notice with a copy of the report and A Summary of Your Rights Under the Fair Credit Reporting Act, then a final adverse action notice. The employer sends these notices.",
+            "When a Texas employer gets a background report from a consumer reporting agency, the FCRA requires a standalone written disclosure and the applicant's written authorization before the report is ordered. SaffHire's invitation workflow collects both electronically. Employers remain responsible for their own hiring decisions and legal compliance.",
           ],
         },
         {
