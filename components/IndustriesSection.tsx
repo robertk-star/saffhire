@@ -5,6 +5,7 @@
  * 2026-08-26: Replaced all broken Manus CDN images with local assets
  */
 
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 const industries = [
@@ -86,9 +87,13 @@ export default function IndustriesSection() {
               href={(industry as any).href || "#contact"}
               className="industry-card group block"
             >
-              <img loading="lazy" decoding="async"
+              <Image
                 src={industry.image}
-                alt={industry.name}
+                alt=""
+                width={800}
+                height={440}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="lazy"
                 className="w-full object-cover"
                 style={{ height: 220 }}
               />
