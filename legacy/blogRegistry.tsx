@@ -418,6 +418,9 @@ export function CheckList({ items }: { items: string[] }) {
   );
 }
 
+import { drugTestTypesEntry } from "./blog/TypesOfEmploymentDrugTests";
+import { staffingChecklistEntry } from "./blog/StaffingClientRequirementsChecklist";
+
 // ─── Article: FCRA Compliance Checklist for Employers in 2026 ─────────────────
 
 function FCRAComplianceChecklist2026() {
@@ -2012,6 +2015,8 @@ export const blogPostRegistry: BlogPostMeta[] = [
     relatedTags: ["Compliance", "Privacy", "State Laws", "Background Checks", "FCRA"],
     ArticleComponent: BirthdateRedactionBlog,
   },
+  drugTestTypesEntry,
+  staffingChecklistEntry,
   {
     slug: "eeoc-guidance-criminal-records-employers",
     title: "EEOC Guidance and Criminal Records: What Every Employer Must Know Before Their Next Hire",
