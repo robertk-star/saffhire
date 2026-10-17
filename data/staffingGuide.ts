@@ -105,13 +105,13 @@ export const staffingGuideSections: ContentSection[] = [
   {
     heading: "Drug Testing for Staffing Placements",
     paragraphs: [
-      "Drug screening is one of the most common client requirements in light industrial, warehouse, manufacturing and transportation placements. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with lab-based panels and instant result options. DOT and non-DOT programs are available for regulated and non-regulated workforces.",
+      "Drug screening is one of the most common client requirements in light industrial, warehouse, manufacturing and transportation placements. Your agency orders the drug screen through the SaffHire portal, the candidate is tested at a Labcorp facility, and results come back to you through the SaffHire portal. Pre-employment, random, post-accident and reasonable-suspicion tests are available, with lab-based panels, instant result options, and DOT and non-DOT testing.",
     ],
     bullets: [
       "Confirm the client's required panel and whether it accepts instant results or requires lab-based testing.",
       "For DOT-regulated roles, such as commercial drivers, federal rules control the testing process, and the client or agency's DOT program requirements apply.",
       "State laws on testing and on marijuana vary. Check the rules in the state where the candidate will work, not just where your office is.",
-      "Send collection instructions right away so the drug screen does not become the slowest part of the package.",
+      "Order the drug screen right away so the drug screen does not become the slowest part of the package.",
     ],
   },
   {
@@ -183,7 +183,7 @@ export const staffingGuideFaqs: FAQEntry[] = [
   {
     question: "Do you offer drug testing for staffing placements?",
     answer:
-      "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with instant result options and DOT and non-DOT programs.",
+      "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing, ordered through the SaffHire portal and performed at Labcorp facilities, with results delivered through the portal, with instant result options and DOT and non-DOT programs.",
   },
   {
     question: "Can we rescreen temporary or returning workers?",
