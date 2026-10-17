@@ -188,17 +188,6 @@ export const blogPosts: BlogPost[] = [
     author: "SaffHire Compliance Team",
     image: "/images/blog-fcra-2026.webp",
   },
-  {
-    slug: "fcra-adverse-action-two-step-notice-requirements-2026",
-    title: "The FCRA Adverse Action Two-Step: Why One Notice Is Not Enough (And What It's Costing You)",
-    excerpt:
-      "Most employers still get FCRA adverse action wrong. Learn the two-step notice requirement that's triggering lawsuits and fines in 2026 before it hits you.",
-    category: "Compliance",
-    date: "May 7, 2026",
-    readTime: "10 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-fcra-adverse-two-step.webp",
-  },
 ];
 
 export const relatedPostsMap: Record<string, string[]> = {
@@ -271,11 +260,6 @@ export const relatedPostsMap: Record<string, string[]> = {
     "fcra-compliance-checklist-employers-2026",
     "how-saffhire-follows-fcra-guidelines",
     "ban-the-box-laws-by-state-employer-guide",
-  ],
-  "fcra-adverse-action-two-step-notice-requirements-2026": [
-    "fcra-compliance-checklist-employers-2026",
-    "fcra-compliance-2026-background-screening-employers",
-    "how-saffhire-follows-fcra-guidelines",
   ],
 };
 

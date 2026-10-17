@@ -10,6 +10,8 @@ import FCRARulesStricterBlog from "./FCRARulesStricterBlog";
 import FCRAEnforcement2026Blog from "./FCRAEnforcement2026Blog";
 import TruckingBadHiringBlog from "./TruckingBadHiringBlog";
 import WarehousingHiringMistakesBlog from "./WarehousingHiringMistakesBlog";
+import { fcraBasicsEntry } from "./blog/FcraBasicsForEmployers";
+import { criminalCheckTypesEntry } from "./blog/TypesOfCriminalBackgroundChecks";
 
 
 // ─── Article: FCRA Adverse Action Two-Step Notice Requirements ─────────────────
@@ -1899,6 +1901,8 @@ function HowSaffHireFollowsFCRA() {
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const blogPostRegistry: BlogPostMeta[] = [
+  fcraBasicsEntry,
+  criminalCheckTypesEntry,
   {
     slug: "why-warehousing-companies-cant-afford-hiring-mistakes",
     title: "Why Warehousing Companies Can't Afford Hiring Mistakes",
@@ -2171,48 +2175,6 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ],
     relatedTags: ["NYC", "AEDT", "AI", "Compliance", "Bias Audit", "Background Checks", "Hiring"],
     ArticleComponent: NYCAEDTLawBlog,
-  },
-  {
-    slug: "fcra-adverse-action-two-step-notice-requirements-2026",
-    title: "The FCRA Adverse Action Two-Step: Why One Notice Is Not Enough (And What It's Costing You)",
-    metaDescription:
-      "Most employers still get FCRA adverse action wrong. Learn the two-step notice requirement that's triggering lawsuits and fines in 2026 before it hits you.",
-    category: "Compliance",
-    date: "May 7, 2026",
-    readTime: "10 min read",
-    author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fcra-adverse-action-two-step-notice-hero-P5Pu9omj9Kr5XpeHgCiXd9.webp",
-    featuredImageSuggestion: "Timeline showing pre-adverse action and adverse action notice process",
-    keyTakeaways: [
-      "FCRA requires two separate notices: pre-adverse action and adverse action",
-      "Pre-adverse action notice must be sent before final decision with 5-business-day dispute period",
-      "Adverse action notice must be sent after dispute period with specific findings",
-      "Single notice violation costs $50K-$500K+ in FTC and class action liability",
-      "Timing and content requirements are strictly enforced by FTC and state AGs in 2026",
-    ],
-    relatedTags: ["FCRA", "Compliance", "Adverse Action", "Notice Requirements", "2026", "FTC Enforcement"],
-    ArticleComponent: FCRAAdverseActionTwoStep,
-  },
-  {
-    slug: "fcra-adverse-action-rules-2025-employer-compliance",
-    title: "The FCRA Adverse Action Rules Just Got Stricter (And Most Employers Are Still Getting It Wrong)",
-    metaDescription:
-      "New CFPB enforcement focus on FCRA adverse action notices is catching employers off guard. Here's what you must do before rejecting a candidate based on a background check.",
-    category: "Compliance",
-    date: "May 9, 2026",
-    readTime: "11 min read",
-    author: "SaffHire Compliance Team",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663368468239/Ge2emXXoKVgq4kYU9oXE74/fcra-adverse-action-rules-stricter-2026-employer-compliance.webp",
-    featuredImageSuggestion: "CFPB enforcement action document with compliance checklist",
-    keyTakeaways: [
-      "CFPB enforcement on adverse action notices has tripled in 2026 compared to 2024",
-      "New standard: notices must include specific findings, not generic language",
-      "Notices must explain your disqualification policy and why the finding is disqualifying",
-      "Vague adverse action notices now trigger $50K-$850K+ enforcement actions",
-      "Candidates must have clear instructions on how to dispute information",
-    ],
-    relatedTags: ["FCRA", "Compliance", "Adverse Action", "CFPB Enforcement", "2026", "Background Checks"],
-    ArticleComponent: FCRARulesStricterBlog,
   },
   {
     slug: "fcra-enforcement-2026-employer-background-screening-compliance",

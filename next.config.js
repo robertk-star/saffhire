@@ -48,6 +48,8 @@ const nextConfig = {
       { source: '/services/churches-non-profit', destination: '/industries/church-nonprofit', statusCode: 301 },
       { source: '/services/:industry(healthcare|education|staffing|transportation|energy|hospitality)', destination: '/industries/:industry', statusCode: 301 },
       { source: '/contact-us', destination: '/contact', statusCode: 301 },
+      { source: '/blog/fcra-adverse-action-rules-2025-employer-compliance', destination: '/blog/fcra-basics-for-employers', statusCode: 301 },
+      { source: '/blog/fcra-adverse-action-two-step-notice-requirements-2026', destination: '/blog/fcra-basics-for-employers', statusCode: 301 },
       { source: '/contact-style-1', destination: '/contact', statusCode: 301 },
       { source: '/create-an-account', destination: '/contact', statusCode: 301 },
       { source: '/index.php/contact-us', destination: '/contact', statusCode: 301 },

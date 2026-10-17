@@ -3,6 +3,9 @@
  * 2026-08-27: Local images replacing broken Manus CDN URLs
  */
 
+import { fcraBasicsListing } from "@/legacy/blog/FcraBasicsForEmployers";
+import { criminalCheckTypesListing } from "@/legacy/blog/TypesOfCriminalBackgroundChecks";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -15,6 +18,8 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  fcraBasicsListing,
+  criminalCheckTypesListing,
   {
     slug: "ai-powered-resume-fraud-hiring-challenge",
     title: "AI-Powered Resume Fraud: The New Hiring Challenge Employers Can’t Ignore",
@@ -148,28 +153,6 @@ export const blogPosts: BlogPost[] = [
     image: "/images/blog-fcra-2026.webp",
   },
   {
-    slug: "fcra-adverse-action-two-step-notice-requirements-2026",
-    title: "The FCRA Adverse Action Two-Step: Why One Notice Is Not Enough (And What It's Costing You)",
-    excerpt:
-      "Most employers still get FCRA adverse action wrong. Learn the two-step notice requirement that's triggering lawsuits and fines in 2026 before it hits you.",
-    category: "Compliance",
-    date: "May 7, 2026",
-    readTime: "10 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-fcra-adverse-two-step.webp",
-  },
-  {
-    slug: "fcra-adverse-action-rules-2025-employer-compliance",
-    title: "The FCRA Adverse Action Rules Just Got Stricter (And Most Employers Are Still Getting It Wrong)",
-    excerpt:
-      "New CFPB enforcement focus on FCRA adverse action notices is catching employers off guard. Here's what you must do before rejecting a candidate based on a background check.",
-    category: "Compliance",
-    date: "May 9, 2026",
-    readTime: "11 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-fcra-adverse-action.webp",
-  },
-  {
     slug: "fcra-enforcement-2026-employer-background-screening-compliance",
     title: "The True Cost of a Bad Hire: How Background Screening Protects Client Relationships",
     excerpt:
@@ -198,17 +181,8 @@ export function getRelatedPosts(slug: string): BlogPost[] {
     "gig-economy-background-screening-contingent-workforce-liability": [
       "trucking-companies-bad-hiring-decisions",
     ],
-    "fcra-adverse-action-rules-2025-employer-compliance": [
-      "fcra-adverse-action-two-step-notice-requirements-2026",
-      "fcra-compliance-checklist-employers-2026",
-    ],
-    "fcra-adverse-action-two-step-notice-requirements-2026": [
-      "fcra-adverse-action-rules-2025-employer-compliance",
-      "fcra-compliance-checklist-employers-2026",
-    ],
     "fcra-compliance-checklist-employers-2026": [
-      "fcra-adverse-action-rules-2025-employer-compliance",
-      "fcra-adverse-action-two-step-notice-requirements-2026",
+      "fcra-basics-for-employers",
     ],
   };
 
