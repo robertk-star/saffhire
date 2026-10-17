@@ -1,8 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
-import PageFAQ from "@/components/PageFAQ";
-import { staffingFaqs } from "@/data/pageFaqs";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 
 import {
   ArrowRight,
@@ -88,27 +87,7 @@ export default function StaffingPage() {
           </div>
         </div>
       </section>
-      <section className="py-16 bg-white border-t border-gray-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-gray-700 leading-relaxed">
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Turnaround for High-Volume Hiring</h2>
-            <p>Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Standard Packages 1-3 average 1 day, Package 4 (adds County Search) averages 1-2 days, and Packages 5 and 6 (add Drug Screening and verifications) average 2-5 days. County searches depend on court record access, and verifications depend on how quickly prior employers and schools respond. See <a href="/packages" className="font-bold text-green-600 underline">Standard Packages &amp; Turnaround</a> for details.</p>
-          </div>
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Packages Customized for Each Client</h2>
-            <p>Packages are customized to each client&apos;s needs. Every standard package includes SSN Trace, Address History, National Criminal Database, Global Security Watch List and Federal Search. From there you can add a Motor Vehicle Report, State and County searches, Drug Screening, Employment Verification and Education Verification. Court access fees may apply to State and County searches (pass-through), and state fees may apply to MVRs.</p>
-          </div>
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>FCRA-Compliant Screening Workflows</h2>
-            <p>When an agency orders a background check, it must give the candidate a standalone written disclosure, get written authorization, and follow the pre-adverse and adverse action process before acting on the report. SaffHire&apos;s candidate invitation and authorization workflow supports those steps. Your agency remains responsible for its hiring decisions and for meeting federal, state and local requirements.</p>
-          </div>
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Veteran-Owned, Serving Agencies Nationwide</h2>
-            <p>SaffHire is a Veteran-Owned company headquartered in Frisco, TX, founded by Robert Krebsbach, John Waak and Jody Thigpen. We work with staffing agencies nationwide, with no setup fees and no minimums. <a href="/contact" className="font-bold text-green-600 underline">Contact us</a> or call 888-588-1733 for a custom quote.</p>
-          </div>
-        </div>
-      </section>
-      <PageFAQ title="Staffing Agency Background Check FAQ" items={staffingFaqs} />
+      <LegacySlot />
       <Footer />
     </div>
   );

@@ -9,6 +9,7 @@ import { Router, Route } from 'wouter';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { LegacySlotContext } from '@/components/next-bridge/LegacySlot';
 
 const Home = dynamic(() => import('@/legacy/Home'));
 const Blog = dynamic(() => import('@/legacy/Blog'));
@@ -106,12 +107,14 @@ const pageMap: Record<PageKey, () => ReactNode> = {
   notFound: () => <NotFound />,
 };
 
-export default function LegacyClientPage({ page, path }: { page: PageKey; path: string }) {
+export default function LegacyClientPage({ page, path, children }: { page: PageKey; path: string; children?: ReactNode }) {
   const useStaticLocation = () => [path, () => undefined] as const;
   return (
     <ThemeProvider defaultTheme="light">
       <TooltipProvider>
-        <Router hook={useStaticLocation as any}>{pageMap[page]()}</Router>
+        <LegacySlotContext.Provider value={children ?? null}>
+          <Router hook={useStaticLocation as any}>{pageMap[page]()}</Router>
+        </LegacySlotContext.Provider>
         <Toaster />
       </TooltipProvider>
     </ThemeProvider>
