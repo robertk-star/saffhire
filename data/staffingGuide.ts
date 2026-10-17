@@ -70,7 +70,7 @@ export const staffingGuideSections: ContentSection[] = [
       {
         heading: "Who decides, and who sees the report",
         paragraphs: [
-          "Agree in the contract who reviews results and who makes the placement decision. If the client wants to see reports or make decisions based on them, involve your legal counsel: the FCRA's permissible purpose, disclosure and adverse action rules follow whoever uses the report for an employment decision. Many agencies keep report review in-house and tell the client only whether the candidate meets the client's written criteria.",
+          "Agree in the contract who reviews results and who makes the placement decision. If the client wants to see reports or make decisions based on them, involve your legal counsel: FCRA rules apply to whoever uses the report for an employment decision. Many agencies keep report review in-house and tell the client only whether the candidate meets the client's written criteria.",
         ],
       },
     ],
@@ -83,39 +83,15 @@ export const staffingGuideSections: ContentSection[] = [
     ],
   },
   {
-    heading: "FCRA Basics Every Staffing Agency Owns",
+    heading: "FCRA Basics: Disclosure and Authorization",
     paragraphs: [
-      "When a staffing agency orders a background check for employment purposes, the agency is a \"user\" of a consumer report under the Fair Credit Reporting Act. That puts several obligations on the agency itself. SaffHire's candidate invitation workflow collects the disclosure acknowledgment and authorization electronically, but your agency remains responsible for its hiring decisions and for following federal, state and local law.",
+      "When a staffing agency orders a background check for employment purposes, the agency is a \"user\" of a consumer report under the Fair Credit Reporting Act. That puts obligations on the agency itself, starting before the report is ordered. SaffHire's candidate invitation workflow collects the disclosure acknowledgment and authorization electronically, but your agency remains responsible for its hiring decisions and for following federal, state and local law.",
     ],
     subsections: [
       {
         heading: "Before ordering: disclosure and authorization",
         paragraphs: [
           "The candidate must get a clear, written disclosure that a background report may be obtained, in a document that consists solely of that disclosure, and must give written authorization before the report is ordered. Keep extra language, such as liability waivers, out of the disclosure.",
-        ],
-      },
-      {
-        heading: "Pre-adverse action notice",
-        paragraphs: [
-          "If the agency may decide not to place, hire or keep someone based in whole or in part on the report, the agency must first send the candidate a pre-adverse action notice. It must include a copy of the report and \"A Summary of Your Rights Under the Fair Credit Reporting Act.\" The point is to give the candidate a chance to review the report and dispute anything inaccurate before the decision is final.",
-        ],
-      },
-      {
-        heading: "Waiting period",
-        paragraphs: [
-          "After the pre-adverse notice, the agency waits a reasonable period before making the final decision. Agencies should set this period in their written policy with their counsel and apply it consistently. Some states and cities require specific waiting periods or extra steps.",
-        ],
-      },
-      {
-        heading: "Final adverse action notice",
-        paragraphs: [
-          "If the agency goes ahead with the decision, it sends a final adverse action notice. Under the FCRA that notice must include the name, address and phone number of the consumer reporting agency that supplied the report; a statement that the consumer reporting agency did not make the decision and cannot explain why it was made; and notice of the candidate's right to get a free copy of the report from that agency within 60 days and to dispute the accuracy or completeness of the information.",
-        ],
-      },
-      {
-        heading: "Who sends the notices",
-        paragraphs: [
-          "Your agency sends the pre-adverse and adverse action notices. SaffHire does not send adverse action letters on an agency's behalf. Your completed reports are in the SaffHire portal so you can attach the copy the pre-adverse notice requires. If a candidate disputes information in a report, the consumer reporting agency must reinvestigate it, generally within 30 days, and correct or delete information that is inaccurate or cannot be verified.",
         ],
       },
       {
@@ -141,8 +117,32 @@ export const staffingGuideSections: ContentSection[] = [
   {
     heading: "Hiring Across Multiple States",
     paragraphs: [
-      "Agencies that recruit in more than one state, or place workers with clients in other states, face a patchwork of rules on top of the FCRA. Some states and cities limit when an employer can ask about criminal history (often called ban-the-box or fair chance laws). For example, California's Fair Chance Act and New York City's Fair Chance Act generally require a conditional offer before an employer looks at criminal history, and add their own notice steps before a final decision. Other states limit how far back certain records can be reported or considered, or require additional disclosure forms.",
-      "The practical approach is to build packages and adverse action steps per state where you place workers, review them with counsel, and revisit them when laws change. On the search side, SaffHire's Federal, State and County searches cover the jurisdictions where the applicant has lived, regardless of where your office is. Court access fees may apply to State and County searches; these are pass-through fees.",
+      "Agencies that recruit in more than one state, or place workers with clients in other states, face a patchwork of rules on top of the FCRA. Some states and cities limit when an employer can ask about criminal history (often called ban-the-box or fair chance laws). For example, California's Fair Chance Act and New York City's Fair Chance Act generally require a conditional offer before an employer looks at criminal history. Other states limit how far back certain records can be reported or considered, or require additional disclosure forms.",
+      "The practical approach is to build packages and screening policies per state where you place workers, review them with counsel, and revisit them when laws change. On the search side, SaffHire's Federal, State and County searches cover the jurisdictions where the applicant has lived, regardless of where your office is. Court access fees may apply to State and County searches; these are pass-through fees.",
+    ],
+  },
+  {
+    heading: "Screening by Placement Type",
+    paragraphs: [
+      "Different placements call for different packages. These are common starting points agencies discuss with their clients; the final package always follows the client's written requirements.",
+    ],
+    bullets: [
+      "Light industrial and warehouse: National Criminal Database package, often with County searches and a drug screen; add an MVR for forklift or driving duties.",
+      "Drivers and delivery: MVR (state fees may apply), criminal searches and drug testing, with DOT testing for DOT-covered drivers.",
+      "Healthcare staffing: criminal searches plus [OIG and SAM exclusion screening](/healthcare-sanctions-oig-checks), with verifications where the client requires them.",
+      "Office, administrative and direct-hire: criminal searches plus employment and education verification for roles where history and credentials matter.",
+      "Hospitality and events: fast instant searches for short-notice shifts, with County searches for roles with guest-room access or cash handling.",
+    ],
+  },
+  {
+    heading: "Common Screening Mistakes to Avoid",
+    bullets: [
+      "Running a different set of searches for candidates on the same job order.",
+      "Waiting until the day before a start date to send the candidate invitation.",
+      "Relying only on a national database when the client expects county-level searches.",
+      "Mixing a liability waiver or other language into the FCRA disclosure form.",
+      "Forgetting that state and city rules follow where the candidate works, not just where the agency is located.",
+      "Not documenting the client's written screening requirements before the first placement.",
     ],
   },
   {
@@ -153,7 +153,7 @@ export const staffingGuideSections: ContentSection[] = [
       "The candidate completes their personal information, disclosure and authorization through the secure link.",
       "Instant searches usually return in minutes; county searches, verifications and drug screens follow.",
       "Review the completed report against the client's written criteria.",
-      "If you may not place the candidate because of the report, send the pre-adverse action notice, wait, then send the final adverse action notice if you go ahead.",
+      "Make and document the placement decision under your written policy.",
       "Rescreen when a client, assignment or policy calls for it.",
     ],
   },
@@ -178,12 +178,7 @@ export const staffingGuideFaqs: FAQEntry[] = [
   {
     question: "Who is responsible for FCRA compliance when a staffing agency orders a background check?",
     answer:
-      "The agency ordering the report is the user of the consumer report under the FCRA. That means providing a standalone disclosure, getting the candidate's written authorization, and following the pre-adverse and adverse action steps before taking action based on the report. SaffHire's invitation workflow collects the disclosure acknowledgment and authorization electronically; the agency remains responsible for its own hiring decisions and legal compliance.",
-  },
-  {
-    question: "Does SaffHire send adverse action letters for us?",
-    answer:
-      "No. Your agency sends the pre-adverse and final adverse action notices. The completed report is in your SaffHire portal so you can include the copy the pre-adverse notice requires, along with A Summary of Your Rights Under the Fair Credit Reporting Act.",
+      "The agency ordering the report is the user of the consumer report under the FCRA. That means providing a standalone disclosure, getting the candidate's written authorization, and following the FCRA's other requirements for users of consumer reports. SaffHire's invitation workflow collects the disclosure acknowledgment and authorization electronically; the agency remains responsible for its own hiring decisions and legal compliance.",
   },
   {
     question: "Do you offer drug testing for staffing placements?",
