@@ -41,6 +41,7 @@ const extraPublicRoutes = [
   '/national-criminal-database-search',
   '/healthcare-sanctions-oig-checks',
   '/open-knowledge',
+  '/ai-info',
   '/referral-partners/benefitsme',
   '/referral-partners/corporate-talent-finder',
   '/referral-partners/defense-by-design',
