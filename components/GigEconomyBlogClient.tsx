@@ -84,14 +84,14 @@ export default function GigEconomyBlogClient() {
                       "Will this person handle money, inventory, payment information, or company property?",
                       "Will this person access confidential data, employee records, or customer information?",
                       "Does the role have industry-specific compliance needs such as healthcare, transportation, education, or financial services?",
-                      "Is the screening process consistent with FCRA disclosure, authorization, and adverse action requirements?",
+                      "Is the screening process consistent with FCRA disclosure and authorization requirements?",
                     ]}
                   />
                 </Section>
 
                 <Section title="The FCRA still matters">
                   <p>
-                    When a third-party background screening company is used for employment-related purposes, employers should treat the process with FCRA care. That means clear disclosure, written authorization, proper review, and compliant adverse action steps when a background report affects a decision.
+                    When a third-party background screening company is used for employment-related purposes, employers should treat the process with FCRA care. That means clear disclosure, written authorization, and careful, consistent review of background reports.
                   </p>
                   <p>
                     The label “contractor” does not make compliance disappear. If the background report is being used to decide whether someone can perform work, access a role, or remain eligible for an assignment, the process should be handled carefully.

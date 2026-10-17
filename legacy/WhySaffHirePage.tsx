@@ -30,7 +30,7 @@ const whyFaqs = [
   {
     question: "Does SaffHire help with FCRA compliance?",
     answer:
-      "Yes. SaffHire's workflows support FCRA requirements, including the standalone disclosure, applicant authorization and adverse-action support. Employers remain responsible for their own hiring decisions and legal compliance.",
+      "Yes. SaffHire's workflows support FCRA requirements, including the standalone disclosure and applicant authorization. Employers remain responsible for their own hiring decisions and legal compliance.",
   },
 ];
 

@@ -6,310 +6,12 @@
 
 import React from "react";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
-import FCRARulesStricterBlog from "./FCRARulesStricterBlog";
 import FCRAEnforcement2026Blog from "./FCRAEnforcement2026Blog";
 import TruckingBadHiringBlog from "./TruckingBadHiringBlog";
 import WarehousingHiringMistakesBlog from "./WarehousingHiringMistakesBlog";
 import { fcraBasicsEntry } from "./blog/FcraBasicsForEmployers";
 import { criminalCheckTypesEntry } from "./blog/TypesOfCriminalBackgroundChecks";
 
-
-// ─── Article: FCRA Adverse Action Two-Step Notice Requirements ─────────────────
-
-function FCRAAdverseActionTwoStep() {
-  return (
-    <div
-      className="space-y-8"
-      style={{ fontFamily: "'Open Sans', sans-serif", color: "#374151", lineHeight: "1.8" }}
-    >
-      <p className="text-lg text-gray-700 leading-relaxed font-medium">
-        Most employers think FCRA adverse action is a one-step process. You find something disqualifying in the background check. You send a rejection email. Done. This assumption is costing employers thousands of dollars in settlements and fines in 2026. The FCRA actually requires two separate notices, sent at two different times, for two different purposes. Skip either one, and you have violated federal law. Get the sequence wrong, and you have compounded the violation. This post explains exactly what the two-step process is, why employers keep getting it wrong, and what it is costing them.
-      </p>
-
-      <Section title="The Two-Step Adverse Action Process Explained">
-        <p>
-          The FCRA requires employers to provide two distinct notices before making a final hiring decision based on background check information. These are not optional steps or procedural niceties. They are legal requirements that the Federal Trade Commission, state attorneys general, and private plaintiffs' attorneys are now actively enforcing.
-        </p>
-
-        <p>
-          The two steps are the pre-adverse action notice and the adverse action notice. They serve different purposes, contain different information, and must be sent at different times in the hiring process. Understanding the distinction is the difference between a compliant hiring process and a lawsuit.
-        </p>
-
-        <div className="space-y-4">
-          <NumberedCard
-            number="1"
-            title="Step 1: Pre-Adverse Action Notice (Before You Decide)"
-            description="As soon as you receive the background check report and identify information that you plan to use to reject the candidate, you must send a pre-adverse action notice. This notice must include a copy of the background report, a summary of the candidate's rights under the FCRA, and information about how to dispute inaccurate information. You must give the candidate at least 5 business days to review the report and respond before you make your final decision."
-          />
-          <NumberedCard
-            number="2"
-            title="Step 2: Adverse Action Notice (After You Decide)"
-            description="After the dispute period expires and you have made your final decision to reject the candidate, you must send an adverse action notice. This notice must explain the specific findings that led to rejection, clarify that the decision was based on information in the background report, provide the name and contact information of the screening company, and inform the candidate of their right to obtain a free copy of the report and dispute inaccurate information."
-          />
-        </div>
-      </Section>
-
-      <Section title="Why Employers Get This Wrong">
-        <p>
-          The two-step requirement seems straightforward in theory. In practice, employers violate it constantly. Here are the most common mistakes:
-        </p>
-
-        <div className="space-y-4">
-          <div className="p-5 rounded-xl border border-red-200 bg-red-50">
-            <h4 className="font-bold text-red-900 mb-2">Mistake 1: Sending Only One Notice</h4>
-            <p className="text-sm text-red-700">
-              Many employers send a single rejection email that attempts to serve as both the pre-adverse action notice and the adverse action notice. This violates the FCRA because it does not give the candidate the required 5 business days to dispute the information before the final decision is made. The FTC considers this a direct violation.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-red-200 bg-red-50">
-            <h4 className="font-bold text-red-900 mb-2">Mistake 2: Sending the Pre-Adverse Action Notice Too Late</h4>
-            <p className="text-sm text-red-700">
-              Some employers wait until after they have decided to reject the candidate before sending the pre-adverse action notice. This defeats the entire purpose of the pre-adverse action notice, which is to give the candidate a chance to dispute information before the decision is made. The FCRA requires the pre-adverse action notice to be sent before the final decision, not after.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-red-200 bg-red-50">
-            <h4 className="font-bold text-red-900 mb-2">Mistake 3: Not Including Required Information in Either Notice</h4>
-            <p className="text-sm text-red-700">
-              The pre-adverse action notice must include a copy of the background report and a summary of FCRA rights. The adverse action notice must include specific findings and the screening company's contact information. Omitting any of this information violates the FCRA. Many employers send notices that lack one or more of these required elements.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-red-200 bg-red-50">
-            <h4 className="font-bold text-red-900 mb-2">Mistake 4: Not Waiting the Full 5 Business Days</h4>
-            <p className="text-sm text-red-700">
-              The FCRA requires at least 5 business days for the candidate to dispute information after receiving the pre-adverse action notice. Some employers wait only 2 or 3 days before sending the adverse action notice. This violates the statute. The 5 business days is a minimum, not a guideline.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-red-200 bg-red-50">
-            <h4 className="font-bold text-red-900 mb-2">Mistake 5: Sending Notices to the Wrong Contact Information</h4>
-            <p className="text-sm text-red-700">
-              If the pre-adverse action or adverse action notice does not reach the candidate, it is as if it was never sent. Some employers send notices to email addresses that bounce or phone numbers that are no longer valid. The FCRA requires reasonable effort to ensure the candidate actually receives the notices.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="What the Pre-Adverse Action Notice Must Include">
-        <p>
-          The pre-adverse action notice is the first critical step. It must contain specific information, formatted in a specific way, and be sent at a specific time. Here is exactly what must be included:
-        </p>
-
-        <CheckList
-          items={[
-            "A clear statement that adverse action may be taken based on information in the background report",
-            "A copy of the background report itself (the actual report from the screening company)",
-            "A copy of the FCRA disclosure statement explaining the candidate's rights (this is typically provided by the screening company)",
-            "Information about how the candidate can dispute inaccurate information in the report",
-            "The name, address, and phone number of the screening company that prepared the report",
-            "A statement that the candidate has the right to contact the screening company to dispute any information",
-            "A reasonable amount of time (at least 5 business days) for the candidate to review and respond before adverse action is taken",
-          ]}
-        />
-
-        <WarningBox
-          headline="The Pre-Adverse Action Notice Is Not Optional"
-          body="Some employers think they can skip the pre-adverse action notice if the background check finding is obviously disqualifying (e.g., a felony conviction). This is incorrect. The FCRA requires the pre-adverse action notice regardless of how serious the finding is. Skipping this step is a direct violation."
-        />
-      </Section>
-
-      <Section title="What the Adverse Action Notice Must Include">
-        <p>
-          After the dispute period expires and you have made your final decision, the adverse action notice must be sent. This is the second critical step. It must include:
-        </p>
-
-        <CheckList
-          items={[
-            "A clear statement that adverse action has been taken (the candidate is not being hired)",
-            "The specific reason(s) for the adverse action based on information in the background report",
-            "A statement that the decision was based in whole or in part on information obtained from the background report",
-            "The name, address, and phone number of the screening company that prepared the report",
-            "A statement that the screening company did not make the decision and cannot explain the employer's decision",
-            "Information about the candidate's right to dispute inaccurate information with the screening company",
-            "Information about the candidate's right to obtain a free copy of the background report from the screening company",
-            "Information about the candidate's right to add a statement to their file if they dispute the accuracy of the report",
-          ]}
-        />
-
-        <p>
-          The adverse action notice must be specific. Saying 'We found disqualifying information in your background check' is not sufficient. You must explain exactly what information led to the rejection. For example: 'We did not move forward with your application because the background check revealed a felony conviction for armed robbery in 2018. This conviction is relevant to the position because the role requires handling cash and working with customers.'
-        </p>
-      </Section>
-
-      <Section title="The Timeline: When Each Notice Must Be Sent">
-        <p>
-          The timing of these notices is critical. Send them in the wrong order or at the wrong time, and you have violated the FCRA. Here is the exact timeline:
-        </p>
-
-        <div className="overflow-x-auto rounded-xl border border-gray-100 shadow-sm">
-          <table className="w-full text-sm">
-            <thead>
-              <tr style={{ backgroundColor: "#0f172a" }}>
-                <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Event</th>
-                <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Timing</th>
-                <th className="text-left text-white font-bold px-5 py-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ["Background report received", "Day 0", "Review report for disqualifying information"],
-                ["Disqualifying info identified", "Day 0", "Send pre-adverse action notice immediately"],
-                ["Pre-adverse action notice sent", "Day 1", "Candidate receives notice and begins 5-business-day review period"],
-                ["Dispute period", "Days 1-5", "Candidate has 5 business days to review and respond"],
-                ["Dispute period expires", "Day 6", "You can now make final decision"],
-                ["Final decision made", "Day 6-7", "Send adverse action notice"],
-                ["Adverse action notice sent", "Day 7", "Candidate receives final rejection notice"],
-              ].map(([event, timing, action], i) => (
-                <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#f8fafc" : "#ffffff" }}>
-                  <td className="px-5 py-4 font-semibold text-gray-900">{event}</td>
-                  <td className="px-5 py-4 text-gray-600">{timing}</td>
-                  <td className="px-5 py-4 text-gray-600">{action}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="mt-4">
-          The key point: the pre-adverse action notice must be sent before you make your final decision. The adverse action notice must be sent after the dispute period expires and you have made your final decision. These are two separate events, separated by at least 5 business days.
-        </p>
-      </Section>
-
-      <Section title="Real-World Consequences of Getting It Wrong">
-        <p>
-          The FTC and state attorneys general are now actively enforcing the two-step requirement. Here are real examples of what employers are facing:
-        </p>
-
-        <div className="space-y-4">
-          <div className="p-5 rounded-xl border border-orange-200 bg-orange-50">
-            <h4 className="font-bold text-orange-900 mb-2">Example 1: Single Notice Violation</h4>
-            <p className="text-sm text-orange-700">
-              An employer sends a single email that says 'We received your background check and found disqualifying information. We are not moving forward with your application.' This email attempts to serve as both the pre-adverse action notice and the adverse action notice. The FTC considers this a violation because it does not give the candidate 5 business days to dispute the information before the decision is made. The employer faces a settlement of $50,000 to $100,000 plus class action liability.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-orange-200 bg-orange-50">
-            <h4 className="font-bold text-orange-900 mb-2">Example 2: Missing Information Violation</h4>
-            <p className="text-sm text-orange-700">
-              An employer sends a pre-adverse action notice but fails to include a copy of the background report or information about dispute rights. The candidate cannot properly review the report or understand their rights. The FTC investigates and finds this is a pattern across 50+ candidates. The employer faces a $250,000 settlement plus required remediation.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-orange-200 bg-orange-50">
-            <h4 className="font-bold text-orange-900 mb-2">Example 3: Insufficient Wait Time</h4>
-            <p className="text-sm text-orange-700">
-              An employer sends the pre-adverse action notice on Monday and the adverse action notice on Wednesday (only 2 business days later). The FCRA requires at least 5 business days. A private plaintiffs' firm files a class action on behalf of all candidates who received notices with insufficient wait time. The employer settles for $500,000 plus attorney fees.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="How to Implement the Two-Step Process Correctly">
-        <p>
-          Implementing the two-step process correctly requires a documented system and clear communication. Here is how to do it:
-        </p>
-
-        <div className="space-y-4">
-          <NumberedCard
-            number="1"
-            title="Create a Pre-Adverse Action Notice Template"
-            description="Work with your screening company or legal counsel to create a template that includes all required elements: a copy of the background report, FCRA disclosure statement, dispute instructions, screening company contact information, and a clear statement of the 5-business-day review period. Do not deviate from this template."
-          />
-          <NumberedCard
-            number="2"
-            title="Create an Adverse Action Notice Template"
-            description="Create a separate template for the adverse action notice that includes all required elements: specific findings, statement that the decision was based on the background report, screening company contact information, and dispute rights. This template must be specific to each candidate and each finding."
-          />
-          <NumberedCard
-            number="3"
-            title="Set Up a Calendar System"
-            description="When you send the pre-adverse action notice, immediately set a calendar reminder for 5 business days later. This reminder should trigger a review of whether the candidate has disputed any information. If no dispute has been received, you can then send the adverse action notice."
-          />
-          <NumberedCard
-            number="4"
-            title="Document Everything"
-            description="Keep a record of when each notice was sent, to whom it was sent, and how it was delivered (email, certified mail, etc.). If the FTC or a plaintiff's attorney questions your process, this documentation is your defense."
-          />
-          <NumberedCard
-            number="5"
-            title="Train Your HR Team"
-            description="Make sure everyone involved in the hiring process understands the two-step requirement. This includes HR staff, hiring managers, and anyone else who touches the background check process. A single mistake by one person can trigger an FTC investigation."
-          />
-        </div>
-      </Section>
-
-      <Section title="Common Questions About the Two-Step Process">
-        <p>
-          Employers often ask specific questions about how to implement the two-step process. Here are the answers to the most common ones:
-        </p>
-
-        <div className="space-y-4">
-          <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
-            <h4 className="font-bold text-gray-900 mb-2">Q: Can I send the pre-adverse action notice and adverse action notice on the same day?</h4>
-            <p className="text-sm text-gray-700">
-              No. The FCRA requires at least 5 business days between the pre-adverse action notice and the adverse action notice. This is not a guideline. It is a legal requirement. If you send both on the same day, you have violated the FCRA.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
-            <h4 className="font-bold text-gray-900 mb-2">Q: What if the candidate disputes the information? Do I still have to send the adverse action notice?</h4>
-            <p className="text-sm text-gray-700">
-              If the candidate disputes the information and the screening company corrects it, you must reassess your decision. If the corrected information is no longer disqualifying, you must hire the candidate or send a new pre-adverse action notice with the corrected information. If the information is still disqualifying after correction, you can send the adverse action notice.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
-            <h4 className="font-bold text-gray-900 mb-2">Q: What if the candidate does not respond to the pre-adverse action notice?</h4>
-            <p className="text-sm text-gray-700">
-              If the candidate does not respond within 5 business days, you can proceed with the adverse action notice. The candidate's failure to respond does not waive their rights. You still must send the adverse action notice with all required information.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
-            <h4 className="font-bold text-gray-900 mb-2">Q: Can I send the notices electronically, or do they have to be in writing?</h4>
-            <p className="text-sm text-gray-700">
-              The FCRA requires written notices. Electronic delivery (email) is acceptable as long as the candidate can print and retain a copy. However, you must ensure the email actually reaches the candidate. If the email bounces or goes to spam, you have not complied with the requirement to provide the notice.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
-            <h4 className="font-bold text-gray-900 mb-2">Q: Do I have to send the adverse action notice if I decide to hire the candidate after the pre-adverse action notice?</h4>
-            <p className="text-sm text-gray-700">
-              No. If you decide to hire the candidate after reviewing the background check, you do not need to send an adverse action notice. The adverse action notice is only required if you decide not to hire based on information in the background report.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="The Connection to Your Broader FCRA Compliance Program">
-        <p>
-          The two-step adverse action process is just one piece of a comprehensive FCRA compliance program. If you want to understand how this fits into your overall compliance obligations, read our post on the <BlogLink slug="fcra-compliance-checklist-for-employers-in-2026" title="FCRA Compliance Checklist for Employers in 2026" />. That post covers the entire hiring process from initial disclosure through final documentation.
-        </p>
-
-        <p>
-          For a deeper dive into how FCRA enforcement is changing in 2026, see our post on <BlogLink slug="fcra-compliance-2026-background-screening-employers" title="The FCRA Is Getting Stricter in 2026" />. That post explains the FTC's enforcement priorities and real-world consequences of non-compliance.
-        </p>
-      </Section>
-
-      <ConclusionBox
-        title="The Two-Step Process Is Not Optional"
-        body="The FCRA requires two separate notices, sent at two different times, for two different purposes. This is not a procedural nicety or a best practice. It is a legal requirement that the FTC, state attorneys general, and private plaintiffs are now actively enforcing. Employers who skip either step or get the timing wrong are facing settlements of $50,000 to $500,000 or more. The cost of compliance is minimal. The cost of non-compliance is substantial. Implement the two-step process correctly, document it, and train your team. This is one of the most important steps you can take to protect your company in 2026."
-      />
-
-      <div className="mt-8 p-6 rounded-xl border border-green-200 bg-green-50">
-        <p className="text-sm text-gray-600">
-          <strong>Use this as your checklist for every adverse action.</strong> Before you send any pre-adverse action notice or adverse action notice, review this post. Make sure you are including all required information. Make sure you are waiting the full 5 business days. Make sure you are sending the notices in the correct order. A single mistake can cost tens of thousands of dollars.
-        </p>
-      </div>
-
-      <p className="text-xs text-gray-400 italic border-t border-gray-100 pt-6">
-        Disclaimer: This article is provided for informational purposes only and does not constitute legal advice. Employers should consult qualified employment counsel before making hiring decisions based on background check results or implementing FCRA compliance procedures.
-      </p>
-    </div>
-  );
-}
 
 // ─── Shared Helper Components ─────────────────────────────────────────────────
 
@@ -464,11 +166,7 @@ function FCRAComplianceChecklist2026() {
             "If criminal history will be considered, provide additional FCRA-specific disclosures",
             "Order the background check through a third-party Consumer Reporting Agency (CRA)",
             "Wait for the report to arrive before making any hiring decision",
-            "If you plan to take adverse action based on the report, provide a pre-adverse action notice",
-            "Give the candidate at least 5 business days to dispute inaccurate information",
-            "After the dispute period, if you still plan to reject, send an adverse action notice",
-            "Include in the adverse action notice: specific findings, the CRA's contact information, and the candidate's right to obtain a free copy of the report",
-            "Keep all disclosures, authorizations, and adverse action notices for at least 3 years",
+            "Keep all disclosures and authorizations for at least 3 years",
           ]}
         />
       </Section>
@@ -492,18 +190,8 @@ function FCRAComplianceChecklist2026() {
           />
           <NumberedCard
             number="3"
-            title="No Pre-Adverse Action Notice"
-            description="If you find information in the background check that you plan to use to reject the candidate, you must give them a copy of the report and a reasonable opportunity to dispute it before you make your final decision. Skipping this step is a direct FCRA violation."
-          />
-          <NumberedCard
-            number="4"
-            title="Vague Adverse Action Notices"
-            description="When you do reject a candidate based on background check findings, your adverse action notice must be specific. 'We decided to move forward with another candidate' is not compliant. You must explain which findings led to the rejection."
-          />
-          <NumberedCard
-            number="5"
             title="No Documentation"
-            description="The FTC assumes that if you cannot produce documentation, the violation occurred. Keep all disclosures, authorizations, reports, and adverse action notices for at least 3 years."
+            description="The FTC assumes that if you cannot produce documentation, the violation occurred. Keep all disclosures, authorizations and reports for at least 3 years."
           />
         </div>
       </Section>
@@ -529,11 +217,8 @@ function FCRAComplianceChecklist2026() {
                 ["3", "Order background check", "After authorization received"],
                 ["4", "Receive background report", "Typically 3-5 business days"],
                 ["5", "Review findings", "Upon receipt"],
-                ["6", "Send pre-adverse action notice (if needed)", "Before making final decision"],
-                ["7", "Wait for candidate response", "At least 5 business days"],
-                ["8", "Make final decision", "After dispute period"],
-                ["9", "Send adverse action notice (if rejecting)", "Immediately after decision"],
-                ["10", "Document and file", "Maintain for 3+ years"],
+                ["6", "Make final decision", "Under your written policy"],
+                ["7", "Document and file", "Maintain for 3+ years"],
               ].map(([step, action, timing], i) => (
                 <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#f8fafc" : "#ffffff" }}>
                   <td className="px-5 py-4 font-semibold text-gray-900">{step}</td>
@@ -557,8 +242,6 @@ function FCRAComplianceChecklist2026() {
             "You use credit checks for non-financial roles",
             "You have a policy of rejecting all candidates with any criminal history",
             "You ask about criminal history on your initial application",
-            "You do not provide candidates with a copy of their background report before adverse action",
-            "Your adverse action notices do not explain specific findings",
             "You do not maintain records of disclosures and authorizations",
             "You operate in California, New York, Illinois, or Colorado without state-specific compliance measures",
           ]}
@@ -597,10 +280,10 @@ const FCRACompliance2026Blog = () => (
 
     <Section title="What Changed: Enforcement, Not the Law">
       <p>
-        The FCRA was written in 1970. The core requirements—written consent, clear adverse action notices, individualized assessment of criminal history—have been in place for decades. What is new in 2026 is the FTC's willingness to pursue violations aggressively, state attorneys general treating FCRA violations as consumer protection matters, and private litigation firms building entire practices around FCRA class actions.
+        The FCRA was written in 1970. The core requirements—written consent, clear disclosures, individualized assessment of criminal history—have been in place for decades. What is new in 2026 is the FTC's willingness to pursue violations aggressively, state attorneys general treating FCRA violations as consumer protection matters, and private litigation firms building entire practices around FCRA class actions.
       </p>
       <p>
-        This shift happened because employers have been getting away with FCRA violations for years. Vague adverse action notices. Blanket criminal history disqualifications. Automated decisions without individualized assessment. These practices were common, and enforcement was rare. That era is over.
+        This shift happened because employers have been getting away with FCRA violations for years. Buried or confusing disclosures. Blanket criminal history disqualifications. Automated decisions without individualized assessment. These practices were common, and enforcement was rare. That era is over.
       </p>
       <WarningBox
         headline="Enforcement Is the New Compliance Risk"
@@ -621,16 +304,11 @@ const FCRACompliance2026Blog = () => (
         />
         <NumberedCard
           number="2"
-          title="Adverse Action Notice Deficiencies"
-          description="Vague adverse action notices are now grounds for FTC enforcement. The agency is requiring employers to provide specific findings, clear explanations of which information led to the rejection, and explicit information about the candidate's right to dispute inaccuracies. Generic rejection emails are no longer compliant."
-        />
-        <NumberedCard
-          number="3"
           title="Unnecessary Use of Criminal History"
           description="The FTC is questioning whether employers actually need criminal history information for certain roles. If you are running criminal background checks for positions where criminal history is not job-related, you may be violating the FCRA's requirement that screening be proportional to the role."
         />
         <NumberedCard
-          number="4"
+          number="3"
           title="State-Specific Compliance Failures"
           description="California, New York, Illinois, Colorado, and other states have passed laws that go beyond federal FCRA requirements. The FTC is now coordinating with state attorneys general to pursue employers who comply with federal law but violate state law."
         />
@@ -653,10 +331,8 @@ const FCRACompliance2026Blog = () => (
           </thead>
           <tbody>
             {[
-              ["Vague adverse action notices", "FTC enforcement, class action liability ($50K-$500K+)", "Employers sending generic rejection emails without explaining specific findings"],
               ["Blanket criminal history disqualifications", "FTC investigation, state AG enforcement ($100K-$1M+)", "Automatically rejecting all candidates with any criminal record regardless of job relevance"],
               ["Ban-the-box violations", "State attorney general enforcement ($50K-$250K+)", "Asking about criminal history before individualized assessment in CA, NY, IL, CO"],
-              ["Failure to provide dispute rights", "CFPB enforcement, private litigation ($25K-$100K+ per violation)", "Not informing candidates they can dispute inaccurate information before adverse action"],
             ].map(([violation, consequence, example], i) => (
               <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#f8fafc" : "#ffffff" }}>
                 <td className="px-5 py-4 font-semibold text-gray-900">{violation}</td>
@@ -670,7 +346,7 @@ const FCRACompliance2026Blog = () => (
 
       <WarningBox
         headline="A Single Violation Can Trigger Multiple Enforcement Actions"
-        body="A vague adverse action notice sent to one candidate can become the basis for an FTC investigation, a state attorney general enforcement action, and a class action lawsuit. The cost of fixing one compliance gap can easily exceed $500,000 when you factor in legal defense, settlement, and remediation."
+        body="A single non-compliant disclosure form can become the basis for an FTC investigation, a state attorney general enforcement action, and a class action lawsuit. The cost of fixing one compliance gap can easily exceed $500,000 when you factor in legal defense, settlement, and remediation."
       />
     </Section>
 
@@ -697,13 +373,8 @@ const FCRACompliance2026Blog = () => (
         />
         <NumberedCard
           number="4"
-          title="Provide Detailed, Specific Adverse Action Notices"
-          description="When you decide not to hire based on background check findings, send an adverse action notice that includes: the specific findings that led to rejection, a summary of the background report, the candidate's right to dispute inaccuracies, the name and contact information of the screening company, and at least 5 business days for the candidate to respond before final rejection."
-        />
-        <NumberedCard
-          number="5"
           title="Verify Your State-Specific Obligations"
-          description="If you operate in California, New York, Illinois, Colorado, or any other state with FCRA-plus requirements, align your process with the strictest state law. This typically means shorter lookback periods for criminal history, ban-the-box compliance, and more detailed adverse action notices."
+          description="If you operate in California, New York, Illinois, Colorado, or any other state with FCRA-plus requirements, align your process with the strictest state law. This typically means shorter lookback periods for criminal history, ban-the-box compliance, and additional notice requirements."
         />
       </div>
     </Section>
@@ -745,7 +416,7 @@ const FCRACompliance2026Blog = () => (
         <NumberedCard
           number="1"
           title="Weeks 1-2: Audit Your Current Process"
-          description="Pull 20-30 recent adverse action notices. Review them against the FTC's 2026 guidance. Are they specific? Do they explain the connection between findings and job requirements? Do they provide dispute rights? Document any gaps."
+          description="Pull your current disclosure and authorization forms and a sample of recent screening files. Check that the disclosure is a standalone document, authorization was obtained before each order, and decisions follow your written criteria. Document any gaps."
         />
         <NumberedCard
           number="2"
@@ -759,13 +430,8 @@ const FCRACompliance2026Blog = () => (
         />
         <NumberedCard
           number="4"
-          title="Weeks 7-8: Create Adverse Action Templates"
-          description="Draft specific adverse action notice templates for different scenarios: criminal history found, employment verification failed, education verification failed, etc. Each template should include specific findings, job relevance, and dispute rights."
-        />
-        <NumberedCard
-          number="5"
           title="Weeks 9-10: Train Your Hiring Team"
-          description="Conduct training on the new process. Explain why individualized assessment matters. Show examples of compliant vs. non-compliant adverse action notices. Make it clear that vague rejection language is no longer acceptable."
+          description="Conduct training on the new process. Explain why individualized assessment matters. Show how to apply your written screening criteria consistently."
         />
       </div>
     </Section>
@@ -777,7 +443,7 @@ const FCRACompliance2026Blog = () => (
 
     <div className="mt-8 p-6 rounded-xl border border-green-200 bg-green-50">
       <p className="text-sm text-gray-600">
-        <strong>Ready to audit your FCRA compliance?</strong> SaffHire provides background screening services that are built for 2026 compliance. We handle individualized assessment, provide detailed adverse action notices, and ensure every screening meets federal and state requirements. <a href="/blog/how-saffhire-follows-fcra-guidelines" className="text-green-600 hover:text-green-700 hover:underline font-medium transition-colors">Learn how SaffHire ensures FCRA compliance</a> for every candidate.
+        <strong>Ready to audit your FCRA compliance?</strong> SaffHire provides background screening services that are built for 2026 compliance. We provide FCRA-compliant disclosure and authorization workflows and accurate background screening reports. <a href="/blog/how-saffhire-follows-fcra-guidelines" className="text-green-600 hover:text-green-700 hover:underline font-medium transition-colors">Learn how SaffHire ensures FCRA compliance</a> for every candidate.
       </p>
     </div>
 
@@ -1338,15 +1004,9 @@ function WhyOngoingScreeningMatters() {
           Employers who add ongoing screening to an existing workforce without obtaining updated
           consent may be in violation of the FCRA.
         </p>
-        <p>
-          When a continuous monitoring alert is triggered, the employer must follow the same
-          adverse action process required for pre-hire decisions. This means providing the employee
-          with a copy of the report, a summary of their FCRA rights, and a reasonable period to
-          dispute any inaccurate information before any adverse employment action is taken.
-        </p>
         <WarningBox
           headline="FCRA Applies Post-Hire Too"
-          body="The FCRA's adverse action requirements do not disappear after the hire date. Any employment decision, including termination or demotion, that is based in whole or in part on a consumer report requires the same pre-adverse and adverse action notices required during the hiring process."
+          body="FCRA requirements do not disappear after the hire date. Disclosure and authorization rules apply to background reports obtained on current employees, so make sure your forms cover ongoing screening."
         />
       </Section>
 
@@ -1693,7 +1353,6 @@ function BanTheBoxGuide() {
             "Asking about criminal history during the initial phone screen",
             "Asking about criminal history before making a conditional offer",
             "Using a blanket disqualification policy based on any criminal history without individualized assessment",
-            "Not providing candidates with a copy of their background report before adverse action",
             "Not giving candidates an opportunity to dispute inaccurate information",
             "Applying a longer lookback period than required by state law (e.g., 10 years instead of 7 years)",
           ]}
@@ -1707,7 +1366,7 @@ function BanTheBoxGuide() {
 
       <div className="mt-8 p-6 rounded-xl border border-green-200 bg-green-50">
         <p className="text-sm text-gray-600">
-          <strong>SaffHire helps employers build ban-the-box-compliant hiring processes</strong> that work across all states. We handle the background check timing, provide detailed adverse action notices, and ensure individualized assessment of criminal history. <BlogLink slug="how-saffhire-follows-fcra-guidelines" title="Learn how SaffHire ensures compliance" />.
+          <strong>SaffHire helps employers build ban-the-box-compliant hiring processes</strong> that work across all states. We help with background check timing and provide FCRA-compliant disclosure and authorization workflows. <BlogLink slug="how-saffhire-follows-fcra-guidelines" title="Learn how SaffHire ensures compliance" />.
         </p>
       </div>
 
@@ -1833,11 +1492,6 @@ function EEOCGuidance() {
             number="5"
             title="Consider Evidence of Rehabilitation"
             description="If a candidate has been employed, has letters of recommendation, or has completed rehabilitation programs, consider this evidence. Do not ignore rehabilitation when making your decision."
-          />
-          <NumberedCard
-            number="6"
-            title="Provide Clear Adverse Action Notices"
-            description="If you reject a candidate based on criminal history, explain your reasoning in the adverse action notice. Explain which Green factors led to your decision. This demonstrates that you conducted an individualized assessment."
           />
         </div>
       </Section>
@@ -1986,7 +1640,6 @@ export const blogPostRegistry: BlogPostMeta[] = [
       "Professional desk with legal documents, gavel, and laptop showing compliance dashboard",
     keyTakeaways: [
       "FCRA requires written consent before any background check",
-      "Employers must provide clear adverse action notices when rejecting candidates",
       "SaffHire handles all FCRA compliance requirements automatically",
       "Compliance protects both employers and candidates",
       "Documentation is critical for defending against FCRA violations",
@@ -2126,7 +1779,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     slug: "fcra-compliance-checklist-employers-2026",
     title: "FCRA Compliance Checklist for Employers in 2026",
     metaDescription:
-      "A step-by-step FCRA compliance checklist for high-turnover employers. Covers disclosures, authorization, adverse action notices, and documentation requirements.",
+      "A step-by-step FCRA compliance checklist for high-turnover employers. Covers disclosures, authorization, and documentation requirements.",
     category: "Compliance",
     date: "March 10, 2026",
     readTime: "8 min read",
@@ -2136,8 +1789,6 @@ export const blogPostRegistry: BlogPostMeta[] = [
     keyTakeaways: [
       "FCRA requires standalone disclosure before any background check",
       "Written authorization from candidate is mandatory",
-      "Pre-adverse action notice must be provided before final rejection",
-      "Adverse action notices must be specific and include dispute rights",
       "Documentation must be maintained for 3+ years",
     ],
     relatedTags: ["FCRA", "Compliance", "Checklist", "Background Checks", "Documentation"],
@@ -2156,12 +1807,11 @@ export const blogPostRegistry: BlogPostMeta[] = [
     featuredImageSuggestion: "Compliance officers reviewing FCRA regulations with dashboard",
     keyTakeaways: [
       "FCRA enforcement is intensifying in 2026 with FTC, state AGs, and private litigation",
-      "FTC priorities: individualized assessment, adverse action notices, proportional screening, state compliance",
-      "Vague adverse action notices now trigger FTC enforcement ($50K-$500K+ liability)",
+      "FTC priorities: individualized assessment, proportional screening, state compliance",
       "Blanket criminal history disqualifications are under FTC investigation",
       "State-specific compliance failures trigger coordinated FTC and state AG enforcement",
     ],
-    relatedTags: ["FCRA", "Compliance", "2026", "FTC Enforcement", "Background Checks", "Adverse Action", "State Laws", "Hiring"],
+    relatedTags: ["FCRA", "Compliance", "2026", "FTC Enforcement", "Background Checks", "State Laws", "Hiring"],
     ArticleComponent: FCRACompliance2026Blog,
   },
   {

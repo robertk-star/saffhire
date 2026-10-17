@@ -14,7 +14,7 @@ const rows = [
   { label: 'Employment verification', saffhire: 'Available as part of a staffing package', checkr: 'Add-on, starting around $12.50 per check' },
   { label: 'MVR / driving records', saffhire: 'Available for driving roles', checkr: 'Add-on MVR and commercial MVR options' },
   { label: 'Support model', saffhire: 'U.S.-based team with a published phone number', checkr: 'Platform-first support with account and help-center workflows' },
-  { label: 'FCRA posture', saffhire: 'FCRA-compliant screening workflows; employers remain responsible for hiring decisions', checkr: 'FCRA-compliant screening workflows and adverse-action tools' },
+  { label: 'FCRA posture', saffhire: 'FCRA-compliant screening workflows; employers remain responsible for hiring decisions', checkr: 'FCRA-compliant screening workflows' },
 ];
 
 const reasons = [

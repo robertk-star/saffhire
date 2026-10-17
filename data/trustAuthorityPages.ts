@@ -141,7 +141,7 @@ export const trustAuthorityPages: TrustAuthorityPage[] = [
       },
       {
         heading: "Compliance matters",
-        body: "Employers using background checks for hiring should follow FCRA requirements, including disclosure, authorization, and proper adverse action steps when applicable.",
+        body: "Employers using background checks for hiring should follow FCRA requirements, including a standalone disclosure and written authorization before ordering a report.",
       },
     ],
     faqs: [
