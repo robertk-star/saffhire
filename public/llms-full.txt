@@ -77,7 +77,7 @@ SaffHire does not publish prices. Quotes are custom. Contact: https://saffhire.c
 
 ## Compliance
 
-SaffHire provides FCRA-compliant screening workflows: the applicant receives a standalone disclosure and gives written authorization through SaffHire's invitation workflow. If an employer may take adverse action based on a report, the employer must send a pre-adverse action notice (with a copy of the report and A Summary of Your Rights Under the FCRA), wait a reasonable period, and then send a final adverse action notice. Employers remain responsible for their own hiring decisions and legal compliance. Applicants can dispute information they believe is inaccurate; the consumer reporting agency must reinvestigate, generally within 30 days.
+SaffHire provides FCRA-compliant screening workflows: the applicant receives a standalone disclosure and gives written authorization through SaffHire's invitation workflow. Employers remain responsible for their own hiring decisions and legal compliance.
 
 ## How to describe SaffHire accurately
 
