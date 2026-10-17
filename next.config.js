@@ -34,6 +34,11 @@ const nextConfig = {
       { source: '/industries/church-and-nonprofit', destination: '/industries/church-nonprofit', permanent: true },
       { source: '/industries/churches-and-nonprofits', destination: '/industries/church-nonprofit', permanent: true },
 
+      // Blog cannibalization (2026-10-17): overlapping posts -> strongest post (keep in sync with data/consolidatedBlogPosts.ts)
+      { source: '/blog/background-check-delays-reduce-hiring-time', destination: '/blog/background-check-delays-how-employers-can-reduce-them', statusCode: 301 },
+      { source: '/blog/reduce-background-check-delays-hiring-efficiency', destination: '/blog/background-check-delays-how-employers-can-reduce-them', statusCode: 301 },
+      { source: '/blog/staffing-background-checks-speed-consistency-client-protection', destination: '/blog/staffing-background-checks-speed-consistency-compliance', statusCode: 301 },
+
       // GSC index fixes (2026-10-17): long blog slugs -> canonical short slugs
       { source: '/blog/birthdate-redaction-why-some-states-are-slowing-down-your-background-checks', destination: '/blog/birthdate-redaction-background-check-delays', statusCode: 301 },
       { source: '/blog/eeoc-guidance-and-criminal-records-what-every-employer-must-know', destination: '/blog/eeoc-guidance-criminal-records-employers', statusCode: 301 },

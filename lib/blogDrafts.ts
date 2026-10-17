@@ -1,5 +1,6 @@
 import { getBlogImageForCategory } from '../data/blogCategoryImages';
 import { getSupabaseAdmin } from './supabaseAdmin';
+import { isConsolidatedBlogSlug } from '@/data/consolidatedBlogPosts';
 
 export type BlogStatus = 'draft' | 'pending_review' | 'changes_requested' | 'approved' | 'published' | 'rejected';
 
@@ -82,7 +83,9 @@ export async function getPublishedDbBlogPosts() {
 
   if (error || !data) return [] as PublicBlogPost[];
 
-  return (data as BlogDraft[]).map((post) => ({
+  return (data as BlogDraft[])
+    .filter((post) => !isConsolidatedBlogSlug(post.slug))
+    .map((post) => ({
     slug: post.slug,
     title: post.title,
     excerpt: post.excerpt,
