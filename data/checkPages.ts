@@ -11,7 +11,7 @@ const FCRA_SHORT =
 const COURT_FEES = "Court access fees may apply to State and County searches; these are pass-through fees.";
 const NO_FEES = "There are no setup fees and no minimums.";
 const DRUG_OFFER =
-  "SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with DOT and non-DOT programs and instant result options.";
+  "SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing, DOT and non-DOT, with instant result options. The employer orders each test through the SaffHire portal, the employee or candidate is tested at a Labcorp facility, and results are delivered to the employer through the SaffHire portal.";
 
 export type CheckPage = ContentPageData & {
   path: string;
@@ -43,14 +43,14 @@ export const checkPages: CheckPage[] = [
     serviceName: "DOT Drug and Alcohol Testing",
     metaTitle: "DOT Drug Testing for Employers | SaffHire",
     description:
-      "DOT drug and alcohol testing for transportation employers: pre-employment, random, post-accident, reasonable-suspicion and return-to-duty testing through certified labs nationwide.",
+      "DOT drug and alcohol testing for transportation employers: pre-employment, random, post-accident, reasonable-suspicion and return-to-duty tests ordered through the SaffHire portal and performed at Labcorp facilities.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
     eyebrow: "DRUG TESTING",
     h1: "DOT Drug Testing for Employers",
     intro:
-      "Employers with safety-sensitive transportation roles, such as commercial drivers, must follow federal Department of Transportation (DOT) testing rules. SaffHire offers DOT drug and alcohol testing through certified labs nationwide as part of DOT-related screening packages.",
+      "Employers with safety-sensitive transportation roles, such as commercial drivers, must follow federal Department of Transportation (DOT) testing rules. Employers order DOT drug tests through the SaffHire portal, testing is performed at Labcorp facilities, and results are delivered through the SaffHire portal.",
     quickAnswer:
-      "DOT drug testing is federally required testing for safety-sensitive transportation employees. It follows the DOT's procedures in 49 CFR Part 40 and the rules of the employer's DOT agency, such as FMCSA for commercial motor carriers. SaffHire offers DOT drug and alcohol testing, including pre-employment, random, post-accident, reasonable-suspicion and return-to-duty testing.",
+      "DOT drug testing is federally required testing for safety-sensitive transportation employees. It follows the DOT's procedures in 49 CFR Part 40 and the rules of the employer's DOT agency, such as FMCSA for commercial motor carriers. Employers order each DOT test through the SaffHire portal, the employee is tested at a Labcorp facility, and results come back through the portal.",
     sections: [
       {
         heading: "Who Needs DOT Drug Testing",
@@ -62,10 +62,10 @@ export const checkPages: CheckPage[] = [
         heading: "DOT Test Types",
         bullets: [
           "Pre-employment: a covered employee must have a verified negative drug test result before first performing safety-sensitive functions.",
-          "Random: covered employees are selected at random and tested unannounced throughout the year. See [random drug testing](/random-drug-testing).",
+          "Random: covered employees are selected at random and tested unannounced throughout the year. The employer (or its consortium or third-party administrator) manages the random pool and selections, then orders each selected employee's test through the SaffHire portal. See [random drug testing](/random-drug-testing).",
           "Post-accident: required after certain accidents as defined by the DOT agency's rules.",
           "Reasonable suspicion: required when a trained supervisor observes specific signs of possible drug or alcohol use.",
-          "Return-to-duty and follow-up: required after a violation, following the return-to-duty process.",
+          "Return-to-duty and follow-up: required after a violation, following the return-to-duty process. The employer orders these tests through the SaffHire portal when they are due."
         ],
       },
       {
@@ -78,6 +78,14 @@ export const checkPages: CheckPage[] = [
         heading: "Other DOT Screening for Drivers",
         paragraphs: [
           "Driver hiring usually combines drug and alcohol testing with other checks. SaffHire's DOT-related packages for drivers and transportation professionals include [MVR checks](/mvr-checks), drug and alcohol testing, and criminal history searches. MVRs usually return in minutes; state fees may apply. Motor carriers also have their own FMCSA obligations, such as Drug and Alcohol Clearinghouse queries, that the carrier is responsible for.",
+        ],
+      },
+      {
+        heading: "How Ordering Works",
+        bullets: [
+          "Order the test for the employee or candidate in the SaffHire portal.",
+          "The employee or candidate goes to a Labcorp facility for collection.",
+          "Results are delivered to you through the SaffHire portal.",
         ],
       },
       {
@@ -103,7 +111,7 @@ export const checkPages: CheckPage[] = [
         answer:
           "You can work with SaffHire for both, but DOT-covered employees must be tested under DOT rules and non-DOT employees under your company policy. Keep the two programs separate.",
       },
-      { question: "Do you offer random testing?", answer: DRUG_OFFER },
+      { question: "Where does DOT testing take place?", answer: "At Labcorp facilities. You order the test through the SaffHire portal, and results are delivered through the portal." },
     ],
     relatedLinks: [...drugLinks, { label: "Transportation Screening", href: "/industries/transportation" }],
   },
@@ -112,21 +120,22 @@ export const checkPages: CheckPage[] = [
     serviceName: "Random Drug Testing",
     metaTitle: "Random Drug Testing Programs for Employers | SaffHire",
     description:
-      "Random drug testing for DOT-regulated and non-DOT workforces through certified labs nationwide, from SaffHire, a Veteran-Owned screening company in Frisco, TX.",
+      "Random drug tests for DOT-regulated and non-DOT workforces, ordered through the SaffHire portal and performed at Labcorp facilities, from SaffHire, a Veteran-Owned screening company in Frisco, TX.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
     eyebrow: "DRUG TESTING",
     h1: "Random Drug Testing",
     intro:
-      "Random drug testing selects employees unannounced from a defined pool. SaffHire offers random drug testing through certified labs nationwide for DOT-regulated and non-DOT workforces.",
+      "Random drug testing selects employees unannounced from a defined pool. Employers that run a random program order each selected employee's test through the SaffHire portal; testing is performed at Labcorp facilities and results come back through the portal.",
     quickAnswer:
       "Random drug testing means employees in a testing pool are selected by a random process and tested without advance notice. It is required for DOT-covered safety-sensitive employees and is an option employers can adopt by policy for other roles.",
     sections: [
       {
         heading: "How Random Testing Works",
         bullets: [
-          "Define the testing pool: which employees or roles are covered. DOT-covered employees belong in a DOT pool; other employees can be in a separate non-DOT pool.",
-          "Select employees with a truly random method, so every employee in the pool has an equal chance each time.",
-          "Notify selected employees and send them to collection promptly.",
+          "The employer defines the testing pool: which employees or roles are covered. DOT-covered employees belong in a DOT pool; other employees can be in a separate non-DOT pool.",
+          "The employer (or its consortium or third-party administrator) selects employees with a truly random method, so every employee in the pool has an equal chance each time.",
+          "Order each selected employee's test in the SaffHire portal and send the employee to a Labcorp facility promptly.",
+          "Results are delivered through the SaffHire portal.",
           "Keep records of selections and results, and review results under your written policy.",
         ],
       },
@@ -161,6 +170,10 @@ export const checkPages: CheckPage[] = [
         answer: "DOT-covered employees should be in a DOT pool tested under DOT rules. Keep non-DOT employees in a separate pool under your company policy.",
       },
       {
+        question: "Does SaffHire manage the random pool?",
+        answer: "No. Your company, or a consortium or third-party administrator you choose, manages the pool and selections. You order each selected employee's test through the SaffHire portal, testing is done at Labcorp, and results come back through the portal.",
+      },
+      {
         question: "What other drug tests does SaffHire offer?",
         answer: DRUG_OFFER,
       },
@@ -177,7 +190,7 @@ export const checkPages: CheckPage[] = [
     eyebrow: "DRUG TESTING",
     h1: "Instant Drug Testing",
     intro:
-      "When a start date is close, instant result drug testing can help. SaffHire offers instant result options alongside lab-based drug testing for employers nationwide.",
+      "When a start date is close, instant result drug testing can help. SaffHire offers instant result options alongside lab-based drug testing. Employers order through the SaffHire portal, testing is performed at Labcorp facilities, and results come back through the portal.",
     quickAnswer:
       "Instant drug testing gives a preliminary result at the time of collection. Employers use it for non-DOT testing under their own policy. A non-negative instant result is not a final result and should be confirmed by a laboratory before any decision. DOT-required tests cannot use instant tests.",
     sections: [
@@ -586,7 +599,7 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       },
     ],
     faqs: [
-      { question: "Do you offer drug testing?", answer: "Yes. We offer pre-employment, random, post-accident, and reasonable-suspicion drug testing through certified labs nationwide. Instant result options are also available." },
+      { question: "Do you offer drug testing?", answer: "Yes. We offer pre-employment, random, post-accident, and reasonable-suspicion drug testing. You order through the SaffHire portal, testing is performed at Labcorp facilities, and results are delivered through the portal. Instant result options are also available." },
       { question: "Do you offer DOT drug testing?", answer: "Yes. DOT and non-DOT programs are available. See DOT Drug Testing." },
       { question: "Which panels do you offer?", answer: "5, 10 and 12 panel testing for non-DOT programs; DOT tests use the federally set DOT panel." },
       { question: "Is there a setup fee or a minimum?", answer: "No. SaffHire has no setup fees and no minimums." },

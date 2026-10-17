@@ -28,7 +28,7 @@ const searchTypes = [
 
 const stats = [
   { value: "Minutes", label: "National Search Results" },
-  { value: "Court-Direct", label: "County Searches" },
+  { value: "No Minimums", label: "No Setup Fees" },
   { value: "FCRA-aware", label: "Screening Workflows" },
   { value: "24/7", label: "Portal Access" },
 ];
