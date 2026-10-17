@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
 import SiteShell from "@/components/SiteShell";
 import PageFAQ, { type FAQEntry } from "@/components/PageFAQ";
+import RichText from "@/components/RichText";
 
 export type ContentSubsection = { heading: string; paragraphs?: string[]; bullets?: string[] };
 export type ContentSection = {
@@ -23,25 +23,6 @@ export type ContentPageData = {
 };
 
 const font = { fontFamily: "'Montserrat', sans-serif" };
-
-/** Renders text with simple [label](/href) links. */
-export function RichText({ text }: { text: string }) {
-  const parts: ReactNode[] = [];
-  const re = /\[([^\]]+)\]\(([^)]+)\)/g;
-  let last = 0;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(text))) {
-    if (m.index > last) parts.push(text.slice(last, m.index));
-    parts.push(
-      <a key={m.index} href={m[2]} className="font-semibold text-green-700 underline">
-        {m[1]}
-      </a>,
-    );
-    last = m.index + m[0].length;
-  }
-  if (last < text.length) parts.push(text.slice(last));
-  return <>{parts}</>;
-}
 
 function Bullets({ items }: { items: string[] }) {
   return (

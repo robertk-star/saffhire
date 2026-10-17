@@ -63,7 +63,7 @@ export default function StaffingPage() {
             {stats.map((stat) => (
               <div key={stat.label} className="py-6 px-6 text-center">
                 <p className="text-2xl lg:text-3xl font-black text-white mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>{stat.value}</p>
-                <p className="text-green-900 text-sm font-semibold">{stat.label}</p>
+                <p className="text-green-50 text-sm font-semibold">{stat.label}</p>
               </div>
             ))}
           </div>

@@ -1,4 +1,5 @@
 import { faqSchema } from "@/lib/structuredData";
+import RichText, { plainText } from "@/components/RichText";
 
 export type FAQEntry = { question: string; answer: string };
 
@@ -7,7 +8,7 @@ export default function PageFAQ({ title = "Frequently Asked Questions", items }:
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(items)) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(items.map((i) => ({ question: i.question, answer: plainText(i.answer) })))) }} />
         <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>{title}</h2>
         <div className="space-y-3">
           {items.map((item) => (
@@ -15,7 +16,7 @@ export default function PageFAQ({ title = "Frequently Asked Questions", items }:
               <summary className="cursor-pointer font-semibold text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 <h3 className="inline">{item.question}</h3>
               </summary>
-              <p className="mt-3 text-gray-700 leading-relaxed">{item.answer}</p>
+              <p className="mt-3 text-gray-700 leading-relaxed"><RichText text={item.answer} /></p>
             </details>
           ))}
         </div>
