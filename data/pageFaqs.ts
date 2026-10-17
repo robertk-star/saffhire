@@ -16,7 +16,7 @@ export const staffingFaqs: FAQEntry[] = [
   {
     question: "Who is responsible for FCRA compliance when a staffing agency orders a background check?",
     answer:
-      "The agency ordering the report is the user of the consumer report under the FCRA. That means providing a standalone disclosure, getting the candidate's written authorization, and following the pre-adverse and adverse action steps before taking action based on the report. SaffHire provides FCRA-compliant workflows to support those steps; the agency remains responsible for its own hiring decisions and legal compliance.",
+      "The agency ordering the report is the user of the consumer report under the FCRA. That means providing a standalone disclosure and getting the candidate's written authorization before ordering. SaffHire's invitation workflow collects both electronically; the agency remains responsible for its own hiring decisions and legal compliance.",
   },
   {
     question: "Are there extra fees on some searches?",
