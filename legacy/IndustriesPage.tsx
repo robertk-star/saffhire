@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 import PageSEO from "@/components/PageSEO";
 import { Link } from "wouter";
 
@@ -96,6 +97,7 @@ export default function IndustriesPage() {
           <a href="/contact" className="btn-green rounded-sm px-10 py-4 text-base font-bold inline-block" style={{ fontFamily: "'Montserrat', sans-serif" }}>Contact Us</a>
         </div>
       </section>
+      <LegacySlot />
       <Footer />
     </div>
   );

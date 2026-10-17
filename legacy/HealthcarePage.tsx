@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 import PageSEO from "@/components/PageSEO";
 
 import {
@@ -63,7 +64,7 @@ export default function HealthcarePage() {
             {stats.map((stat) => (
               <div key={stat.label} className="py-6 px-6 text-center">
                 <p className="text-2xl lg:text-3xl font-black text-white mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>{stat.value}</p>
-                <p className="text-green-900 text-sm font-semibold">{stat.label}</p>
+                <p className="text-green-50 text-sm font-semibold">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -71,6 +72,7 @@ export default function HealthcarePage() {
       </section>
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="sr-only">Background screening services for healthcare</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => {
               const Icon = service.icon;
@@ -85,6 +87,7 @@ export default function HealthcarePage() {
           </div>
         </div>
       </section>
+      <LegacySlot />
       <Footer />
     </div>
   );

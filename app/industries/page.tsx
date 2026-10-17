@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
 import LegacyClientPage from '@/components/next-bridge/LegacyClientPage';
+import PageFAQ from '@/components/PageFAQ';
+import { industryFaqs } from '@/data/industryFaqs';
 import { getPageMetadata } from '@/shared/seoMetadata';
 
 const meta = getPageMetadata('/industries');
 export const metadata: Metadata = { title: meta.title, description: meta.description };
 
 export default function Page() {
-  return <LegacyClientPage page="industries" path="/industries" />;
+  const faq = industryFaqs['/industries'];
+  return (
+    <LegacyClientPage page="industries" path="/industries">
+      <PageFAQ title={faq.title} items={faq.items} />
+    </LegacyClientPage>
+  );
 }

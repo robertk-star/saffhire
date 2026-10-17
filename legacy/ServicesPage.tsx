@@ -6,6 +6,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LegacySlot from "@/components/next-bridge/LegacySlot";
 import IndustriesSection from "@/components/IndustriesSection";
 import PageSEO from "@/components/PageSEO";
 import { Link } from "wouter";
@@ -151,6 +152,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <LegacySlot />
       <Footer />
     </div>
   );
