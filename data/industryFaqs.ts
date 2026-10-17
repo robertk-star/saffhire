@@ -31,7 +31,7 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
       {
         question: "Do you offer drug testing for healthcare employers?",
         answer:
-          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with instant result options.",
+          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing. Drug screens are ordered through the SaffHire portal, performed at Labcorp facilities, and results are delivered through the portal. Instant result options are available.",
       },
       { question: "How long does healthcare background screening take?", answer: INSTANT },
     ],
@@ -52,7 +52,7 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
       {
         question: "Do you offer drug and alcohol testing for drivers?",
         answer:
-          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with DOT and non-DOT programs.",
+          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing. Drug screens are ordered through the SaffHire portal, performed at Labcorp facilities, and results are delivered through the portal. DOT and non-DOT testing is available.",
       },
       { question: "Are there extra fees on MVRs or court searches?", answer: FEES },
       { question: "Can you screen drivers who live in other states?", answer: NATIONWIDE },
@@ -70,7 +70,7 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
       {
         question: "Do you offer drug testing for manufacturing employers?",
         answer:
-          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with instant result options.",
+          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing. Drug screens are ordered through the SaffHire portal, performed at Labcorp facilities, and results are delivered through the portal. Instant result options are available.",
       },
       {
         question: "Can we screen temp workers and contractors who work in our facility?",
@@ -92,7 +92,7 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
       {
         question: "Do you offer drug testing for hospitality employers?",
         answer:
-          "Yes. SaffHire offers pre-employment drug testing through certified labs nationwide, with instant result options.",
+          "Yes. SaffHire offers pre-employment drug testing. Drug screens are ordered through the SaffHire portal, performed at Labcorp facilities, and results are delivered through the portal. Instant result options are available.",
       },
       {
         question: "Do we need the applicant's permission to run a background check?",
@@ -113,7 +113,7 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
       {
         question: "Do you offer drug testing for energy employers?",
         answer:
-          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing through certified labs nationwide, with DOT and non-DOT programs.",
+          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing. Drug screens are ordered through the SaffHire portal, performed at Labcorp facilities, and results are delivered through the portal. DOT and non-DOT testing is available.",
       },
       { question: "Can you screen workers hired for sites in other states?", answer: NATIONWIDE },
       { question: "How long does screening take?", answer: INSTANT },
