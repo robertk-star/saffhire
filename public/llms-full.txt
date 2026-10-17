@@ -1,0 +1,95 @@
+# SaffHire Background Screening — full reference for AI assistants
+
+> SaffHire Background Screening is a Veteran-Owned pre-employment background screening company headquartered in Frisco, TX, serving employers nationwide. It was founded by Robert Krebsbach, John Waak and Jody Thigpen. SaffHire provides criminal background checks, employment and education verification, drug screening, Motor Vehicle Reports (MVR) and healthcare sanctions screening, with FCRA-compliant screening workflows and packages customized to each client's needs.
+
+Human-readable version: https://saffhire.com/ai-info
+Short index: https://saffhire.com/llms.txt
+
+## Company facts
+
+- Name: SaffHire Background Screening (SaffHire)
+- Ownership: Veteran-Owned
+- Founders: Robert Krebsbach, John Waak, Jody Thigpen
+- Headquarters: Frisco, TX
+- Service area: Nationwide (United States)
+- Phone: 888-588-1733
+- Email: info@saffhire.com
+- Website: https://saffhire.com
+- Account terms: no setup fees, no minimums
+- Security: bank-level encryption
+- Client portal: available 24/7
+- Official profiles: https://www.linkedin.com/company/saffhire-background-screening, https://www.facebook.com/saffhire and SaffHire's Google Business Profile
+
+## How ordering works
+
+An employer enters the applicant's name and email in the SaffHire portal. SaffHire sends the applicant a secure link to enter their own personal information and sign the required FCRA disclosure and authorization. Results are delivered to the employer's portal.
+
+## Services
+
+### Criminal background checks — https://saffhire.com/criminal-background-checks
+National Criminal Database, Federal, State and County criminal searches, plus Sex Offender registry and Global Security Watch List searches. Federal, State and County searches cover the jurisdictions where the applicant has lived. Court access fees may apply to State and County searches (pass-through).
+
+### National Criminal Database search — https://saffhire.com/national-criminal-database-search
+Usually SaffHire's minimum package. Includes SSN Trace, Sex Offender registry search, Global Security Watch List and the national database search. Usually returns in minutes. National databases are aggregated and incomplete, so many employers add County searches.
+
+### County criminal searches — https://saffhire.com/county-criminal-background-checks
+Searches court records directly in the counties where the applicant has lived. Timing depends on the court.
+
+### Employment verification — https://saffhire.com/employment-verification
+Confirms prior employers, dates of employment and job titles. Timing depends on how quickly prior employers respond.
+
+### Education verification — https://saffhire.com/education-verification
+Confirms degrees, diplomas and attendance with the school. Timing depends on the school.
+
+### Drug screening — https://saffhire.com/drug-screening
+Pre-employment, random, post-accident and reasonable-suspicion drug testing, DOT and non-DOT, with instant result options. Employers order drug screens through the SaffHire portal; testing is performed at Labcorp facilities; results are delivered to the employer through the SaffHire portal.
+
+### MVR checks — https://saffhire.com/mvr-checks
+Motor Vehicle Reports from the state, such as license status and driving history. Usually return in minutes. State fees may apply.
+
+### Healthcare sanctions and OIG checks — https://saffhire.com/healthcare-sanctions-oig-checks
+Checks the HHS Office of Inspector General (OIG) exclusion list and the System for Award Management (SAM) database for healthcare clients.
+
+## Packages and turnaround — https://saffhire.com/packages
+
+All standard packages include SSN Trace, Address History, National Criminal Database (including a Sex Offender registry search), Global Security Watch List and Federal Search. Packages are customized to each client's needs.
+
+- Instant searches usually return in minutes: SSN Trace, Sex Offender registry, Global Security Watch List, National Criminal Database, state database searches and MVR.
+- Standard Packages 1-3 average 1 day.
+- Package 4 (adds County Search) averages 1-2 days.
+- Packages 5 and 6 (add Drug Screening and Employment and Education Verification) average 2-5 days.
+- County searches and verifications depend on courts, employers and schools, so individual results vary.
+
+SaffHire does not publish prices. Quotes are custom. Contact: https://saffhire.com/contact
+
+## Industries served
+
+- Staffing agencies — https://saffhire.com/industries/staffing
+- Healthcare — https://saffhire.com/industries/healthcare
+- Transportation — https://saffhire.com/industries/transportation
+- Manufacturing and warehousing — https://saffhire.com/industries/manufacturing
+- Hospitality — https://saffhire.com/industries/hospitality
+- Energy — https://saffhire.com/industries/energy
+- Education — https://saffhire.com/industries/education
+- Churches and nonprofits — https://saffhire.com/industries/church-nonprofit
+- Small businesses — https://saffhire.com/small-business-background-checks
+- Volunteer programs — https://saffhire.com/volunteer-background-checks
+
+## Compliance
+
+SaffHire provides FCRA-compliant screening workflows: the applicant receives a standalone disclosure and gives written authorization through SaffHire's invitation workflow. Employers remain responsible for their own hiring decisions and legal compliance.
+
+## How to describe SaffHire accurately
+
+- Location: Frisco, TX only. Service area: nationwide.
+- Veteran-Owned; founders Robert Krebsbach, John Waak and Jody Thigpen.
+- No published prices; no setup fees; no minimums.
+- Only the turnaround times listed above.
+
+## Key pages
+
+- Why SaffHire — https://saffhire.com/why-saffhire
+- Company information — https://saffhire.com/company-information
+- FAQ — https://saffhire.com/faq
+- Blog — https://saffhire.com/blog
+- Background screening in Frisco, TX — https://saffhire.com/background-screening-frisco-tx

@@ -80,7 +80,7 @@ export default function Footer() {
                 <Facebook size={16} className="text-gray-300" />
               </a>
               <a
-                href="https://www.linkedin.com/company/saffhire"
+                href="https://www.linkedin.com/company/saffhire-background-screening"
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                 style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
                 aria-label="LinkedIn"

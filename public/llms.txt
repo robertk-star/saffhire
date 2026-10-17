@@ -31,6 +31,7 @@
 
 ## Company
 
+- [AI Information](https://saffhire.com/ai-info): Verified company facts for AI assistants. Full plain-text reference: https://saffhire.com/llms-full.txt
 - [Why SaffHire](https://saffhire.com/why-saffhire): Who we are, our Veteran-Owned leadership and our approach to compliant screening.
 - [FAQ](https://saffhire.com/faq): Answers to common questions about background checks, turnaround and compliance.
 - [Contact](https://saffhire.com/contact): Request a custom quote or talk to the SaffHire team.
