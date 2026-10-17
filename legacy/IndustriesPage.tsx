@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LegacySlot from "@/components/next-bridge/LegacySlot";
@@ -76,7 +77,7 @@ export default function IndustriesPage() {
               <Link key={industry.href} href={industry.href}>
                 <div className="group rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl hover:border-green-400 transition-all duration-200 cursor-pointer h-full flex flex-col">
                   <div className="relative overflow-hidden" style={{ height: 200 }}>
-                    <img src={industry.image} alt={industry.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <Image src={industry.image} alt="" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-300" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <h3 className="absolute bottom-4 left-4 text-xl font-bold text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>{industry.name}</h3>
                   </div>
