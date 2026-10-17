@@ -33,6 +33,28 @@ const nextConfig = {
       { source: '/industries/nonprofits', destination: '/industries/church-nonprofit', permanent: true },
       { source: '/industries/church-and-nonprofit', destination: '/industries/church-nonprofit', permanent: true },
       { source: '/industries/churches-and-nonprofits', destination: '/industries/church-nonprofit', permanent: true },
+
+      // GSC index fixes (2026-10-17): long blog slugs -> canonical short slugs
+      { source: '/blog/birthdate-redaction-why-some-states-are-slowing-down-your-background-checks', destination: '/blog/birthdate-redaction-background-check-delays', statusCode: 301 },
+      { source: '/blog/eeoc-guidance-and-criminal-records-what-every-employer-must-know', destination: '/blog/eeoc-guidance-criminal-records-employers', statusCode: 301 },
+      { source: '/blog/the-employers-state-by-state-guide-to-ban-the-box-laws', destination: '/blog/ban-the-box-laws-by-state-employer-guide', statusCode: 301 },
+      { source: '/blog/the-roi-of-speed-how-5-minute-background-checks-slash-your-time-to-hire', destination: '/blog/roi-of-speed-5-minute-background-checks-time-to-hire', statusCode: 301 },
+      { source: '/blog/why-ongoing-employee-screening-will-change-the-way-you-manage-long-term-risk', destination: '/blog/ongoing-employee-screening-long-term-risk-management', statusCode: 301 },
+      { source: '/blog/what-the-oig-expects-from-healthcare-organizations', destination: '/blog/what-oig-expects-healthcare-organizations', statusCode: 301 },
+      { source: '/blog/fcra-compliance-checklist-for-employers-in-2026', destination: '/blog/fcra-compliance-checklist-employers-2026', statusCode: 301 },
+      { source: '/blog/how-saffhire-follows-fcra-guidelines', destination: '/blog/fcra-compliance-2026-background-screening-employers', statusCode: 301 },
+      // Legacy CMS URLs
+      { source: '/services/manufacturingwarehousing', destination: '/industries/manufacturing', statusCode: 301 },
+      { source: '/services/churches-non-profit', destination: '/industries/church-nonprofit', statusCode: 301 },
+      { source: '/services/:industry(healthcare|education|staffing|transportation|energy|hospitality)', destination: '/industries/:industry', statusCode: 301 },
+      { source: '/contact-us', destination: '/contact', statusCode: 301 },
+      { source: '/contact-style-1', destination: '/contact', statusCode: 301 },
+      { source: '/create-an-account', destination: '/contact', statusCode: 301 },
+      { source: '/index.php/contact-us', destination: '/contact', statusCode: 301 },
+      { source: '/index.php/contact-style-1', destination: '/contact', statusCode: 301 },
+      { source: '/index.php/services/:industry(healthcare|education|staffing|transportation|energy|hospitality)', destination: '/industries/:industry', statusCode: 301 },
+      { source: '/index.php', destination: '/', statusCode: 301 },
+      { source: '/index.php/:path*', destination: '/:path*', statusCode: 301 },
     ];
   },
   experimental: {

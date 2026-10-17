@@ -310,14 +310,8 @@ export default function FCRAEnforcement2026Blog() {
           </li>
           <li>
             <BlogLink
-              slug="roi-of-speed-how-5-minute-background-checks-slash-your-time-to-hire"
+              slug="roi-of-speed-5-minute-background-checks-time-to-hire"
               title="The ROI of Speed: How 5-Minute Background Checks Slash Your Time-to-Hire"
-            />
-          </li>
-          <li>
-            <BlogLink
-              slug="top-industries-that-require-most-screening"
-              title="The Top Industries That Require the Most Screening"
             />
           </li>
         </ul>
