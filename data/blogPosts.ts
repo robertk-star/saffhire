@@ -81,6 +81,8 @@ export const blogPosts: BlogPost[] = [
     author: "SaffHire Compliance Team",
     image: "/images/blog-eeoc-criminal.webp",
   },
+  drugTestTypesListing,
+  staffingChecklistListing,
   {
     slug: "ban-the-box-laws-by-state-employer-guide",
     title: "The Employer's State-by-State Guide to Ban-the-Box Laws: What You Must Do Before You Ask",
@@ -217,3 +219,6 @@ export function getRelatedPosts(slug: string): BlogPost[] {
     .map((relatedSlug) => blogPosts.find((post) => post.slug === relatedSlug))
     .filter((post): post is BlogPost => post !== undefined);
 }
+
+import { drugTestTypesListing } from "@/legacy/blog/TypesOfEmploymentDrugTests";
+import { staffingChecklistListing } from "@/legacy/blog/StaffingClientRequirementsChecklist";
