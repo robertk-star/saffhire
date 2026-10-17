@@ -1027,6 +1027,9 @@ export interface BlogPostMeta {
   ArticleComponent: React.FC;
 }
 
+import { texasLawsEntry } from "./blog/TexasBackgroundCheckLaws";
+import { dotClearinghouseEntry } from "./blog/DotDrugTestingClearinghouse";
+
 // ─── Blog #7: What the OIG Expects from Healthcare Organizations ───
 
 function WhatOIGExpectsHealthcare() {
@@ -1959,6 +1962,8 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ],
     ArticleComponent: TruckingBadHiringBlog,
   },
+  texasLawsEntry,
+  dotClearinghouseEntry,
   // ── Existing post (kept for backward compatibility) ──
   {
     slug: "how-saffhire-follows-fcra-guidelines",
