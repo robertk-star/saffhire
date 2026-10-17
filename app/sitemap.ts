@@ -37,6 +37,7 @@ const extraPublicRoutes = [
   '/background-screening-allen-tx',
   '/volunteer-background-checks',
   '/small-business-background-checks',
+  '/sterling-first-advantage-alternative',
   '/county-criminal-background-checks',
   '/national-criminal-database-search',
   '/healthcare-sanctions-oig-checks',
