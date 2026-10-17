@@ -35,6 +35,8 @@ function renderMarkdown(markdown: string) {
   });
 }
 
+const noindexOpenKnowledgeSlugs = new Set(['conversion-goals']);
+
 export function generateStaticParams() {
   return openKnowledgePages.map((page) => ({ slug: page.slug }));
 }
@@ -51,7 +53,8 @@ export async function generateMetadata({
     title: page.title,
     description: page.description,
     alternates: { canonical: `/open-knowledge/${page.slug}` },
-    robots: { index: true, follow: true },
+    // Internal-facing pages stay reachable but out of search results.
+    robots: noindexOpenKnowledgeSlugs.has(page.slug) ? { index: false, follow: true } : { index: true, follow: true },
   };
 }
 

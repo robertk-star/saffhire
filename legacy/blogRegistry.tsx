@@ -1983,7 +1983,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: HowSaffHireFollowsFCRA,
   },
   {
-    slug: "birthdate-redaction-why-some-states-are-slowing-down-your-background-checks",
+    slug: "birthdate-redaction-background-check-delays",
     title: "Birthdate Redaction: Why Some States Are Slowing Down Your Background Checks (and How to Handle It)",
     metaDescription:
       "California and Michigan birthdate redaction laws are causing background check delays. Learn why PII redaction is spreading and how to keep your screening process on track.",
@@ -2004,7 +2004,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: BirthdateRedactionBlog,
   },
   {
-    slug: "eeoc-guidance-and-criminal-records-what-every-employer-must-know",
+    slug: "eeoc-guidance-criminal-records-employers",
     title: "EEOC Guidance and Criminal Records: What Every Employer Must Know Before Their Next Hire",
     metaDescription:
       "Blanket criminal record exclusion policies can expose your company to EEOC liability. Learn the Green factors and how to build a compliant screening policy.",
@@ -2025,7 +2025,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: EEOCGuidance,
   },
   {
-    slug: "the-employers-state-by-state-guide-to-ban-the-box-laws",
+    slug: "ban-the-box-laws-by-state-employer-guide",
     title: "The Employer's State-by-State Guide to Ban-the-Box Laws: What You Must Do Before You Ask",
     metaDescription:
       "Ban-the-box laws now cover 37 states and 150+ cities. This guide breaks down requirements, penalties, and how to build a compliant hiring process.",
@@ -2046,7 +2046,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: BanTheBoxGuide,
   },
   {
-    slug: "the-roi-of-speed-how-5-minute-background-checks-slash-your-time-to-hire",
+    slug: "roi-of-speed-5-minute-background-checks-time-to-hire",
     title: "The ROI of Speed: How 5-Minute Background Checks Slash Your Time-to-Hire",
     metaDescription:
       "Slow background checks cost employers thousands per month in lost productivity and candidate withdrawals. Discover how fast screening improves hiring outcomes.",
@@ -2067,7 +2067,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: ROIOfSpeed,
   },
   {
-    slug: "why-ongoing-employee-screening-will-change-the-way-you-manage-long-term-risk",
+    slug: "ongoing-employee-screening-long-term-risk-management",
     title: "Why Ongoing Employee Screening Will Change the Way You Manage Long-Term Risk",
     metaDescription:
       "A pre-hire background check is a snapshot. Continuous screening solutions monitor employees throughout their employment, catching post-hire incidents before they become crises.",
@@ -2088,7 +2088,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: WhyOngoingScreeningMatters,
   },
   {
-    slug: "what-the-oig-expects-from-healthcare-organizations",
+    slug: "what-oig-expects-healthcare-organizations",
     title: "What the OIG Expects from Healthcare Organizations",
     metaDescription:
       "The OIG exclusion list is updated monthly. Employing an excluded individual can trigger civil penalties, full claim repayment, and loss of Medicare and Medicaid billing privileges.",
@@ -2109,7 +2109,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     ArticleComponent: WhatOIGExpectsHealthcare,
   },
   {
-    slug: "fcra-compliance-checklist-for-employers-in-2026",
+    slug: "fcra-compliance-checklist-employers-2026",
     title: "FCRA Compliance Checklist for Employers in 2026",
     metaDescription:
       "A step-by-step FCRA compliance checklist for high-turnover employers. Covers disclosures, authorization, adverse action notices, and documentation requirements.",

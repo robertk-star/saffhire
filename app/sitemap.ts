@@ -6,6 +6,14 @@ import { getPublishedDbBlogPosts } from '@/lib/blogDrafts';
 import { openKnowledgePages } from '@/data/openKnowledgePages';
 import { SITE_URL } from '@/lib/siteUrl';
 import { routeLastModified } from '@/data/routeLastModified';
+import { blogPostRegistry } from '@/legacy/blogRegistry';
+
+// File-based posts render only when they have an article body (registry or a custom component).
+const customBodySlugs = new Set([
+  'gig-economy-background-screening-contingent-workforce-liability',
+  'ai-powered-resume-fraud-hiring-challenge',
+]);
+const registrySlugs = new Set(blogPostRegistry.map((post) => post.slug));
 
 const excludedRoutes = new Set([
   '/404',
@@ -13,6 +21,8 @@ const excludedRoutes = new Set([
   '/apps',
   '/test-signup',
   '/saffhire-vs-checkr-for-staffing-agencies',
+  // noindex: internal-facing open-knowledge page
+  '/open-knowledge/conversion-goals',
 ]);
 
 const extraPublicRoutes = [
@@ -31,9 +41,6 @@ const extraPublicRoutes = [
   '/national-criminal-database-search',
   '/healthcare-sanctions-oig-checks',
   '/open-knowledge',
-  '/llms.txt',
-  '/open-knowledge.md',
-  '/open-knowledge/okf.json',
   '/referral-partners/benefitsme',
   '/referral-partners/corporate-talent-finder',
   '/referral-partners/defense-by-design',
@@ -58,7 +65,9 @@ export const dynamic = 'force-dynamic';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const dbPosts = await getPublishedDbBlogPosts();
   const staticRoutes = Object.keys(seoMetadata);
-  const fileBlogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
+  const fileBlogRoutes = blogPosts
+    .filter((post) => customBodySlugs.has(post.slug) || registrySlugs.has(post.slug))
+    .map((post) => `/blog/${post.slug}`);
   const dbBlogRoutes = dbPosts.map((post) => `/blog/${post.slug}`);
   const blogRoutes = Array.from(new Set([...fileBlogRoutes, ...dbBlogRoutes]));
   const authorityRoutes = seoAuthorityPages.map((page) => page.path);

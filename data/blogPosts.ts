@@ -137,61 +137,6 @@ export const blogPosts: BlogPost[] = [
     image: "/images/blog-birthdate-redaction.webp",
   },
   {
-    slug: "how-long-background-checks-go-back-7-year-rule",
-    title: "How Long Background Checks Can Go Back (7-Year Rule Explained)",
-    excerpt:
-      "The FCRA 7-year rule is the federal baseline for background check lookback periods, but it is not the whole story. Learn about felony exceptions, state variations, industry-specific requirements, and how to determine the right lookback period for your hiring process.",
-    category: "Compliance",
-    date: "April 9, 2026",
-    readTime: "10 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-7-year-rule.webp",
-  },
-  {
-    slug: "true-cost-of-bad-hire",
-    title: "The True Cost of a Bad Hire: How Background Screening Prevents Costly Mistakes",
-    excerpt:
-      "A single bad hire can cost $15,000 to $150,000 or more when you factor in recruitment, training, lost productivity, and legal liability. Learn what bad hires actually cost and how thorough background screening helps prevent the most expensive hiring mistakes.",
-    category: "Hiring Best Practices",
-    date: "April 10, 2026",
-    readTime: "11 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-true-cost-bad-hire.webp",
-  },
-  {
-    slug: "top-industries-that-require-most-screening",
-    title: "The Top Industries That Require the Most Screening (And Why Cutting Corners Gets Expensive Fast)",
-    excerpt:
-      "Six industries face the highest hiring risks: staffing, transportation, warehousing, healthcare, financial services, and construction. Learn why thorough background screening is non-negotiable in these sectors and what gaps most companies miss.",
-    category: "Industry-Specific",
-    date: "April 13, 2026",
-    readTime: "11 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-top-industries.webp",
-  },
-  {
-    slug: "screening-healthcare-workers-what-employers-must-verify",
-    title: "Screening Healthcare Workers: What Employers MUST Verify",
-    excerpt:
-      "Hiring in healthcare is not like hiring for a grocery line. You are trusting someone with lives. Learn the 7 critical verifications every healthcare employer must perform, the compliance traps that cost employers millions, and the three screening setups that balance speed with protection.",
-    category: "Healthcare Compliance",
-    date: "April 27, 2026",
-    readTime: "10 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-healthcare-workers.webp",
-  },
-  {
-    slug: "ai-in-background-screening-faster-smarter-more-reliable",
-    title: "AI in Background Screening: Faster, Smarter, More Reliable",
-    excerpt:
-      "AI is transforming background screening - but it's not replacing it. Discover how AI speeds up turnaround times, improves data matching, flags risk patterns, and automates repetitive work. Plus: what AI cannot replace and why the best screening combines AI with human expertise.",
-    category: "Technology",
-    date: "April 30, 2026",
-    readTime: "9 min read",
-    author: "SaffHire Compliance Team",
-    image: "/images/blog-ai-resume-fraud.webp",
-  },
-  {
     slug: "fcra-compliance-2026-background-screening-employers",
     title: "The FCRA Is Getting Stricter in 2026 (And Most Employers Are Not Ready)",
     excerpt:
@@ -248,13 +193,9 @@ export function formatRssDate(date: Date): string {
 export function getRelatedPosts(slug: string): BlogPost[] {
   const relatedPostsMap: Record<string, string[]> = {
     "ai-powered-resume-fraud-hiring-challenge": [
-      "ai-in-background-screening-faster-smarter-more-reliable",
-      "true-cost-of-bad-hire",
       "small-business-background-checks",
     ],
     "gig-economy-background-screening-contingent-workforce-liability": [
-      "top-industries-that-require-most-screening",
-      "true-cost-of-bad-hire",
       "trucking-companies-bad-hiring-decisions",
     ],
     "fcra-adverse-action-rules-2025-employer-compliance": [
