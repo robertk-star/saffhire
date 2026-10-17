@@ -23,6 +23,8 @@ const excludedRoutes = new Set([
   '/saffhire-vs-checkr-for-staffing-agencies',
   // noindex: internal-facing open-knowledge page
   '/open-knowledge/conversion-goals',
+  // noindex for now
+  '/sterling-first-advantage-alternative',
 ]);
 
 const extraPublicRoutes = [
