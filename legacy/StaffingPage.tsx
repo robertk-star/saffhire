@@ -36,7 +36,7 @@ const stats = [
 export default function StaffingPage() {
   return (
     <div className="min-h-screen bg-white">
-      <PageSEO path="/industries/staffing" title="Background Screening for Staffing Agencies" description="Background screening for staffing agencies nationwide. Fast criminal checks and employment verification with FCRA-compliant screening workflows." />
+      <PageSEO path="/industries/staffing" title="Staffing Agency Background Checks - Nationwide" description="Staffing agency background checks nationwide: high-volume screening, 24/7 portal access, DOT drug testing through Labcorp, and FCRA-compliant workflows." />
       <Navbar />
       <section className="relative pt-20 overflow-hidden" style={{ backgroundColor: "#0f172a" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,8 +44,8 @@ export default function StaffingPage() {
             <div className="flex flex-col justify-center py-16 pr-0 lg:pr-12">
               <a href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm mb-8"><ArrowLeft size={14} />Back to Home</a>
               <p className="section-label mb-3" style={{ color: "#22c55e", fontFamily: "'Montserrat', sans-serif" }}>INDUSTRY SOLUTIONS</p>
-              <h1 className="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>Staffing Agency{" "}<br /><span style={{ color: "#22c55e" }}>Background Screening</span></h1>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">Fast, high-volume background screening built for staffing agencies. Place candidates faster while supporting client compliance requirements.</p>
+              <h1 className="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>Staffing Agency{" "}<br /><span style={{ color: "#22c55e" }}>Background Checks</span></h1>
+              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">Fast, high-volume background checks for staffing agencies nationwide. Place candidates faster while supporting client compliance requirements.</p>
               <div className="flex flex-wrap gap-4">
                 <a href="/#contact" className="btn-green inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>Get a Free Quote <ArrowRight size={16} /></a>
                 <a href="tel:8885881733" className="inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold border border-gray-600 text-white hover:border-green-400 hover:text-green-400 transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}><Phone size={16} />888-588-1733</a>

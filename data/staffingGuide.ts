@@ -25,7 +25,7 @@ export const staffingGuideSections: ContentSection[] = [
       {
         heading: "Searches that depend on courts, employers and schools",
         paragraphs: [
-          "County criminal searches require retrieving records from the court, so timing depends on the county. Employment and education verifications depend on how quickly prior employers and schools respond. Drug screening depends on when the candidate gets to a collection site. Standard Packages 1-3 average 1 day, Package 4 (adds County Search) averages 1-2 days, and Packages 5 and 6 (add Drug Screening and verifications) average 2-5 days. Individual results can vary. See [Standard Packages & Turnaround](/packages) for what each package includes.",
+          "County criminal searches require retrieving records from the court, so timing depends on the county. Employment and education verifications depend on how quickly prior employers and schools respond. Drug screening depends on when the candidate gets to a Labcorp collection site. Individual results vary. See [Standard Packages](/packages) for what each package includes.",
         ],
       },
       {
@@ -51,6 +51,32 @@ export const staffingGuideSections: ContentSection[] = [
       "Use the same package for every candidate on the same job order. Consistent screening is easier to defend and easier to explain to clients.",
       "Order through the portal, where every candidate's status and completed report are in one place.",
       "Review results with written criteria, so two recruiters looking at the same report reach the same decision.",
+    ],
+  },
+  {
+    heading: "Nationwide Background Checks for Staffing Agencies",
+    paragraphs: [
+      "Staffing agencies rarely recruit in just one city. Candidates move between states, clients open sites in new markets, and a single job order can draw applicants from several jurisdictions. SaffHire screens candidates nationwide, so your agency can use one partner and one portal for every placement, wherever the candidate has lived and wherever the client is located.",
+      "Federal, State and County criminal searches follow the candidate's address history, not your office location. The National Criminal Database search gives a broad first look across many jurisdictions, and County searches confirm records at the court level where a client requires it. SaffHire is based in Frisco, TX and serves staffing agencies across the country.",
+    ],
+  },
+  {
+    heading: "24/7 Portal Access for Recruiters",
+    paragraphs: [
+      "Staffing does not keep office hours. Recruiters fill night shifts, weekend events and short-notice call-offs, so the screening portal is available 24/7. From the portal your team can send candidate invitations, order packages, track the status of every candidate, and view completed reports in one place.",
+    ],
+    bullets: [
+      "Send invitations with just the candidate's name and email; the candidate completes their own information and authorization.",
+      "See which searches are complete and which are still pending for every candidate on a job order.",
+      "Order drug screens and receive drug test results in the same portal as the background report.",
+      "Applicant and client data is protected with bank-level encryption.",
+    ],
+  },
+  {
+    heading: "DOT Drug Testing for Staffing Agencies",
+    paragraphs: [
+      "Agencies that place commercial drivers and other safety-sensitive transportation workers often need DOT drug testing in addition to non-DOT panels. Federal DOT rules (49 CFR Part 40, and FMCSA rules for commercial drivers) control how DOT tests are collected, processed and reviewed, and FMCSA requires a pre-employment query of the Drug and Alcohol Clearinghouse for CDL drivers.",
+      "With SaffHire, your agency orders DOT and non-DOT drug tests through the SaffHire portal, the candidate is tested at a Labcorp facility, and results come back to you through the portal. Learn more on our [DOT drug testing page](/dot-drug-testing) and in our [DOT drug testing and FMCSA Clearinghouse guide](/blog/dot-drug-testing-fmcsa-clearinghouse-guide).",
     ],
   },
   {
@@ -85,6 +111,7 @@ export const staffingGuideSections: ContentSection[] = [
   {
     heading: "FCRA Basics: Disclosure and Authorization",
     paragraphs: [
+      "For a deeper overview, read our [FCRA basics for employers](/blog/fcra-basics-for-employers) guide.",
       "When a staffing agency orders a background check for employment purposes, the agency is a \"user\" of a consumer report under the Fair Credit Reporting Act. That puts obligations on the agency itself, starting before the report is ordered. SaffHire's candidate invitation workflow collects the disclosure acknowledgment and authorization electronically, but your agency remains responsible for its hiring decisions and for following federal, state and local law.",
     ],
     subsections: [
@@ -163,10 +190,20 @@ export const staffingGuideSections: ContentSection[] = [
       "SaffHire is a Veteran-Owned company headquartered in Frisco, TX, founded by Robert Krebsbach, John Waak and Jody Thigpen, and serving staffing agencies nationwide. Packages are customized to each client's needs, with no setup fees and no minimums. Applicant and client data is protected with bank-level encryption, and the portal is available 24/7. [Contact us](/contact) or call 888-588-1733 for a custom quote.",
     ],
   },
+  {
+    heading: "Related Resources",
+    bullets: [
+      "[All industries we serve](/industries)",
+      "[Background screening FAQ](/faq)",
+      "[Staffing agency client screening requirements checklist](/blog/staffing-agency-client-screening-requirements-checklist)",
+      "[FCRA basics for employers](/blog/fcra-basics-for-employers)",
+      "[SaffHire blog](/blog)",
+    ],
+  },
 ];
 
 const TURNAROUND =
-  "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Standard Packages 1-3 average 1 day, Package 4 averages 1-2 days, and Packages 5 and 6 average 2-5 days. County searches and verifications depend on courts, employers and schools, so individual results can vary.";
+  "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. State fees may apply to MVRs. County searches, verifications and drug screens depend on courts, employers, schools and when the candidate visits a Labcorp facility, so individual results vary.";
 
 export const staffingGuideFaqs: FAQEntry[] = [
   { question: "How fast can a staffing agency get background check results?", answer: TURNAROUND },
@@ -186,6 +223,16 @@ export const staffingGuideFaqs: FAQEntry[] = [
       "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing, ordered through the SaffHire portal and performed at Labcorp facilities, with results delivered through the portal, with instant result options and DOT and non-DOT programs.",
   },
   {
+    question: "Do you offer DOT drug testing for staffing agencies?",
+    answer:
+      "Yes. Agencies order DOT and non-DOT drug tests through the SaffHire portal, candidates test at Labcorp facilities, and results are delivered through the portal.",
+  },
+  {
+    question: "Can recruiters access the portal outside business hours?",
+    answer:
+      "Yes. The SaffHire portal is available 24/7, so recruiters can send invitations, order searches and check status at any hour.",
+  },
+  {
     question: "Can we rescreen temporary or returning workers?",
     answer:
       "Yes. SaffHire supports ongoing and periodic rescreening programs for temp and contract workforces. Make sure your disclosure and authorization cover the rescreen, or collect a new one.",
@@ -196,8 +243,8 @@ export const staffingGuideFaqs: FAQEntry[] = [
       "Court access fees may apply to State and County searches; these are pass-through fees. State fees may apply to Motor Vehicle Reports (MVR). There are no setup fees and no minimums.",
   },
   {
-    question: "Do you screen candidates outside Texas?",
+    question: "Do you run staffing agency background checks nationwide?",
     answer:
-      "Yes. SaffHire is headquartered in Frisco, TX and serves employers nationwide. Federal, State and County searches cover the jurisdictions where the applicant has lived.",
+      "Yes. SaffHire is based in Frisco, TX and serves staffing agencies nationwide. Federal, State and County searches cover the jurisdictions where the applicant has lived.",
   },
 ];

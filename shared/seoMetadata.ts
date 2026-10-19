@@ -98,8 +98,8 @@ export const seoMetadata: Record<string, PageMetadata> = {
     keywords: "healthcare background screening, OIG exclusion check, healthcare compliance",
   },
   "/industries/staffing": {
-    title: "Staffing Agency Background Screening - Fast Turnaround",
-    description: "Background screening solutions for staffing agencies, with FCRA-compliant screening workflows for temporary and direct-hire placements.",
+    title: "Staffing Agency Background Checks - Nationwide",
+    description: "Staffing agency background checks nationwide: high-volume screening, 24/7 portal access, DOT drug testing through Labcorp, and FCRA-compliant workflows.",
     ogImage: "https://saffhire.com/og-image-staffing.jpg",
     ogImageAlt: "Staffing Screening",
     keywords: "staffing agency background screening, temporary staffing screening",
