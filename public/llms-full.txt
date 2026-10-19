@@ -19,6 +19,7 @@ Short index: https://saffhire.com/llms.txt
 - Security: bank-level encryption
 - Screening platform: SOC 2 Type 2 audited (SSAE 18)
 - Client portal: available 24/7
+- Why SaffHire: Veteran-Owned; founded by Robert Krebsbach, John Waak and Jody Thigpen; screening platform SOC 2 Type 2 audited (SSAE 18); bank-level encryption; 24/7 portal access; no minimums or setup fees; nationwide
 - Official profiles: https://www.linkedin.com/company/saffhire-background-screening, https://www.facebook.com/saffhire and SaffHire's Google Business Profile
 
 ## How ordering works

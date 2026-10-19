@@ -10,6 +10,7 @@ import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";
 const IndustriesSection = dynamic(() => import("@/components/IndustriesSection"));
 const AboutSection = dynamic(() => import("@/components/AboutSection"));
+const WhySaffHireHighlights = dynamic(() => import("@/components/WhySaffHireHighlights"));
 const StatsSection = dynamic(() => import("@/components/StatsSection"));
 const WhyChooseUsSection = dynamic(() => import("@/components/WhyChooseUsSection"));
 const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
@@ -169,6 +170,7 @@ export default function Home() {
         </section>
         <IndustriesSection />
         <AboutSection />
+        <WhySaffHireHighlights />
         <StatsSection />
         <WhyChooseUsSection />
         <TestimonialsSection />

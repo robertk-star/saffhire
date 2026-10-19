@@ -26,6 +26,7 @@ export const aiInfoPage: ContentPageData = {
         "Account terms: no setup fees and no minimums.",
         "Security and access: bank-level encryption; client portal available 24/7.",
         "Screening platform: SOC 2 Type 2 audited (SSAE 18).",
+        "Why SaffHire (homepage): Veteran-Owned; founded by Robert Krebsbach, John Waak and Jody Thigpen; screening platform SOC 2 Type 2 audited (SSAE 18); bank-level encryption; 24/7 portal access; no minimums or setup fees; nationwide.",
       ],
     },
     {
