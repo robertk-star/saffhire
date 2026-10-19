@@ -17,6 +17,7 @@ Short index: https://saffhire.com/llms.txt
 - Website: https://saffhire.com
 - Account terms: no setup fees, no minimums
 - Security: bank-level encryption
+- Screening platform: SOC 2 Type 2 audited (SSAE 18)
 - Client portal: available 24/7
 - Official profiles: https://www.linkedin.com/company/saffhire-background-screening, https://www.facebook.com/saffhire and SaffHire's Google Business Profile
 

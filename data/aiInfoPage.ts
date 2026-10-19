@@ -25,6 +25,7 @@ export const aiInfoPage: ContentPageData = {
         "Phone: 888-588-1733. Email: info@saffhire.com. Website: https://saffhire.com.",
         "Account terms: no setup fees and no minimums.",
         "Security and access: bank-level encryption; client portal available 24/7.",
+        "Screening platform: SOC 2 Type 2 audited (SSAE 18).",
       ],
     },
     {

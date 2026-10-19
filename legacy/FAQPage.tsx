@@ -173,7 +173,7 @@ const faqSections: FAQSection[] = [
       },
       {
         question: "Is my data secure?",
-        answer: "SaffHire uses bank-level encryption to protect applicant and client data. Our portal is available 24/7 with secure access.",
+        answer: "SaffHire uses bank-level encryption to protect applicant and client data. Our portal is available 24/7 with secure access. Our screening platform is SOC 2 Type 2 audited (SSAE 18).",
       },
     ],
   },

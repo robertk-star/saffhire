@@ -196,7 +196,7 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
           "No. National criminal databases are aggregated from many sources and are incomplete. A county criminal search goes directly to the court for that jurisdiction, so many employers add county searches for the places an applicant has lived.",
       },
       { question: "Are there additional fees on some searches?", answer: FEES },
-      { question: "Is my data secure?", answer: "SaffHire uses bank-level encryption to protect applicant and client data. Our portal is available 24/7 with secure access." },
+      { question: "Is my data secure?", answer: "SaffHire uses bank-level encryption to protect applicant and client data. Our portal is available 24/7 with secure access. Our screening platform is SOC 2 Type 2 audited (SSAE 18)." },
     ],
   },
 };

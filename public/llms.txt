@@ -1,6 +1,6 @@
 # SaffHire Background Screening
 
-> SaffHire is a Veteran-Owned, FCRA-compliant pre-employment background screening company based in Frisco, TX, serving employers nationwide. Founded by Robert Krebsbach, John Waak and Jody Thigpen, SaffHire provides criminal background checks, employment and education verification, drug screening and MVR checks, with screening packages customized to each client's needs.
+> SaffHire is a Veteran-Owned, FCRA-compliant pre-employment background screening company based in Frisco, TX, serving employers nationwide. Founded by Robert Krebsbach, John Waak and Jody Thigpen, SaffHire provides criminal background checks, employment and education verification, drug screening and MVR checks, with screening packages customized to each client's needs. Data is protected with bank-level encryption, and our screening platform is SOC 2 Type 2 audited (SSAE 18).
 
 ## Services
 
