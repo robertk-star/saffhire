@@ -62,7 +62,7 @@ export default function AboutSection() {
                 <div>
                   <h3 className="font-bold text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>Data Compliance</h3>
                   <p className="text-sm text-gray-600">
-                    Bank-level encrypted security with 24/7 access to your screening portal.
+                    Bank-level encrypted security with 24/7 access to your screening portal. Our screening platform is SOC 2 Type 2 audited (SSAE 18).
                   </p>
                 </div>
               </div>
