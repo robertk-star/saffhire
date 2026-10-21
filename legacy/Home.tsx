@@ -13,7 +13,6 @@ const AboutSection = dynamic(() => import("@/components/AboutSection"));
 const WhySaffHireHighlights = dynamic(() => import("@/components/WhySaffHireHighlights"));
 const StatsSection = dynamic(() => import("@/components/StatsSection"));
 const WhyChooseUsSection = dynamic(() => import("@/components/WhyChooseUsSection"));
-const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
 const ContactSection = dynamic(() => import("@/components/ContactSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
 import PageSEO from "@/components/PageSEO";
@@ -79,77 +78,6 @@ export default function Home() {
     });
     document.head.appendChild(schemaScript);
 
-    // Add Review schema markup for testimonials
-    const reviewSchemaScript = document.createElement("script");
-    reviewSchemaScript.type = "application/ld+json";
-    reviewSchemaScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "ratingCount": "3",
-      "bestRating": "5",
-      "worstRating": "1",
-      "itemReviewed": {
-        "@type": "Service",
-        "name": "Background Screening Services",
-        "provider": {
-          "@type": "Organization",
-          "name": "SaffHire Background Screening"
-        }
-      },
-      "reviews": [
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
-          "reviewBody": "SaffHire made our screening process incredibly simple. Results come back fast and their team is always available when we have questions. We would never go back to our old provider.",
-          "author": {
-            "@type": "Person",
-            "name": "Jennifer M.",
-            "jobTitle": "HR Director"
-          },
-          "datePublished": "2026-05-04"
-        },
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
-          "reviewBody": "As a healthcare facility, compliance is everything. SaffHire handles all our OIG checks, license verifications, and drug testing in one place. They understand what we need.",
-          "author": {
-            "@type": "Person",
-            "name": "Marcus T.",
-            "jobTitle": "Operations Manager"
-          },
-          "datePublished": "2026-05-04"
-        },
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
-          "reviewBody": "We run background checks on dozens of drivers every month. SaffHire's DOT-compliant packages save us time and the pricing is the best we have found anywhere.",
-          "author": {
-            "@type": "Person",
-            "name": "Sandra R.",
-            "jobTitle": "Fleet Manager"
-          },
-          "datePublished": "2026-05-04"
-        }
-      ]
-    });
-    document.head.appendChild(reviewSchemaScript);
-
     return () => {
       // Reset to default on unmount
       document.title = "SaffHire Background Pre-Employment Screening";
@@ -173,7 +101,6 @@ export default function Home() {
         <WhySaffHireHighlights />
         <StatsSection />
         <WhyChooseUsSection />
-        <TestimonialsSection />
         <LatestBlogPost />
         <ContactSection />
       </main>
