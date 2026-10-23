@@ -170,6 +170,36 @@ export const seoMetadata: Record<string, PageMetadata> = {
     ogImageAlt: "FCRA News",
     keywords: "FCRA news, background screening regulations, compliance updates",
   },
+  "/background-screening-frisco-tx": {
+    title: "Frisco, TX Background Screening for Employers",
+    description: "Background screening for Frisco, TX employers. SaffHire is headquartered in Frisco, TX and screens applicants for employers nationwide.",
+    ogImageAlt: "Background Screening in Frisco, TX",
+    keywords: "Frisco TX background screening, background check Frisco Texas, Frisco employer screening",
+  },
+  "/background-screening-dallas-tx": {
+    title: "Dallas, TX Background Screening for Employers",
+    description: "Background screening for Dallas, TX employers. SaffHire is headquartered in Frisco, TX and serves Dallas employers and employers nationwide.",
+    ogImageAlt: "Background Screening in Dallas, TX",
+    keywords: "Dallas TX background screening, background check Dallas Texas, Dallas employer screening",
+  },
+  "/background-screening-plano-tx": {
+    title: "Plano, TX Background Screening for Employers",
+    description: "Background screening for Plano, TX employers. SaffHire is headquartered in Frisco, TX and serves Plano employers and employers nationwide.",
+    ogImageAlt: "Background Screening in Plano, TX",
+    keywords: "Plano TX background screening, background check Plano Texas, Plano employer screening",
+  },
+  "/background-screening-mckinney-tx": {
+    title: "McKinney, TX Background Screening for Employers",
+    description: "Background screening for McKinney, TX employers. SaffHire is headquartered in Frisco, TX and serves McKinney employers and employers nationwide.",
+    ogImageAlt: "Background Screening in McKinney, TX",
+    keywords: "McKinney TX background screening, background check McKinney Texas, McKinney employer screening",
+  },
+  "/background-screening-allen-tx": {
+    title: "Allen, TX Background Screening for Employers",
+    description: "Background screening for Allen, TX employers. SaffHire is headquartered in Frisco, TX and serves Allen employers and employers nationwide.",
+    ogImageAlt: "Background Screening in Allen, TX",
+    keywords: "Allen TX background screening, background check Allen Texas, Allen employer screening",
+  },
 };
 
 export function getPageMetadata(path: string): PageMetadata {
