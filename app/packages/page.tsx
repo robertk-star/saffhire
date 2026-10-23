@@ -5,7 +5,7 @@ import { breadcrumbSchema } from '@/lib/structuredData';
 export const metadata: Metadata = {
   title: 'Standard Background Check Packages & Turnaround',
   description:
-    'SaffHire standard background screening packages and average turnaround, from 1 day to 2-5 days. Every package includes SSN Trace, Address History, National Criminal Database, Global Security Watch List and Federal Search.',
+    'SaffHire standard packages, average turnaround 1 day to 2-5 days: SSN Trace, Address History, National Criminal Database, Global Watch List and Federal Search.',
 };
 
 export default function Page() {
