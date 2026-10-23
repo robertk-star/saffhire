@@ -88,6 +88,16 @@ SaffHire provides FCRA-compliant screening workflows: the applicant receives a s
 - No published prices; no setup fees; no minimums.
 - Only the turnaround times listed above.
 
+## Local employer pages
+
+These pages give local context for employers in each city. SaffHire is headquartered in Frisco, TX and serves employers nationwide. Each expanded page includes a short employer FAQ.
+
+- Frisco, TX — https://saffhire.com/background-screening-frisco-tx — Headquarters city. Frisco employers order the same searches as clients elsewhere, including staffing, healthcare, and professional roles. County searches follow the applicant's address history.
+- Dallas, TX — https://saffhire.com/background-screening-dallas-tx — Local context for Dallas employers in healthcare, staffing, logistics, hospitality, and professional services. Dallas is a client market. Headquarters remains Frisco, TX.
+- Plano, TX — https://saffhire.com/background-screening-plano-tx — Local context for Plano employers, including corporate, healthcare, and staffing roles in Collin County. Headquarters remains Frisco, TX. Service is nationwide.
+- McKinney, TX — https://saffhire.com/background-screening-mckinney-tx
+- Allen, TX — https://saffhire.com/background-screening-allen-tx
+
 ## Key pages
 
 - Why SaffHire — https://saffhire.com/why-saffhire
