@@ -31,6 +31,10 @@ import {
   seedIndividual,
   findIndividualSeedSheet,
   coverageWarnings,
+  coverageApplies,
+  baseIncludesCoverage,
+  linePreCoveragePrice,
+  individualPreCoverage,
   sectionOptions,
 } from '@/lib/proposalBuilder';
 
@@ -78,7 +82,10 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
   const states = useMemo(() => Array.from(new Set(items.map((item) => item.state).filter(Boolean))).sort(), [items]);
   const catalogList = useMemo(() => buildCatalog(proposal.base, sheets, items, proposal.state), [proposal.base, sheets, items, proposal.state]);
   const catalog = useMemo(() => new Map(catalogList.map((entry) => [entry.key, entry])), [catalogList]);
-  const totals = useMemo(() => proposalTotals(proposal, catalog), [proposal, catalog]);
+  // 10% sales coverage is applied at most once: never when the base sheet already includes it.
+  const coverageInSheet = useMemo(() => baseIncludesCoverage(proposal, sheets), [proposal, sheets]);
+  const coverage = useMemo(() => coverageApplies(proposal, sheets), [proposal, sheets]);
+  const totals = useMemo(() => proposalTotals(proposal, catalog, sheets), [proposal, catalog, sheets]);
   const fallbackSheet = useMemo(() => findIndividualSeedSheet(sheets), [sheets]);
   const warnings = useMemo(() => coverageWarnings(proposal, sheets, Boolean(proposal.aLaCarteOnly)), [proposal, sheets]);
 
@@ -333,7 +340,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         ? proposal.individual
             .filter((row) => row.label.trim())
             .map((row) => {
-              const unit = individualUnit(row, catalog, proposal.salesCoverage);
+              const unit = individualUnit(row, catalog, coverage);
               return { label: row.label.trim(), price: unit === null ? '' : money(unit) };
             })
         : [];
@@ -344,8 +351,10 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: `${label} – ${pkg.name.trim() || 'Package'}`,
-            description: pkg.description.trim() || `Created from the proposal builder (${baseLabel}${proposal.salesCoverage ? ' + 10% sales coverage' : ''}).`,
-            minimum_package: packageToSheetRows(pkg, catalog, proposal.salesCoverage),
+            description: pkg.description.trim() || `Created from the proposal builder (${baseLabel}${coverage ? '; includes 10% sales coverage' : ''}).`,
+            minimum_package: packageToSheetRows(pkg, catalog, coverage),
+            // The saved prices already contain the 10% whenever it was applied here or came from the base sheet.
+            includes_sales_coverage: coverage || coverageInSheet,
             individual_pricing: individual,
           }),
         });
@@ -363,7 +372,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
   }
 
   function openPreview() {
-    const preview = buildClientPreview(proposal, catalog, baseLabel);
+    const preview = buildClientPreview(proposal, catalog, baseLabel, new Date(), sheets);
     sessionStorage.setItem(BUILDER_PREVIEW_KEY, JSON.stringify(preview));
     window.location.href = '/admin/proposals/builder/preview';
   }
@@ -391,8 +400,9 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           <tbody>
             {rows.map((line) => {
               const entry = catalog.get(line.catalogKey);
-              const calc = calcLine(line, entry, proposal.salesCoverage);
-              const baseUnit = lineBaseUnitPrice(entry, proposal.salesCoverage);
+              const calc = calcLine(line, entry, coverage);
+              const baseUnit = lineBaseUnitPrice(entry, false);
+              const preCoverage = linePreCoveragePrice(line, entry);
               const missing = line.catalogKey && !entry;
               return (
                 <tr key={line.id} className="border-t border-gray-100 align-top" data-line-label={line.label}>
@@ -421,7 +431,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
                           type="number"
                           step="0.01"
                           min="0"
-                          value={line.priceOverride ?? (baseUnit ?? '')}
+                          value={preCoverage ?? ''}
                           onChange={(e) => updateLine(pkg.id, list, line.id, { priceOverride: e.target.value === '' ? null : Number(e.target.value) })}
                           className={`${input} ${calc.edited ? 'border-amber-400 bg-amber-50' : ''}`}
                           aria-label="Client unit price"
@@ -432,6 +442,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
                       </div>
                     )}
                     {calc.edited ? <div className="mt-1 text-[11px] font-bold text-amber-700" data-edited="true">edited{baseUnit !== null && line.catalogKey ? ` · base ${money(baseUnit)}` : ''}</div> : null}
+                    {!line.included && coverage && calc.unit !== null ? <div className="mt-1 text-[11px] text-slate-500" data-client-unit>Client price {money(calc.unit)}</div> : null}
                   </td>
                   <td className="py-2 pr-2 text-center">
                     <input type="checkbox" checked={line.included} onChange={(e) => updateLine(pkg.id, list, line.id, { included: e.target.checked })} className="mt-2 h-4 w-4" aria-label="Included" />
@@ -583,10 +594,22 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           </label>
         </div>
         <label className="mt-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-slate-800">
-          <input type="checkbox" checked={proposal.salesCoverage} onChange={(e) => update({ salesCoverage: e.target.checked })} className="mt-1 h-4 w-4" name="salesCoverage" />
+          <input
+            type="checkbox"
+            checked={coverageInSheet || proposal.salesCoverage}
+            disabled={coverageInSheet}
+            onChange={(e) => update({ salesCoverage: e.target.checked })}
+            className="mt-1 h-4 w-4"
+            name="salesCoverage"
+            aria-describedby="sales-coverage-help"
+          />
           <span>
             <span className="block font-bold text-slate-900">Add 10% sales coverage</span>
-            <span className="block text-slate-600">Multiplies base client prices by 1.10. Internal cost is unchanged. Prices you type by hand are used exactly as entered.</span>
+            {coverageInSheet ? (
+              <span id="sales-coverage-help" className="block font-bold text-green-800" data-coverage-locked>Already included in this price sheet</span>
+            ) : (
+              <span id="sales-coverage-help" className="block text-slate-600">Multiplies client prices by 1.10, once, including prices you edit (type the price before the 10%). Internal cost is unchanged.</span>
+            )}
           </span>
         </label>
         {warnings.map((w) => (
@@ -671,8 +694,9 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           <div className="space-y-2" data-individual-table>
             {proposal.individual.map((row) => {
               const entry = catalog.get(row.catalogKey);
-              const base = individualBaseUnit(row, catalog, proposal.salesCoverage);
-              const unit = individualUnit(row, catalog, proposal.salesCoverage);
+              const base = individualBaseUnit(row, catalog, false);
+              const pre = individualPreCoverage(row, catalog);
+              const unit = individualUnit(row, catalog, coverage);
               const edited = row.priceOverride !== null && base !== null;
               return (
                 <div key={row.id} className="grid items-center gap-2 rounded-xl border border-gray-100 bg-slate-50 p-3 md:grid-cols-[1fr_180px_auto_90px]">
@@ -681,7 +705,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
                     type="number"
                     step="0.01"
                     min="0"
-                    value={row.priceOverride ?? (unit ?? '')}
+                    value={pre ?? ''}
                     onChange={(e) => updateIndividual(row.id, { priceOverride: e.target.value === '' ? null : Number(e.target.value) })}
                     className={`${input} ${edited ? 'border-amber-400 bg-amber-50' : ''}`}
                     aria-label="Individual price"
@@ -690,6 +714,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
                     {edited ? (
                       <button type="button" onClick={() => updateIndividual(row.id, { priceOverride: null })} className="font-bold text-amber-700">edited · reset to {base === null ? 'base' : money(base)}</button>
                     ) : entry ? <span className="text-slate-500">from base</span> : base !== null ? <span className="text-slate-500">from sheet</span> : <span className="text-slate-500">manual</span>}
+                    {unit !== null && pre !== null && unit !== pre ? <span className="ml-2 text-slate-500" data-client-unit>client {money(unit)}</span> : null}
                     {entry && entry.internalCost !== null && unit !== null ? <span className="ml-2 text-amber-800">cost {money(entry.internalCost)} · profit {money(unit - entry.internalCost)}</span> : null}
                   </div>
                   <button type="button" onClick={() => update({ individual: proposal.individual.filter((r) => r.id !== row.id) })} className={btn}>Remove</button>
@@ -721,7 +746,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           <div className="rounded-xl bg-slate-900 px-6 py-4 text-white">
             <div className="text-xs font-bold uppercase tracking-wide text-slate-300">Overall total</div>
             <div className="text-3xl font-black" data-overall-total>{money(totals.total)}</div>
-            {proposal.salesCoverage ? <div className="mt-1 text-xs text-slate-300">Includes 10% sales coverage</div> : null}
+            {coverage || coverageInSheet ? <div className="mt-1 text-xs text-slate-300">Includes 10% sales coverage</div> : null}
           </div>
         </div>
         )}

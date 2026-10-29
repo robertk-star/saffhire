@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { clientSafeText } from '@/lib/proposalBuilder';
 
 type SectionKey = 'cover' | 'whySaffhire' | 'services' | 'packages' | 'pricing' | 'process';
 
@@ -482,7 +483,7 @@ export default function ProposalPreview() {
         {has('pricing') ? (
           <PageShell pageNumber={++pageNumber}>
             <h2 className="text-3xl font-black text-slate-900">Pricing</h2>
-            {proposal.pricingPresetName ? <p className="mt-2 text-sm font-bold text-slate-500">{proposal.pricingPresetName}</p> : null}
+            {clientSafeText(proposal.pricingPresetName) ? <p className="mt-2 text-sm font-bold text-slate-500">{clientSafeText(proposal.pricingPresetName)}</p> : null}
 
             <h3 className="mt-6 text-xl font-black text-slate-900">Minimum Package</h3>
             <div className="mt-3 overflow-hidden rounded-xl border border-slate-200">

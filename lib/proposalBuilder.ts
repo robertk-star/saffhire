@@ -42,7 +42,15 @@ export type CatalogPricingItem = {
 };
 
 export type SheetRow = { label: string; price: string };
-export type BaseSheet = { id: string; name: string; description: string; minimum_package: SheetRow[]; individual_pricing: SheetRow[] };
+export type BaseSheet = {
+  id: string;
+  name: string;
+  description: string;
+  minimum_package: SheetRow[];
+  individual_pricing: SheetRow[];
+  /** Database flag (proposal_pricing_pages.includes_sales_coverage): the sheet's prices already include the 10% sales coverage. */
+  includes_sales_coverage?: boolean | null;
+};
 
 export type BaseSource = { kind: 'sheet'; sheetId: string } | { kind: 'category'; priceKey: PriceKey };
 
@@ -60,7 +68,7 @@ export type BuilderLine = {
   catalogKey: string;
   label: string;
   quantity: number;
-  /** Final client unit price typed by the admin. null = use base (with coverage). */
+  /** Unit price typed by the admin, before sales coverage. null = use base. The 10% is added once on top when it applies. */
   priceOverride: number | null;
   /** Shown as "Included" and adds nothing to the total. */
   included: boolean;
@@ -80,7 +88,7 @@ export type IndividualRow = {
   catalogKey: string;
   /** Base price taken from the seed sheet when no catalog entry matches (sales coverage still applies). */
   fallbackPrice?: number | null;
-  /** Client price typed by the admin. null = use base. */
+  /** Price typed by the admin, before sales coverage. null = use base. The 10% is added once on top when it applies. */
   priceOverride: number | null;
   /** True when fallbackPrice came from a sheet that already includes 10% sales coverage; the checkbox is not applied again. */
   coverageIncluded?: boolean;
@@ -165,11 +173,22 @@ export function buildCatalog(base: BaseSource, sheets: BaseSheet[], items: Catal
   return entries;
 }
 
+/**
+ * Client unit price for a line. `coverage` = "apply the 10% multiplier" (see coverageApplies); it is applied exactly
+ * once, to the base price or to the admin's edited price, and never when the base sheet already includes it.
+ */
 export function lineUnitPrice(line: { priceOverride: number | null; included?: boolean }, entry: CatalogEntry | undefined, coverage: boolean): number | null {
   if (line.included) return 0;
-  if (line.priceOverride !== null && line.priceOverride !== undefined) return round2(line.priceOverride);
+  if (line.priceOverride !== null && line.priceOverride !== undefined) return applyCoverage(line.priceOverride, coverage);
   if (!entry || entry.basePrice === null) return null;
   return applyCoverage(entry.basePrice, coverage);
+}
+
+/** Price before sales coverage: the edited price, else the base price. This is what the price input shows. */
+export function linePreCoveragePrice(line: { priceOverride: number | null }, entry: CatalogEntry | undefined): number | null {
+  if (line.priceOverride !== null && line.priceOverride !== undefined) return round2(line.priceOverride);
+  if (!entry || entry.basePrice === null) return null;
+  return round2(entry.basePrice);
 }
 
 export function lineBaseUnitPrice(entry: CatalogEntry | undefined, coverage: boolean) {
@@ -204,8 +223,9 @@ export function packageTotals(pkg: BuilderPackage, catalog: Map<string, CatalogE
   return { total, cost: costKnown ? cost : null, profit: costKnown ? round2(total - cost) : null };
 }
 
-export function proposalTotals(p: BuilderProposal, catalog: Map<string, CatalogEntry>) {
-  const perPackage = p.packages.map((pkg) => ({ id: pkg.id, ...packageTotals(pkg, catalog, p.salesCoverage) }));
+export function proposalTotals(p: BuilderProposal, catalog: Map<string, CatalogEntry>, sheets: BaseSheet[] = []) {
+  const coverage = coverageApplies(p, sheets);
+  const perPackage = p.packages.map((pkg) => ({ id: pkg.id, ...packageTotals(pkg, catalog, coverage) }));
   const total = round2(perPackage.reduce((sum, item) => sum + item.total, 0));
   const anyUnknown = perPackage.some((item) => item.cost === null);
   const cost = anyUnknown ? null : round2(perPackage.reduce((sum, item) => sum + (item.cost || 0), 0));
@@ -236,15 +256,47 @@ export function moveItem<T>(list: T[], index: number, delta: number): T[] {
 
 export const COVERAGE_SEED_SHEET_NAME = 'Staffing + 10% Sales Coverage';
 
-/** True when a sheet name says its prices already include the 10% sales coverage uplift. */
-export function sheetIncludesCoverage(name: string | undefined | null) {
-  const n = String(name || '');
-  return /\+\s*10\s*%/.test(n) || /10\s*%\s*sales/i.test(n) || /sales\s+coverage/i.test(n);
+/**
+ * True when a price sheet's prices already include the 10% sales coverage. Uses the database flag
+ * `proposal_pricing_pages.includes_sales_coverage` only (migration 014); names and descriptions are not inspected.
+ */
+export function sheetIncludesCoverage(sheet: Pick<BaseSheet, 'includes_sales_coverage'> | undefined | null) {
+  return Boolean(sheet && sheet.includes_sales_coverage === true);
+}
+
+/** The selected base sheet already includes the 10%: the checkbox shows checked + locked and no multiplier is added. */
+export function baseIncludesCoverage(p: Pick<BuilderProposal, 'base'>, sheets: BaseSheet[]) {
+  if (p.base.kind !== 'sheet') return false;
+  const id = p.base.sheetId;
+  return sheetIncludesCoverage(sheets.find((s) => s.id === id));
+}
+
+/** Apply the ×1.10 multiplier? Only when the box is on and the base sheet does not already include it. */
+export function coverageApplies(p: Pick<BuilderProposal, 'base' | 'salesCoverage'>, sheets: BaseSheet[]) {
+  return Boolean(p.salesCoverage) && !baseIncludesCoverage(p, sheets);
+}
+
+/**
+ * Client output must never mention the sales coverage (it covers SaffHire's referral fee cost; Robert, Oct 29 2026).
+ * Strips "10%" / "sales coverage" / "coverage" wording from any text that reaches the preview or PDF.
+ */
+export const CLIENT_FORBIDDEN_WORDING = /10\s*%|sales\s*coverage|coverage/i;
+export function clientSafeText(text: string | undefined | null) {
+  let t = String(text || '');
+  if (!CLIENT_FORBIDDEN_WORDING.test(t)) return t.trim();
+  t = t
+    .replace(/[(\[]?\s*(?:\+|with|incl(?:\.|udes?|uding)?|plus)?\s*(?:a\s+|the\s+)?10\s*%\s*(?:sales\s*coverage|coverage|uplift|markup|mark-up)?\s*[)\]]?/gi, ' ')
+    .replace(/[(\[]?\s*(?:\+|with|incl(?:\.|udes?|uding)?|plus)?\s*(?:sales\s*)?coverage\s*[)\]]?/gi, ' ')
+    .replace(/\s*[;:,+–-]\s*(?=[.)]|$)/g, '')
+    .replace(/\(\s*\)/g, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+  return CLIENT_FORBIDDEN_WORDING.test(t) ? '' : t;
 }
 
 /**
  * Sheet that seeds the Individual (à la carte) table in category mode: "Staffing + 10% Sales Coverage" by name,
- * then any sheet whose name indicates +10%/sales coverage, then SaffHire Direct Pricing, then the first sheet.
+ * then any sheet flagged includes_sales_coverage, then SaffHire Direct Pricing, then the first sheet.
  */
 export function findIndividualSeedSheet(sheets: BaseSheet[]): BaseSheet | undefined {
   const norm = (v: string) => v.toLowerCase().replace(/\s+/g, ' ').trim();
@@ -252,23 +304,23 @@ export function findIndividualSeedSheet(sheets: BaseSheet[]): BaseSheet | undefi
   const pool = withRows.length ? withRows : sheets;
   return (
     pool.find((s) => norm(s.name) === norm(COVERAGE_SEED_SHEET_NAME)) ||
-    pool.find((s) => sheetIncludesCoverage(s.name)) ||
+    pool.find((s) => sheetIncludesCoverage(s)) ||
     pool.find((s) => /direct/i.test(s.name)) ||
     pool[0]
   );
 }
 
-/** Non-blocking warnings shown when the 10% sales coverage would be (or could be) applied twice. */
+/**
+ * Non-blocking info notes about sales coverage. The 10% can no longer be applied twice: a sheet that already includes it
+ * locks the checkbox and adds no multiplier (see coverageApplies).
+ */
 export function coverageWarnings(p: Pick<BuilderProposal, 'base' | 'salesCoverage' | 'individual'>, sheets: BaseSheet[], aLaCarteOnly = false): string[] {
   if (!p.salesCoverage) return [];
   const out: string[] = [];
   if (p.base.kind === 'sheet') {
-    const sheet = sheets.find((s) => s.id === (p.base as { sheetId: string }).sheetId);
-    if (sheet && sheetIncludesCoverage(sheet.name)) {
-      out.push(`The base price sheet "${sheet.name}" already includes 10% sales coverage. With "Add 10% sales coverage" ticked, 10% is applied twice (×1.21 overall). Untick the checkbox, or choose a sheet without coverage, unless that is intended.`);
-    }
+    return out;
   } else if (p.individual.some((r) => r.coverageIncluded)) {
-    out.push(`The Individual (à la carte) prices are seeded from a sheet that already includes 10% sales coverage, so the checkbox is not applied to them again${aLaCarteOnly ? '' : '; it only raises package prices'}. Typed prices are used exactly as entered.`);
+    out.push(`The Individual (à la carte) prices are seeded from a sheet that already includes 10% sales coverage, so the checkbox is not applied to them again (typed prices in those rows are used as entered)${aLaCarteOnly ? '' : '; it only raises package prices'}.`);
   }
   return out;
 }
@@ -277,7 +329,7 @@ export function coverageWarnings(p: Pick<BuilderProposal, 'base' | 'salesCoverag
 export function seedIndividual(base: BaseSource, sheets: BaseSheet[], catalog: CatalogEntry[], fallbackSheet: BaseSheet | undefined = findIndividualSeedSheet(sheets)): IndividualRow[] {
   const sheet = base.kind === 'sheet' ? sheets.find((s) => s.id === base.sheetId) : fallbackSheet;
   // Category mode + a coverage-inclusive seed sheet: use that sheet's prices as-is (coverage already in them).
-  const useSheetPrices = base.kind === 'category' && sheetIncludesCoverage(sheet?.name);
+  const useSheetPrices = base.kind === 'category' && sheetIncludesCoverage(sheet);
   const rows = sheet?.individual_pricing || [];
   const byLabel = new Map(catalog.map((entry) => [normName(entry.label), entry]));
   return rows.map((row) => {
@@ -299,9 +351,20 @@ export function individualBaseUnit(row: IndividualRow, catalog: Map<string, Cata
   return null;
 }
 
-export function individualUnit(row: IndividualRow, catalog: Map<string, CatalogEntry>, coverage: boolean) {
+/** Price before coverage for an individual row (what the input shows). */
+export function individualPreCoverage(row: IndividualRow, catalog: Map<string, CatalogEntry>): number | null {
   if (row.priceOverride !== null && row.priceOverride !== undefined) return round2(row.priceOverride);
-  return individualBaseUnit(row, catalog, coverage);
+  return individualBaseUnit(row, catalog, false);
+}
+
+/**
+ * Client price for an individual row. Rows seeded from a coverage-inclusive sheet never get the multiplier (their sheet
+ * already has it); other rows get it once, on the base or on the edited price, when `coverage` applies.
+ */
+export function individualUnit(row: IndividualRow, catalog: Map<string, CatalogEntry>, coverage: boolean) {
+  const apply = coverage && !row.coverageIncluded;
+  if (row.priceOverride !== null && row.priceOverride !== undefined) return applyCoverage(row.priceOverride, apply);
+  return individualBaseUnit(row, catalog, apply);
 }
 
 /** Client-safe payload for preview/PDF. Contains no internal cost or profit. */
@@ -324,15 +387,16 @@ export type ClientPreview = {
   createdAt: string;
 };
 
-export function buildClientPreview(p: BuilderProposal, catalog: Map<string, CatalogEntry>, baseLabel: string, now = new Date()): ClientPreview {
+export function buildClientPreview(p: BuilderProposal, catalog: Map<string, CatalogEntry>, baseLabel: string, now = new Date(), sheets: BaseSheet[] = []): ClientPreview {
   const alacarte = Boolean(p.aLaCarteOnly);
+  const coverage = coverageApplies(p, sheets);
   const packages = alacarte ? [] : p.packages.map((pkg) => {
     const all = [...pkg.minimumItems, ...pkg.lines].filter((line) => line.label.trim());
     const rows = all.map((line) => {
-      const calc = calcLine(line, catalog.get(line.catalogKey), p.salesCoverage);
+      const calc = calcLine(line, catalog.get(line.catalogKey), coverage);
       const qty = Math.max(0, Number(line.quantity) || 0);
       return {
-        label: line.label.trim(),
+        label: clientSafeText(line.label),
         quantity: qty,
         included: line.included,
         unit: line.included ? 'Included' : calc.unit === null ? 'N/A' : money(calc.unit),
@@ -340,27 +404,27 @@ export function buildClientPreview(p: BuilderProposal, catalog: Map<string, Cata
       };
     });
     return {
-      name: pkg.name.trim() || 'Package',
-      description: pkg.description.trim(),
-      includes: all.map((line) => line.label.trim()),
+      name: clientSafeText(pkg.name) || 'Package',
+      description: clientSafeText(pkg.description),
+      includes: all.map((line) => clientSafeText(line.label)),
       rows,
-      total: packageTotals(pkg, catalog, p.salesCoverage).total,
+      total: packageTotals(pkg, catalog, coverage).total,
     };
   });
   const individual = alacarte || p.includeIndividual
     ? p.individual
         .filter((row) => row.label.trim())
         .map((row) => {
-          const unit = individualUnit(row, catalog, p.salesCoverage);
-          return { label: row.label.trim(), price: unit === null ? 'N/A' : money(unit) };
+          const unit = individualUnit(row, catalog, coverage);
+          return { label: clientSafeText(row.label), price: unit === null ? 'N/A' : money(unit) };
         })
     : [];
   return {
-    clientName: p.clientName.trim(),
-    contactName: p.contactName.trim(),
-    notes: p.notes.trim(),
+    clientName: clientSafeText(p.clientName),
+    contactName: clientSafeText(p.contactName),
+    notes: clientSafeText(p.notes),
     sections: sectionOptions.filter((s) => p.sections[s.key] && !(alacarte && s.key === 'packages')).map((s) => s.key),
-    baseLabel,
+    baseLabel: clientSafeText(baseLabel),
     mode: alacarte ? 'alacarte' : 'packages',
     packages,
     individual,

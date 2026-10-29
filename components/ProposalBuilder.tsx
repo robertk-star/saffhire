@@ -65,6 +65,7 @@ export default function ProposalBuilder({ initialPricingPages }: { initialPricin
   const [presetId, setPresetId] = useState(initialPricingPages[0]?.id || '');
   const [pageName, setPageName] = useState(initialPricingPages[0]?.name || '');
   const [pageDescription, setPageDescription] = useState(initialPricingPages[0]?.description || '');
+  const [pageIncludesCoverage, setPageIncludesCoverage] = useState(Boolean(initialPricingPages[0]?.includes_sales_coverage));
   const [minimumPackage, setMinimumPackage] = useState<PriceRow[]>(
     initialPricingPages[0] ? toEditableRows(initialPricingPages[0].minimum_package) : blankRows(),
   );
@@ -91,6 +92,7 @@ export default function ProposalBuilder({ initialPricingPages }: { initialPricin
     setPresetId(page.id);
     setPageName(page.name);
     setPageDescription(page.description || '');
+    setPageIncludesCoverage(Boolean(page.includes_sales_coverage));
     setMinimumPackage(toEditableRows(page.minimum_package));
     setIndividualPricing(toEditableRows(page.individual_pricing));
     setStatusMessage('');
@@ -107,6 +109,7 @@ export default function ProposalBuilder({ initialPricingPages }: { initialPricin
     setPresetId('');
     setPageName('');
     setPageDescription('');
+    setPageIncludesCoverage(false);
     setMinimumPackage(blankRows());
     setIndividualPricing(blankRows());
     setStatusMessage('Editing a new pricing page. Save to keep it.');
@@ -148,6 +151,7 @@ export default function ProposalBuilder({ initialPricingPages }: { initialPricin
         description: pageDescription.trim(),
         minimum_package: toStoredRows(minimumPackage),
         individual_pricing: toStoredRows(individualPricing),
+        includes_sales_coverage: pageIncludesCoverage,
       };
 
       if (!payload.name) throw new Error('Pricing page name is required.');
@@ -343,6 +347,10 @@ export default function ProposalBuilder({ initialPricingPages }: { initialPricin
                 className="w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:border-green-500 focus:outline-none"
                 placeholder="Optional short description"
               />
+            </label>
+            <label className="flex items-start gap-3 text-sm text-slate-700 md:col-span-2">
+              <input type="checkbox" checked={pageIncludesCoverage} onChange={(event) => setPageIncludesCoverage(event.target.checked)} className="mt-1 h-4 w-4" name="includesSalesCoverage" />
+              <span><span className="font-bold">Prices already include the 10% sales coverage</span> <span className="text-slate-500">(admin only; the Proposal Builder will not add it again)</span></span>
             </label>
           </div>
 

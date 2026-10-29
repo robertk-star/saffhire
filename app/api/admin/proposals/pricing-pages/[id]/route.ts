@@ -22,6 +22,7 @@ export async function PATCH(request: Request, context: RouteContext) {
       minimum_package: Array.isArray(body.minimum_package) ? body.minimum_package : undefined,
       individual_pricing: Array.isArray(body.individual_pricing) ? body.individual_pricing : undefined,
       sort_order: body.sort_order !== undefined ? Number(body.sort_order) : undefined,
+      includes_sales_coverage: typeof body.includes_sales_coverage === 'boolean' ? body.includes_sales_coverage : undefined,
     });
     return NextResponse.json({ page });
   } catch (error) {
