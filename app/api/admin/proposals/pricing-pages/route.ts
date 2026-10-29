@@ -25,6 +25,7 @@ export async function POST(request: Request) {
       minimum_package: Array.isArray(body.minimum_package) ? body.minimum_package : [],
       individual_pricing: Array.isArray(body.individual_pricing) ? body.individual_pricing : [],
       sort_order: body.sort_order !== undefined ? Number(body.sort_order) : undefined,
+      includes_sales_coverage: body.includes_sales_coverage === true,
     });
     return NextResponse.json({ page });
   } catch (error) {

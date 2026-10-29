@@ -87,7 +87,7 @@ test('totals per package and overall; client preview has no cost or profit', () 
   const json = JSON.stringify(preview);
   assert.ok(!/cost|profit|internal/i.test(json), 'client preview must not include internal fields');
   assert.equal(preview.grandTotal, 28.6);
-  assert.equal(preview.coverageNote, 'All prices include 10% sales coverage.');
+  assert.ok(!/10\s*%|coverage/i.test(json), 'no coverage wording for clients');
   assert.equal(preview.packages[0].rows[0].total, 'Included');
   assert.equal(preview.packages[0].includes[0], 'Sex Offender Registry');
 });
@@ -154,13 +154,13 @@ test('à la carte only: no packages, no Service Packages section, individual tab
 test('coverage seed sheet: lookup by name, graceful fallback, no double coverage, warnings', () => {
   const mk = (id: string, name: string, price: string): BaseSheet => ({ id, name, description: '', minimum_package: [], individual_pricing: [{ label: 'Federal Search', price }, { label: 'Drug Screen', price: 'Included' }] });
   const direct = mk('d', 'SaffHire Direct Pricing', '$5.00');
-  const cov = mk('c', 'Staffing + 10% Sales Coverage', '$6.05');
-  const other = mk('o', 'Church Pricing (+10%)', '$7.00');
+  const cov = { ...mk('c', 'Staffing + 10% Sales Coverage', '$6.05'), includes_sales_coverage: true };
+  const other = { ...mk('o', 'Church Pricing (+10%)', '$7.00'), includes_sales_coverage: true };
   assert.equal(findIndividualSeedSheet([direct, other, cov])?.id, 'c');
   assert.equal(findIndividualSeedSheet([direct, other])?.id, 'o');
   assert.equal(findIndividualSeedSheet([mk('x', 'Zeta', '$1'), direct])?.id, 'd');
   assert.equal(findIndividualSeedSheet([])?.id, undefined);
-  assert.ok(sheetIncludesCoverage('Staffing + 10% Sales Coverage') && sheetIncludesCoverage('X +10%') && !sheetIncludesCoverage('SaffHire Direct Pricing'));
+  assert.ok(sheetIncludesCoverage(cov) && !sheetIncludesCoverage(mk('n', 'X +10%', '$1')) && !sheetIncludesCoverage(direct));
 
   const base = { kind: 'category' as const, priceKey: 'staffing_price' as const };
   const cat = buildCatalog(base, [direct, cov], items, 'Texas');

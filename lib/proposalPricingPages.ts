@@ -12,6 +12,8 @@ export type ProposalPricingPage = {
   minimum_package: PriceRow[];
   individual_pricing: PriceRow[];
   sort_order: number;
+  /** Prices already include the 10% sales coverage (migration 014). The builder never adds a second 10% to these. */
+  includes_sales_coverage: boolean;
   created_at?: string;
   updated_at?: string;
 };
@@ -47,6 +49,7 @@ export const defaultProposalPricingPages: ProposalPricingPage[] = [
       { label: 'Continuous Monitoring', price: '$2.00' },
     ],
     sort_order: 1,
+    includes_sales_coverage: false,
   },
   {
     id: 'staffing',
@@ -78,6 +81,7 @@ export const defaultProposalPricingPages: ProposalPricingPage[] = [
       { label: 'Continuous Monitoring', price: '$2.00' },
     ],
     sort_order: 2,
+    includes_sales_coverage: false,
   },
   {
     id: 'staffing-sales',
@@ -109,6 +113,7 @@ export const defaultProposalPricingPages: ProposalPricingPage[] = [
       { label: 'Continuous Monitoring', price: '$2.20' },
     ],
     sort_order: 3,
+    includes_sales_coverage: true,
   },
 ];
 
@@ -130,6 +135,7 @@ function mapRow(item: Record<string, unknown>): ProposalPricingPage {
     minimum_package: normalizeRows(item.minimum_package),
     individual_pricing: normalizeRows(item.individual_pricing),
     sort_order: Number(item.sort_order || 0),
+    includes_sales_coverage: item.includes_sales_coverage === true,
     created_at: item.created_at ? String(item.created_at) : undefined,
     updated_at: item.updated_at ? String(item.updated_at) : undefined,
   };
@@ -141,7 +147,7 @@ export async function getProposalPricingPages(): Promise<ProposalPricingPage[]> 
 
   const { data, error } = await supabase
     .from('proposal_pricing_pages')
-    .select('id, name, description, minimum_package, individual_pricing, sort_order, created_at, updated_at')
+    .select('id, name, description, minimum_package, individual_pricing, sort_order, includes_sales_coverage, created_at, updated_at')
     .order('sort_order', { ascending: true })
     .order('name', { ascending: true });
 
@@ -160,6 +166,7 @@ export async function createProposalPricingPage(input: {
   minimum_package?: PriceRow[];
   individual_pricing?: PriceRow[];
   sort_order?: number;
+  includes_sales_coverage?: boolean;
 }) {
   const supabase = getSupabaseAdmin();
   if (!supabase) throw new Error('Database is not configured.');
@@ -183,8 +190,9 @@ export async function createProposalPricingPage(input: {
       minimum_package: normalizeRows(input.minimum_package || []),
       individual_pricing: normalizeRows(input.individual_pricing || []),
       sort_order: nextSort,
+      includes_sales_coverage: input.includes_sales_coverage === true,
     })
-    .select('id, name, description, minimum_package, individual_pricing, sort_order, created_at, updated_at')
+    .select('id, name, description, minimum_package, individual_pricing, sort_order, includes_sales_coverage, created_at, updated_at')
     .single();
 
   if (error) throw new Error(error.message);
@@ -199,6 +207,7 @@ export async function updateProposalPricingPage(
     minimum_package?: PriceRow[];
     individual_pricing?: PriceRow[];
     sort_order?: number;
+    includes_sales_coverage?: boolean;
   },
 ) {
   const supabase = getSupabaseAdmin();
@@ -215,12 +224,13 @@ export async function updateProposalPricingPage(
   if (input.minimum_package !== undefined) update.minimum_package = normalizeRows(input.minimum_package);
   if (input.individual_pricing !== undefined) update.individual_pricing = normalizeRows(input.individual_pricing);
   if (input.sort_order !== undefined) update.sort_order = Number(input.sort_order) || 0;
+  if (input.includes_sales_coverage !== undefined) update.includes_sales_coverage = input.includes_sales_coverage === true;
 
   const { data, error } = await supabase
     .from('proposal_pricing_pages')
     .update(update)
     .eq('id', id)
-    .select('id, name, description, minimum_package, individual_pricing, sort_order, created_at, updated_at')
+    .select('id, name, description, minimum_package, individual_pricing, sort_order, includes_sales_coverage, created_at, updated_at')
     .single();
 
   if (error) throw new Error(error.message);

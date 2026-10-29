@@ -48,7 +48,7 @@ export type BaseSheet = {
   description: string;
   minimum_package: SheetRow[];
   individual_pricing: SheetRow[];
-  /** Explicit flag: the sheet's prices already include the 10% sales coverage. Wins over name/description hints when set. */
+  /** Database flag (proposal_pricing_pages.includes_sales_coverage): the sheet's prices already include the 10% sales coverage. */
   includes_sales_coverage?: boolean | null;
 };
 
@@ -256,28 +256,12 @@ export function moveItem<T>(list: T[], index: number, delta: number): T[] {
 
 export const COVERAGE_SEED_SHEET_NAME = 'Staffing + 10% Sales Coverage';
 
-/** True when a sheet *name* says its prices already include the 10% sales coverage uplift. */
-export function nameIndicatesCoverage(name: string | undefined | null) {
-  const n = String(name || '');
-  return /\+\s*10\s*%/.test(n) || /10\s*%\s*sales/i.test(n) || /sales\s+coverage/i.test(n);
-}
-
-/** Description wording used by the seed sheet ("10% uplift to cover salesperson cost") and by sheets saved from the builder. */
-function descriptionIndicatesCoverage(description: string | undefined | null) {
-  const d = String(description || '');
-  return /10\s*%\s*(sales\s+coverage|uplift)/i.test(d) || /includes?\s+(the\s+)?10\s*%/i.test(d);
-}
-
 /**
- * True when a price sheet's prices already include the 10% sales coverage.
- * Order: explicit `includes_sales_coverage` flag (when the row has one), then the name, then the description.
- * Production sheets have no flag column today, so the name/description hints are what decide.
+ * True when a price sheet's prices already include the 10% sales coverage. Uses the database flag
+ * `proposal_pricing_pages.includes_sales_coverage` only (migration 014); names and descriptions are not inspected.
  */
-export function sheetIncludesCoverage(sheet: string | Pick<BaseSheet, 'name' | 'description' | 'includes_sales_coverage'> | undefined | null) {
-  if (!sheet) return false;
-  if (typeof sheet === 'string') return nameIndicatesCoverage(sheet);
-  if (typeof sheet.includes_sales_coverage === 'boolean') return sheet.includes_sales_coverage;
-  return nameIndicatesCoverage(sheet.name) || descriptionIndicatesCoverage(sheet.description);
+export function sheetIncludesCoverage(sheet: Pick<BaseSheet, 'includes_sales_coverage'> | undefined | null) {
+  return Boolean(sheet && sheet.includes_sales_coverage === true);
 }
 
 /** The selected base sheet already includes the 10%: the checkbox shows checked + locked and no multiplier is added. */
@@ -292,20 +276,27 @@ export function coverageApplies(p: Pick<BuilderProposal, 'base' | 'salesCoverage
   return Boolean(p.salesCoverage) && !baseIncludesCoverage(p, sheets);
 }
 
-export const COVERAGE_NOTE = 'All prices include 10% sales coverage.';
-export const INDIVIDUAL_COVERAGE_NOTE = 'Individual (à la carte) prices include 10% sales coverage.';
-
-/** The one sales-coverage note for the quote (preview/PDF), or null. Never repeated per package. */
-export function coverageNoteFor(p: Pick<BuilderProposal, 'base' | 'salesCoverage' | 'individual' | 'aLaCarteOnly' | 'includeIndividual'>, sheets: BaseSheet[]): string | null {
-  if (coverageApplies(p, sheets) || baseIncludesCoverage(p, sheets)) return COVERAGE_NOTE;
-  const showsIndividual = Boolean(p.aLaCarteOnly) || p.includeIndividual;
-  if (showsIndividual && p.individual.some((r) => r.coverageIncluded && r.label.trim())) return INDIVIDUAL_COVERAGE_NOTE;
-  return null;
+/**
+ * Client output must never mention the sales coverage (it covers SaffHire's referral fee cost; Robert, Oct 29 2026).
+ * Strips "10%" / "sales coverage" / "coverage" wording from any text that reaches the preview or PDF.
+ */
+export const CLIENT_FORBIDDEN_WORDING = /10\s*%|sales\s*coverage|coverage/i;
+export function clientSafeText(text: string | undefined | null) {
+  let t = String(text || '');
+  if (!CLIENT_FORBIDDEN_WORDING.test(t)) return t.trim();
+  t = t
+    .replace(/[(\[]?\s*(?:\+|with|incl(?:\.|udes?|uding)?|plus)?\s*(?:a\s+|the\s+)?10\s*%\s*(?:sales\s*coverage|coverage|uplift|markup|mark-up)?\s*[)\]]?/gi, ' ')
+    .replace(/[(\[]?\s*(?:\+|with|incl(?:\.|udes?|uding)?|plus)?\s*(?:sales\s*)?coverage\s*[)\]]?/gi, ' ')
+    .replace(/\s*[;:,+–-]\s*(?=[.)]|$)/g, '')
+    .replace(/\(\s*\)/g, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+  return CLIENT_FORBIDDEN_WORDING.test(t) ? '' : t;
 }
 
 /**
  * Sheet that seeds the Individual (à la carte) table in category mode: "Staffing + 10% Sales Coverage" by name,
- * then any sheet whose name indicates +10%/sales coverage, then SaffHire Direct Pricing, then the first sheet.
+ * then any sheet flagged includes_sales_coverage, then SaffHire Direct Pricing, then the first sheet.
  */
 export function findIndividualSeedSheet(sheets: BaseSheet[]): BaseSheet | undefined {
   const norm = (v: string) => v.toLowerCase().replace(/\s+/g, ' ').trim();
@@ -313,7 +304,7 @@ export function findIndividualSeedSheet(sheets: BaseSheet[]): BaseSheet | undefi
   const pool = withRows.length ? withRows : sheets;
   return (
     pool.find((s) => norm(s.name) === norm(COVERAGE_SEED_SHEET_NAME)) ||
-    pool.find((s) => nameIndicatesCoverage(s.name)) ||
+    pool.find((s) => sheetIncludesCoverage(s)) ||
     pool.find((s) => /direct/i.test(s.name)) ||
     pool[0]
   );
@@ -393,8 +384,6 @@ export type ClientPreview = {
   }[];
   individual: { label: string; price: string }[];
   grandTotal: number;
-  /** Single sales-coverage note shown once on the Pricing page (never per package). null = no note. */
-  coverageNote: string | null;
   createdAt: string;
 };
 
@@ -407,7 +396,7 @@ export function buildClientPreview(p: BuilderProposal, catalog: Map<string, Cata
       const calc = calcLine(line, catalog.get(line.catalogKey), coverage);
       const qty = Math.max(0, Number(line.quantity) || 0);
       return {
-        label: line.label.trim(),
+        label: clientSafeText(line.label),
         quantity: qty,
         included: line.included,
         unit: line.included ? 'Included' : calc.unit === null ? 'N/A' : money(calc.unit),
@@ -415,9 +404,9 @@ export function buildClientPreview(p: BuilderProposal, catalog: Map<string, Cata
       };
     });
     return {
-      name: pkg.name.trim() || 'Package',
-      description: pkg.description.trim(),
-      includes: all.map((line) => line.label.trim()),
+      name: clientSafeText(pkg.name) || 'Package',
+      description: clientSafeText(pkg.description),
+      includes: all.map((line) => clientSafeText(line.label)),
       rows,
       total: packageTotals(pkg, catalog, coverage).total,
     };
@@ -427,20 +416,19 @@ export function buildClientPreview(p: BuilderProposal, catalog: Map<string, Cata
         .filter((row) => row.label.trim())
         .map((row) => {
           const unit = individualUnit(row, catalog, coverage);
-          return { label: row.label.trim(), price: unit === null ? 'N/A' : money(unit) };
+          return { label: clientSafeText(row.label), price: unit === null ? 'N/A' : money(unit) };
         })
     : [];
   return {
-    clientName: p.clientName.trim(),
-    contactName: p.contactName.trim(),
-    notes: p.notes.trim(),
+    clientName: clientSafeText(p.clientName),
+    contactName: clientSafeText(p.contactName),
+    notes: clientSafeText(p.notes),
     sections: sectionOptions.filter((s) => p.sections[s.key] && !(alacarte && s.key === 'packages')).map((s) => s.key),
-    baseLabel,
+    baseLabel: clientSafeText(baseLabel),
     mode: alacarte ? 'alacarte' : 'packages',
     packages,
     individual,
     grandTotal: round2(packages.reduce((sum, pkg) => sum + pkg.total, 0)),
-    coverageNote: coverageNoteFor(p, sheets),
     createdAt: now.toISOString(),
   };
 }

@@ -1,18 +1,19 @@
 // Run: npx --yes tsx --test tests/proposalCoverageOnce.test.ts
-// Robert (Oct 29, 2026): "Only show 10% once." The 10% sales coverage is applied at most once per quote and noted once.
+// Robert (Oct 29, 2026): "Only show 10% once." The 10% sales coverage is applied at most once per quote and never mentioned to clients
+// (Robert, 9:58 AM CT: "Absolutely not. That covers our referral fee cost."). Coverage sheets are flagged in the database.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  BaseSheet, BuilderLine, BuilderProposal, CatalogPricingItem, COVERAGE_NOTE,
+  BaseSheet, BuilderLine, BuilderProposal, CatalogPricingItem, CLIENT_FORBIDDEN_WORDING, clientSafeText,
   baseIncludesCoverage, buildCatalog, buildClientPreview, coverageApplies, emptyProposal, newLine,
   packageToSheetRows, proposalTotals, round2, sheetIncludesCoverage,
 } from '../lib/proposalBuilder';
 import { IND, IND_COV, MIN, MIN_COV, productionSheets } from './fixtures/productionPriceSheets';
 
-const savedFromBuilderNoBox: BaseSheet = { id: 'saved-a', name: 'Acme – Basic', description: 'Created from the proposal builder (Staffing + 10% Sales Coverage).', minimum_package: MIN_COV, individual_pricing: IND_COV };
-const savedFromBuilderBox: BaseSheet = { id: 'saved-b', name: 'Acme – Standard', description: 'Created from the proposal builder (Saffhire Pricing; includes 10% sales coverage).', minimum_package: MIN_COV, individual_pricing: IND_COV };
+const savedFromBuilderNoBox: BaseSheet = { id: 'saved-a', name: 'Acme – Basic', description: 'Created from the proposal builder (Staffing + 10% Sales Coverage).', minimum_package: MIN_COV, individual_pricing: IND_COV, includes_sales_coverage: true };
+const savedFromBuilderBox: BaseSheet = { id: 'saved-b', name: 'Acme – Standard', description: 'Created from the proposal builder (Saffhire Pricing; includes 10% sales coverage).', minimum_package: MIN_COV, individual_pricing: IND_COV, includes_sales_coverage: true };
 const flaggedOn: BaseSheet = { id: 'flag-on', name: 'Client X special', description: '', minimum_package: MIN_COV, individual_pricing: IND_COV, includes_sales_coverage: true };
-const flaggedOff: BaseSheet = { id: 'flag-off', name: 'Old +10% sheet (repriced)', description: '', minimum_package: MIN, individual_pricing: IND, includes_sales_coverage: false };
+const flaggedOff: BaseSheet = { id: 'flag-off', name: 'Old +10% Sales Coverage sheet (repriced)', description: 'with a 10% uplift', minimum_package: MIN, individual_pricing: IND, includes_sales_coverage: false };
 const sheets = [...productionSheets, savedFromBuilderNoBox, savedFromBuilderBox, flaggedOn, flaggedOff];
 const COVERAGE_SHEETS = new Set(['d1024696', 'saved-a', 'saved-b', 'flag-on']);
 
@@ -84,12 +85,15 @@ test('every sheet × box on/off × 1-3 packages × edited prices: 10% applied at
     if (applies && edit === 'none') assert.equal(totals.total, round2(grandBase * 1.1), `${name} grand exactly x1.10`);
     if (!applies) assert.equal(totals.total, round2(grandBase), `${name} grand unchanged`);
 
-    // Preview/PDF payload: the 10% is mentioned exactly once (one note), never per package row.
-    const preview = buildClientPreview(p, map, 'x', new Date(0), sheets);
-    const mentions = (JSON.stringify(preview).match(/10%/g) || []).length;
-    const expectNote = applies || inSheet;
-    assert.equal(preview.coverageNote, expectNote ? COVERAGE_NOTE : (p.individual.some((r) => r.coverageIncluded) ? preview.coverageNote : null), name);
-    assert.equal(mentions, preview.coverageNote ? 1 : 0, `${name} 10% shown once`);
+    // Client preview / PDF payload: no 10% or sales coverage wording at all, even when the base label is the
+    // coverage sheet's name and the package description / notes typed by an admin mention it.
+    const sheetName = b.base.kind === 'sheet' ? sheets.find((s) => s.id === (b.base as { sheetId: string }).sheetId)!.name : 'Staffing pricing';
+    p.notes = 'Pricing includes 10% sales coverage.';
+    p.packages[0].description = 'Staffing + 10% Sales Coverage package';
+    const preview = buildClientPreview(p, map, sheetName, new Date(0), sheets);
+    const text = JSON.stringify(preview);
+    assert.ok(!/10\s*%|sales\s*coverage|coverage/i.test(text), `${name}: client output mentions coverage: ${text.match(/.{0,30}(10\s*%|coverage).{0,30}/i)?.[0]}`);
+    assert.ok(!('coverageNote' in preview), name);
     assert.equal(preview.grandTotal, totals.total, name);
     cases++;
   }
@@ -109,13 +113,21 @@ test('"Staffing + 10% Sales Coverage" with the box checked equals "Saffhire Pric
   assert.equal(t.total, 92.4);
 });
 
-test('sheet detection: explicit flag wins, then name, then description; production sheets', () => {
+test('sheet detection uses the database flag only (migration 014 values)', () => {
   assert.deepEqual(productionSheets.map((s) => sheetIncludesCoverage(s)), [false, false, true]);
   assert.equal(sheetIncludesCoverage(savedFromBuilderNoBox), true);
-  assert.equal(sheetIncludesCoverage(savedFromBuilderBox), true);
   assert.equal(sheetIncludesCoverage(flaggedOn), true);
-  assert.equal(sheetIncludesCoverage(flaggedOff), false);
-  assert.equal(sheetIncludesCoverage({ name: 'Plain', description: 'Created from the proposal builder (Saffhire Pricing).' }), false);
+  assert.equal(sheetIncludesCoverage(flaggedOff), false); // name/description mention 10% but the flag is false
+  assert.equal(sheetIncludesCoverage({ ...productionSheets[2], includes_sales_coverage: undefined }), false); // no name fallback
+  assert.equal(sheetIncludesCoverage(undefined), false);
+});
+
+test('clientSafeText strips every coverage phrasing and keeps other text', () => {
+  for (const t of ['Staffing + 10% Sales Coverage', 'Staffing pricing with a 10% uplift to cover salesperson cost.', 'Created from the proposal builder (Saffhire Pricing; includes 10% sales coverage).', 'All prices include 10% sales coverage.', 'Sales Coverage', 'x 10 % y']) {
+    assert.ok(!CLIENT_FORBIDDEN_WORDING.test(clientSafeText(t)), t);
+  }
+  assert.equal(clientSafeText('SaffHire Direct Pricing'), 'SaffHire Direct Pricing');
+  assert.equal(clientSafeText(''), '');
 });
 
 test('saving packages as a sheet writes final prices once and the new sheet is recognised as coverage-inclusive', () => {
@@ -123,7 +135,10 @@ test('saving packages as a sheet writes final prices once and the new sheet is r
   const rows = packageToSheetRows(p.packages[0], map, coverageApplies(p, sheets));
   assert.deepEqual(rows.find((r) => r.label === 'Social Security Trace'), { label: 'Social Security Trace', price: '$7.98' }); // edited 7.25 +10% once
   assert.deepEqual(rows.find((r) => r.label === 'Federal Search'), { label: 'Federal Search', price: '$5.50' });
-  const saved: BaseSheet = { id: 'n', name: 'New – Package 1', description: 'Created from the proposal builder (Saffhire Pricing; includes 10% sales coverage).', minimum_package: rows, individual_pricing: [] };
+  // The builder saves includes_sales_coverage = box applied || base sheet already included it.
+  const flag = coverageApplies(p, sheets) || baseIncludesCoverage(p, sheets);
+  assert.equal(flag, true);
+  const saved: BaseSheet = { id: 'n', name: 'New – Package 1', description: '', minimum_package: rows, individual_pricing: [], includes_sales_coverage: flag };
   const again = emptyProposal({ kind: 'sheet', sheetId: 'n' });
   again.salesCoverage = true;
   assert.equal(coverageApplies(again, [saved]), false); // re-using the saved sheet never adds a second 10%

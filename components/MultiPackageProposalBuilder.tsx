@@ -353,6 +353,8 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
             name: `${label} – ${pkg.name.trim() || 'Package'}`,
             description: pkg.description.trim() || `Created from the proposal builder (${baseLabel}${coverage ? '; includes 10% sales coverage' : ''}).`,
             minimum_package: packageToSheetRows(pkg, catalog, coverage),
+            // The saved prices already contain the 10% whenever it was applied here or came from the base sheet.
+            includes_sales_coverage: coverage || coverageInSheet,
             individual_pricing: individual,
           }),
         });
