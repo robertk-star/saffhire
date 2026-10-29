@@ -191,7 +191,7 @@ export function buildCatalog(base: BaseSource, sheets: BaseSheet[], items: Catal
   const stateItems = state ? items.filter((item) => item.state === state) : [];
   const byName = new Map(stateItems.map((item) => [normName(item.service), item]));
   if (base.kind === 'category') {
-    return stateItems.map((item) => {
+    const entries: CatalogEntry[] = stateItems.map((item) => {
       const raw = item[base.priceKey];
       return {
         key: `item:${item.id}`,
@@ -201,6 +201,21 @@ export function buildCatalog(base: BaseSource, sheets: BaseSheet[], items: Catal
         internalCost: itemCost(item),
       };
     });
+    // Package items with no category price (Social Security Trace, Sex Offender Registry, Global Security Watch List,
+    // National Database Search) come from the plain seed sheet's minimum package, at its prices (Robert, Oct 29 2026).
+    // Never from a sheet that already includes the 10%: the checkbox applies it once, like every other line.
+    const seed = findIndividualSeedSheet(sheets);
+    if (stateItems.length && seed && !sheetIncludesCoverage(seed)) {
+      const have = new Set(entries.map((e) => normName(e.label)));
+      for (const row of seed.minimum_package || []) {
+        const n = normName(row.label);
+        if (!n || have.has(n)) continue;
+        have.add(n);
+        const parsed = parsePrice(row.price);
+        entries.push({ key: `sheet:${n}`, label: row.label, basePrice: parsed.price, included: parsed.included, internalCost: null });
+      }
+    }
+    return entries;
   }
   const sheet = sheets.find((s) => s.id === base.sheetId);
   if (!sheet) return [];

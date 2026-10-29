@@ -157,3 +157,37 @@ test('drafts: company type persists; legacy drafts infer it from a category base
   assert.equal(fresh.companyType, '');
   assert.equal(pricingSourceNote(fresh, sheets), 'Choose the company type to set pricing.');
 });
+
+test('company-type packages offer the Saffhire Pricing minimum-package items at sheet prices; 10% once; Included stays $0', () => {
+  const MIN_ITEMS = ['Social Security Trace', 'Sex Offender Registry', 'Global Security Watch List', 'National Database Search'];
+  const plain = sheets.find((s) => s.name === 'Saffhire Pricing')!;
+  for (const t of companyTypes) for (const box of [false, true]) {
+    const p = proposalFor(t.key, box);
+    const { list } = catalogOf(p);
+    for (const label of MIN_ITEMS) {
+      const e = list.find((c) => c.label === label);
+      assert.ok(e, `${t.label}: ${label} offered`);
+      const sheetRow = plain.minimum_package.find((r) => r.label === label)!;
+      assert.equal(e!.included, sheetRow.price === 'Included');
+      if (!e!.included) assert.equal(e!.basePrice, Number(sheetRow.price.replace(/[$,]/g, '')));
+    }
+    p.packages[0].minimumItems = MIN_ITEMS.map((label) => newLine(list.find((c) => c.label === label)));
+    const { map } = catalogOf(p);
+    const base = round2(5 + PKG.reduce((s, l) => s + price(l, t.priceKey), 0));
+    const expected = box ? round2(5.5 + PKG.reduce((s, l) => s + round2(price(l, t.priceKey) * 1.1), 0)) : base;
+    assert.equal(proposalTotals(p, map, sheets).total, expected, `${t.label} box ${box}`);
+    const preview = buildClientPreview(p, map, `${t.label} pricing`, new Date(0), sheets);
+    const rows = preview.packages[0].rows;
+    assert.equal(rows.find((r) => r.label === 'Social Security Trace')!.unit, box ? '$5.50' : '$5.00');
+    for (const label of MIN_ITEMS.slice(1)) assert.equal(rows.find((r) => r.label === label)!.total, 'Included');
+    assert.ok(!CLIENT_FORBIDDEN_WORDING.test(JSON.stringify(preview)), 'no 10% / coverage wording for clients');
+    // Not in the Individual table (Robert: no National Criminal Alias Search row either).
+    assert.ok(!p.individual.some((r) => r.label === 'National Criminal Alias Search' || r.label === 'Social Security Trace'));
+  }
+});
+
+test('minimum-package items never come from a sheet that already includes the 10%', () => {
+  const onlyCoverage = sheets.filter((s) => s.includes_sales_coverage);
+  const list = buildCatalog(companyTypeBase('trucking'), onlyCoverage, items, 'Texas');
+  assert.ok(!list.some((c) => c.label === 'Social Security Trace'));
+});

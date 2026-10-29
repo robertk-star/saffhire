@@ -35,8 +35,10 @@ const sheet: BaseSheet = {
 
 test('category catalog uses the selected state and price column', () => {
   const cat = buildCatalog({ kind: 'category', priceKey: 'staffing_price' }, [sheet], items, 'Texas');
-  assert.equal(cat.length, 2);
-  assert.deepEqual(cat.map((c) => c.basePrice), [6, 5]);
+  // 2 state items + the seed sheet's minimum-package items with no category price (Oct 29 2026).
+  assert.equal(cat.length, 4);
+  assert.deepEqual(cat.map((c) => c.basePrice), [6, 5, 5, 0]);
+  assert.deepEqual(cat.slice(2).map((c) => [c.label, c.included]), [['Social Security Trace', false], ['Sex Offender Registry', true]]);
   assert.equal(buildCatalog({ kind: 'category', priceKey: 'staffing_price' }, [sheet], items, '').length, 0);
 });
 
