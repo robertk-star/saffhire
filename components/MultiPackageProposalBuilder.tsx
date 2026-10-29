@@ -36,6 +36,15 @@ import {
   linePreCoveragePrice,
   individualPreCoverage,
   sectionOptions,
+  CompanyType,
+  companyTypes,
+  companyTypeBase,
+  companyTypeLabel,
+  changeCompanyType,
+  applyCompanyTypePricing,
+  pricingSourceNote,
+  remapToCatalog,
+  sameBase,
 } from '@/lib/proposalBuilder';
 
 export const BUILDER_PREVIEW_KEY = 'saffhire_proposal_builder_preview';
@@ -78,6 +87,8 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  // Admin-only note shown when a company type change kept the admin's edits or override.
+  const [typeNote, setTypeNote] = useState('');
 
   const states = useMemo(() => Array.from(new Set(items.map((item) => item.state).filter(Boolean))).sort(), [items]);
   const catalogList = useMemo(() => buildCatalog(proposal.base, sheets, items, proposal.state), [proposal.base, sheets, items, proposal.state]);
@@ -149,38 +160,36 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
     setProposal((current) => ({ ...current, ...patch }));
   }
 
-  function remapToCatalog(next: BuilderProposal): BuilderProposal {
-    const list = buildCatalog(next.base, sheets, items, next.state);
-    const byLabel = new Map(list.map((entry) => [normLabel(entry.label), entry]));
-    const keys = new Set(list.map((entry) => entry.key));
-    const remap = (line: BuilderLine): BuilderLine => {
-      if (!line.catalogKey || keys.has(line.catalogKey)) return line;
-      const entry = byLabel.get(normLabel(line.label));
-      return { ...line, catalogKey: entry ? entry.key : '' };
-    };
-    return {
-      ...next,
-      packages: next.packages.map((pkg) => ({ ...pkg, minimumItems: pkg.minimumItems.map(remap), lines: pkg.lines.map(remap) })),
-      individual: next.individual.map((row) => {
-        if (row.catalogKey && keys.has(row.catalogKey)) return row;
-        const label = normLabel(row.label);
-        const entry = byLabel.get(label) || (label === '1 county criminal search' ? byLabel.get('county criminal search') : undefined);
-        return { ...row, catalogKey: entry ? entry.key : '' };
-      }),
-    };
-  }
-
+  // Picking a base by hand is an explicit override unless it is the company type's own default.
   function changeBase(base: BaseSource) {
-    setProposal((current) => remapToCatalog({ ...current, base }));
+    setProposal((current) => {
+      const baseOverride = current.companyType ? !sameBase(base, companyTypeBase(current.companyType)) : true;
+      return remapToCatalog({ ...current, base, baseOverride }, sheets, items);
+    });
   }
 
   function changeState(state: string) {
-    setProposal((current) => remapToCatalog({ ...current, state }));
+    setProposal((current) => remapToCatalog({ ...current, state }, sheets, items));
+  }
+
+  function changeType(value: string) {
+    const type = companyTypes.find((t) => t.key === value)?.key;
+    if (!type) return;
+    const result = changeCompanyType(proposal, type as CompanyType, sheets, items);
+    setProposal(result.proposal);
+    setTypeNote(result.note);
+  }
+
+  function applyTypePricing() {
+    if (!proposal.companyType) return;
+    setProposal(applyCompanyTypePricing(proposal, sheets, items));
+    setTypeNote('');
   }
 
   function resetAll() {
     if (!window.confirm('Reset the builder and start over? Unsaved changes will be lost.')) return;
     setProposal(emptyProposal(defaultBase(sheets)));
+    setTypeNote('');
     setDraftId('');
     setDraftName('');
     setStatus('Builder reset.');
@@ -319,6 +328,7 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         name = body.draft.name;
       }
       setProposal(normalizeProposal(data, defaultBase(sheets)));
+      setTypeNote('');
       setDraftId(id);
       setDraftName(name);
       setStatus(`Loaded draft "${name}".`);
@@ -378,6 +388,10 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
   }
 
   const needsState = proposal.base.kind === 'category' && !proposal.state;
+  const needsType = !proposal.companyType && !proposal.baseOverride;
+  const typeLabel = companyTypeLabel(proposal.companyType);
+  const onTypeDefault = Boolean(proposal.companyType) && sameBase(proposal.base, companyTypeBase(proposal.companyType as CompanyType));
+  const sourceNote = pricingSourceNote(proposal, sheets);
   const alacarte = Boolean(proposal.aLaCarteOnly);
   const sectionCount = sectionOptions.filter((s) => proposal.sections[s.key] && !(alacarte && s.key === 'packages')).length;
 
@@ -506,7 +520,15 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           </div>
           <button type="button" onClick={resetAll} className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-slate-700 hover:bg-gray-50">Reset / start over</button>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-4">
+          <label className="block">
+            <span className="mb-2 block text-sm font-bold text-slate-700">Company type</span>
+            <select value={proposal.companyType || ''} onChange={(e) => changeType(e.target.value)} className={`${input} ${needsType ? 'border-amber-400 bg-amber-50' : ''}`} name="companyType" aria-describedby="company-type-help">
+              <option value="">Select company type</option>
+              {companyTypes.map((t) => <option key={t.key} value={t.key}>{t.label}</option>)}
+            </select>
+            <span id="company-type-help" className="mt-1 block text-xs text-slate-500">Sets the default pricing for the packages and the individual table.</span>
+          </label>
           <label className="block">
             <span className="mb-2 block text-sm font-bold text-slate-700">Client / company name</span>
             <input value={proposal.clientName} onChange={(e) => update({ clientName: e.target.value })} className={input} name="clientName" />
@@ -559,7 +581,23 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
 
       <section className={card}>
         <h2 className="text-2xl font-black text-slate-900">Base pricing</h2>
-        <p className="mt-1 text-sm text-slate-600">Line prices auto-fill from this base. You can still edit any price below.</p>
+        <p className="mt-1 text-sm text-slate-600">Defaults to the company type. Picking a different base here is an override for this proposal. You can still edit any price below.</p>
+        <div className={`mt-3 flex flex-wrap items-center gap-3 rounded-xl border p-3 text-sm ${onTypeDefault ? 'border-green-200 bg-green-50 text-green-900' : 'border-amber-300 bg-amber-50 text-amber-900'}`} data-pricing-source>
+          <span className="font-bold">{sourceNote}</span>
+          {proposal.companyType && !onTypeDefault ? (
+            <button type="button" onClick={applyTypePricing} className={btn} data-apply-type-pricing>Apply {typeLabel} pricing</button>
+          ) : null}
+        </div>
+        {typeNote ? (
+          <div role="status" data-company-type-note className="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+            <span className="block font-bold">Admin only</span>
+            <span className="block">{typeNote}</span>
+            <span className="mt-2 flex gap-2">
+              <button type="button" onClick={applyTypePricing} className={btn}>Apply {typeLabel} pricing</button>
+              <button type="button" onClick={() => setTypeNote('')} className={btn}>Keep my pricing</button>
+            </span>
+          </div>
+        ) : null}
         <div className="mt-5 grid gap-4 md:grid-cols-2">
           <label className={`block rounded-xl border p-4 ${proposal.base.kind === 'category' ? 'border-green-500 bg-green-50' : 'border-gray-200'}`}>
             <span className="flex items-center gap-2 text-sm font-bold text-slate-800">
@@ -688,7 +726,11 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
           </div>
         </div>
         {proposal.base.kind === 'category' && fallbackSheet ? (
-          <p className="mb-3 text-xs text-slate-500" data-individual-seed>Seeded from the “{fallbackSheet.name}” price sheet{proposal.individual.some((r) => r.coverageIncluded) ? ' (prices already include 10% sales coverage)' : ''}. Use “Reload from base” to reseed.</p>
+          <p className="mb-3 text-xs text-slate-500" data-individual-seed>
+            {proposal.individual.some((r) => r.coverageIncluded)
+              ? `Seeded from the “${fallbackSheet.name}” price sheet (prices already include 10% sales coverage). Use “Reload from base” to reseed.`
+              : `Priced from ${priceCategories.find((c) => c.key === (proposal.base as { priceKey: PriceKey }).priceKey)?.label || ''} pricing${proposal.state ? ` for ${proposal.state}` : ' (select the majority search state)'}. Rows with no category price use the “${fallbackSheet.name}” sheet price. Use “Reload from base” to reseed.`}
+          </p>
         ) : null}
         {alacarte || proposal.includeIndividual ? (
           <div className="space-y-2" data-individual-table>
@@ -751,9 +793,10 @@ export default function MultiPackageProposalBuilder({ items, sheets: initialShee
         </div>
         )}
         <div className="mt-6 flex flex-wrap gap-3">
-          <button type="button" disabled={!sectionCount} onClick={openPreview} className="rounded-md bg-[#17843f] px-6 py-3 text-sm font-bold text-white hover:bg-[#116b32] disabled:bg-gray-300">Preview proposal</button>
+          <button type="button" disabled={!sectionCount || needsType} onClick={openPreview} className="rounded-md bg-[#17843f] px-6 py-3 text-sm font-bold text-white hover:bg-[#116b32] disabled:bg-gray-300">Preview proposal</button>
           {alacarte ? null : <button type="button" disabled={busy} onClick={savePackagesAsSheets} className={btn}>Save packages as new price sheet(s)</button>}
         </div>
+        {needsType ? <p className="mt-2 text-xs font-bold text-amber-700" data-needs-company-type>Choose the company type in Proposal setup before previewing.</p> : null}
       </section>
     </div>
   );
