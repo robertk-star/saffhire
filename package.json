@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "check": "tsc --noEmit",
-    "test:proposals": "npx --yes tsx --test tests/proposalBuilder.test.ts tests/proposalCoverageOnce.test.ts"
+    "test:proposals": "npx --yes tsx --test tests/proposalBuilder.test.ts tests/proposalCoverageOnce.test.ts tests/proposalCompanyType.test.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

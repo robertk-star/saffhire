@@ -35,8 +35,10 @@ const sheet: BaseSheet = {
 
 test('category catalog uses the selected state and price column', () => {
   const cat = buildCatalog({ kind: 'category', priceKey: 'staffing_price' }, [sheet], items, 'Texas');
-  assert.equal(cat.length, 2);
-  assert.deepEqual(cat.map((c) => c.basePrice), [6, 5]);
+  // 2 state items + the seed sheet's minimum-package items with no category price (Oct 29 2026).
+  assert.equal(cat.length, 4);
+  assert.deepEqual(cat.map((c) => c.basePrice), [6, 5, 5, 0]);
+  assert.deepEqual(cat.slice(2).map((c) => [c.label, c.included]), [['Social Security Trace', false], ['Sex Offender Registry', true]]);
   assert.equal(buildCatalog({ kind: 'category', priceKey: 'staffing_price' }, [sheet], items, '').length, 0);
 });
 
@@ -156,8 +158,11 @@ test('coverage seed sheet: lookup by name, graceful fallback, no double coverage
   const direct = mk('d', 'SaffHire Direct Pricing', '$5.00');
   const cov = { ...mk('c', 'Staffing + 10% Sales Coverage', '$6.05'), includes_sales_coverage: true };
   const other = { ...mk('o', 'Church Pricing (+10%)', '$7.00'), includes_sales_coverage: true };
-  assert.equal(findIndividualSeedSheet([direct, other, cov])?.id, 'c');
-  assert.equal(findIndividualSeedSheet([direct, other])?.id, 'o');
+  // Oct 29 2026 (company type pricing): the seed sheet never already includes the 10%; "Saffhire Pricing" first.
+  const saffhire = mk('s', 'Saffhire Pricing', '$5.00');
+  assert.equal(findIndividualSeedSheet([direct, other, cov, saffhire])?.id, 's');
+  assert.equal(findIndividualSeedSheet([direct, other, cov])?.id, 'd');
+  assert.equal(findIndividualSeedSheet([other, cov])?.id, 'o'); // only coverage sheets left: first one (legacy path)
   assert.equal(findIndividualSeedSheet([mk('x', 'Zeta', '$1'), direct])?.id, 'd');
   assert.equal(findIndividualSeedSheet([])?.id, undefined);
   assert.ok(sheetIncludesCoverage(cov) && !sheetIncludesCoverage(mk('n', 'X +10%', '$1')) && !sheetIncludesCoverage(direct));
@@ -165,7 +170,7 @@ test('coverage seed sheet: lookup by name, graceful fallback, no double coverage
   const base = { kind: 'category' as const, priceKey: 'staffing_price' as const };
   const cat = buildCatalog(base, [direct, cov], items, 'Texas');
   const map = new Map(cat.map((c) => [c.key, c]));
-  const rows = seedIndividual(base, [direct, cov], cat);
+  const rows = seedIndividual(base, [cov], cat); // only a coverage sheet exists (legacy drafts)
   assert.equal(rows[0].coverageIncluded, true);
   // Sheet price used as-is, checkbox on or off: no double coverage.
   assert.equal(individualUnit(rows[0], map, false), 6.05);
