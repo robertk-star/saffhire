@@ -47,7 +47,7 @@ test('sheet catalog parses prices and Included rows', () => {
   assert.equal(cat.find((c) => c.label === 'Federal Search')!.internalCost, 1.5);
 });
 
-test('10% sales coverage applies to client prices only; overrides are used as typed', () => {
+test('10% sales coverage applies to client prices only, once, including edited prices', () => {
   const cat = buildCatalog({ kind: 'category', priceKey: 'staffing_price' }, [sheet], items, 'Texas');
   const county = cat[0];
   const base = calcLine({ id: 'l', catalogKey: county.key, label: county.label, quantity: 2, priceOverride: null, included: false }, county, true);
@@ -56,8 +56,10 @@ test('10% sales coverage applies to client prices only; overrides are used as ty
   assert.equal(base.cost, 6); // cost not marked up
   assert.equal(base.edited, false);
   const edited = calcLine({ id: 'l', catalogKey: county.key, label: county.label, quantity: 2, priceOverride: 7.25, included: false }, county, true);
-  assert.equal(edited.unit, 7.25);
-  assert.equal(edited.total, 14.5);
+  assert.equal(edited.unit, 7.98); // 7.25 typed, +10% once
+  assert.equal(edited.total, 15.96);
+  const editedOff = calcLine({ id: 'l', catalogKey: county.key, label: county.label, quantity: 2, priceOverride: 7.25, included: false }, county, false);
+  assert.equal(editedOff.unit, 7.25);
   assert.equal(edited.edited, true);
   const included = calcLine({ id: 'l', catalogKey: county.key, label: county.label, quantity: 1, priceOverride: null, included: true }, county, true);
   assert.equal(included.total, 0);
@@ -79,12 +81,13 @@ test('totals per package and overall; client preview has no cost or profit', () 
   p.packages[1].lines[0].priceOverride = 10;
   const t = proposalTotals(p, map);
   assert.equal(t.perPackage[0].total, 12.1);
-  assert.equal(t.perPackage[1].total, 15.5);
-  assert.equal(t.total, 27.6);
+  assert.equal(t.perPackage[1].total, 16.5); // edited 10 -> 11 (+10% once) + Federal 5.5
+  assert.equal(t.total, 28.6);
   const preview = buildClientPreview(p, map, 'Staffing pricing');
   const json = JSON.stringify(preview);
   assert.ok(!/cost|profit|internal/i.test(json), 'client preview must not include internal fields');
-  assert.equal(preview.grandTotal, 27.6);
+  assert.equal(preview.grandTotal, 28.6);
+  assert.equal(preview.coverageNote, 'All prices include 10% sales coverage.');
   assert.equal(preview.packages[0].rows[0].total, 'Included');
   assert.equal(preview.packages[0].includes[0], 'Sex Offender Registry');
 });
@@ -123,7 +126,7 @@ test('à la carte only: no packages, no Service Packages section, individual tab
   const map = new Map(cat.map((c) => [c.key, c]));
   p.packages[0].lines = [{ id: '1', catalogKey: cat[0].key, label: cat[0].label, quantity: 1, priceOverride: null, included: false }];
   p.individual = seedIndividual(p.base, [sheet], cat, sheet);
-  p.individual[1].priceOverride = 9.99; // edited row
+  p.individual[1].priceOverride = 9.99; // edited row: +10% once -> 10.99
   const preview = buildClientPreview(p, map, 'Staffing pricing');
   assert.equal(preview.mode, 'alacarte');
   assert.equal(preview.packages.length, 0);
@@ -131,7 +134,7 @@ test('à la carte only: no packages, no Service Packages section, individual tab
   assert.ok(preview.sections.includes('cover') && preview.sections.includes('pricing'));
   assert.deepEqual(preview.individual, [
     { label: 'Federal Search', price: '$5.50' },
-    { label: '1 County Criminal Search', price: '$9.99' },
+    { label: '1 County Criminal Search', price: '$10.99' },
     { label: '3 County Criminal Searches', price: '$18.15' },
   ]);
   assert.equal(preview.grandTotal, 0);
@@ -176,7 +179,8 @@ test('coverage seed sheet: lookup by name, graceful fallback, no double coverage
   assert.deepEqual(coverageWarnings({ base, salesCoverage: false, individual: rows }, [cov]), []);
   assert.equal(coverageWarnings({ base, salesCoverage: true, individual: dRows }, [direct]).length, 0);
   assert.match(coverageWarnings({ base, salesCoverage: true, individual: rows }, [cov])[0], /already includes 10%/);
-  assert.match(coverageWarnings({ base: { kind: 'sheet', sheetId: 'c' }, salesCoverage: true, individual: [] }, [cov])[0], /applied twice/);
+  // A coverage-inclusive base sheet no longer warns: the checkbox is locked and no second multiplier is applied.
+  assert.deepEqual(coverageWarnings({ base: { kind: 'sheet', sheetId: 'c' }, salesCoverage: true, individual: [] }, [cov]), []);
   assert.equal(coverageWarnings({ base: { kind: 'sheet', sheetId: 'd' }, salesCoverage: true, individual: [] }, [direct]).length, 0);
   // Persisted through drafts
   const p = emptyProposal(base); p.individual = rows;

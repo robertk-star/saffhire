@@ -494,6 +494,8 @@ export default function MultiPackageProposalPreview() {
           <PageShell key={`pricing-${pageIndex}`} pageNumber={++pageNumber}>
             <h2 className="text-3xl font-black text-slate-900">{pageIndex === 0 ? 'Pricing' : 'Pricing (continued)'}</h2>
             {pageIndex === 0 && proposal.mode === 'alacarte' ? <p className="mt-2 text-sm text-slate-600">À la carte price list: order any service individually at the prices below.</p> : null}
+            {/* Sales coverage is noted once for the whole quote, on the first Pricing page only (never per package). */}
+            {pageIndex === 0 && proposal.coverageNote ? <p className="mt-2 text-sm text-slate-600" data-coverage-note>{proposal.coverageNote}</p> : null}
             {blocks.map((block, blockIndex) => {
               if (block.kind === 'package') {
                 const pkg = proposal.packages[block.index];
