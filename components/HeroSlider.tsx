@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
@@ -28,112 +28,70 @@ const slides = [
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
-  // The first slide's text renders fully visible on first paint (it is the LCP
-  // element), with no fade-in. Text transitions only run once slides change.
-  const [hasChanged, setHasChanged] = useState(false);
-  // Only the first slide's image is in the initial HTML; the others load after
-  // the page has finished loading so they don't compete with the LCP image.
-  const [loadRest, setLoadRest] = useState(false);
+  // Only the first image is in the initial HTML. Later slides load when chosen.
+  const [loaded, setLoaded] = useState<number[]>([0]);
 
-  useEffect(() => {
-    const start = () => setLoadRest(true);
-    if (document.readyState === "complete") {
-      const t = setTimeout(start, 1500);
-      return () => clearTimeout(t);
-    }
-    const onLoad = () => setTimeout(start, 1500);
-    window.addEventListener("load", onLoad, { once: true });
-    return () => window.removeEventListener("load", onLoad);
-  }, []);
-
-  const goTo = useCallback(
-    (index: number) => {
-      if (animating || index === current) return;
-      setAnimating(true);
-      setHasChanged(true);
-      setCurrent(index);
-      setTimeout(() => setAnimating(false), 800);
-    },
-    [animating, current]
-  );
-
-  useEffect(() => {
-    if (!loadRest) return;
-    const timer = setInterval(() => {
-      goTo((current + 1) % slides.length);
-    }, 5500);
-    return () => clearInterval(timer);
-  }, [current, goTo, loadRest]);
+  const goTo = (index: number) => {
+    setLoaded((prev) => (prev.includes(index) ? prev : [...prev, index]));
+    setCurrent(index);
+  };
 
   return (
     <section style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#0f172a" }}>
       {slides.map((slide, i) => {
         const HeadingTag = (i === 0 ? "h1" : "h2") as "h1" | "h2";
+        const active = i === current;
         return (
-        <div
-          key={slide.id}
-          style={{ position: "absolute", inset: 0, opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0, transition: hasChanged ? "opacity 0.7s ease" : "none" }}
-        >
-          {(i === 0 || loadRest) && (
-            <Image
-              src={slide.image}
-              alt={slide.label}
-              fill
-              sizes="100vw"
-              quality={70}
-              priority={i === 0}
-              fetchPriority={i === 0 ? "high" : "low"}
-              style={{ objectFit: "cover", transform: i === current ? "scale(1.03)" : "scale(1)", transition: "transform 6s ease-out" }}
-            />
-          )}
           <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(to right, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.55) 50%, rgba(15,23,42,0.25) 100%)",
-            }}
-          />
-          <div style={{ position: "relative", zIndex: 10, height: "100%", display: "flex", alignItems: "center" }}>
-            <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", width: "100%" }}>
-              <div style={{ maxWidth: 680 }}>
-                <p
-                  style={{
-                    color: "#22c55e",
-                    fontFamily: "'Montserrat', sans-serif",
-                    letterSpacing: "0.15em",
-                    fontWeight: 700,
-                    fontSize: 14,
-                    marginBottom: 16,
-                    opacity: i === current ? 1 : 0,
-                    transform: i === current ? "translateY(0)" : "translateY(20px)",
-                    transition: hasChanged ? "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s" : "none",
-                  }}
-                >
-                  {slide.label}
-                </p>
-                <HeadingTag
-                  style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    color: "#fff",
-                    fontWeight: 900,
-                    fontSize: "clamp(32px, 5vw, 60px)",
-                    lineHeight: 1.1,
-                    margin: "0 0 32px",
-                    opacity: i === current ? 1 : 0,
-                    transform: i === current ? "translateY(0)" : "translateY(30px)",
-                    transition: hasChanged ? "opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s" : "none",
-                  }}
-                >
-                  {slide.title}
-                </HeadingTag>
-                <div
-                  style={{
-                    opacity: i === current ? 1 : 0,
-                    transform: i === current ? "translateY(0)" : "translateY(20px)",
-                    transition: hasChanged ? "opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s" : "none",
-                  }}
-                >
+            key={slide.id}
+            style={{ position: "absolute", inset: 0, opacity: active ? 1 : 0, zIndex: active ? 1 : 0 }}
+          >
+            {(i === 0 || loaded.includes(i)) && (
+              <Image
+                src={slide.image}
+                alt={slide.label}
+                fill
+                sizes="100vw"
+                quality={70}
+                priority={i === 0}
+                fetchPriority={i === 0 ? "high" : "low"}
+                style={{ objectFit: "cover" }}
+              />
+            )}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to right, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.55) 50%, rgba(15,23,42,0.25) 100%)",
+              }}
+            />
+            <div style={{ position: "relative", zIndex: 10, height: "100%", display: "flex", alignItems: "center" }}>
+              <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", width: "100%" }}>
+                <div style={{ maxWidth: 680 }}>
+                  <p
+                    style={{
+                      color: "#22c55e",
+                      fontFamily: "'Montserrat', sans-serif",
+                      letterSpacing: "0.15em",
+                      fontWeight: 700,
+                      fontSize: 14,
+                      marginBottom: 16,
+                    }}
+                  >
+                    {slide.label}
+                  </p>
+                  <HeadingTag
+                    style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      color: "#fff",
+                      fontWeight: 900,
+                      fontSize: "clamp(32px, 5vw, 60px)",
+                      lineHeight: 1.1,
+                      margin: "0 0 32px",
+                    }}
+                  >
+                    {slide.title}
+                  </HeadingTag>
                   <a
                     href="/#contact"
                     className="btn-green"
@@ -146,7 +104,6 @@ export default function HeroSlider() {
               </div>
             </div>
           </div>
-        </div>
         );
       })}
       <div style={{ position: "absolute", bottom: 32, right: 32, zIndex: 20, display: "flex", gap: 12 }}>

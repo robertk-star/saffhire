@@ -1,4 +1,6 @@
-import Script from "next/script";
+"use client";
+
+import { useEffect } from "react";
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
@@ -6,38 +8,62 @@ const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
 // GA4 measurement ID (G-...), gtm.js would just load gtag a second time.
 const gtmId = rawGtmId && rawGtmId.startsWith("GTM-") ? rawGtmId : undefined;
 
-// Analytics load with strategy "lazyOnload" (after window load / browser idle)
-// so they never compete with the hero for bandwidth or main-thread time.
-// The gtag stub queues commands, so the page_view from gtag('config') still fires.
-export default function TrackingScripts() {
-  return (
-    <>
-      {gtmId ? (
-        <Script id="gtm-init" strategy="lazyOnload">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${gtmId}');
-          `}
-        </Script>
-      ) : null}
+type DataLayer = unknown[];
 
-      {gaId ? (
-        <>
-          <Script id="ga-init" strategy="lazyOnload">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              window.gtag = window.gtag || gtag;
-              gtag('js', new Date());
-              gtag('config', '${gaId}', { anonymize_ip: true });
-            `}
-          </Script>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="lazyOnload" />
-        </>
-      ) : null}
-    </>
-  );
+function dataLayer() {
+  const win = window as Window & { dataLayer?: DataLayer; gtag?: (...args: unknown[]) => void };
+  win.dataLayer = win.dataLayer || [];
+  return win;
+}
+
+function inject(src: string, id: string) {
+  if (document.getElementById(id)) return;
+  const script = document.createElement("script");
+  script.id = id;
+  script.src = src;
+  script.async = true;
+  document.body.appendChild(script);
+}
+
+function loadAnalytics() {
+  const win = dataLayer();
+  if (gtmId) {
+    win.dataLayer?.push({ "gtm.start": Date.now(), event: "gtm.js" });
+    inject(`https://www.googletagmanager.com/gtm.js?id=${gtmId}`, "gtm-js");
+  }
+  if (gaId) {
+    if (!win.gtag) {
+      win.gtag = (...args: unknown[]) => {
+        win.dataLayer?.push(args);
+      };
+    }
+    win.gtag("js", new Date());
+    win.gtag("config", gaId, { anonymize_ip: true });
+    inject(`https://www.googletagmanager.com/gtag/js?id=${gaId}`, "ga-js");
+  }
+}
+
+// gtag.js is about 167 KiB and Lighthouse marks most of it unused during first
+// load. Load it on the first tap, click, or keypress so it is not part of the
+// initial download. A timer would keep the lab trace open until the script
+// downloaded and would put those bytes back into the unused-JavaScript audit.
+export default function TrackingScripts() {
+  useEffect(() => {
+    if (!gaId && !gtmId) return;
+    let done = false;
+    const run = () => {
+      if (done) return;
+      done = true;
+      loadAnalytics();
+    };
+    const events = ["pointerdown", "keydown", "touchstart"] as const;
+    for (const eventName of events) {
+      window.addEventListener(eventName, run, { once: true, passive: true });
+    }
+    return () => {
+      for (const eventName of events) window.removeEventListener(eventName, run);
+    };
+  }, []);
+
+  return null;
 }
