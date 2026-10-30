@@ -25,6 +25,9 @@ export function generateStaticParams() {
   return blogPosts.filter((post) => hasFileArticle(post.slug)).map((post) => ({ slug: post.slug }));
 }
 
+/** Document title only. The H1 stays the longer listing title. Includes the brand suffix so the layout template is not applied twice. */
+const adverseActionTwoStepTitleTag = "FCRA Adverse Action: One Notice Isn't Enough | SaffHire";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const dbPost = await getPublishedDbBlogPostBySlug(slug);
@@ -36,6 +39,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const post = blogPosts.find((item) => item.slug === slug);
+  if (slug === 'fcra-adverse-action-two-step-notice-requirements-2026') {
+    return {
+      title: { absolute: adverseActionTwoStepTitleTag },
+      description: post?.excerpt || 'SaffHire background screening article.',
+    };
+  }
   return { title: post?.title || 'Background Screening Blog', description: post?.excerpt || 'SaffHire background screening article.' };
 }
 
