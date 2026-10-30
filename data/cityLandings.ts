@@ -27,10 +27,10 @@ export type CityLanding = {
   serviceArea: string;
 };
 
-const minutesBullet =
+export const minutesBullet =
   "These searches usually return in minutes: Motor Vehicle Reports, Sex Offender registry searches, Global Security Watch List searches, SSN traces, state database searches, and National Criminal Database searches.";
 
-const serviceCards: CityCard[] = [
+export const serviceCards: CityCard[] = [
   {
     title: "Criminal Background Checks",
     href: "/criminal-background-checks",
@@ -63,7 +63,7 @@ const serviceCards: CityCard[] = [
   },
 ];
 
-const sharedRelated: CityLink[] = [
+export const sharedRelated: CityLink[] = [
   { label: "Staffing agency background checks", href: "/industries/staffing" },
   { label: "FAQ", href: "/faq" },
   { label: "Texas background checks", href: "/background-checks-texas" },
