@@ -11,6 +11,7 @@ import TruckingBadHiringBlog from "./TruckingBadHiringBlog";
 import WarehousingHiringMistakesBlog from "./WarehousingHiringMistakesBlog";
 import { fcraBasicsEntry } from "./blog/FcraBasicsForEmployers";
 import { criminalCheckTypesEntry } from "./blog/TypesOfCriminalBackgroundChecks";
+import { adverseTwoStepEntry } from "./blog/FcraAdverseActionTwoStep";
 
 
 // ─── Shared Helper Components ─────────────────────────────────────────────────
@@ -1561,6 +1562,7 @@ function HowSaffHireFollowsFCRA() {
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const blogPostRegistry: BlogPostMeta[] = [
+  adverseTwoStepEntry,
   fcraBasicsEntry,
   criminalCheckTypesEntry,
   {

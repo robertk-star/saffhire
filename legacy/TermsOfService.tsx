@@ -22,7 +22,7 @@ const sections = [
     title: "2. User Responsibilities",
     content: [
       "Employer clients who use SaffHire's background screening services are responsible for ensuring that their use of the Services complies with all applicable laws, including the Fair Credit Reporting Act (FCRA), the Equal Employment Opportunity Commission (EEOC) guidance on the use of criminal records in employment decisions, and all applicable state and local ban-the-box, fair chance, and anti-discrimination laws.",
-      "Employer clients are responsible for obtaining proper written authorization from applicants before initiating a background check, providing required disclosures in the format required by law, and following all adverse action procedures required by the FCRA if a background check result influences a hiring decision. SaffHire provides tools and guidance to assist with compliance, but the employer client remains solely responsible for its own compliance obligations.",
+      "Employer clients are responsible for obtaining proper written authorization from applicants before initiating a background check and for providing required disclosures in the format required by law. If a background check influences a hiring decision, the employer, not SaffHire, must follow the FCRA adverse action procedures, including any pre-adverse action notice and any adverse action notice. SaffHire does not send, handle, or manage those notices. The employer client remains solely responsible for its own compliance obligations.",
       "Users are responsible for maintaining the confidentiality of their account credentials and for all activity that occurs under their account. You agree to notify SaffHire immediately of any unauthorized use of your account.",
     ],
   },

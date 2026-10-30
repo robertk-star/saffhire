@@ -46,7 +46,7 @@ export const openKnowledgePages: OpenKnowledgePage[] = [
     slug: 'compliance-and-claim-rules',
     title: 'SaffHire Compliance and Claim Rules',
     description: 'Language rules for describing SaffHire screening services without making legal guarantees.',
-    markdown: `# Compliance and Claim Rules\n\nSaffHire content should be FCRA-aware and EEOC-aware. The company supports FCRA-compliant screening workflows, but does not offer legal advice or legal guarantees.\n\n## Preferred language\n- FCRA-compliant background screening services\n- Compliance-aware screening workflows\n- Helps employers make informed hiring decisions\n- Supports safer hiring decisions\n- Employers should follow applicable federal, state, and local requirements\n\n## Avoid\n- Guaranteed compliance\n- We eliminate hiring risk\n- We guarantee safe hires\n- This search finds every record\n- We decide if someone should be hired`,
+    markdown: `# Compliance and Claim Rules\n\nSaffHire content should be FCRA-aware and EEOC-aware. The company supports FCRA-compliant screening workflows, but does not offer legal advice or legal guarantees.\n\n## Preferred language\n- FCRA-compliant background screening services\n- Compliance-aware screening workflows\n- Helps employers make informed hiring decisions\n- Supports safer hiring decisions\n- Employers should follow applicable federal, state, and local requirements\n\n## Avoid\n- Guaranteed compliance\n- We eliminate hiring risk\n- We guarantee safe hires\n- This search finds every record\n- We decide if someone should be hired\n- SaffHire sends, handles, or manages pre-adverse or adverse action notices. The employer sends those notices`,
   },
   {
     slug: 'content-and-seo-guidelines',

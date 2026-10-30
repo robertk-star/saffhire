@@ -26,9 +26,13 @@ Avoid:
 - We decide if someone should be hired
 - You can reject an applicant based only on this result
 
-## No adverse action, I-9 or E-Verify content
+## Adverse action, I-9 and E-Verify
 
-SaffHire does not provide adverse action, I-9 or E-Verify services. Do not write content about them. If content discusses consumer reports, applicant rights, disputes, or FCRA disclosures, add careful disclaimers that the information is general and not legal advice.
+Educational content about the FCRA adverse action process is allowed. It must never say or suggest that SaffHire sends, handles, or manages pre-adverse or adverse action notices for clients. Those notices are always the employer's responsibility.
+
+Do not write I-9 or E-Verify content. SaffHire does not provide those services.
+
+If content discusses consumer reports, applicant rights, disputes, or FCRA disclosures, add a disclaimer that the information is general and not legal advice.
 
 ## Criminal record caution
 

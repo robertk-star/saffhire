@@ -160,11 +160,12 @@ export default function PrivacyPolicy() {
                 afforded to them under the Act.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Applicants have the right to request a copy of their consumer report, to dispute
-                inaccurate or incomplete information, and to be notified when an adverse action
-                is taken against them based on the contents of a background check report. These
-                rights are described in the Summary of Your Rights Under the FCRA, which is
-                provided to applicants as part of the screening process.
+                Applicants have the right to request a copy of their consumer report and to dispute
+                inaccurate or incomplete information. If an employer takes adverse action based on
+                a background check, the employer, not SaffHire, must send the pre-adverse action
+                notice and the adverse action notice. SaffHire does not send, handle, or manage
+                those notices. Those rights are described in A Summary of Your Rights Under the
+                Fair Credit Reporting Act.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 To the extent applicable, SaffHire also complies with state privacy laws,
