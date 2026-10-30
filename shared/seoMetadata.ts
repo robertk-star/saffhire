@@ -126,11 +126,11 @@ export const seoMetadata: Record<string, PageMetadata> = {
     keywords: "hospitality background screening, retail background check",
   },
   "/industries/energy": {
-    title: "Energy Industry Background Screening - Compliance & Safety",
-    description: "Background screening for energy sector companies, with safety-focused packages and FCRA-compliant screening workflows.",
+    title: "Energy Industry Background Check Solutions",
+    description: "Employee screening for the energy industry from Veteran-Owned SaffHire in Frisco, TX. Background checks for energy employers nationwide.",
     ogImage: "https://saffhire.com/og-image-energy.jpg",
     ogImageAlt: "Energy Screening",
-    keywords: "energy industry background screening, oil and gas screening",
+    keywords: "employee screening for energy industry, background check for energy industry, energy industry background check solutions",
   },
   "/industries/education": {
     title: "Education Background Screening - Schools & Universities",

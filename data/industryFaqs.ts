@@ -103,21 +103,25 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
     ],
   },
   "/industries/energy": {
-    title: "Energy Industry Background Screening FAQ",
+    title: "Energy Industry Background Check FAQ",
     items: [
       {
-        question: "What checks do energy and oilfield employers usually run?",
+        question: "What is employee screening for the energy industry?",
         answer:
-          "Common packages combine criminal searches, drug and alcohol testing, employment verification and, for driving roles, an MVR. Packages are customized to each client's needs and any site or contract requirements.",
+          "Employee screening for the energy industry is the set of checks an employer orders before someone works at a plant, field site, or in a vehicle. SaffHire is Veteran-Owned, headquartered in Frisco, TX, and provides that screening for energy employers nationwide.",
       },
       {
-        question: "Do you offer drug testing for energy employers?",
+        question: "What does a background check for the energy industry include?",
         answer:
-          "Yes. SaffHire offers pre-employment, random, post-accident and reasonable-suspicion drug testing. Drug screens are ordered through the SaffHire portal, performed at Labcorp facilities, and results are delivered through the portal. DOT and non-DOT testing is available.",
+          "A background check for the energy industry commonly includes criminal searches, drug and alcohol testing, and employment verification. Driving roles can add an MVR. Licensed trades can add credential checks. Packages are customized to the role and to any site requirement.",
       },
-      { question: "Can you screen workers hired for sites in other states?", answer: NATIONWIDE },
-      { question: "How long does screening take?", answer: INSTANT },
-      { question: "Are there extra fees on some searches?", answer: FEES },
+      {
+        question: "What energy industry background check solutions does SaffHire offer?",
+        answer:
+          "Energy industry background check solutions include criminal searches, pre-employment, random, post-accident, and reasonable-suspicion drug testing (DOT and non-DOT), and employment verification. Drug screens are ordered in the SaffHire portal, collected at Labcorp, and returned through the portal.",
+      },
+      { question: "Can energy employers screen workers hired for sites in other states?", answer: NATIONWIDE },
+      { question: "How long does an energy industry background check take?", answer: INSTANT },
     ],
   },
   "/industries/education": {
