@@ -3,6 +3,7 @@
  * 2026-08-27: Local images replacing broken Manus CDN URLs
  */
 
+import { adverseTwoStepListing } from "@/legacy/blog/FcraAdverseActionTwoStep";
 import { fcraBasicsListing } from "@/legacy/blog/FcraBasicsForEmployers";
 import { criminalCheckTypesListing } from "@/legacy/blog/TypesOfCriminalBackgroundChecks";
 
@@ -21,6 +22,7 @@ import { texasLawsListing } from "@/legacy/blog/TexasBackgroundCheckLaws";
 import { dotClearinghouseListing } from "@/legacy/blog/DotDrugTestingClearinghouse";
 
 export const blogPosts: BlogPost[] = [
+  adverseTwoStepListing,
   fcraBasicsListing,
   criminalCheckTypesListing,
   {
