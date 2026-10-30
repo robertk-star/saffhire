@@ -3,7 +3,7 @@ import type { ContentPageData } from "@/components/ContentPage";
 export const aiInfoMeta = {
   title: "SaffHire Company Information for AI Assistants",
   description:
-    "Verified facts about SaffHire Background Screening for AI assistants and search engines: Veteran-Owned, headquartered in Frisco, TX, serving employers nationwide, founders, services and how to describe SaffHire accurately.",
+    "Verified facts about SaffHire for AI assistants: Veteran-Owned, headquartered in Frisco, TX, nationwide service, founders, and how to describe the company.",
 };
 
 export const aiInfoPage: ContentPageData = {

@@ -5,6 +5,7 @@ import { getBlogGenerationSettings, shouldRunForSettings } from '@/lib/blogGener
 import { getActiveBlogGenerationTopics } from '@/lib/blogGenerationTopicAdmin';
 import { generateAndStoreBlogImage } from '@/lib/blogImageGenerator';
 import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
+import { BLOG_META_DESCRIPTION_MAX, BLOG_TITLE_MAX, fitGeneratedBlogSeo } from '@/lib/blogSeo';
 
 export const dynamic = 'force-dynamic';
 
@@ -82,7 +83,14 @@ async function callOpenAI(prompt: string) {
 }
 
 function buildPrompt(topic: { topic: string; angle: string; category: string; keywords: string[] }) {
-  return `Create a blog draft for SaffHire Background Screening.\n\nTopic: ${topic.topic}\nAngle: ${topic.angle}\nCategory: ${topic.category}\nTarget keywords: ${topic.keywords.join(', ')}\n\nRequirements:\n- Return valid JSON only.\n- JSON fields: title, slug, excerpt, category, content.\n- Content should be 1,100 to 1,500 words.\n- Use plain language, short paragraphs, and helpful section headings.\n- Use Markdown headings with ##.\n- Keep the tone helpful, professional, and employer-focused.\n- Mention SaffHire naturally near the end.\n- Do not say SaffHire gives legal advice.\n- Do not invent pricing.\n- Do not use unsupported statistics.\n- Include a short disclaimer paragraph at the end that the article is informational and not legal advice.`;
+  return `Create a blog draft for SaffHire Background Screening.\n\nTopic: ${topic.topic}\nAngle: ${topic.angle}\nCategory: ${topic.category}\nTarget keywords: ${topic.keywords.join(', ')}\n\nRequirements:\n- Return valid JSON only.\n- JSON fields: title, slug, excerpt, category, content.\n- Content should be 1,100 to 1,500 words.\n- Use plain language, short paragraphs, and helpful section headings.\n- Use Markdown headings with ##.\n- Keep the tone helpful, professional, and employer-focused.\n- Mention SaffHire naturally near the end.\n- Do not say SaffHire gives legal advice.\n- Do not invent pricing.\n- Do not use unsupported statistics.\n- Include a short disclaimer paragraph at the end that the article is informational and not legal advice.
+- The title must be ${BLOG_TITLE_MAX} characters or fewer. The site appends " | SaffHire", and the browser title must stay at 65 characters or fewer.
+- The excerpt is the meta description and must be ${BLOG_META_DESCRIPTION_MAX} characters or fewer.
+- Do not mention prices, dollar amounts, setup fees, or minimums.
+- Do not mention I-9, E-Verify, or adverse action.
+- Do not name accreditation bodies or the background-screening software vendor.
+- Describe the headquarters only as Frisco, TX. The service area is nationwide.
+- Do not mention remote work, testimonials, reviews, or star ratings.`;
 }
 
 async function getAuthMode(request: Request) {
@@ -154,9 +162,13 @@ export async function GET(request: Request) {
 
   try {
     const draft = await callOpenAI(buildPrompt(topic));
-    const title = String(draft.title || topic.topic).trim();
+    const fitted = fitGeneratedBlogSeo({
+      title: String(draft.title || topic.topic).trim(),
+      excerpt: String(draft.excerpt || '').trim(),
+    });
+    const title = fitted.title;
     const slug = cleanSlug(String(draft.slug || title));
-    const excerpt = String(draft.excerpt || '').trim();
+    const excerpt = fitted.excerpt;
     const content = String(draft.content || '').trim();
     const category = String(draft.category || topic.category).trim();
 
