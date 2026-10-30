@@ -1,4 +1,5 @@
 const path = require('path');
+const { gscRedirects } = require('./data/gscRedirects');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -62,6 +63,14 @@ const nextConfig = {
       { source: '/index.php/services/:industry(healthcare|education|staffing|transportation|energy|hospitality)', destination: '/industries/:industry', statusCode: 301 },
       { source: '/index.php', destination: '/', statusCode: 301 },
       { source: '/index.php/:path*', destination: '/:path*', statusCode: 301 },
+
+      // GSC Oct 30 2026: soft 404 blog URLs and indexed template 404s.
+      // Do not add /blog/fcra-adverse-action-two-step-notice-requirements-2026 here.
+      ...gscRedirects.map((redirect) => ({
+        source: redirect.source,
+        destination: redirect.destination,
+        statusCode: 301,
+      })),
     ];
   },
   experimental: {
