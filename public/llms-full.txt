@@ -44,7 +44,16 @@ Confirms prior employers, dates of employment and job titles. Timing depends on 
 Confirms degrees, diplomas and attendance with the school. Timing depends on the school.
 
 ### Drug screening — https://saffhire.com/drug-screening
-Pre-employment, random, post-accident and reasonable-suspicion drug testing, DOT and non-DOT, with instant result options. Employers order drug screens through the SaffHire portal; testing is performed at Labcorp facilities; results are delivered to the employer through the SaffHire portal.
+Pre-employment, random, post-accident and reasonable-suspicion drug testing, DOT and non-DOT, with instant result options. Employers order drug screens through the SaffHire portal; testing is performed at Labcorp facilities; results are delivered to the employer through the SaffHire portal. See also https://saffhire.com/instant-drug-testing and https://saffhire.com/random-drug-testing.
+
+### Federal criminal background checks — https://saffhire.com/federal-criminal-background-checks
+Federal court searches for employment screening.
+
+### Global watch list search — https://saffhire.com/global-watch-list-search
+Watch list screening. Usually returns in minutes.
+
+### Texas background checks — https://saffhire.com/background-checks-texas
+Texas employer rules and searches. Headquarters remain Frisco, TX. Service is nationwide. Employer guide: https://saffhire.com/blog/texas-background-check-laws-employers.
 
 ### MVR checks — https://saffhire.com/mvr-checks
 Motor Vehicle Reports from the state, such as license status and driving history. Usually return in minutes. State fees may apply.

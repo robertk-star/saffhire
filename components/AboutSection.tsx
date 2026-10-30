@@ -27,8 +27,13 @@ export default function AboutSection() {
                 mission, adapted quickly, and found ways to continue serving our clients.
               </p>
               <p>
-                Headquartered in Frisco, Texas, SaffHire serves clients across all 50 states with a
-                commitment to practical, compliance-aware background screening.
+                Headquartered in Frisco, TX, SaffHire is Veteran-Owned and serves employers nationwide.
+                Employers can read <a className="text-green-700 underline" href="/background-checks-texas">Texas background checks</a>,{" "}
+                <a className="text-green-700 underline" href="/federal-criminal-background-checks">federal criminal searches</a>,{" "}
+                <a className="text-green-700 underline" href="/global-watch-list-search">global watch list search</a>,{" "}
+                <a className="text-green-700 underline" href="/instant-drug-testing">instant drug testing</a>,{" "}
+                <a className="text-green-700 underline" href="/random-drug-testing">random drug testing</a>, and our{" "}
+                <a className="text-green-700 underline" href="/blog/texas-background-check-laws-employers">Texas background check laws guide</a>.
               </p>
             </div>
 

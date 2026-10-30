@@ -176,7 +176,7 @@ export default function CompanyInformationPage() {
                   <div>
                     <dt className="font-bold text-slate-950">Website</dt>
                     <dd className="mt-1">
-                      <a className="text-green-700 hover:underline" href="https://www.saffhire.com">www.saffhire.com</a>
+                      <a className="text-green-700 hover:underline" href="https://saffhire.com">saffhire.com</a>
                     </dd>
                   </div>
                   <div>
