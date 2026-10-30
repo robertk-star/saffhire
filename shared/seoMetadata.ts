@@ -190,13 +190,13 @@ export const seoMetadata: Record<string, PageMetadata> = {
   },
   "/background-screening-mckinney-tx": {
     title: "McKinney, TX Background Screening for Employers",
-    description: "Background screening for McKinney, TX employers. SaffHire is headquartered in Frisco, TX and serves McKinney employers and employers nationwide.",
+    description: "McKinney, TX employers order criminal searches, verifications, drug screens and MVRs from Veteran-Owned SaffHire, headquartered in Frisco, TX, nationwide.",
     ogImageAlt: "Background Screening in McKinney, TX",
     keywords: "McKinney TX background screening, background check McKinney Texas, McKinney employer screening",
   },
   "/background-screening-allen-tx": {
     title: "Allen, TX Background Screening for Employers",
-    description: "Background screening for Allen, TX employers. SaffHire is headquartered in Frisco, TX and serves Allen employers and employers nationwide.",
+    description: "Allen, TX employers screen candidates with Veteran-Owned SaffHire. Headquarters remain in Frisco, TX, and the service covers employers nationwide.",
     ogImageAlt: "Background Screening in Allen, TX",
     keywords: "Allen TX background screening, background check Allen Texas, Allen employer screening",
   },

@@ -4,6 +4,7 @@ import DatabaseBlogPostClient from '@/components/DatabaseBlogPostClient';
 import { blogPosts, type BlogPost } from '@/data/blogPosts';
 import { blogPostRegistry } from '@/legacy/blogRegistry';
 import { getPublishedDbBlogPostBySlug, type PublicBlogPost } from '@/lib/blogDrafts';
+import { blogDocumentMeta } from '@/lib/blogSeo';
 import { blogPostingSchema } from '@/lib/structuredData';
 
 export const dynamic = 'force-dynamic';
@@ -27,7 +28,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const dbPost = await getPublishedDbBlogPostBySlug(slug);
-  if (dbPost) return { title: dbPost.title, description: dbPost.excerpt };
+  if (dbPost) {
+    const meta = blogDocumentMeta(dbPost.slug, dbPost.title, dbPost.excerpt);
+    // Overrides set an absolute title so the layout template cannot push the tag past 65 characters.
+    if (meta.overridden) return { title: { absolute: meta.titleTag }, description: meta.description };
+    return { title: meta.title, description: meta.description };
+  }
 
   const post = blogPosts.find((item) => item.slug === slug);
   return { title: post?.title || 'Background Screening Blog', description: post?.excerpt || 'SaffHire background screening article.' };
