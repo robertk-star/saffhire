@@ -120,7 +120,7 @@ export async function sendPortalInvite(input: { email: string; username: string;
   const key = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
   if (!key || !from) return false;
-  const loginUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com'}/driver-pipeline/login`;
+  const loginUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace(/\/$/, '').replace('https://www.saffhire.com', 'https://saffhire.com')}/driver-pipeline/login`;
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },

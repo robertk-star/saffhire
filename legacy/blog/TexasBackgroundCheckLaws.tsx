@@ -60,7 +60,8 @@ function TexasLawsArticle() {
       </Answer>
 
       <p>
-        This guide covers Texas-specific rules only. For the federal basics of disclosure and authorization, see our{" "}
+        This guide covers Texas-specific rules only. The companion page for ordering is{" "}
+        <L href="/background-checks-texas">Texas background checks</L>. For the federal basics of disclosure and authorization, see our{" "}
         <L href="/blog/fcra-basics-for-employers">FCRA basics primer</L>. For a nationwide view of fair chance laws, see our{" "}
         <L href="/blog/ban-the-box-laws-by-state-employer-guide">ban-the-box guide</L>.
       </p>

@@ -564,7 +564,7 @@ export default function ProposalPreview() {
               </div>
               <div>
                 <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Website</div>
-                <div className="mt-1 font-bold text-slate-900">www.saffhire.com</div>
+                <div className="mt-1 font-bold text-slate-900">saffhire.com</div>
               </div>
             </div>
           </PageShell>

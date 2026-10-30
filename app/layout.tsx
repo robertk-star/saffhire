@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { organizationSchema, websiteSchema } from '@/lib/structuredData';
+import { SITE_URL } from '@/lib/siteUrl';
 import TrackingScripts from '@/components/TrackingScripts';
 import ConversionEventBridge from '@/components/ConversionEventBridge';
 import ChataraiWidget from '@/components/ChataraiWidget';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'SaffHire Background Pre-Employment Screening',
     template: '%s | SaffHire',

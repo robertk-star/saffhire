@@ -11,7 +11,7 @@ async function sendReset(email: string, displayName: string, token: string) {
   const key = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
   if (!key || !from) return false;
-  const link = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.saffhire.com'}/driver-pipeline/reset?token=${token}`;
+  const link = `${(process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace(/\/$/, '').replace('https://www.saffhire.com', 'https://saffhire.com')}/driver-pipeline/reset?token=${token}`;
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },

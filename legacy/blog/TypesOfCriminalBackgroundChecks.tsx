@@ -203,9 +203,9 @@ function TypesOfCriminalChecksArticle() {
         <p>A practical way to decide is to start with a baseline and add searches based on risk:</p>
         <Bullets
           items={[
-            <><strong>Baseline for most roles:</strong> SSN trace to identify address history, national criminal database search, and county searches in the counties the applicant has lived in during your lookback period. A sex offender registry search and global watch list search are commonly added and can return in minutes.</>,
+            <><strong>Baseline for most roles:</strong> SSN trace to identify address history, national criminal database search, and county searches in the counties the applicant has lived in during your lookback period. A sex offender registry search and <L href="/global-watch-list-search">global watch list search</L> are commonly added and can return in minutes.</>,
             <><strong>Add statewide searches</strong> when the state offers a reliable repository or when regulations for the role require one.</>,
-            <><strong>Add federal searches</strong> for roles with financial authority, access to sensitive data or federal contract work.</>,
+            <><strong>Add federal searches</strong> for roles with financial authority, access to sensitive data or federal contract work. See <L href="/federal-criminal-background-checks">federal criminal background checks</L>.</>,
             <><strong>Add role-specific checks</strong> such as <L href="/mvr-checks">MVR checks</L> for drivers (state fees may apply) or <L href="/healthcare-sanctions-oig-checks">healthcare sanctions and OIG checks</L> for healthcare roles.</>,
           ]}
         />
@@ -213,7 +213,7 @@ function TypesOfCriminalChecksArticle() {
           Apply the same package to everyone in the same role, document why, and remember that federal and state law limit
           how far back some records can be reported. Our <L href="/blog/fcra-basics-for-employers">FCRA basics primer</L>{" "}
           explains those rules, and our <L href="/criminal-background-checks">criminal background checks</L> page lists the
-          searches SaffHire offers.
+          searches SaffHire offers. Texas employers can also read <L href="/blog/texas-background-check-laws-employers">Texas background check laws</L>.
         </p>
       </Section>
 

@@ -127,6 +127,8 @@ function DrugTestTypesArticle() {
           Keep DOT and non-DOT programs separate. DOT forms and procedures should only be used for covered employees. For the
           full DOT picture, including Clearinghouse queries, see our{" "}
           <L href="/blog/dot-drug-testing-fmcsa-clearinghouse-guide">DOT drug testing and Clearinghouse guide</L>.
+          Non-DOT programs can use <L href="/instant-drug-testing">instant drug testing</L> for a fast preliminary screen, and{" "}
+          <L href="/random-drug-testing">random drug testing</L> when a written policy calls for unannounced tests.
         </p>
       </Section>
 

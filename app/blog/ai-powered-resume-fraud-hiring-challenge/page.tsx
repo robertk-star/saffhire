@@ -23,11 +23,11 @@ export default function Page() {
     publisher: {
       "@type": "Organization",
       name: "SaffHire Background Screening",
-      url: "https://www.saffhire.com",
+      url: "https://saffhire.com",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": "https://www.saffhire.com/blog/ai-powered-resume-fraud-hiring-challenge",
+      "@id": "https://saffhire.com/blog/ai-powered-resume-fraud-hiring-challenge",
     },
   };
 
