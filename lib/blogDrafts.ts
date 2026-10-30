@@ -33,11 +33,29 @@ export type PublicBlogPost = {
   readTime: string;
   date: string;
   publishedAt: string | null;
+  updatedAt: string | null;
   source: 'database';
 };
 
 function getPublicBlogImage(post: BlogDraft) {
   return post.image_url || getBlogImageForCategory(post.category);
+}
+
+function toPublicBlogPost(post: BlogDraft): PublicBlogPost {
+  return {
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    content: post.content,
+    category: post.category,
+    author: post.author,
+    image: getPublicBlogImage(post),
+    readTime: post.read_time,
+    date: post.published_at ? new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date(post.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+    publishedAt: post.published_at,
+    updatedAt: post.updated_at,
+    source: 'database',
+  };
 }
 
 export function isBlogAdminConfigured() {
@@ -85,19 +103,7 @@ export async function getPublishedDbBlogPosts() {
 
   return (data as BlogDraft[])
     .filter((post) => !isConsolidatedBlogSlug(post.slug))
-    .map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    excerpt: post.excerpt,
-    content: post.content,
-    category: post.category,
-    author: post.author,
-    image: getPublicBlogImage(post),
-    readTime: post.read_time,
-    date: post.published_at ? new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date(post.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-    publishedAt: post.published_at,
-    source: 'database' as const,
-  }));
+    .map(toPublicBlogPost);
 }
 
 export async function getPublishedDbBlogPostBySlug(slug: string) {
@@ -114,17 +120,5 @@ export async function getPublishedDbBlogPostBySlug(slug: string) {
   if (error || !data) return null;
   const post = data as BlogDraft;
 
-  return {
-    slug: post.slug,
-    title: post.title,
-    excerpt: post.excerpt,
-    content: post.content,
-    category: post.category,
-    author: post.author,
-    image: getPublicBlogImage(post),
-    readTime: post.read_time,
-    date: post.published_at ? new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date(post.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-    publishedAt: post.published_at,
-    source: 'database' as const,
-  };
+  return toPublicBlogPost(post);
 }

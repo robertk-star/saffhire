@@ -62,34 +62,6 @@ export default function BlogPost() {
 
   const { ArticleComponent } = registryEntry;
 
-  // Generate JSON-LD schema for the article
-  const schemaMarkup = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": postMeta.title,
-    "description": registryEntry.metaDescription,
-    "image": postMeta.image,
-    "datePublished": postMeta.date,
-    "author": {
-      "@type": "Organization",
-      "name": postMeta.author,
-      "url": "https://saffhire.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "SaffHire",
-      "url": "https://saffhire.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://saffhire.com/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://saffhire.com/blog/${slug}`
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white">
       <PageSEO
@@ -97,10 +69,6 @@ export default function BlogPost() {
         title={postMeta.title}
         description={registryEntry.metaDescription}
       />
-      {/* JSON-LD Schema Markup */}
-      <script type="application/ld+json">
-        {JSON.stringify(schemaMarkup)}
-      </script>
       <Navbar />
 
       {/* Hero */}

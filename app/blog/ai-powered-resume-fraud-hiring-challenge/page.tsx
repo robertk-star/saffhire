@@ -1,39 +1,30 @@
 import type { Metadata } from "next";
 import AIResumeFraudBlogClient from "@/components/AIResumeFraudBlogClient";
+import { blogPosts } from "@/data/blogPosts";
+import { blogPostingSchema } from "@/lib/structuredData";
 
-const title = "AI-Powered Resume Fraud: The New Hiring Challenge Employers Can’t Ignore";
-const description = "AI-generated resumes can make candidates look more qualified than they are. Learn how employers can use verification and background screening to reduce hiring risk.";
+const post = blogPosts.find((item) => item.slug === "ai-powered-resume-fraud-hiring-challenge");
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: post?.title,
+  description: post?.excerpt,
 };
 
 export default function Page() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: title,
-    description,
-    datePublished: "2026-05-25",
-    author: {
-      "@type": "Organization",
-      name: "SaffHire Compliance Team",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "SaffHire Background Screening",
-      url: "https://saffhire.com",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://saffhire.com/blog/ai-powered-resume-fraud-hiring-challenge",
-    },
-  };
+  const schema = post
+    ? blogPostingSchema({
+        slug: post.slug,
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        authorName: post.author,
+        image: post.image,
+      })
+    : null;
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {schema ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /> : null}
       <AIResumeFraudBlogClient />
     </>
   );

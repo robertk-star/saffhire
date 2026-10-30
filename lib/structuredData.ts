@@ -112,6 +112,78 @@ export function faqSchema(items: Array<{ question: string; answer: string }>) {
   };
 }
 
+const monthIndex: Record<string, string> = {
+  january: "01",
+  february: "02",
+  march: "03",
+  april: "04",
+  may: "05",
+  june: "06",
+  july: "07",
+  august: "08",
+  september: "09",
+  october: "10",
+  november: "11",
+  december: "12",
+};
+
+/** Listing dates ("May 21, 2026") and ISO timestamps both become ISO 8601. */
+export function toSchemaDate(value: string) {
+  const trimmed = value.trim();
+  if (/^\d{4}-\d{2}-\d{2}/.test(trimmed)) return trimmed;
+  const match = trimmed.match(/^([A-Za-z]+)\s+(\d{1,2}),\s+(\d{4})$/);
+  if (!match) return trimmed;
+  const month = monthIndex[match[1].toLowerCase()];
+  if (!month) return trimmed;
+  return `${match[3]}-${month}-${match[2].padStart(2, "0")}`;
+}
+
+function absoluteAsset(url: string | null | undefined) {
+  if (!url) return `${siteUrl}/images/saffhire-logo.png`;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return `${siteUrl}${url.startsWith("/") ? url : `/${url}`}`;
+}
+
+export function blogPostingSchema(input: {
+  slug: string;
+  headline: string;
+  description?: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName: string;
+  image?: string | null;
+}) {
+  const published = toSchemaDate(input.datePublished);
+  const modifiedRaw = toSchemaDate(input.dateModified || input.datePublished);
+  const modified = modifiedRaw < published ? published : modifiedRaw;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: input.headline,
+    description: input.description,
+    image: absoluteAsset(input.image),
+    datePublished: published,
+    dateModified: modified,
+    author: {
+      "@type": "Organization",
+      name: input.authorName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "SaffHire Background Screening",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/saffhire-logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/blog/${input.slug}`,
+    },
+  };
+}
+
 export function breadcrumbSchema(items: Array<{ name: string; path: string }>) {
   return {
     "@context": "https://schema.org",

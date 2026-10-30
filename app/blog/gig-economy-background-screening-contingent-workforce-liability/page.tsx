@@ -1,39 +1,30 @@
 import type { Metadata } from "next";
 import GigEconomyBlogClient from "@/components/GigEconomyBlogClient";
+import { blogPosts } from "@/data/blogPosts";
+import { blogPostingSchema } from "@/lib/structuredData";
 
-const title = "Gig Economy Background Screening: Contingent Workforce Liability Employers Can’t Ignore";
-const description = "Gig workers, contractors, temporary staff, and freelancers can still create safety, customer, compliance, and reputation risk. Learn how employers should approach contingent workforce background screening.";
+const post = blogPosts.find((item) => item.slug === "gig-economy-background-screening-contingent-workforce-liability");
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: post?.title,
+  description: post?.excerpt,
 };
 
 export default function Page() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: title,
-    description,
-    datePublished: "2026-05-22",
-    author: {
-      "@type": "Organization",
-      name: "SaffHire Compliance Team",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "SaffHire Background Screening",
-      url: "https://saffhire.com",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://saffhire.com/blog/gig-economy-background-screening-contingent-workforce-liability",
-    },
-  };
+  const schema = post
+    ? blogPostingSchema({
+        slug: post.slug,
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        authorName: post.author,
+        image: post.image,
+      })
+    : null;
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {schema ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /> : null}
       <GigEconomyBlogClient />
     </>
   );
