@@ -4,7 +4,7 @@ export const texasPath = "/background-checks-texas";
 export const texasMeta = {
   title: "Texas Background Checks for Employers | SaffHire, Frisco, TX",
   description:
-    "Employment background checks for Texas employers from SaffHire, a Veteran-Owned screening company headquartered in Frisco, TX and serving employers nationwide. Texas rules, searches and FAQs.",
+    "Texas background checks for employers from Veteran-Owned SaffHire, headquartered in Frisco, TX and serving employers nationwide. Rules, searches, and FAQs.",
 };
 
 export const texasPage: ContentPageData = {
