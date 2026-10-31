@@ -25,7 +25,7 @@ const badges = [
   {
     icon: Zap,
     title: "Fast Response",
-    description: "Instant searches like the National Criminal Database, SSN Trace and MVR usually return in minutes. Full packages average 1 to 5 days.",
+    description: "Instant searches like the National Criminal Database, SSN Trace and MVR usually return in minutes. Full packages take 1 to 3 days on average.",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function WhyChooseUsSection() {
             <img loading="lazy" decoding="async" src="/images/why-choose-us.webp" alt="SaffHire team working" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 500 }} />
             <div className="absolute bottom-6 left-6 bg-white rounded-lg shadow-xl p-5" style={{ borderLeft: "4px solid #22c55e" }}>
               <p className="text-3xl font-black" style={{ fontFamily: "'Montserrat', sans-serif", color: "#17843f" }}>Since</p>
-              <p className="text-2xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>2020</p>
+              <p className="text-2xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>2019</p>
             </div>
           </div>
 

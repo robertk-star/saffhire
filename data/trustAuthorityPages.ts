@@ -40,7 +40,7 @@ export const trustAuthorityPages: TrustAuthorityPage[] = [
     ],
     faqs: [
       { question: "Where is SaffHire based?", answer: "SaffHire is based in Frisco, Texas and serves employers nationwide." },
-      { question: "When was SaffHire founded?", answer: "SaffHire has served employers since 2020." },
+      { question: "When was SaffHire founded?", answer: "SaffHire has served employers since 2019." },
       { question: "Does SaffHire serve all 50 states?", answer: "Yes. SaffHire provides background screening services for employers across the United States." },
     ],
     relatedLinks: [

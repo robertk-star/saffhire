@@ -66,7 +66,7 @@ export default function Footer() {
             </p>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Providing fast, secure, and reliable background screening services for businesses
-              across all industries since 2020.
+              across all industries since 2019.
             </p>
             <div className="flex items-center gap-3">
               <a

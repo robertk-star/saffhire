@@ -1,6 +1,6 @@
 export default function StatsSection() {
   const stats = [
-    { number: "5+", label: "Years of Success", description: "Giving your business the tools and data it needs to make a more informed hire." },
+    { number: "6+", label: "Years of Success", description: "Giving your business the tools and data it needs to make a more informed hire." },
     { number: "50", label: "States Served", description: "Nationwide background screening support for employers across the United States." },
     { number: "24/7", label: "Portal Access", description: "Access your screening portal anytime, anywhere, with bank-level encrypted security." },
   ];
