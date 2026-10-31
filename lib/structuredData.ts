@@ -23,7 +23,7 @@ export const organizationSchema = {
   image: `${siteUrl}/images/saffhire-logo.png`,
   telephone: "+1-888-588-1733",
   email: "info@saffhire.com",
-  foundingDate: "2020",
+  foundingDate: "2019",
   founder: founders,
   slogan: "Veteran-Owned Small Business",
   keywords: "Veteran-Owned, background screening, pre-employment screening",

@@ -16,9 +16,9 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                SaffHire opened its doors with excitement, passion, and a vision to make a lasting
-                impact. But just one week later, the world changed in ways we could have never
-                imagined. The COVID-19 pandemic hit, and what was supposed to be the thrilling start
+                SaffHire opened just before COVID hit, with excitement, passion, and a vision to make a lasting
+                impact. The world changed in ways we could have never
+                imagined, and what was supposed to be the thrilling start
                 of our business turned into an immediate test of resilience and adaptability.
               </p>
               <p>
@@ -77,9 +77,9 @@ export default function AboutSection() {
           <div className="relative">
             <img loading="lazy" decoding="async" src="/images/about-team.webp" alt="SaffHire team" className="w-full rounded-lg shadow-xl object-cover" style={{ height: 480 }} />
             <div className="absolute -bottom-6 -left-6 rounded-lg p-6 shadow-lg" style={{ backgroundColor: "#17843f" }}>
-              <p className="text-white text-4xl font-black" style={{ fontFamily: "'Montserrat', sans-serif" }}>5+</p>
+              <p className="text-white text-4xl font-black" style={{ fontFamily: "'Montserrat', sans-serif" }}>6+</p>
               <p className="text-white text-sm font-semibold mt-1">Years of Success</p>
-              <p className="text-white text-xs mt-1">Since 2020</p>
+              <p className="text-white text-xs mt-1">Since 2019</p>
             </div>
           </div>
         </div>
