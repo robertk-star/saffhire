@@ -16,9 +16,9 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                SaffHire opened its doors with excitement, passion, and a vision to make a lasting
-                impact. But just one week later, the world changed in ways we could have never
-                imagined. The COVID-19 pandemic hit, and what was supposed to be the thrilling start
+                SaffHire opened just before COVID hit, with excitement, passion, and a vision to make a lasting
+                impact. The world changed in ways we could have never
+                imagined, and what was supposed to be the thrilling start
                 of our business turned into an immediate test of resilience and adaptability.
               </p>
               <p>
