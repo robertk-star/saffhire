@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BlogPostCTA from "@/components/BlogPostCTA";
 import { Calendar, Clock, ArrowLeft, Tag, BookOpen } from "lucide-react";
 
 export default function AIResumeFraudBlogClient() {
@@ -134,6 +135,8 @@ export default function AIResumeFraudBlogClient() {
                     <strong>SaffHire helps employers verify candidate claims</strong> through employment verification, education verification, criminal background checks, MVR checks, healthcare screening, and custom background screening packages. <a href="/contact" className="text-green-700 font-semibold hover:underline">Contact SaffHire</a> to build the right screening package for your hiring process.
                   </p>
                 </div>
+
+                <BlogPostCTA />
 
                 <p className="text-xs text-gray-400 italic border-t border-gray-100 pt-6">
                   Disclaimer: This article is provided for informational purposes only and does not constitute legal advice. Employers should consult qualified employment counsel before making hiring decisions based on background screening results.

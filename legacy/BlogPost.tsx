@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GigEconomyBlogClient from "@/components/GigEconomyBlogClient";
 import AIResumeFraudBlogClient from "@/components/AIResumeFraudBlogClient";
+import BlogPostCTA from "@/components/BlogPostCTA";
 import { Calendar, Clock, ArrowLeft, Tag, BookOpen, ChevronRight } from "lucide-react";
 import { blogPosts, getRelatedPosts } from "@/data/blogPosts";
 import { blogPostRegistry } from "./blogRegistry";
@@ -134,6 +135,7 @@ export default function BlogPost() {
               ) : (
                 <ArticleComponent />
               )}
+              <BlogPostCTA />
             </article>
 
             {/* Sidebar */}
