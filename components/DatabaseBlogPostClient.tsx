@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BlogPostCTA from "@/components/BlogPostCTA";
 import type { PublicBlogPost } from "@/lib/blogDrafts";
 import { Calendar, Clock, ArrowLeft, Tag, BookOpen, ChevronRight } from "lucide-react";
 
@@ -235,6 +236,8 @@ export default function DatabaseBlogPostClient({ post }: { post: PublicBlogPost 
                     <strong>SaffHire helps employers build background screening packages</strong> based on role, industry, risk level, and compliance needs. <a href="/contact" className="text-green-700 font-semibold hover:underline">Contact SaffHire</a> to review the right screening package for your hiring process.
                   </p>
                 </div>
+
+                <BlogPostCTA />
               </div>
             </article>
 

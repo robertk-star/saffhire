@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BlogPostCTA from "@/components/BlogPostCTA";
 import { Calendar, Clock, ArrowLeft, Tag, BookOpen } from "lucide-react";
 
 export default function GigEconomyBlogClient() {
@@ -132,6 +133,8 @@ export default function GigEconomyBlogClient() {
                     <strong>SaffHire helps employers build role-based screening packages</strong> for employees, contractors, temporary workers, volunteers, drivers, healthcare workers, and contingent workforce programs. <a href="/contact" className="text-green-700 font-semibold hover:underline">Contact SaffHire</a> to review the right package for your workforce.
                   </p>
                 </div>
+
+                <BlogPostCTA />
 
                 <p className="text-xs text-gray-400 italic border-t border-gray-100 pt-6">
                   Disclaimer: This article is provided for informational purposes only and does not constitute legal advice. Employers should consult qualified employment counsel for guidance specific to their hiring and contractor-screening practices.
