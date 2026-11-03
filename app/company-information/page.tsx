@@ -74,7 +74,7 @@ const organizationSchema = {
   },
   areaServed: 'United States',
   description:
-    'SaffHire Background Screening provides employment background screening services for employers across the United States.',
+    'SaffHire Background Screening is a Veteran-Owned company founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience. It provides employment background screening services for employers across the United States.',
   sameAs: [
     'https://www.linkedin.com/company/saffhire-background-screening',
     'https://www.facebook.com/saffhire',

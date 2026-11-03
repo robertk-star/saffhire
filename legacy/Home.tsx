@@ -45,7 +45,7 @@ export default function Home() {
       "name": "SaffHire Background Screening",
       "url": "https://saffhire.com",
       "logo": "https://saffhire.com/logo.png",
-      "description": "SaffHire provides fast, secure, and FCRA-compliant background screening services for businesses of all sizes nationwide. Headquartered in Frisco, TX.",
+      "description": "SaffHire is a Veteran-Owned company founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience. It provides fast, secure, and FCRA-compliant background screening services for businesses of all sizes nationwide. Headquartered in Frisco, TX.",
       "telephone": "+1-888-588-1733",
       "email": "info@saffhire.com",
       "address": {
