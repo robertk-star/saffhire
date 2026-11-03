@@ -23,7 +23,7 @@
 - [Transportation](https://saffhire.com/industries/transportation): Driver screening including MVR and drug testing.
 - [Manufacturing and Warehousing](https://saffhire.com/industries/manufacturing): Screening for manufacturing and warehouse workforces.
 - [Hospitality](https://saffhire.com/industries/hospitality): Screening for hotels, restaurants and hospitality employers.
-- [Energy](https://saffhire.com/industries/energy): Screening for energy and oilfield employers.
+- [Oil & Gas](https://saffhire.com/industries/oil-and-gas): Oil & Gas background screening for energy and oilfield employers.
 - [Education](https://saffhire.com/industries/education): Screening for schools and education employers.
 - [Churches and Non-Profits](https://saffhire.com/industries/church-nonprofit): Volunteer and staff screening for churches and non-profit organizations.
 - [Small Business Background Checks](https://saffhire.com/small-business-background-checks): Screening for small employers with no minimums.

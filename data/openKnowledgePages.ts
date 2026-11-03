@@ -28,7 +28,7 @@ export const openKnowledgePages: OpenKnowledgePage[] = [
     slug: 'industries-and-audiences',
     title: 'Industries and Audiences SaffHire Serves',
     description: 'Industries and employer types SaffHire supports with background screening.',
-    markdown: `# Industries and Audiences\n\nSaffHire helps employers across all industries, with dedicated pages for several high-demand sectors.\n\n## Industry pages\n- /industries\n- /industries/healthcare\n- /industries/staffing\n- /industries/transportation\n- /industries/manufacturing\n- /industries/hospitality\n- /industries/energy\n- /industries/education\n- /industries/church-nonprofit\n\n## Key audiences\nEmployers and HR teams, staffing companies, transportation and trucking companies, healthcare employers, churches and nonprofits, volunteer organizations, and small businesses.`,
+    markdown: `# Industries and Audiences\n\nSaffHire helps employers across all industries, with dedicated pages for several high-demand sectors.\n\n## Industry pages\n- /industries\n- /industries/healthcare\n- /industries/staffing\n- /industries/transportation\n- /industries/manufacturing\n- /industries/hospitality\n- /industries/oil-and-gas\n- /industries/education\n- /industries/church-nonprofit\n\n## Key audiences\nEmployers and HR teams, staffing companies, transportation and trucking companies, healthcare employers, churches and nonprofits, volunteer organizations, and small businesses.`,
   },
   {
     slug: 'site-map-and-routes',
@@ -52,7 +52,7 @@ export const openKnowledgePages: OpenKnowledgePage[] = [
     slug: 'content-and-seo-guidelines',
     title: 'SaffHire Content and SEO Guidelines',
     description: 'How SaffHire organizes public content for employers, search engines, and AI search tools.',
-    markdown: `# Content and SEO Guidelines\n\nSaffHire content should support topical authority around employment background screening.\n\n## Content clusters\n- Services: criminal checks, verifications, drug screening, MVR, healthcare sanctions, volunteer checks, small business checks\n- Industries: healthcare, staffing, transportation, manufacturing, hospitality, energy, education, churches and nonprofits\n- Compliance and education: FCRA news, blog posts, background screening guides, FAQ, company information, open knowledge pages\n\n## AI and search discovery\nPublic discovery files include /llms.txt, /sitemap.xml, /robots.txt, /company-information, and /open-knowledge.`,
+    markdown: `# Content and SEO Guidelines\n\nSaffHire content should support topical authority around employment background screening.\n\n## Content clusters\n- Services: criminal checks, verifications, drug screening, MVR, healthcare sanctions, volunteer checks, small business checks\n- Industries: healthcare, staffing, transportation, manufacturing, hospitality, Oil & Gas and energy, education, churches and nonprofits\n- Compliance and education: FCRA news, blog posts, background screening guides, FAQ, company information, open knowledge pages\n\n## AI and search discovery\nPublic discovery files include /llms.txt, /sitemap.xml, /robots.txt, /company-information, and /open-knowledge.`,
   },
 ];
 

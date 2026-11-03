@@ -42,7 +42,7 @@ const industries = [
   'Transportation and trucking',
   'Manufacturing and warehousing',
   'Hospitality',
-  'Energy',
+  'Oil & Gas',
   'Education',
   'Churches and nonprofit organizations',
   'Small businesses',

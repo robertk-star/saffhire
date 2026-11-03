@@ -21,7 +21,7 @@ export default function Navbar() {
     { label: "Transportation", href: "/industries/transportation" },
     { label: "Manufacturing / Warehousing", href: "/industries/manufacturing" },
     { label: "Hospitality", href: "/industries/hospitality" },
-    { label: "Energy", href: "/industries/energy" },
+    { label: "Oil & Gas", href: "/industries/oil-and-gas" },
     { label: "Education", href: "/industries/education" },
     { label: "Churches / Non-Profit", href: "/industries/church-nonprofit" },
   ];
