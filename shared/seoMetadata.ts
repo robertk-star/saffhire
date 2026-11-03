@@ -92,7 +92,7 @@ export const seoMetadata: Record<string, PageMetadata> = {
   },
   "/industries/healthcare": {
     title: "Healthcare Background Screening - OIG & Compliance Requirements",
-    description: "Background screening for healthcare organizations, including OIG exclusion checks and FCRA-compliant screening workflows.",
+    description: "Background screening for hospitals, medical offices, and other healthcare organizations, including OIG exclusion checks and FCRA-compliant workflows.",
     ogImage: "https://saffhire.com/og-image-healthcare.jpg",
     ogImageAlt: "Healthcare Screening",
     keywords: "healthcare background screening, OIG exclusion check, healthcare compliance",
