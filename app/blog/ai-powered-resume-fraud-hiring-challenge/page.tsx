@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import AIResumeFraudBlogClient from "@/components/AIResumeFraudBlogClient";
 import { blogPosts } from "@/data/blogPosts";
 import { blogPostingSchema } from "@/lib/structuredData";
+import { blogSocialMetadata } from "@/lib/blogSocialMeta";
 
 const post = blogPosts.find((item) => item.slug === "ai-powered-resume-fraud-hiring-challenge");
 
 export const metadata: Metadata = {
   title: post?.title,
   description: post?.excerpt,
+  ...(post ? blogSocialMetadata({ slug: post.slug, title: post.title, description: post.excerpt, image: post.image }) : {}),
 };
 
 export default function Page() {
