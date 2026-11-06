@@ -102,13 +102,13 @@ export const industryFaqs: Record<string, { title: string; items: FAQEntry[] }> 
       { question: "Is there a setup fee or a minimum?", answer: "No. SaffHire has no setup fees and no minimums." },
     ],
   },
-  "/industries/energy": {
-    title: "Energy Industry Background Check FAQ",
+  "/industries/oil-and-gas": {
+    title: "Oil & Gas and Energy Industry Background Check FAQ",
     items: [
       {
         question: "What is employee screening for the energy industry?",
         answer:
-          "Employee screening for the energy industry is the set of checks an employer orders before someone works at a plant, field site, or in a vehicle. SaffHire is Veteran-Owned, headquartered in Frisco, TX, and provides that screening for energy employers nationwide.",
+          "Employee screening for the energy industry is the set of checks an Oil & Gas or other energy employer orders before someone works at a plant, field site, or in a vehicle. SaffHire is Veteran-Owned, headquartered in Frisco, TX, and provides that screening for energy employers nationwide.",
       },
       {
         question: "What does a background check for the energy industry include?",

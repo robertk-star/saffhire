@@ -37,9 +37,9 @@ const industries = [
     image: "/images/industry-hospitality.webp",
   },
   {
-    name: "Energy",
-    href: "/industries/energy",
-    description: "Safety-focused screening for energy, oil and gas, and utilities workers.",
+    name: "Oil & Gas",
+    href: "/industries/oil-and-gas",
+    description: "Safety-focused screening for Oil & Gas, utilities, and other energy workers.",
     image: "/images/industry-energy.webp",
   },
   {

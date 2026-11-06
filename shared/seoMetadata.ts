@@ -30,7 +30,7 @@ export const seoMetadata: Record<string, PageMetadata> = {
   },
   "/industries": {
     title: "Industry-Specific Background Screening Solutions",
-    description: "Background screening for healthcare, staffing, transportation, manufacturing, hospitality, energy, education, churches, and more.",
+    description: "Background screening for healthcare, staffing, transportation, manufacturing, hospitality, Oil & Gas and energy, education, churches, and more.",
     ogImage: "https://saffhire.com/og-image-industries.jpg",
     ogImageAlt: "SaffHire Industries",
     keywords: "industry background screening, healthcare screening, staffing screening, transportation screening",
@@ -125,12 +125,12 @@ export const seoMetadata: Record<string, PageMetadata> = {
     ogImageAlt: "Hospitality Screening",
     keywords: "hospitality background screening, retail background check",
   },
-  "/industries/energy": {
-    title: "Energy Industry Background Check Solutions",
-    description: "Employee screening for the energy industry from Veteran-Owned SaffHire in Frisco, TX. Background checks for energy employers nationwide.",
+  "/industries/oil-and-gas": {
+    title: "Oil & Gas: Energy Industry Background Check Solutions",
+    description: "Oil & Gas employee screening for the energy industry from Veteran-Owned SaffHire in Frisco, TX. Background checks for energy employers nationwide.",
     ogImage: "https://saffhire.com/og-image-energy.jpg",
-    ogImageAlt: "Energy Screening",
-    keywords: "employee screening for energy industry, background check for energy industry, energy industry background check solutions",
+    ogImageAlt: "Oil & Gas Screening",
+    keywords: "Oil & Gas background screening, employee screening for energy industry, background check for energy industry, energy industry background check solutions",
   },
   "/industries/education": {
     title: "Education Background Screening - Schools & Universities",

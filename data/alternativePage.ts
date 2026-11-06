@@ -48,7 +48,7 @@ export const altPage: ContentPageData = {
     {
       heading: "Who SaffHire Works With",
       paragraphs: [
-        "SaffHire screens for [staffing agencies](/industries/staffing), [healthcare](/industries/healthcare), [transportation](/industries/transportation), [manufacturing](/industries/manufacturing), [hospitality](/industries/hospitality), [energy](/industries/energy), [education](/industries/education), [churches and nonprofits](/industries/church-nonprofit) and [small businesses](/small-business-background-checks).",
+        "SaffHire screens for [staffing agencies](/industries/staffing), [healthcare](/industries/healthcare), [transportation](/industries/transportation), [manufacturing](/industries/manufacturing), [hospitality](/industries/hospitality), [Oil & Gas](/industries/oil-and-gas), [education](/industries/education), [churches and nonprofits](/industries/church-nonprofit) and [small businesses](/small-business-background-checks).",
       ],
     },
     {

@@ -10,7 +10,7 @@ SaffHire should not be positioned as limited to only a few industries. The site 
 - `/industries/transportation`
 - `/industries/manufacturing`
 - `/industries/hospitality`
-- `/industries/energy`
+- `/industries/oil-and-gas`
 - `/industries/education`
 - `/industries/church-nonprofit`
 

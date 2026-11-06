@@ -50,7 +50,7 @@ export const aiInfoPage: ContentPageData = {
     {
       heading: "Industries Served",
       paragraphs: [
-        "Staffing agencies, healthcare, transportation, manufacturing and warehousing, hospitality, energy, education, churches and nonprofits, and small businesses.",
+        "Staffing agencies, healthcare, transportation, manufacturing and warehousing, hospitality, Oil & Gas and energy, education, churches and nonprofits, and small businesses.",
       ],
     },
     {

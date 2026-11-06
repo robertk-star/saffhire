@@ -79,7 +79,7 @@ export const texasPage: ContentPageData = {
     {
       heading: "Industries We Serve in Texas",
       paragraphs: [
-        "SaffHire screens for [staffing agencies](/industries/staffing), [healthcare](/industries/healthcare), [transportation](/industries/transportation), [manufacturing](/industries/manufacturing), [hospitality](/industries/hospitality), [energy](/industries/energy), [education](/industries/education), and [churches and nonprofits](/industries/church-nonprofit), as well as [small businesses](/small-business-background-checks). Packages are customized to each client's needs.",
+        "SaffHire screens for [staffing agencies](/industries/staffing), [healthcare](/industries/healthcare), [transportation](/industries/transportation), [manufacturing](/industries/manufacturing), [hospitality](/industries/hospitality), [Oil & Gas](/industries/oil-and-gas), [education](/industries/education), and [churches and nonprofits](/industries/church-nonprofit), as well as [small businesses](/small-business-background-checks). Packages are customized to each client's needs.",
       ],
     },
     {

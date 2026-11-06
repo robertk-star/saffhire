@@ -85,8 +85,8 @@
       "route": "/industries/hospitality"
     },
     {
-      "name": "Energy",
-      "route": "/industries/energy"
+      "name": "Oil & Gas",
+      "route": "/industries/oil-and-gas"
     },
     {
       "name": "Education",
@@ -145,7 +145,7 @@
     "/healthcare-sanctions-oig-checks",
     "/industries/church-nonprofit",
     "/industries/education",
-    "/industries/energy",
+    "/industries/oil-and-gas",
     "/industries/healthcare",
     "/industries/hospitality",
     "/industries/manufacturing",

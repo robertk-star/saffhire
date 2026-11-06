@@ -41,7 +41,7 @@ The following routes were found in the uploaded `app` directory.
 - `/healthcare-sanctions-oig-checks`
 - `/industries/church-nonprofit`
 - `/industries/education`
-- `/industries/energy`
+- `/industries/oil-and-gas`
 - `/industries/healthcare`
 - `/industries/hospitality`
 - `/industries/manufacturing`

@@ -34,7 +34,7 @@ The site has service pages, industry pages, local pages, blogs, guides, sitemap,
 - Transportation
 - Manufacturing / warehousing
 - Hospitality
-- Energy
+- Oil & Gas
 - Education
 - Churches / nonprofit
 

@@ -323,14 +323,14 @@ export default function DrugScreening() {
               </span>
             </a>
             <a
-              href="/industries/energy"
+              href="/industries/oil-and-gas"
               className="group p-6 rounded-xl border border-gray-200 hover:border-green-400 hover:shadow-lg transition-all duration-300"
             >
               <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-                Energy
+                Oil & Gas
               </h3>
               <p className="text-gray-600 text-sm mb-4">
-                Drug testing for energy sector and safety-sensitive positions.
+                Drug testing for Oil & Gas and other safety-sensitive energy roles.
               </p>
               <span className="inline-flex items-center gap-2 text-green-600 font-semibold text-sm">
                 Learn More <ArrowRight size={14} />

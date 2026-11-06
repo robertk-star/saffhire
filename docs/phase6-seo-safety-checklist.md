@@ -29,7 +29,7 @@ This project is a Next.js migration of the original SaffHire Manus website. The 
    - /industries/transportation
    - /industries/manufacturing
    - /industries/hospitality
-   - /industries/energy
+   - /industries/oil-and-gas
    - /industries/education
    - /industries/church-nonprofit
 6. Local SEO pages load:

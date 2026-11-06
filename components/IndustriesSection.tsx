@@ -40,9 +40,9 @@ const industries = [
     image: "/images/industry-hospitality.webp",
   },
   {
-    name: "Energy",
-    href: "/industries/energy",
-    description: "Safety-first screening for energy sector workers and contractors.",
+    name: "Oil & Gas",
+    href: "/industries/oil-and-gas",
+    description: "Safety-first screening for Oil & Gas and energy workers and contractors.",
     image: "/images/industry-energy.webp",
   },
   {

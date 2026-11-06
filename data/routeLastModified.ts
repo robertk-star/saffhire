@@ -47,7 +47,7 @@ export const routeLastModified: Record<string, string> = {
   "/healthcare-sanctions-oig-checks": "2026-06-10T10:33:08-05:00",
   "/industries/church-nonprofit": "2026-10-16T06:17:34-05:00",
   "/industries/education": "2026-10-16T06:17:34-05:00",
-  "/industries/energy": "2026-10-16T06:17:34-05:00",
+  "/industries/oil-and-gas": "2026-11-03T09:00:00-06:00",
   "/industries/healthcare": "2026-10-16T06:17:34-05:00",
   "/industries/hospitality": "2026-10-16T06:17:34-05:00",
   "/industries/manufacturing": "2026-10-16T06:17:34-05:00",
