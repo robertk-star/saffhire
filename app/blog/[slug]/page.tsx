@@ -5,6 +5,7 @@ import { blogPosts, type BlogPost } from '@/data/blogPosts';
 import { blogPostRegistry } from '@/legacy/blogRegistry';
 import { getPublishedDbBlogPostBySlug, type PublicBlogPost } from '@/lib/blogDrafts';
 import { blogDocumentMeta } from '@/lib/blogSeo';
+import { blogSocialMetadata } from '@/lib/blogSocialMeta';
 import { blogPostingSchema } from '@/lib/structuredData';
 
 export const dynamic = 'force-dynamic';
@@ -33,19 +34,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const dbPost = await getPublishedDbBlogPostBySlug(slug);
   if (dbPost) {
     const meta = blogDocumentMeta(dbPost.slug, dbPost.title, dbPost.excerpt);
+    const social = blogSocialMetadata({ slug: dbPost.slug, title: dbPost.title, description: meta.description, image: dbPost.image });
     // Overrides set an absolute title so the layout template cannot push the tag past 65 characters.
-    if (meta.overridden) return { title: { absolute: meta.titleTag }, description: meta.description };
-    return { title: meta.title, description: meta.description };
+    if (meta.overridden) return { title: { absolute: meta.titleTag }, description: meta.description, ...social };
+    return { title: meta.title, description: meta.description, ...social };
   }
 
   const post = blogPosts.find((item) => item.slug === slug);
+  const social = post ? blogSocialMetadata({ slug: post.slug, title: post.title, description: post.excerpt, image: post.image }) : {};
   if (slug === 'fcra-adverse-action-two-step-notice-requirements-2026') {
     return {
       title: { absolute: adverseActionTwoStepTitleTag },
       description: post?.excerpt || 'SaffHire background screening article.',
+      ...social,
     };
   }
-  return { title: post?.title || 'Background Screening Blog', description: post?.excerpt || 'SaffHire background screening article.' };
+  return { title: post?.title || 'Background Screening Blog', description: post?.excerpt || 'SaffHire background screening article.', ...social };
 }
 
 function schemaScript(schema: ReturnType<typeof blogPostingSchema>) {
