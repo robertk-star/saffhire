@@ -1,6 +1,6 @@
 const points = [
   { title: "Veteran-Owned", text: "SaffHire is a Veteran-Owned background screening company based in Frisco, TX." },
-  { title: "Founded by Industry Leaders", text: "Founded by Robert Krebsbach, John Waak and Jody Thigpen." },
+  { title: "Founded by Industry Leaders", text: "Founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience." },
   { title: "SOC 2 Type 2 Platform", text: "Our screening platform is SOC 2 Type 2 audited (SSAE 18)." },
   { title: "Bank-Level Encryption", text: "Applicant and client data is protected with bank-level encryption." },
   { title: "24/7 Portal Access", text: "Order, track and review reports in our secure portal, available 24/7." },

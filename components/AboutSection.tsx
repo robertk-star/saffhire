@@ -28,6 +28,7 @@ export default function AboutSection() {
               </p>
               <p>
                 Headquartered in Frisco, TX, SaffHire is Veteran-Owned and serves employers nationwide.
+                The founders, Robert Krebsbach, John Waak and Jody Thigpen, have 18 years of combined experience.
                 Employers can read <a className="text-green-700 underline" href="/background-checks-texas">Texas background checks</a>,{" "}
                 <a className="text-green-700 underline" href="/federal-criminal-background-checks">federal criminal searches</a>,{" "}
                 <a className="text-green-700 underline" href="/global-watch-list-search">global watch list search</a>,{" "}

@@ -8,7 +8,7 @@ import PageSEO from "@/components/PageSEO";
 const whyFaqs = [
   {
     question: "Who is behind SaffHire?",
-    answer: "SaffHire is a Veteran-Owned background screening company founded by Robert Krebsbach, John Waak and Jody Thigpen.",
+    answer: "SaffHire is a Veteran-Owned background screening company founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience.",
   },
   {
     question: "Where is SaffHire based, and who do you serve?",

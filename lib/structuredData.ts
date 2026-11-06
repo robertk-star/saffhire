@@ -43,7 +43,7 @@ export const organizationSchema = {
     "https://www.google.com/search?q=Saffhire+Background+Screening&stick=H4sIAAAAAAAA_-NgU1I1qLAwM0k2TjKxMEi2SLFITbW0MqgwMUxKMzU2TTVPMUk0MzW0XMQqG5yYlpaRWZSq4JSYnJ1elF-al6IQnFyUmpqXmZcOAPfw2MJJAAAA",
   ],
   description:
-    "SaffHire is a Veteran-Owned company that provides fast, secure background screening services and FCRA-compliant screening workflows for employers across the United States.",
+    "SaffHire is a Veteran-Owned company founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience. It provides fast, secure background screening services and FCRA-compliant screening workflows for employers across the United States.",
   knowsAbout: [
     "FCRA-compliant screening workflows",
     "criminal background checks",
