@@ -82,14 +82,22 @@ function uniqueAttempts(attempts: ImageAttempt[]) {
   });
 }
 
+// OpenAI shut down dall-e-3 (May 12, 2026) and gpt-image-1 (Oct 23, 2026); gpt-image-1.5,
+// gpt-image-1-mini and chatgpt-image-latest shut down Dec 1, 2026. Requests with these IDs fail
+// with "The model '...' does not exist", so skip them even if OPENAI_IMAGE_MODEL still names one.
+// Current Image API models: https://developers.openai.com/api/docs/guides/image-generation
+const retiredImageModels = new Set(['dall-e-2', 'dall-e-3', 'gpt-image-1', 'gpt-image-1-mini', 'gpt-image-1.5', 'chatgpt-image-latest']);
+
 function resolveImageAttempts(kind: ImageKind): ImageAttempt[] {
-  const configuredModel = process.env.OPENAI_IMAGE_MODEL;
-  const configuredSize = process.env.OPENAI_IMAGE_SIZE || '1536x1024';
+  const configuredModel = process.env.OPENAI_IMAGE_MODEL?.trim();
+  const usableConfiguredModel = configuredModel && !retiredImageModels.has(configuredModel) ? configuredModel : undefined;
+  const defaultSize = kind === 'social' ? '1024x1024' : '1536x1024';
+  const configuredSize = process.env.OPENAI_IMAGE_SIZE || defaultSize;
 
   return uniqueAttempts([
-    ...(configuredModel ? [{ model: configuredModel, size: configuredSize, label: 'configured image model' }] : []),
-    { model: 'gpt-image-1', size: '1536x1024', label: 'gpt-image-1 fallback' },
-    { model: 'dall-e-3', size: kind === 'social' ? '1024x1024' : '1792x1024', label: 'dall-e-3 fallback' },
+    ...(usableConfiguredModel ? [{ model: usableConfiguredModel, size: configuredSize, label: 'configured image model' }] : []),
+    { model: 'gpt-image-2.5-flare', size: defaultSize, label: 'gpt-image-2.5-flare fallback' },
+    { model: 'gpt-image-2', size: defaultSize, label: 'gpt-image-2 fallback' },
   ]);
 }
 
