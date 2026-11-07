@@ -7,7 +7,7 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').rep
 export const metadata: Metadata = {
   title: 'Open Knowledge Format for SaffHire Background Screening',
   description:
-    'Public Open Knowledge Format pages for SaffHire Background Screening. Structured company, service, industry, compliance, and site information for customers, search engines, and AI search tools.',
+    'Open Knowledge pages for SaffHire: company, service, industry, and compliance facts for customers, search engines, and AI tools.',
   alternates: {
     canonical: '/open-knowledge',
   },

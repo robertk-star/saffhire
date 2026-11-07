@@ -153,6 +153,50 @@ export const seoMetadata: Record<string, PageMetadata> = {
     ogImageAlt: "SaffHire Partners",
     keywords: "background screening partners, referral partners",
   },
+  "/referral-partners/benefitsme": {
+    title: "BenefitsMe Referral Partner",
+    description: "SaffHire and BenefitsMe partnership. Streamlined background screening for BenefitsMe clients.",
+  },
+  "/referral-partners/corporate-talent-finder": {
+    title: "Corporate Talent Finder Partner",
+    description: "SaffHire and Corporate Talent Finder partnership. Boutique recruiting paired with background screening.",
+  },
+  "/referral-partners/defense-by-design": {
+    title: "Defense by Design Referral Partner",
+    description: "SaffHire and Defense by Design partnership. Background screening services for Defense by Design clients.",
+  },
+  "/referral-partners/fynn": {
+    title: "Fynn Referral Partner",
+    description: "SaffHire and Fynn partnership. AI-driven EHR for senior living communities paired with background screening.",
+  },
+  "/referral-partners/gmg-savings": {
+    title: "GMG Savings Referral Partner",
+    description: "SaffHire and GMG Savings partnership. Background screening services for GMG Savings clients.",
+  },
+  "/referral-partners/hooray-health": {
+    title: "Hooray Health Referral Partner",
+    description: "SaffHire and Hooray Health partnership. Healthcare benefits for hourly employees paired with background screening.",
+  },
+  "/referral-partners/level-c-solutions": {
+    title: "Level-C Solutions Referral Partner",
+    description: "SaffHire and Level-C Solutions partnership. Business consulting and staffing solutions paired with background screening.",
+  },
+  "/referral-partners/novatech": {
+    title: "NovaTech Referral Partner",
+    description: "SaffHire and NovaTech partnership. Background screening solutions for NovaTech clients.",
+  },
+  "/referral-partners/sandene-strategies": {
+    title: "Sandene Strategies Referral Partner",
+    description: "SaffHire and Sandene Strategies partnership. Background screening solutions for Sandene Strategies clients.",
+  },
+  "/referral-partners/staffing-for-healthcare": {
+    title: "Staffing for Healthcare Partner",
+    description: "SaffHire and Staffing for Healthcare partnership. Healthcare staffing solutions paired with background screening.",
+  },
+  "/referral-partners/workshield": {
+    title: "WorkShield Referral Partner",
+    description: "SaffHire and WorkShield partnership. Integrated background screening solutions for WorkShield clients.",
+  },
   "/privacy-policy": {
     title: "Privacy Policy - SaffHire",
     description: "SaffHire privacy policy. Learn how we protect your data.",

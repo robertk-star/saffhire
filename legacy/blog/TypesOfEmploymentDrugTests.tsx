@@ -6,7 +6,7 @@ import { Article, Answer, Section, Sub, Bullets, Table, Note, L, FaqSection, Sou
 const slug = "types-of-employment-drug-tests";
 const title = "Types of Employment Drug Tests: Random, Instant, Lab-Based, DOT and Panel Basics";
 const description =
-  "A plain-English guide to employment drug testing: lab-based vs. instant tests, when to use random testing, how DOT tests differ from non-DOT tests, specimen types, and what 5-panel and expanded panels cover.";
+  "A plain-English guide to employment drug testing: lab-based and instant tests, random testing, DOT versus non-DOT tests, and what panels cover.";
 
 const faqs: Faq[] = [
   {
