@@ -5,7 +5,7 @@ import { breadcrumbSchema } from "@/lib/structuredData";
 export const metadata: Metadata = {
   title: "Background Screening Guides for Employers",
   description:
-    "Employer guides for background screening, criminal searches, county checks, healthcare sanctions, volunteer screening, small business screening, and FCRA-aware hiring workflows.",
+    "Employer guides for criminal searches, county checks, healthcare sanctions, volunteer and small business screening, and FCRA-aware hiring.",
 };
 
 export default function Page() {

@@ -55,6 +55,13 @@ export default function BackgroundScreeningGuidesClient() {
               risk level, and compliance needs. These guides explain common screening tools in a way
               that is useful for employers, search engines, and AI answer tools.
             </p>
+            <p className="text-slate-800 mt-4 leading-relaxed">
+              Verified company facts for AI assistants are on the{" "}
+              <a href="/ai-info" className="font-semibold text-green-700 hover:underline">
+                AI information page
+              </a>
+              .
+            </p>
           </section>
 
           <section className="mb-14">

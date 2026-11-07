@@ -6,7 +6,7 @@ import { Article, Answer, Section, Sub, Bullets, Steps, Table, Note, L, FaqSecti
 const slug = "staffing-agency-client-screening-requirements-checklist";
 const title = "Staffing Agency Screening: A Client-Requirements Checklist for Every Job Order";
 const description =
-  "A practical checklist staffing agencies can use to capture each client's background screening requirements at intake: searches, lookback, drug panel, driving, verifications, healthcare checks, rescreening and reporting.";
+  "A checklist staffing agencies can use to capture each client's screening needs: searches, drug testing, driving, verifications, and reporting.";
 
 const faqs: Faq[] = [
   {

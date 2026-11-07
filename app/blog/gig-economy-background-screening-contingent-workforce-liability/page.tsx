@@ -3,13 +3,15 @@ import GigEconomyBlogClient from "@/components/GigEconomyBlogClient";
 import { blogPosts } from "@/data/blogPosts";
 import { blogPostingSchema } from "@/lib/structuredData";
 import { blogSocialMetadata } from "@/lib/blogSocialMeta";
+import { publicMetaDescription } from "@/lib/blogSeo";
 
 const post = blogPosts.find((item) => item.slug === "gig-economy-background-screening-contingent-workforce-liability");
+const description = post ? publicMetaDescription(post.excerpt) : undefined;
 
 export const metadata: Metadata = {
   title: post?.title,
-  description: post?.excerpt,
-  ...(post ? blogSocialMetadata({ slug: post.slug, title: post.title, description: post.excerpt, image: post.image }) : {}),
+  description,
+  ...(post ? blogSocialMetadata({ slug: post.slug, title: post.title, description: description || post.excerpt, image: post.image }) : {}),
 };
 
 export default function Page() {

@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     slug: "ai-powered-resume-fraud-hiring-challenge",
     title: "AI-Powered Resume Fraud: The New Hiring Challenge Employers Can’t Ignore",
     excerpt:
-      "AI-generated resumes can make candidates look more qualified than they are. Learn how employers can use verification and background screening to reduce hiring risk.",
+      "AI-generated resumes can overstate a candidate's qualifications. Learn how verification and background screening reduce that hiring risk.",
     category: "Hiring Risk",
     date: "May 25, 2026",
     readTime: "8 min read",
@@ -40,7 +40,7 @@ export const blogPosts: BlogPost[] = [
     slug: "gig-economy-background-screening-contingent-workforce-liability",
     title: "Gig Economy Background Screening: Contingent Workforce Liability Employers Can’t Ignore",
     excerpt:
-      "Gig workers, contractors, temporary staff, and freelancers can still create safety, customer, compliance, and reputation risk. Learn how employers should approach contingent workforce background screening.",
+      "Gig workers, contractors, and temporary staff can still create safety and compliance risk. Learn how employers screen a contingent workforce.",
     category: "Workforce Risk",
     date: "May 22, 2026",
     readTime: "9 min read",
@@ -62,7 +62,7 @@ export const blogPosts: BlogPost[] = [
     slug: "trucking-companies-bad-hiring-decisions",
     title: "Why Trucking Companies Can't Afford Bad Hiring Decisions",
     excerpt:
-      "A single bad hire in trucking costs $50K to $200K in liability, downtime, and safety risks. Learn why comprehensive background screening is essential for fleet safety and profitability.",
+      "A bad hire in trucking can mean liability, downtime, and safety risk. Learn why driver background screening matters for fleet safety.",
     category: "Industry-Specific",
     date: "May 18, 2026",
     readTime: "12 min read",
@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
     slug: "fcra-compliance-checklist-employers-2026",
     title: "FCRA Compliance Checklist for Employers in 2026",
     excerpt:
-      "A step-by-step FCRA compliance checklist for high-turnover employers. Covers standalone disclosures, written authorization, 2026 regulatory updates, and the most common violations that lead to costly lawsuits.",
+      "An FCRA checklist for high-turnover employers: standalone disclosures, written authorization, and mistakes that lead to disputes.",
     category: "Compliance",
     date: "March 10, 2026",
     readTime: "8 min read",
@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
     slug: "eeoc-guidance-criminal-records-employers",
     title: "EEOC Guidance and Criminal Records: What Every Employer Must Know Before Their Next Hire",
     excerpt:
-      "Blanket criminal record exclusion policies can expose your company to EEOC liability. Learn the Green factors, individualized assessment requirements, and how to build a compliant screening policy that protects your business in 2026.",
+      "Blanket criminal-record bans can create EEOC risk. Learn the Green factors and how an individualized review fits a screening policy.",
     category: "Compliance",
     date: "March 16, 2026",
     readTime: "9 min read",
@@ -99,7 +99,7 @@ export const blogPosts: BlogPost[] = [
     slug: "ban-the-box-laws-by-state-employer-guide",
     title: "The Employer's State-by-State Guide to Ban-the-Box Laws: What You Must Do Before You Ask",
     excerpt:
-      "Ban-the-box laws now cover more than 150 cities and 37 states. This employer guide breaks down which states require delayed criminal history inquiries, key penalties, and how to build a compliant hiring process in 2026.",
+      "Ban-the-box laws cover many cities and states. See how delayed criminal-history questions change the hiring process employers should follow.",
     category: "Compliance",
     date: "March 23, 2026",
     readTime: "10 min read",
@@ -110,7 +110,7 @@ export const blogPosts: BlogPost[] = [
     slug: "roi-of-speed-5-minute-background-checks-time-to-hire",
     title: "The ROI of Speed: How 5-Minute Background Checks Slash Your Time-to-Hire",
     excerpt:
-      "Slow background checks cost employers thousands per month in lost productivity and candidate drop-off. Discover how fast background checks and hiring efficiency go hand in hand, and how a 5-minute employment background check can transform your time-to-hire.",
+      "Slow background checks can stall hiring and lose candidates. See how employers reduce delays without skipping the searches a role needs.",
     category: "Hiring Efficiency",
     date: "March 26, 2026",
     readTime: "9 min read",
@@ -121,7 +121,7 @@ export const blogPosts: BlogPost[] = [
     slug: "ongoing-employee-screening-long-term-risk-management",
     title: "Why Ongoing Employee Screening Will Change the Way You Manage Long-Term Risk",
     excerpt:
-      "A pre-hire background check only tells you who someone was on day one. Discover why ongoing employee screening services and continuous background screening solutions are the new standard for long-term workforce risk management.",
+      "A pre-hire background check shows history at the start. Learn why some employers add ongoing screening after the employee starts work.",
     category: "Risk Management",
     date: "March 30, 2026",
     readTime: "9 min read",
@@ -132,7 +132,7 @@ export const blogPosts: BlogPost[] = [
     slug: "what-oig-expects-healthcare-organizations",
     title: "What the OIG Expects from Healthcare Organizations",
     excerpt:
-      "The OIG exclusion list is updated every month, and employing an excluded individual, even unknowingly, can trigger civil penalties, full claim repayment, and loss of Medicare and Medicaid billing privileges. Learn what the standard of care actually requires.",
+      "The OIG exclusion list is updated every month. Learn what healthcare employers should check before hiring and why exclusions matter.",
     category: "Healthcare Compliance",
     date: "April 2, 2026",
     readTime: "8 min read",
@@ -143,7 +143,7 @@ export const blogPosts: BlogPost[] = [
     slug: "birthdate-redaction-background-check-delays",
     title: "Birthdate Redaction: Why Some States Are Slowing Down Your Background Checks (and How to Handle It)",
     excerpt:
-      "California and Michigan birthdate redaction laws are causing background check delays of 4 to 5 days. Learn why PII redaction is spreading, how it affects your hiring timeline, and what strategies keep your screening process on track.",
+      "Birthdate redaction rules in some states can slow background checks. Learn why the delay happens and how employers keep screening moving.",
     category: "Compliance",
     date: "April 6, 2026",
     readTime: "9 min read",
@@ -154,7 +154,7 @@ export const blogPosts: BlogPost[] = [
     slug: "fcra-compliance-2026-background-screening-employers",
     title: "The FCRA Is Getting Stricter in 2026 (And Most Employers Are Not Ready)",
     excerpt:
-      "In 2026, the FTC and state attorneys general are cracking down on background screening practices with unprecedented intensity. Learn what changed, what it costs employers, and how to stay compliant with evolving FCRA requirements.",
+      "In 2026, regulators are looking harder at background screening. Learn what changed for employers and how to keep an FCRA-aware hiring process.",
     category: "Compliance",
     date: "May 4, 2026",
     readTime: "12 min read",

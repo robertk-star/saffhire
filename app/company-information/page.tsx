@@ -7,7 +7,7 @@ const siteUrl = SITE_URL;
 export const metadata: Metadata = {
   title: 'Company Information for SaffHire Background Screening',
   description:
-    'Authoritative company information about SaffHire Background Screening, including services, industries served, location, compliance approach, and contact details.',
+    'Company facts for SaffHire Background Screening: services, industries, Frisco, TX headquarters, compliance approach, and how to contact the team.',
   alternates: {
     canonical: '/company-information',
   },

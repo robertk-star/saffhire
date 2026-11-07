@@ -35,10 +35,17 @@ export function renderedBlogTitle(title: string) {
   return `${title}${BLOG_TITLE_SUFFIX}`;
 }
 
+/** Meta descriptions stay within 160 characters, including database posts that ship with a long excerpt. */
+export function publicMetaDescription(description: string) {
+  return description.length <= BLOG_META_DESCRIPTION_MAX
+    ? description
+    : trimAtWord(description, BLOG_META_DESCRIPTION_MAX);
+}
+
 export function blogDocumentMeta(slug: string, title: string, description: string) {
   const override = blogSeoOverrides[slug];
   const nextTitle = override?.title ?? title;
-  const nextDescription = override?.description ?? description;
+  const nextDescription = publicMetaDescription(override?.description ?? description);
   return {
     title: nextTitle,
     description: nextDescription,

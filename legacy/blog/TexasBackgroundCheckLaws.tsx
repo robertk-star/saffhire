@@ -6,7 +6,7 @@ import { Article, Answer, Section, Sub, Bullets, Table, Note, L, FaqSection, Sou
 const slug = "texas-background-check-laws-employers";
 const title = "Texas Background Check Laws for Employers: The 7-Year Rule, Fair Chance Hiring and DPS Records";
 const description =
-  "What Texas employers need to know about background checks: the Texas 7-year reporting limit and its $75,000 salary exception, the status of Austin's fair chance ordinance, DPS criminal history records, nondisclosure orders and negligent hiring.";
+  "What Texas employers need to know about background checks, including the 7-year reporting limit, DPS records, and fair chance rules.";
 
 const BC20 = "https://statutes.capitol.texas.gov/Docs/BC/htm/BC.20.htm";
 const GV411 = "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.411.htm";
