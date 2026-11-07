@@ -13,10 +13,10 @@ describe("homepage turnaround heading", () => {
     assert.doesNotMatch(page, /PBSA|TazWorks|I-9|E-Verify|adverse action|\$\d|24 hour/i);
   });
 
-  it("leaves package rows that say 2-5 days unchanged", () => {
+  it("states that every standard package takes 1 to 3 days on average", () => {
     const packages = readFileSync(new URL("../components/PackagesClient.tsx", import.meta.url), "utf8");
-    assert.match(packages, /turnaround: "2-5 days"/);
-    assert.equal(packages.split("2-5 days").length - 1, 2);
-    assert.doesNotMatch(packages, /1 to 3 days/);
+    assert.equal(packages.split('turnaround: "1 to 3 days"').length - 1, 6);
+    assert.doesNotMatch(packages, /2-5 days|1-2 days|turnaround: "1 day"/);
+    assert.match(packages, /Full background packages take 1 to 3 days on average/);
   });
 });

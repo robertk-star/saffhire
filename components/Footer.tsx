@@ -153,7 +153,7 @@ export default function Footer() {
                 SaffHire provides background screening services nationwide for employers across all 50 states.
               </p>
               <p className="text-gray-400 text-sm leading-relaxed">
-                Based in Frisco, Texas. Serving businesses throughout the United States.
+                Based in Frisco, TX. Serving businesses throughout the United States.
               </p>
             </div>
           </div>

@@ -1,6 +1,6 @@
 # SaffHire Background Screening
 
-> SaffHire is a Veteran-Owned, FCRA-compliant pre-employment background screening company based in Frisco, TX, serving employers nationwide. Founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience, SaffHire provides criminal background checks, employment and education verification, drug screening and MVR checks, with screening packages customized to each client's needs. Data is protected with bank-level encryption, our screening platform is SOC 2 Type 2 audited (SSAE 18), the client portal is available 24/7, and there are no minimums or setup fees.
+> SaffHire is a Veteran-Owned, FCRA-compliant pre-employment background screening company based in Frisco, TX, serving employers nationwide. Founded in 2019 by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience, SaffHire provides criminal background checks, employment and education verification, drug screening and MVR checks, with screening packages customized to each client's needs. Data is protected with bank-level encryption, our screening platform is SOC 2 Type 2 audited (SSAE 18), the client portal is available 24/7, and there are no minimums or setup fees.
 
 ## Services
 
@@ -13,7 +13,7 @@
 - [Drug Screening](https://saffhire.com/drug-screening): Pre-employment and ongoing drug testing programs.
 - [MVR Checks](https://saffhire.com/mvr-checks): Motor vehicle record reports for driving positions.
 - [Healthcare Sanctions and OIG Checks](https://saffhire.com/healthcare-sanctions-oig-checks): Exclusion and sanctions list screening for healthcare employers.
-- [Standard Packages and Turnaround](https://saffhire.com/packages): Standard screening packages and typical turnaround times, customized per client.
+- [Standard Packages and Turnaround](https://saffhire.com/packages): Standard screening packages, customized per client. Full background packages take 1 to 3 days on average. Instant searches usually return in minutes.
 
 ## Industries
 
