@@ -490,7 +490,7 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       {
         heading: "What Affects Timing",
         paragraphs: [
-          "Employment verifications depend on how quickly prior employers respond. Some use third-party verification services, some have closed or merged, and some only confirm limited information. Packages 5 and 6, which add Drug Screening and Employment and Education Verification, average 2-5 days. Individual results can vary.",
+          "Employment verifications depend on how quickly prior employers respond. Some use third-party verification services, some have closed or merged, and some only confirm limited information. Full background packages take 1 to 3 days on average. Individual results can vary.",
         ],
       },
       {
@@ -501,12 +501,37 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
           "Send the SaffHire invitation as soon as an offer is extended.",
         ],
       },
-      { heading: "Compliance", paragraphs: [FCRA_SHORT] },
+      {
+        heading: "Who It Is For",
+        paragraphs: [
+          "Employment verification is for employers that need to confirm a candidate's work history before the hire is final. Staffing agencies use it when a client contract requires verified experience. Healthcare, transportation, professional services, and other employers use it when a job title or time in a role is part of the hiring decision. Small businesses use it when one hire carries a large share of the work.",
+          "It does not belong on every order. Packages are customized to each client's needs, so verification can be added only for the roles that require it. See [standard packages](/packages) for how it fits alongside criminal searches.",
+        ],
+      },
+      {
+        heading: "How the Process Works",
+        paragraphs: [
+          "The employer orders employment verification in the SaffHire portal. SaffHire's invitation workflow sends the applicant a standalone written disclosure and collects written authorization before the verification is run. After that, SaffHire contacts the prior employers the applicant listed, or the third-party verification service those employers use.",
+          "The request asks the source to confirm the employer name, the dates of employment, and the job title. If a prior employer has closed, merged, changed its name, or will only confirm limited information, the attempt is documented in the report so you can see what was confirmed and what was not.",
+          "A large employer that participates in an automated verification network may respond quickly. A small employer, a closed business, or an employer that outsources verification can take longer. Full background packages take 1 to 3 days on average. An individual verification can fall outside that average when a prior employer is slow to respond. Ask applicants for complete employer names, locations, and dates, and send the invitation as soon as you are ready to screen.",
+        ],
+      },
+      {
+        heading: "Compliance",
+        paragraphs: [
+          FCRA_SHORT,
+          "The report shows what the source confirmed. It does not tell you whether to hire the person. SaffHire is not a law firm and does not provide legal advice. Questions about which information you may consider belong with your own counsel.",
+          "Employment verification confirms work history. It is separate from a [criminal background check](/criminal-background-checks), a [drug screen](/drug-screening), and an [education verification](/education-verification). There are no setup fees and no minimums. Call 888-588-1733 or [contact SaffHire](/contact) if you want help deciding which roles need this search.",
+        ],
+      },
     ],
     faqs: [
-      { question: "How long does employment verification take?", answer: "It depends on how quickly prior employers respond. Packages that include verifications (Packages 5 and 6) average 2-5 days." },
+      { question: "How long does employment verification take?", answer: "It depends on how quickly prior employers respond. Full background packages take 1 to 3 days on average." },
       { question: "What does employment verification confirm?", answer: "Employer names, dates of employment and job titles, and it can reveal unexplained gaps." },
       { question: "Does employment verification need the applicant's authorization?", answer: "Yes. Like other background checks from a screening company, it requires a standalone disclosure and written authorization, which SaffHire's invitation workflow collects." },
+      { question: "Who should add employment verification?", answer: "Employers and staffing agencies that need confirmed work history for a role, including when a client contract requires it. Packages are customized, so it can be left off roles that do not need it." },
+      { question: "What if a prior employer will not respond?", answer: "The attempt is documented in the report, including when an employer has closed, merged, or will only confirm limited information." },
+      { question: "Does SaffHire decide whether to hire the person?", answer: "No. SaffHire provides the report. The employer makes the hiring decision. SaffHire is not a law firm and does not provide legal advice." },
     ],
   },
   "/education-verification": {
@@ -556,12 +581,34 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
         ],
       },
       {
-        heading: "MVRs for DOT-Regulated Drivers",
+        heading: "Who It Is For",
         paragraphs: [
-          "Motor carriers have their own FMCSA driving-record requirements, such as obtaining driving records from each state where a driver held a license before hire and reviewing them annually. SaffHire's DOT-related packages include MVR checks along with [DOT drug and alcohol testing](/dot-drug-testing) and criminal history searches.",
+          "Order an MVR when driving is part of the job or when your insurance carrier asks for a driving record. That includes commercial drivers, delivery drivers, employees who drive a company vehicle, and field roles that travel between sites. A forklift or warehouse role needs one when driving is actually part of the work, not for every person on the floor.",
+          "Employers that never put someone behind the wheel can leave the MVR off the package. Packages are customized to each client's needs. [Transportation screening](/industries/transportation) describes how carriers combine an MVR with other driver checks.",
         ],
       },
-      { heading: "Compliance", paragraphs: [FCRA_SHORT] },
+      {
+        heading: "How an MVR Check Works",
+        paragraphs: [
+          "The employer orders the Motor Vehicle Report in the SaffHire portal. The applicant receives a standalone written disclosure and provides written authorization through the invitation workflow before the record is requested.",
+          "The report comes from the state that holds the driving record. It can show license status and the driving history that state reports, such as violations, suspensions, and accidents. What appears, and how far back it goes, depends on that state's rules. MVRs usually return in minutes. State fees may apply.",
+          "A driver who has held licenses in more than one state may need a record from each of those states. You tell SaffHire which states to request. Full background packages that include other searches take 1 to 3 days on average. The MVR itself is one of the instant searches and usually returns in minutes.",
+        ],
+      },
+      {
+        heading: "MVRs for DOT-Regulated Drivers",
+        paragraphs: [
+          "Motor carriers have their own FMCSA driving-record requirements, such as obtaining driving records from each state where a driver held a license before hire and reviewing them annually. Those carrier duties stay with the carrier. SaffHire's DOT-related packages include MVR checks along with [DOT drug and alcohol testing](/dot-drug-testing) and criminal history searches. SaffHire does not replace the carrier's own FMCSA obligations.",
+        ],
+      },
+      {
+        heading: "Compliance",
+        paragraphs: [
+          FCRA_SHORT,
+          "An MVR is information for the employer's decision. It is not legal advice, and it does not by itself decide whether someone may drive. Review your insurance requirements and any DOT or state rules with your own counsel. SaffHire is not a law firm.",
+          "SaffHire is a Veteran-Owned company headquartered in Frisco, TX and serves employers nationwide. There are no setup fees and no minimums. State fees may apply to the record itself. Call 888-588-1733 or [contact SaffHire](/contact) to add MVRs for the roles that drive.",
+        ],
+      },
     ],
     faqs: [
       {
@@ -570,6 +617,9 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       },
       { question: "Are there fees on MVRs?", answer: "State fees may apply to Motor Vehicle Reports. There are no setup fees and no minimums." },
       { question: "Can I run MVRs on current employees?", answer: "Yes, with a proper disclosure and authorization. Many employers review driving records periodically for employees who drive for work." },
+      { question: "Which states can you check?", answer: "MVR coverage is available nationwide. A driver who held licenses in more than one state may need a report from each of those states. What each state reports depends on that state's rules." },
+      { question: "Does an MVR replace a criminal background check?", answer: "No. An MVR is the driving record. Criminal searches are separate. Many driver packages include both, plus drug testing when the role requires it." },
+      { question: "Does SaffHire decide who may drive?", answer: "No. SaffHire provides the report. The employer makes the decision. SaffHire is not a law firm and does not provide legal advice." },
     ],
   },
   "/drug-screening": {
