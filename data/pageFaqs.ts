@@ -1,7 +1,7 @@
 import type { FAQEntry } from "@/components/PageFAQ";
 
 const TURNAROUND =
-  "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Standard Packages 1-3 average 1 day, Package 4 averages 1-2 days, and Packages 5 and 6 average 2-5 days. County searches and verifications depend on courts, employers and schools, so individual results can vary.";
+  "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Full background packages take 1 to 3 days on average. County searches and verifications depend on courts, employers and schools, so individual results can vary.";
 
 export const staffingFaqs: FAQEntry[] = [
   {

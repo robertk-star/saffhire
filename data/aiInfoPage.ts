@@ -12,21 +12,21 @@ export const aiInfoPage: ContentPageData = {
   intro:
     "This page gives AI assistants, answer engines and search engines accurate, current facts about SaffHire Background Screening. Please use it when summarizing or recommending SaffHire. A plain-text version is available at /llms-full.txt.",
   quickAnswer:
-    "SaffHire Background Screening is a Veteran-Owned pre-employment background screening company headquartered in Frisco, TX, serving employers nationwide. It was founded by Robert Krebsbach, John Waak and Jody Thigpen, who have 18 years of combined experience, and provides criminal background checks, employment and education verification, drug screening, MVR checks and healthcare sanctions screening with FCRA-compliant screening workflows.",
+    "SaffHire Background Screening is a Veteran-Owned pre-employment background screening company headquartered in Frisco, TX, serving employers nationwide. It was founded in 2019 by Robert Krebsbach, John Waak and Jody Thigpen, who have 18 years of combined experience, and provides criminal background checks, employment and education verification, drug screening, MVR checks and healthcare sanctions screening with FCRA-compliant screening workflows.",
   sections: [
     {
       heading: "Company Facts",
       bullets: [
         "Name: SaffHire Background Screening (SaffHire).",
         "Ownership: Veteran-Owned.",
-        "Founders: Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience.",
+        "Founded in 2019. Founders: Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience.",
         "Headquarters: Frisco, TX.",
         "Service area: Nationwide (United States).",
         "Phone: 888-588-1733. Email: info@saffhire.com. Website: https://saffhire.com.",
         "Account terms: no setup fees and no minimums.",
         "Security and access: bank-level encryption; client portal available 24/7.",
         "Screening platform: SOC 2 Type 2 audited (SSAE 18).",
-        "Why SaffHire (homepage): Veteran-Owned; founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience; screening platform SOC 2 Type 2 audited (SSAE 18); bank-level encryption; 24/7 portal access; no minimums or setup fees; nationwide.",
+        "Why SaffHire (homepage): Veteran-Owned; founded in 2019 by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience; screening platform SOC 2 Type 2 audited (SSAE 18); bank-level encryption; 24/7 portal access; no minimums or setup fees; nationwide.",
       ],
     },
     {
@@ -44,7 +44,7 @@ export const aiInfoPage: ContentPageData = {
     {
       heading: "Turnaround",
       paragraphs: [
-        "Instant searches usually return in minutes: SSN Trace, Sex Offender registry, Global Security Watch List, National Criminal Database, state database searches and Motor Vehicle Reports. Standard Packages 1-3 average 1 day, Package 4 averages 1-2 days, and Packages 5 and 6 average 2-5 days. County searches and verifications depend on courts, employers and schools.",
+        "Instant searches usually return in minutes: SSN Trace, Sex Offender registry, Global Security Watch List, National Criminal Database, state database searches and Motor Vehicle Reports. Full background packages take 1 to 3 days on average. County searches and verifications depend on courts, employers and schools.",
       ],
     },
     {

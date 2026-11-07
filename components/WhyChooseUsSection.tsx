@@ -5,7 +5,7 @@ const features = [
   "Intuitive and user-friendly for both clients and applicants",
   "Signatures and authorizations are all done digitally online",
   "Instant result drug testing available",
-  "Custom packages with competitive pricing",
+  "Custom packages built around the searches each role needs",
   "100% web-based SaaS with bank encrypted security access 24/7",
   "No setup fees, no minimums for using our portal",
   "Custom solutions available for unique business needs",

@@ -23,7 +23,7 @@ const EMPLOYMENT_IMG = "/images/hero-business-services.webp";
 const features = [
   { icon: Briefcase, title: "Prior Employer Confirmation", description: "Confirm job titles, dates of employment, and employer names directly with prior employers." },
   { icon: FileSearch, title: "Gap Identification", description: "Identify unexplained gaps so you can ask the right follow-up questions." },
-  { icon: Clock, title: "Fast Turnaround", description: "Most verifications complete within standard business timeframes." },
+  { icon: Clock, title: "Fast Turnaround", description: "Full background packages take 1 to 3 days on average." },
   { icon: ShieldCheck, title: "FCRA Compliant", description: "Authorization and disclosure handled through a compliant digital workflow." },
 ];
 

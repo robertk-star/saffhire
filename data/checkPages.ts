@@ -313,7 +313,7 @@ export const checkPages: CheckPage[] = [
     faqs: [
       { question: "Is a Federal Search included in SaffHire packages?", answer: "Yes. All standard packages include a Federal Search, along with SSN Trace, Address History, National Criminal Database and Global Security Watch List." },
       { question: "Why isn't a federal case in a county search?", answer: "Federal cases are filed in U.S. District Courts, which are a separate court system from state and county courts." },
-      { question: "How long does a package with a Federal Search take?", answer: "Standard Packages 1-3 average 1 day, Package 4 averages 1-2 days, and Packages 5 and 6 average 2-5 days. Individual results can vary." },
+      { question: "How long does a package with a Federal Search take?", answer: "Full background packages take 1 to 3 days on average. Individual results can vary." },
     ],
     relatedLinks: criminalLinks,
   },
@@ -446,7 +446,7 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       {
         heading: "Building the Right Criminal Package",
         paragraphs: [
-          "The National Criminal Database search is usually SaffHire's minimum package. It includes an SSN Trace, Sex Offender registry search, Global Security Watch List and the national database search. Because national databases are aggregated and incomplete, many employers add County searches for the counties where the applicant has lived, and State searches where useful. Standard Packages 1-3 average 1 day, and Package 4 (adds County Search) averages 1-2 days. " + COURT_FEES,
+          "The National Criminal Database search is usually SaffHire's minimum package. It includes an SSN Trace, Sex Offender registry search, Global Security Watch List and the national database search. Because national databases are aggregated and incomplete, many employers add County searches for the counties where the applicant has lived, and State searches where useful. Full background packages take 1 to 3 days on average. " + COURT_FEES,
         ],
       },
       {
@@ -490,7 +490,7 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       {
         heading: "What Affects Timing",
         paragraphs: [
-          "Employment verifications depend on how quickly prior employers respond. Some use third-party verification services, some have closed or merged, and some only confirm limited information. Packages 5 and 6, which add Drug Screening and Employment and Education Verification, average 2-5 days. Individual results can vary.",
+          "Employment verifications depend on how quickly prior employers respond. Some use third-party verification services, some have closed or merged, and some only confirm limited information. Full background packages take 1 to 3 days on average. Individual results can vary.",
         ],
       },
       {
@@ -504,7 +504,7 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       { heading: "Compliance", paragraphs: [FCRA_SHORT] },
     ],
     faqs: [
-      { question: "How long does employment verification take?", answer: "It depends on how quickly prior employers respond. Packages that include verifications (Packages 5 and 6) average 2-5 days." },
+      { question: "How long does employment verification take?", answer: "It depends on how quickly prior employers respond. Full background packages take 1 to 3 days on average." },
       { question: "What does employment verification confirm?", answer: "Employer names, dates of employment and job titles, and it can reveal unexplained gaps." },
       { question: "Does employment verification need the applicant's authorization?", answer: "Yes. Like other background checks from a screening company, it requires a standalone disclosure and written authorization, which SaffHire's invitation workflow collects." },
     ],
@@ -526,13 +526,13 @@ export const serviceUpgrades: Record<string, { sections: ContentSection[]; faqTi
       {
         heading: "What Affects Timing",
         paragraphs: [
-          "Timing depends on how quickly schools respond. Schools that have closed, international schools, and records under a former name can take longer. Packages 5 and 6 average 2-5 days. Individual results can vary.",
+          "Timing depends on how quickly schools respond. Schools that have closed, international schools, and records under a former name can take longer. Full background packages take 1 to 3 days on average. Individual results can vary.",
         ],
       },
       { heading: "Compliance", paragraphs: [FCRA_SHORT] },
     ],
     faqs: [
-      { question: "How long does education verification take?", answer: "It depends on how quickly schools respond. Packages that include verifications average 2-5 days." },
+      { question: "How long does education verification take?", answer: "It depends on how quickly schools respond. Full background packages take 1 to 3 days on average." },
       { question: "What does education verification confirm?", answer: "Degrees, diplomas and attendance dates, confirmed with the school." },
       { question: "Should every role include education verification?", answer: "Usually only roles where a degree or diploma is a genuine job requirement. Packages are customized to each client's needs." },
     ],

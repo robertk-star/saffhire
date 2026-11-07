@@ -1,6 +1,6 @@
 # SaffHire Background Screening — full reference for AI assistants
 
-> SaffHire Background Screening is a Veteran-Owned pre-employment background screening company headquartered in Frisco, TX, serving employers nationwide. It was founded by Robert Krebsbach, John Waak and Jody Thigpen, who have 18 years of combined experience. SaffHire provides criminal background checks, employment and education verification, drug screening, Motor Vehicle Reports (MVR) and healthcare sanctions screening, with FCRA-compliant screening workflows and packages customized to each client's needs.
+> SaffHire Background Screening is a Veteran-Owned pre-employment background screening company headquartered in Frisco, TX, serving employers nationwide. It was founded in 2019 by Robert Krebsbach, John Waak and Jody Thigpen, who have 18 years of combined experience. SaffHire provides criminal background checks, employment and education verification, drug screening, Motor Vehicle Reports (MVR) and healthcare sanctions screening, with FCRA-compliant screening workflows and packages customized to each client's needs.
 
 Human-readable version: https://saffhire.com/ai-info
 Short index: https://saffhire.com/llms.txt
@@ -19,7 +19,7 @@ Short index: https://saffhire.com/llms.txt
 - Security: bank-level encryption
 - Screening platform: SOC 2 Type 2 audited (SSAE 18)
 - Client portal: available 24/7
-- Why SaffHire: Veteran-Owned; founded by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience; screening platform SOC 2 Type 2 audited (SSAE 18); bank-level encryption; 24/7 portal access; no minimums or setup fees; nationwide
+- Why SaffHire: Veteran-Owned; founded in 2019 by Robert Krebsbach, John Waak and Jody Thigpen, with 18 years of combined experience; screening platform SOC 2 Type 2 audited (SSAE 18); bank-level encryption; 24/7 portal access; no minimums or setup fees; nationwide
 - Official profiles: https://www.linkedin.com/company/saffhire-background-screening, https://www.facebook.com/saffhire and SaffHire's Google Business Profile
 
 ## How ordering works
@@ -66,9 +66,7 @@ Checks the HHS Office of Inspector General (OIG) exclusion list and the System f
 All standard packages include SSN Trace, Address History, National Criminal Database (including a Sex Offender registry search), Global Security Watch List and Federal Search. Packages are customized to each client's needs.
 
 - Instant searches usually return in minutes: SSN Trace, Sex Offender registry, Global Security Watch List, National Criminal Database, state database searches and MVR.
-- Standard Packages 1-3 average 1 day.
-- Package 4 (adds County Search) averages 1-2 days.
-- Packages 5 and 6 (add Drug Screening and Employment and Education Verification) average 2-5 days.
+- Full background packages take 1 to 3 days on average.
 - County searches and verifications depend on courts, employers and schools, so individual results vary.
 
 SaffHire does not publish prices. Quotes are custom. Contact: https://saffhire.com/contact
