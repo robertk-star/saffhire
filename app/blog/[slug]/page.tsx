@@ -4,7 +4,7 @@ import DatabaseBlogPostClient from '@/components/DatabaseBlogPostClient';
 import { blogPosts, type BlogPost } from '@/data/blogPosts';
 import { blogPostRegistry } from '@/legacy/blogRegistry';
 import { getPublishedDbBlogPostBySlug, type PublicBlogPost } from '@/lib/blogDrafts';
-import { blogDocumentMeta } from '@/lib/blogSeo';
+import { blogDocumentMeta, publicMetaDescription } from '@/lib/blogSeo';
 import { blogSocialMetadata } from '@/lib/blogSocialMeta';
 import { blogPostingSchema } from '@/lib/structuredData';
 
@@ -41,15 +41,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const post = blogPosts.find((item) => item.slug === slug);
-  const social = post ? blogSocialMetadata({ slug: post.slug, title: post.title, description: post.excerpt, image: post.image }) : {};
+  const description = publicMetaDescription(post?.excerpt || 'SaffHire background screening article.');
+  const social = post ? blogSocialMetadata({ slug: post.slug, title: post.title, description, image: post.image }) : {};
   if (slug === 'fcra-adverse-action-two-step-notice-requirements-2026') {
     return {
       title: { absolute: adverseActionTwoStepTitleTag },
-      description: post?.excerpt || 'SaffHire background screening article.',
+      description,
       ...social,
     };
   }
-  return { title: post?.title || 'Background Screening Blog', description: post?.excerpt || 'SaffHire background screening article.', ...social };
+  return { title: post?.title || 'Background Screening Blog', description, ...social };
 }
 
 function schemaScript(schema: ReturnType<typeof blogPostingSchema>) {

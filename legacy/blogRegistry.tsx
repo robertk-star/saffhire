@@ -1600,7 +1600,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     slug: "trucking-companies-bad-hiring-decisions",
     title: "Why Trucking Companies Can't Afford Bad Hiring Decisions",
     metaDescription:
-      "A single bad hire in trucking costs $50K to $200K in liability, downtime, and safety risks. Learn why comprehensive background screening is essential for fleet safety and profitability.",
+      "A bad hire in trucking can mean liability, downtime, and safety risk. Learn why driver background screening matters for fleet safety.",
     category: "Industry-Specific",
     date: "May 18, 2026",
     readTime: "12 min read",
@@ -1653,7 +1653,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     slug: "birthdate-redaction-background-check-delays",
     title: "Birthdate Redaction: Why Some States Are Slowing Down Your Background Checks (and How to Handle It)",
     metaDescription:
-      "California and Michigan birthdate redaction laws are causing background check delays. Learn why PII redaction is spreading and how to keep your screening process on track.",
+      "Birthdate redaction rules in some states can slow background checks. Learn why the delay happens and how employers keep screening moving.",
     category: "Compliance",
     date: "April 6, 2026",
     readTime: "9 min read",
@@ -1739,7 +1739,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     slug: "ongoing-employee-screening-long-term-risk-management",
     title: "Why Ongoing Employee Screening Will Change the Way You Manage Long-Term Risk",
     metaDescription:
-      "A pre-hire background check is a snapshot. Continuous screening solutions monitor employees throughout their employment, catching post-hire incidents before they become crises.",
+      "A pre-hire background check shows history at the start. Learn why some employers add ongoing screening after the employee starts work.",
     category: "Risk Management",
     date: "March 30, 2026",
     readTime: "9 min read",
@@ -1760,7 +1760,7 @@ export const blogPostRegistry: BlogPostMeta[] = [
     slug: "what-oig-expects-healthcare-organizations",
     title: "What the OIG Expects from Healthcare Organizations",
     metaDescription:
-      "The OIG exclusion list is updated monthly. Employing an excluded individual can trigger civil penalties, full claim repayment, and loss of Medicare and Medicaid billing privileges.",
+      "The OIG exclusion list is updated every month. Learn what healthcare employers should check before hiring and why exclusions matter.",
     category: "Healthcare Compliance",
     date: "April 2, 2026",
     readTime: "8 min read",

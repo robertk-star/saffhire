@@ -43,7 +43,7 @@ export const checkPages: CheckPage[] = [
     serviceName: "DOT Drug and Alcohol Testing",
     metaTitle: "DOT Drug Testing for Employers | SaffHire",
     description:
-      "DOT drug and alcohol testing for transportation employers: pre-employment, random, post-accident, reasonable-suspicion and return-to-duty tests ordered through the SaffHire portal and performed at Labcorp facilities.",
+      "DOT drug and alcohol testing for transportation employers. Order pre-employment, random, post-accident, and return-to-duty tests in the SaffHire portal.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
     eyebrow: "DRUG TESTING",
     h1: "DOT Drug Testing for Employers",
@@ -120,7 +120,7 @@ export const checkPages: CheckPage[] = [
     serviceName: "Random Drug Testing",
     metaTitle: "Random Drug Testing Programs for Employers | SaffHire",
     description:
-      "Random drug tests for DOT-regulated and non-DOT workforces, ordered through the SaffHire portal and performed at Labcorp facilities, from SaffHire, a Veteran-Owned screening company in Frisco, TX.",
+      "Random drug tests for DOT and non-DOT workforces. Order each test in the SaffHire portal and collect it at a Labcorp facility.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
     eyebrow: "DRUG TESTING",
     h1: "Random Drug Testing",
@@ -185,7 +185,7 @@ export const checkPages: CheckPage[] = [
     serviceName: "Instant Drug Testing",
     metaTitle: "Instant Drug Testing for Employers | SaffHire",
     description:
-      "Instant result drug testing options for non-DOT pre-employment screening, alongside lab-based testing, from SaffHire, a Veteran-Owned screening company serving employers nationwide.",
+      "Instant result drug testing for non-DOT pre-employment screening, with lab confirmation when a result needs it. Nationwide from SaffHire.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
     eyebrow: "DRUG TESTING",
     h1: "Instant Drug Testing",
@@ -235,7 +235,7 @@ export const checkPages: CheckPage[] = [
     serviceName: "State Criminal Background Checks",
     metaTitle: "State Criminal Background Checks for Employers | SaffHire",
     description:
-      "State criminal record searches for the states where an applicant has lived, including instant state database searches, from SaffHire, a Veteran-Owned screening company in Frisco, TX.",
+      "State criminal record searches for the states where an applicant has lived, including state database searches that usually return in minutes.",
     parent: { name: "Criminal Background Checks", path: "/criminal-background-checks" },
     eyebrow: "CRIMINAL SCREENING",
     h1: "State Criminal Background Checks",
@@ -279,7 +279,7 @@ export const checkPages: CheckPage[] = [
     serviceName: "Federal Criminal Background Checks",
     metaTitle: "Federal Criminal Background Checks for Employers | SaffHire",
     description:
-      "Federal criminal court searches for employers. Federal Search is included in every SaffHire standard package. Veteran-Owned, Frisco, TX, serving employers nationwide.",
+      "Federal criminal court searches for employers. A Federal Search is included in every SaffHire standard package, nationwide from Frisco, TX.",
     parent: { name: "Criminal Background Checks", path: "/criminal-background-checks" },
     eyebrow: "CRIMINAL SCREENING",
     h1: "Federal Criminal Background Checks",
@@ -372,7 +372,7 @@ export const checkPages: CheckPage[] = [
     serviceName: "SSN Trace and Address History",
     metaTitle: "SSN Trace for Employment Background Checks | SaffHire",
     description:
-      "SSN Trace and Address History for employers: find names and addresses associated with an applicant to guide where criminal searches run. Usually returns in minutes.",
+      "SSN Trace and Address History for employers. See names and addresses tied to an applicant so criminal searches cover the right places.",
     eyebrow: "IDENTITY",
     h1: "SSN Trace and Address History",
     intro:

@@ -6,7 +6,7 @@ import { Article, Answer, Section, Sub, Bullets, Steps, Table, Note, L, FaqSecti
 const slug = "dot-drug-testing-fmcsa-clearinghouse-guide";
 const title = "DOT Drug Testing and the FMCSA Clearinghouse: An Employer's Guide";
 const description =
-  "Who needs DOT drug and alcohol testing, the six FMCSA test types, the 5-panel DOT drug test, and how pre-employment and annual FMCSA Drug & Alcohol Clearinghouse queries work under 49 CFR parts 40 and 382.";
+  "Who needs DOT drug and alcohol testing, the FMCSA test types, the DOT drug panel, and how Clearinghouse queries work for employers.";
 
 const P382 = "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-382";
 const P40 = "https://www.ecfr.gov/current/title-49/subtitle-A/part-40";

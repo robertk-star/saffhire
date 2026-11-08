@@ -6,7 +6,7 @@ import { Article, Answer, Section, Sub, Bullets, Table, Note, L, FaqSection, Sou
 const slug = "types-of-criminal-background-checks";
 const title = "Types of Criminal Background Checks: County, State, Federal and National Database Searches";
 const description =
-  "County, statewide, federal and national database criminal searches each cover different records. Learn what each one finds, what it misses and when employers should use it.";
+  "County, statewide, federal, and national database searches cover different records. Learn what each finds, what it misses, and when to use it.";
 
 const faqs: Faq[] = [
   {

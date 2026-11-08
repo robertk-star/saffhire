@@ -25,6 +25,7 @@ export default function Footer() {
     { label: "Background Screening Guides", href: "/background-screening-guides" },
     { label: "Company Information", href: "/company-information" },
     { label: "Blog", href: "/blog" },
+    { label: "AI Information", href: "/ai-info" },
     { label: "FAQ", href: "/faq" },
     { label: "Referral Partners", href: "/referral-partners" },
     { label: "Contact", href: "/contact" },

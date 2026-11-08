@@ -6,7 +6,7 @@ import { Article, Answer, Section, Sub, Bullets, Steps, Note, L, FaqSection, Sou
 const slug = "fcra-basics-for-employers";
 const title = "FCRA Basics for Employers: Disclosure, Authorization and What a CRA Does";
 const description =
-  "A plain-English FCRA primer for employers: what counts as a consumer report, the standalone disclosure, written authorization, your certification to the CRA, and what a consumer reporting agency is responsible for.";
+  "A plain-English FCRA primer for employers: consumer reports, the standalone disclosure, written authorization, and who is responsible for each step.";
 
 const faqs: Faq[] = [
   {
