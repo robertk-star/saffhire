@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RichText from "@/components/RichText";
 import type { SeoAuthorityPage } from "@/data/seoAuthorityPages";
 
 export default function SeoAuthorityPageClient({ page }: { page: SeoAuthorityPage }) {
@@ -73,13 +74,26 @@ export default function SeoAuthorityPageClient({ page }: { page: SeoAuthorityPag
             </section>
           </div>
 
+          {page.detailSections?.map((section) => (
+            <section key={section.heading} className="mb-12 max-w-3xl">
+              <h2 className="text-3xl font-black text-slate-900 mb-4">{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className="mt-4 text-gray-700 leading-relaxed">
+                  <RichText text={paragraph} />
+                </p>
+              ))}
+            </section>
+          ))}
+
           <section className="mb-12">
             <h2 className="text-3xl font-black text-slate-900 mb-6">Common Questions</h2>
             <div className="space-y-5">
               {page.faqs.map((faq) => (
                 <article key={faq.question} className="rounded-xl border border-gray-200 p-6">
                   <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.question}</h3>
-                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                  <p className="text-gray-700 leading-relaxed">
+                    <RichText text={faq.answer} />
+                  </p>
                 </article>
               ))}
             </div>
