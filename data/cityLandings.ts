@@ -158,14 +158,14 @@ export const friscoLanding: CityLanding = {
 
 export const dallasLanding: CityLanding = {
   path: "/background-screening-dallas-tx",
-  seoTitle: "Dallas, TX Background Screening for Employers",
+  seoTitle: "Background Screening for Dallas, TX Employers",
   seoDescription:
-    "Background screening for Dallas, TX employers. SaffHire is headquartered in Frisco, TX and serves Dallas employers and employers nationwide.",
-  eyebrow: "DALLAS, TX",
-  h1: "Background Screening Services for Dallas, TX Businesses",
+    "Employment background screening for Dallas employers: criminal searches, verifications, drug testing and MVRs. SaffHire, Frisco, TX. Call 888-588-1733.",
+  eyebrow: "DALLAS, TX BACKGROUND SCREENING",
+  h1: "Background Screening for Dallas Employers",
   hero:
-    "SaffHire screens applicants for Dallas, TX employers and for employers nationwide. SaffHire is headquartered in Frisco, TX. Dallas employers use the same portal and the same FCRA-compliant screening workflows as clients everywhere else in the United States. This page explains how Dallas employers order screening. It is local context, and the service area stays nationwide.",
-  whyTitle: "Background screening for Dallas employers",
+    "Background screening is how a Dallas employer checks the records that matter for a job before making a hiring decision. SaffHire provides employment background screening for Dallas, TX employers: criminal searches that follow the applicant's address history, employment and education verification, drug testing and motor vehicle records, all ordered in one portal with an FCRA disclosure and authorization built into the applicant invitation. SaffHire is a Veteran-Owned background screening company headquartered in Frisco, TX, serving Dallas employers and employers nationwide. To talk through the roles you hire, call us for more information or fill out a contact form. Call 888-588-1733.",
+  whyTitle: "What background screening covers for Dallas hiring",
   whyParagraphs: [
     "Dallas employers hire across healthcare, staffing, logistics, hospitality, financial services, and professional offices. An applicant for a Dallas job may have lived in Dallas County, in Collin County, in another Texas county, or outside Texas. SaffHire orders criminal searches for the jurisdictions on that address history, so a Dallas job is not limited to a Dallas County search when the applicant lived somewhere else.",
     "SaffHire was founded by Robert Krebsbach, John Waak, and Jody Thigpen and is headquartered in Frisco, TX. Dallas is a market SaffHire serves. It is not a second headquarters. Dallas employers order criminal background checks, employment verification, education verification, drug screening, and motor vehicle records in the same portal used by clients in other states. There are no setup fees and no minimums. The client portal is available 24/7. Our screening platform is SOC 2 Type 2 audited (SSAE 18).",
@@ -198,7 +198,7 @@ export const dallasLanding: CityLanding = {
   startTitle: "Before a Dallas employer places the first order",
   startParagraphs: [
     "Decide who will invite applicants, who will read reports, and which roles share a package. A driver package and a front-office package are built from different searches. Write down whether DOT drug testing, an OIG check, or an MVR belongs on the order. SaffHire will match those requirements to searches and will tell you which results wait on a court, a prior employer, or a school.",
-    "Read the [FAQ](/faq) for how screening works, the [Texas background checks](/background-checks-texas) page for statewide rules, and [staffing agency background checks](/industries/staffing) if a staffing desk will place the orders. Call (888) 588-1733 or email info@saffhire.com if you would rather walk through the roles with the team.",
+    "Read the [FAQ](/faq) for how screening works, the [Texas background checks](/background-checks-texas) page for statewide rules, and [staffing agency background checks](/industries/staffing) if a staffing desk will place the orders. If you would rather walk through the roles with the team, call us for more information or fill out a contact form. Call 888-588-1733 or use the [contact form](/contact).",
   ],
   serviceCards,
   faqTitle: "Questions from Dallas employers",
