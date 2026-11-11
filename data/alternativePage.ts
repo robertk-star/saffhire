@@ -2,7 +2,7 @@ import type { ContentPageData } from "@/components/ContentPage";
 
 export const altPath = "/sterling-first-advantage-alternative";
 export const altMeta = {
-  title: "Sterling / First Advantage Alternative | SaffHire Background Screening",
+  title: "Sterling / First Advantage Alternative",
   description:
     "Reviewing background screening providers after First Advantage acquired Sterling? SaffHire is a Veteran-Owned, responsive screening company in Frisco, TX serving employers nationwide.",
 };
