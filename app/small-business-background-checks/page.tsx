@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SeoAuthorityPageClient from "@/components/SeoAuthorityPageClient";
+import { plainText } from "@/components/RichText";
 import { getSeoAuthorityPage } from "@/data/seoAuthorityPages";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/structuredData";
 
@@ -16,7 +17,7 @@ export default function Page() {
 
   const schemas = [
     serviceSchema({ name: page.title, description: page.description, path: page.path }),
-    faqSchema(page.faqs),
+    faqSchema(page.faqs.map((faq) => ({ question: faq.question, answer: plainText(faq.answer) }))),
     breadcrumbSchema([
       { name: "Home", path: "/" },
       { name: page.title, path: page.path },
