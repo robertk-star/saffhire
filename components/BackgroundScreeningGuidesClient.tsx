@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { seoAuthorityPages } from "@/data/seoAuthorityPages";
+import { backgroundCheckCompaniesMeta } from "@/data/backgroundCheckCompaniesPage";
 
 const coreServices = [
   { label: "Criminal Background Checks", href: "/criminal-background-checks" },
@@ -75,6 +76,22 @@ export default function BackgroundScreeningGuidesClient() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <a
+                href={backgroundCheckCompaniesMeta.path}
+                className="group rounded-2xl border border-gray-200 p-6 hover:border-green-400 hover:shadow-lg transition-all"
+              >
+                <p className="text-xs font-bold uppercase tracking-wider text-green-600 mb-3">
+                  Employer Guide
+                </p>
+                <h3 className="text-2xl font-black text-slate-900 mb-3 group-hover:text-green-700">
+                  How to Choose a Background Check Company
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  What background check companies and background screening companies do, the questions to ask before you
+                  sign up, and the warning signs to watch for.
+                </p>
+                <span className="text-green-700 font-bold">Read guide →</span>
+              </a>
               {seoAuthorityPages.map((page) => (
                 <a
                   key={page.path}

@@ -50,6 +50,7 @@ const extraPublicRoutes = [
   '/federal-criminal-background-checks',
   '/global-watch-list-search',
   '/ssn-trace',
+  '/background-check-companies',
   '/open-knowledge',
   '/ai-info',
   '/referral-partners/benefitsme',

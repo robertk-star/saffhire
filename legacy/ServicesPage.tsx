@@ -81,7 +81,8 @@ export default function ServicesPage() {
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Fast, FCRA-compliant background screening services built for businesses of every size
             and industry. Instant searches like SSN Trace, Sex Offender, Global Watch List, MVR and the National Criminal Database usually return in minutes.
-            Related pages: <a className="text-green-400 underline" href="/background-checks-texas">Texas background checks</a>,{" "}
+            Related pages: <a className="text-green-400 underline" href="/background-check-companies">how to choose a background check company</a>,{" "}
+            <a className="text-green-400 underline" href="/background-checks-texas">Texas background checks</a>,{" "}
             <a className="text-green-400 underline" href="/federal-criminal-background-checks">federal criminal background checks</a>,{" "}
             <a className="text-green-400 underline" href="/global-watch-list-search">global watch list search</a>,{" "}
             <a className="text-green-400 underline" href="/instant-drug-testing">instant drug testing</a>,{" "}
