@@ -41,7 +41,7 @@ export const checkPages: CheckPage[] = [
   {
     path: "/dot-drug-testing",
     serviceName: "DOT Drug and Alcohol Testing",
-    metaTitle: "DOT Drug Testing for Employers | SaffHire",
+    metaTitle: "DOT Drug Testing for Employers",
     description:
       "DOT drug and alcohol testing for transportation employers. Order pre-employment, random, post-accident, and return-to-duty tests in the SaffHire portal.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
@@ -118,7 +118,7 @@ export const checkPages: CheckPage[] = [
   {
     path: "/random-drug-testing",
     serviceName: "Random Drug Testing",
-    metaTitle: "Random Drug Testing Programs for Employers | SaffHire",
+    metaTitle: "Random Drug Testing Programs for Employers",
     description:
       "Random drug tests for DOT and non-DOT workforces. Order each test in the SaffHire portal and collect it at a Labcorp facility.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
@@ -183,7 +183,7 @@ export const checkPages: CheckPage[] = [
   {
     path: "/instant-drug-testing",
     serviceName: "Instant Drug Testing",
-    metaTitle: "Instant Drug Testing for Employers | SaffHire",
+    metaTitle: "Instant Drug Testing for Employers",
     description:
       "Instant result drug testing for non-DOT pre-employment screening, with lab confirmation when a result needs it. Nationwide from SaffHire.",
     parent: { name: "Drug Screening", path: "/drug-screening" },
@@ -233,7 +233,7 @@ export const checkPages: CheckPage[] = [
   {
     path: "/state-criminal-background-checks",
     serviceName: "State Criminal Background Checks",
-    metaTitle: "State Criminal Background Checks for Employers | SaffHire",
+    metaTitle: "State Criminal Background Checks for Employers",
     description:
       "State criminal record searches for the states where an applicant has lived, including state database searches that usually return in minutes.",
     parent: { name: "Criminal Background Checks", path: "/criminal-background-checks" },
@@ -277,7 +277,7 @@ export const checkPages: CheckPage[] = [
   {
     path: "/federal-criminal-background-checks",
     serviceName: "Federal Criminal Background Checks",
-    metaTitle: "Federal Criminal Background Checks for Employers | SaffHire",
+    metaTitle: "Federal Criminal Background Checks for Employers",
     description:
       "Federal criminal court searches for employers. A Federal Search is included in every SaffHire standard package, nationwide from Frisco, TX.",
     parent: { name: "Criminal Background Checks", path: "/criminal-background-checks" },
@@ -320,7 +320,7 @@ export const checkPages: CheckPage[] = [
   {
     path: "/global-watch-list-search",
     serviceName: "Global Security Watch List Search",
-    metaTitle: "Global Watch List and Sanctions Search for Employers | SaffHire",
+    metaTitle: "Global Watch List and Sanctions Search for Employers",
     description:
       "Global Security Watch List search covering OFAC and international watch lists, included in every SaffHire standard package and usually returned in minutes.",
     parent: { name: "Criminal Background Checks", path: "/criminal-background-checks" },

@@ -2,7 +2,7 @@ import type { ContentPageData } from "@/components/ContentPage";
 
 export const texasPath = "/background-checks-texas";
 export const texasMeta = {
-  title: "Texas Background Checks for Employers | SaffHire, Frisco, TX",
+  title: "Texas Background Checks for Employers, Frisco, TX",
   description:
     "Texas background checks for employers from Veteran-Owned SaffHire, headquartered in Frisco, TX and serving employers nationwide. Rules, searches, and FAQs.",
 };

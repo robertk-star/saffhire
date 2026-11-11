@@ -198,12 +198,12 @@ export const seoMetadata: Record<string, PageMetadata> = {
     description: "SaffHire and WorkShield partnership. Integrated background screening solutions for WorkShield clients.",
   },
   "/privacy-policy": {
-    title: "Privacy Policy - SaffHire",
+    title: "Privacy Policy",
     description: "SaffHire privacy policy. Learn how we protect your data.",
     keywords: "privacy policy, data protection",
   },
   "/terms-of-service": {
-    title: "Terms of Service - SaffHire",
+    title: "Terms of Service",
     description: "SaffHire terms of service for using our background screening services.",
     keywords: "terms of service, legal terms, service agreement",
   },
