@@ -111,6 +111,7 @@ export const seoAuthorityPages: SeoAuthorityPage[] = [
     relatedLinks: [
       { label: "Criminal Background Checks", href: "/criminal-background-checks" },
       { label: "National Criminal Database Search", href: "/national-criminal-database-search" },
+      { label: "SSN Trace and Address History", href: "/ssn-trace" },
       { label: "FCRA Compliance News", href: "/fcra-news" },
     ],
   },
