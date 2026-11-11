@@ -19,6 +19,7 @@ export const routeLastModified: Record<string, string> = {
   "/admin/users": "2026-07-27T13:24:29-05:00",
   "/apps/add": "2026-07-18T10:02:33-05:00",
   "/apps": "2026-07-18T10:02:33-05:00",
+  "/background-check-companies": "2026-11-11T15:30:00-06:00",
   "/background-screening-allen-tx": "2026-06-09T17:56:58Z",
   "/background-screening-dallas-tx": "2026-10-16T06:30:37-05:00",
   "/background-screening-frisco-tx": "2026-10-16T06:30:37-05:00",
