@@ -115,10 +115,12 @@ export default function SeoAuthorityPageClient({ page }: { page: SeoAuthorityPag
           </section>
 
           <section className="rounded-2xl p-8 text-center" style={{ backgroundColor: "#0f172a" }}>
-            <h2 className="text-3xl font-black text-white mb-4">Need help choosing the right screening package?</h2>
+            <h2 className="text-3xl font-black text-white mb-4">
+              {page.ctaTitle || "Need help choosing the right screening package?"}
+            </h2>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              SaffHire helps employers build background screening packages based on role, industry,
-              risk level, and compliance needs.
+              {page.ctaText ||
+                "SaffHire helps employers build background screening packages based on role, industry, risk level, and compliance needs."}
             </p>
             <a
               href="/contact"
