@@ -221,10 +221,10 @@ export const seoMetadata: Record<string, PageMetadata> = {
     keywords: "Frisco TX background screening, background check Frisco Texas, Frisco employer screening",
   },
   "/background-screening-dallas-tx": {
-    title: "Dallas, TX Background Screening for Employers",
-    description: "Background screening for Dallas, TX employers. SaffHire is headquartered in Frisco, TX and serves Dallas employers and employers nationwide.",
-    ogImageAlt: "Background Screening in Dallas, TX",
-    keywords: "Dallas TX background screening, background check Dallas Texas, Dallas employer screening",
+    title: "Background Screening for Dallas, TX Employers",
+    description: "Employment background screening for Dallas employers: criminal searches, verifications, drug testing and MVRs. SaffHire, Frisco, TX. Call 888-588-1733.",
+    ogImageAlt: "Background Screening for Dallas, TX Employers",
+    keywords: "background screening, background screening Dallas TX, employment background screening Dallas, Dallas employer background checks",
   },
   "/background-screening-plano-tx": {
     title: "Plano, TX Background Screening for Employers",
