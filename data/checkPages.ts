@@ -370,53 +370,165 @@ export const checkPages: CheckPage[] = [
   {
     path: "/ssn-trace",
     serviceName: "SSN Trace and Address History",
-    metaTitle: "SSN Trace for Employment Background Checks | SaffHire",
+    metaTitle: "SSN Trace for Employers: What It Shows and Its Limits",
     description:
-      "SSN Trace and Address History for employers. See names and addresses tied to an applicant so criminal searches cover the right places.",
-    eyebrow: "IDENTITY",
-    h1: "SSN Trace and Address History",
+      "What an SSN trace shows, what it does not, and how employers use name and address history to choose where criminal searches run. Call SaffHire at 888-588-1733.",
+    eyebrow: "IDENTITY AND ADDRESS HISTORY",
+    h1: "SSN Trace for Employment Background Checks",
     intro:
-      "An SSN Trace is the starting point of most background checks. It lists names and addresses associated with an applicant's Social Security number, which tells you where to run county, state and federal searches. It usually returns in minutes and is included in every SaffHire standard package.",
+      "An SSN trace is the first search in most employment background checks. It returns the names and addresses associated with an applicant's Social Security number, which tells you which counties and states to search for criminal records and which other names to search under. SaffHire includes the SSN Trace and Address History in every standard package.",
     quickAnswer:
-      "An SSN Trace searches commercial data sources for names, aliases and addresses associated with a Social Security number. It is not a criminal search, but it shows where an applicant has lived so criminal searches cover the right jurisdictions.",
+      "An SSN trace is a search of name, alias and address history associated with a Social Security number. The results come from commercial data sources such as credit header data, which is the identifying information (names and addresses) that sits at the top of a consumer file, not the credit account details. An SSN trace is not a criminal record, it does not confirm that the SSN is valid or belongs to the applicant, and it is not an employment history or a credit report. Its job is to point the rest of the background check to the right places.",
     sections: [
+      {
+        heading: "What Is an SSN Trace?",
+        paragraphs: [
+          "An SSN trace takes the Social Security number an applicant provides and looks for the names and addresses that commercial data sources have linked to that number over time. Think of it as a map, not a verdict. It tells the screening process where the applicant has likely lived and what names they may have used, so the searches that do look for records are aimed at the right courts.",
+          "Most of the data comes from credit header information. When a person applies for credit, signs a lease or sets up utilities, their name and address are often reported along with their SSN. Over years, those reports build a trail of addresses and name variations. An SSN trace reads that identifying trail. It does not show credit scores, balances, accounts or payment history.",
+        ],
+      },
       {
         heading: "What an SSN Trace Shows",
         bullets: [
-          "Names and aliases associated with the SSN, including maiden or previous names.",
-          "Address history, which guides which counties and states to search.",
-          "Possible inconsistencies worth a follow-up question, such as a name or address that does not match the application.",
+          "Names associated with the SSN, including maiden names, married names and previous legal names.",
+          "Aliases and name variations, such as a middle name used as a first name, a nickname, or a hyphenated surname.",
+          "Address history, often with the city, county and state for each address and the approximate dates it was reported.",
+          "Possible inconsistencies worth a follow-up question, such as a name or address that does not appear on the application.",
         ],
       },
       {
-        heading: "What It Does Not Do",
+        heading: "What an SSN Trace Does Not Show",
         paragraphs: [
-          "An SSN Trace is not a criminal record and should not be used by itself to make a hiring decision. Results come from data sources, so they may be incomplete for applicants with little credit or address history.",
+          "Because an SSN trace is often the first line on a report, employers sometimes expect more from it than it can give. It is a pointer search. These are things it does not do:",
+        ],
+        bullets: [
+          "It is not a criminal record. It does not search any court, and an address on the trace says nothing about whether the person has a record there.",
+          "It does not verify that the SSN is valid or that it belongs to the applicant. It lists what data sources have associated with the number. Identity verification is a separate question.",
+          "It is not an employment history. Past employers and job titles come from [employment verification](/employment-verification), which is a separate search.",
+          "It is not a credit report. It does not show credit scores, debts, accounts or payment history.",
+          "It does not confirm citizenship or work authorization.",
+          "It is not a complete list of every place a person has lived. People with little credit or rental history, younger applicants, and people new to the United States may have few or no addresses on file.",
         ],
       },
       {
-        heading: "Why It Matters for Criminal Searches",
+        heading: "Why Employers Run an SSN Trace First",
         paragraphs: [
-          "Most criminal cases are filed at the county level. Knowing where an applicant has lived lets you search the right counties and states, and the names found let searches include aliases. That is why the SSN Trace and Address History come first in every SaffHire package.",
+          "Most criminal cases in the United States are filed and kept at the county level, and there is no single national court database that holds every county's records. A [county criminal search](/county-criminal-background-checks) only covers the county that is searched. The SSN trace gives you the list of counties where the applicant has lived, so the county searches you order match the applicant's actual history instead of only the address on the application.",
+          "The names on the trace matter just as much. A record filed under a maiden name or a name variation can be missed if the search only uses the applicant's current name. Adding the names from the trace to the criminal searches helps close that gap. The same address and name history also guides [state criminal searches](/state-criminal-background-checks) and [federal criminal searches](/federal-criminal-background-checks), and it helps match records from a [National Criminal Database search](/national-criminal-database-search) to the right person.",
         ],
       },
       {
-        heading: "Ordering",
+        heading: "How an SSN Trace Fits Into a Background Check",
+        bullets: [
+          "The employer orders a package in the SaffHire portal, and the applicant receives a secure invitation link.",
+          "The applicant reviews the standalone disclosure, signs the authorization, and enters their own personal information, including their SSN.",
+          "The SSN trace runs and returns the associated names and address history.",
+          "Those counties, states and names guide the criminal searches in the package.",
+          "Results are delivered in the SaffHire portal, where the employer reviews the full report and makes its own decision.",
+        ],
+      },
+      {
+        heading: "When the Results Do Not Match the Application",
         paragraphs: [
-          "The applicant enters their own personal information through SaffHire's secure invitation link, so you don't have to collect sensitive details yourself. Data is protected with bank-level encryption, and results appear in your portal, available 24/7. " + NO_FEES,
+          "An unfamiliar name or address on an SSN trace is a reason to look closer, not proof that an applicant lied. Common explanations include a name change after marriage or divorce, a nickname, a short stay at a relative's address, a mistyped SSN, or a data source that mixed up two people with similar information. Less often, a mismatch can point to identity theft.",
+          "A reasonable approach is to compare the trace with what the applicant provided, ask the applicant about anything you do not recognize, and confirm the SSN was entered correctly. Avoid treating a mismatch by itself as a reason to reject someone. If information in the report may affect your decision, follow your FCRA process, described below.",
+        ],
+      },
+      {
+        heading: "How Far Back an SSN Trace Goes",
+        paragraphs: [
+          "There is no fixed lookback period for an SSN trace. How much history appears depends on the data sources and on how much the applicant's name and address have been reported over time. An applicant with a long credit and rental history may show many addresses, while a recent graduate may show only one or two.",
+          "The digits of an SSN are not a reliable guide to where a person is from. The Social Security Administration began assigning numbers randomly in June 2011, so the first digits of newer numbers do not reflect a state.",
+        ],
+      },
+      {
+        heading: "Turnaround",
+        paragraphs: [
+          "The SSN trace is an instant search and usually returns in minutes. The county and state searches it points to take longer, because they depend on the courts involved. Timing can vary for an individual applicant.",
+        ],
+      },
+      {
+        heading: "FCRA Notes for Employers",
+        paragraphs: [
+          "When an employer orders an SSN trace from a background screening company as part of an employment background check, it is part of a consumer report, and the Fair Credit Reporting Act applies. Here is a short, general overview:",
+        ],
+        bullets: [
+          "Permissible purpose: the FCRA lets an employer obtain a consumer report for employment purposes, such as evaluating an applicant or a current employee. Reports are ordered for that purpose only.",
+          "Disclosure and authorization: before ordering, give the applicant a standalone written disclosure and get their written authorization. SaffHire's invitation workflow collects both electronically.",
+          "Before and after a negative decision: if you may decide not to hire someone based in whole or in part on the report, the FCRA requires notice steps. These include giving the applicant a copy of the report and a summary of their rights before the decision is final, then a final notice after the decision.",
+          "State and local rules: some states and cities add their own requirements on top of the FCRA.",
+        ],
+      },
+      {
+        heading: "Ordering an SSN Trace with SaffHire",
+        paragraphs: [
+          "The SSN Trace and Address History is included in every SaffHire standard package, alongside the searches it supports. The applicant enters their own personal information through SaffHire's secure invitation link, so you do not have to collect or store their SSN yourself. Data is protected with bank-level encryption, and results appear in your portal, available 24/7. " + NO_FEES,
+          "SaffHire is a Veteran-Owned background screening company headquartered in Frisco, TX and serving employers nationwide. SaffHire is not a law firm and does not provide legal advice. This page is general information. Talk to your own legal counsel about FCRA questions or how to use a report in a hiring decision.",
+          "Want to know which searches fit your roles? Please call us for more information or fill out a contact form. Call 888-588-1733 or use the [contact form](/contact).",
         ],
       },
     ],
+    faqTitle: "SSN Trace FAQ",
     faqs: [
-      { question: "How long does an SSN Trace take?", answer: "An SSN Trace usually returns in minutes." },
-      { question: "Is an SSN Trace included in every package?", answer: "Yes. All standard packages include SSN Trace and Address History." },
-      { question: "Do I have to collect the applicant's SSN?", answer: "No. SaffHire sends the applicant a secure link to enter their own personal information and sign the disclosure and authorization." },
+      {
+        question: "What is an SSN trace?",
+        answer:
+          "An SSN trace is a search of the names, aliases and addresses that commercial data sources associate with a Social Security number. Employers use it at the start of a background check to decide which counties and states to search and which names to include.",
+      },
+      {
+        question: "Does an SSN trace show criminal records?",
+        answer:
+          "No. An SSN trace does not search any court. It shows where the applicant has lived, which guides where [county criminal searches](/county-criminal-background-checks) and other criminal searches should run.",
+      },
+      {
+        question: "Does an SSN trace verify that an SSN is valid or belongs to the applicant?",
+        answer:
+          "No. It lists the names and addresses that data sources have linked to the number. It does not confirm that the number is valid, that it was issued to the applicant, or that the applicant is who they say they are.",
+      },
+      {
+        question: "Is an SSN trace a credit report?",
+        answer:
+          "No. Much of the data comes from credit header information, which is the name and address section of a consumer file. An SSN trace does not show credit scores, accounts, balances or payment history.",
+      },
+      {
+        question: "Does an SSN trace show employment history?",
+        answer:
+          "No. Past employers, job titles and dates come from [employment verification](/employment-verification), which is a separate search.",
+      },
+      {
+        question: "How far back does an SSN trace go?",
+        answer:
+          "There is no fixed lookback period. The history depends on the data sources and how much the applicant's name and address have been reported over time. Applicants with little credit or rental history may show few addresses.",
+      },
+      {
+        question: "How long does an SSN trace take?",
+        answer:
+          "An SSN trace is an instant search and usually returns in minutes. The county searches it points to depend on the courts involved and take longer.",
+      },
+      {
+        question: "What if the trace shows a name or address the applicant did not list?",
+        answer:
+          "Treat it as a question, not a conclusion. Name changes, nicknames, short stays and data errors are common explanations. Ask the applicant, confirm the SSN was entered correctly, and follow your FCRA process if the report may affect your decision.",
+      },
+      {
+        question: "Is an SSN trace included in SaffHire packages?",
+        answer:
+          "Yes. Every SaffHire standard package includes the SSN Trace and Address History. The applicant enters their own information through a secure link, so you do not have to collect their SSN. Call 888-588-1733 or [contact SaffHire](/contact).",
+      },
     ],
     relatedLinks: [
+      { label: "County Criminal Background Checks", href: "/county-criminal-background-checks" },
       { label: "Criminal Background Checks", href: "/criminal-background-checks" },
       { label: "National Criminal Database Search", href: "/national-criminal-database-search" },
+      { label: "State Criminal Searches", href: "/state-criminal-background-checks" },
+      { label: "Federal Criminal Searches", href: "/federal-criminal-background-checks" },
+      { label: "Employment Verification", href: "/employment-verification" },
       { label: "Standard Packages & Turnaround", href: "/packages" },
+      { label: "Contact SaffHire", href: "/contact" },
     ],
+    ctaTitle: "Add an SSN trace to your screening program",
+    ctaText:
+      "Questions about SSN traces or which searches a role needs? Call us for more information or fill out a contact form. Call 888-588-1733. SaffHire is Veteran-Owned, headquartered in Frisco, TX, and serves employers nationwide.",
   },
 ];
 
