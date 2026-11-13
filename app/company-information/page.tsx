@@ -186,7 +186,7 @@ export default function CompanyInformationPage() {
                   </div>
                   <div>
                     <dt className="font-bold text-slate-950">Location</dt>
-                    <dd className="mt-1 text-slate-700">Frisco, Texas</dd>
+                    <dd className="mt-1 text-slate-700">Frisco, TX</dd>
                   </div>
                   <div>
                     <dt className="font-bold text-slate-950">Phone</dt>

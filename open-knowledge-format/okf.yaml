@@ -2,7 +2,7 @@ okf_version: 1.0
 site:
   name: SaffHire Background Screening
   url: https://www.saffhire.com
-  location: Frisco, Texas
+  location: Frisco, TX
   coverage: United States, all 50 states
 primary_goal: Get employers to request a quote, contact SaffHire, or create an account.
 primary_services:
