@@ -19,6 +19,21 @@ function renderMarkdown(markdown: string) {
         </h2>
       );
     }
+    // A line that is only a markdown link to an internal path, like
+    // "[Client Login](/login)", renders as a button.
+    const buttonLink = line.match(/^\[([^\]]+)\]\((\/[^)\s]*)\)$/);
+    if (buttonLink) {
+      return (
+        <p key={index} className="mt-4">
+          <a
+            href={buttonLink[2]}
+            className="inline-block rounded-md bg-[#17843f] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#116b32]"
+          >
+            {buttonLink[1]}
+          </a>
+        </p>
+      );
+    }
     if (line.startsWith('- ')) {
       return (
         <li key={index} className="ml-5 list-disc leading-7 text-slate-700">

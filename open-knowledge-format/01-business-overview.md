@@ -34,7 +34,7 @@ SaffHire should be presented as helpful, practical, trustworthy, and compliance-
 
 - Phone: (888) 588-1733
 - Main public site: https://www.saffhire.com
-- Client login: https://saffhire.instascreen.net/sso/login.taz
+- Client login: https://saffhire.com/login
 - Account setup/intake: https://intake.saffhire.com/
 
 ## Current known internal/private tools
