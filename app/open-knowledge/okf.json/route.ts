@@ -10,7 +10,7 @@ export function GET() {
       name: 'SaffHire Background Screening',
       short_name: 'SaffHire',
       url: SITE_URL,
-      location: 'Frisco, Texas',
+      location: 'Frisco, TX',
       coverage: 'United States, all 50 states',
       phone: '(888) 588-1733',
       email: 'info@saffhire.com',

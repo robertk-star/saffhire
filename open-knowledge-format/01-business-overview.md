@@ -10,7 +10,7 @@ https://www.saffhire.com
 
 ## Core positioning
 
-SaffHire provides fast, secure, and reliable background screening services for employers across all industries. The site positions SaffHire as a nationwide background screening provider based in Frisco, Texas.
+SaffHire provides fast, secure, and reliable background screening services for employers across all industries. The site positions SaffHire as a nationwide background screening provider based in Frisco, TX.
 
 ## Primary offer
 
@@ -18,7 +18,7 @@ Pre-employment and workforce background screening services for businesses, inclu
 
 ## Geographic scope
 
-- Based in Frisco, Texas
+- Based in Frisco, TX
 - Serves businesses nationwide across all 50 states
 - Local SEO pages exist for Frisco, Dallas, Plano, McKinney, and Allen, Texas
 

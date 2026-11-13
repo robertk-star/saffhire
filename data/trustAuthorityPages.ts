@@ -18,10 +18,10 @@ export const trustAuthorityPages: TrustAuthorityPage[] = [
     title: "About SaffHire Background Screening",
     metaTitle: "About SaffHire Background Screening",
     description:
-      "Learn about SaffHire, a Frisco, Texas background screening company serving employers nationwide with FCRA-compliant screening support.",
+      "Learn about SaffHire, a Frisco, TX background screening company serving employers nationwide with FCRA-compliant screening support.",
     eyebrow: "ABOUT SAFFHIRE",
     quickAnswer:
-      "SaffHire is a background screening company based in Frisco, Texas and serving employers across the United States. SaffHire helps businesses choose and manage FCRA-compliant screening services including criminal background checks, employment verification, education verification, drug screening, MVR checks, and industry-specific screening packages.",
+      "SaffHire is a background screening company based in Frisco, TX and serving employers across the United States. SaffHire helps businesses choose and manage FCRA-compliant screening services including criminal background checks, employment verification, education verification, drug screening, MVR checks, and industry-specific screening packages.",
     sections: [
       {
         heading: "Who SaffHire helps",
@@ -39,7 +39,7 @@ export const trustAuthorityPages: TrustAuthorityPage[] = [
       },
     ],
     faqs: [
-      { question: "Where is SaffHire based?", answer: "SaffHire is based in Frisco, Texas and serves employers nationwide." },
+      { question: "Where is SaffHire based?", answer: "SaffHire is based in Frisco, TX and serves employers nationwide." },
       { question: "When was SaffHire founded?", answer: "SaffHire has served employers since 2019." },
       { question: "Does SaffHire serve all 50 states?", answer: "Yes. SaffHire provides background screening services for employers across the United States." },
     ],

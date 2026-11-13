@@ -30,4 +30,16 @@ describe("Nov 7 audit copy consistency", () => {
     const combined = `${company}\n${llms}\n${llmsFull}\n${JSON.stringify(organizationSchema)}`;
     assert.doesNotMatch(combined, /since 2020|founded in 2020|foundingDate":"2020"|foundingDate: '2020'/i);
   });
+
+  it("uses Frisco, TX on /company-information and the Open Knowledge pages (Nov 13 audit)", () => {
+    for (const path of [
+      "../app/company-information/page.tsx",
+      "../data/openKnowledgePages.ts",
+      "../app/open-knowledge/okf.json/route.ts",
+    ]) {
+      const source = read(path);
+      assert.doesNotMatch(source, /Frisco, Texas/, path);
+      assert.match(source, /Frisco, TX/, path);
+    }
+  });
 });
