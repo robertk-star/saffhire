@@ -281,7 +281,7 @@ const FCRACompliance2026Blog = () => (
 
     <Section title="What Changed: Enforcement, Not the Law">
       <p>
-        The FCRA was written in 1970. The core requirements—written consent, clear disclosures, individualized assessment of criminal history—have been in place for decades. What is new in 2026 is the FTC's willingness to pursue violations aggressively, state attorneys general treating FCRA violations as consumer protection matters, and private litigation firms building entire practices around FCRA class actions.
+        The FCRA was written in 1970. The core requirements (written consent, clear disclosures, individualized assessment of criminal history) have been in place for decades. What is new in 2026 is the FTC's willingness to pursue violations aggressively, state attorneys general treating FCRA violations as consumer protection matters, and private litigation firms building entire practices around FCRA class actions.
       </p>
       <p>
         This shift happened because employers have been getting away with FCRA violations for years. Buried or confusing disclosures. Blanket criminal history disqualifications. Automated decisions without individualized assessment. These practices were common, and enforcement was rare. That era is over.
@@ -837,7 +837,7 @@ function WhatOIGExpectsHealthcare() {
           <NumberedCard
             number="1"
             title="Establish a Screening Schedule"
-            description="Pick a date each month—the first Monday, the 15th, whatever works for your organization—and commit to running LEIE checks on that date. Document this schedule and share it with your compliance team. Consistency is part of the standard of care."
+            description="Pick a date each month (the first Monday, the 15th, whatever works for your organization) and commit to running LEIE checks on that date. Document this schedule and share it with your compliance team. Consistency is part of the standard of care."
           />
           <NumberedCard
             number="2"
@@ -1050,7 +1050,7 @@ function WhyOngoingScreeningMatters() {
 
       <ConclusionBox
         title="Ongoing Screening Is Risk Management, Not Punishment"
-        body="Continuous background screening solutions are not about policing your workforce. They are about managing risk across the full employment lifecycle. Employees understand this. In fact, employees in high-trust roles—healthcare, education, finance—often expect ongoing screening as part of the job. Implementing a transparent, consistent ongoing screening program demonstrates that your organization takes compliance seriously and respects the trust that employees and customers place in you."
+        body="Continuous background screening solutions are not about policing your workforce. They are about managing risk across the full employment lifecycle. Employees understand this. In fact, employees in high-trust roles (healthcare, education, finance) often expect ongoing screening as part of the job. Implementing a transparent, consistent ongoing screening program demonstrates that your organization takes compliance seriously and respects the trust that employees and customers place in you."
       />
 
       <div className="mt-8 p-6 rounded-xl border border-green-200 bg-green-50">
@@ -1078,7 +1078,7 @@ function ROIOfSpeed() {
     >
       <p className="text-lg text-gray-700 leading-relaxed font-medium">
         Slow background checks cost employers thousands of dollars every month. Not because the
-        checks themselves are expensive—they are not. But because every day a candidate waits for
+        checks themselves are expensive (they are not). But because every day a candidate waits for
         results is a day they might accept another offer, withdraw from your process, or lose
         interest in your company. Time-to-hire is a direct competitive advantage in a tight labor
         market, and background screening speed is one of the most underestimated levers you have to
@@ -1243,7 +1243,7 @@ function BanTheBoxGuide() {
         </p>
         <p>
           Instead, ban-the-box laws typically require employers to wait until later in the hiring
-          process—usually after an initial interview or conditional offer—before asking about
+          process (usually after an initial interview or conditional offer) before asking about
           criminal history. The idea is to give candidates with criminal records a fair chance to
           be evaluated on their qualifications before criminal history becomes a factor.
         </p>
