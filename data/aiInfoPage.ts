@@ -44,7 +44,7 @@ export const aiInfoPage: ContentPageData = {
     {
       heading: "Turnaround",
       paragraphs: [
-        "Instant searches usually return in minutes: SSN Trace, Sex Offender registry, Global Security Watch List, National Criminal Database, state database searches and Motor Vehicle Reports. Full background packages take 1 to 3 days on average. County searches and verifications depend on courts, employers and schools.",
+        "Instant searches usually return in minutes: SSN Trace, Sex Offender registry, Global Security Watch List, National Criminal Database, state database searches and Motor Vehicle Reports. Full background packages take 1 to 3 days on average. Packages with drug screening take 1 to 5 days on average, and records that need a closer look can take longer. County searches and verifications depend on courts, employers and schools.",
       ],
     },
     {

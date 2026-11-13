@@ -25,7 +25,7 @@ const badges = [
   {
     icon: Zap,
     title: "Fast Response",
-    description: "Instant searches like the National Criminal Database, SSN Trace and MVR usually return in minutes. Full packages take 1 to 3 days on average.",
+    description: "Instant searches like the National Criminal Database, SSN Trace and MVR usually return in minutes. Full packages take 1 to 3 days on average. Packages with drug screening take 1 to 5 days on average, and records that need a closer look can take longer.",
   },
 ];
 
@@ -61,9 +61,12 @@ export default function WhyChooseUsSection() {
           </div>
         </div>
 
-        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-10 leading-tight max-w-4xl" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight max-w-4xl" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           Instant searches like the National Criminal Database, SSN Trace and MVR usually return in minutes. Full packages take 1 to 3 days on average.
         </h2>
+        <p className="text-gray-600 mb-10 leading-relaxed max-w-4xl">
+          A full package typically takes 1 to 3 days. Packages with drug screening take 1 to 5 days on average, and records that need a closer look can take longer. Timing for an individual applicant can vary.
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {badges.map((badge) => (

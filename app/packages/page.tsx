@@ -5,7 +5,7 @@ import { breadcrumbSchema } from '@/lib/structuredData';
 export const metadata: Metadata = {
   title: 'Standard Background Check Packages & Turnaround',
   description:
-    'SaffHire standard packages take 1 to 3 days on average. They include SSN Trace, Address History, National Criminal Database, and Federal Search.',
+    'Standard packages take 1 to 3 days on average, or 1 to 5 days with drug screening. Each includes SSN Trace, National Criminal Database and Federal Search.',
 };
 
 export default function Page() {

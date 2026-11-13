@@ -48,7 +48,7 @@ const faqSections: FAQSection[] = [
       {
         question: "How long does a background check take?",
         answer:
-          "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, the National Criminal Database, state database searches and MVR) usually return in minutes. Full background packages take 1 to 3 days on average. County searches and verifications depend on courts, employers and schools, so individual results can vary. See Standard Packages and Turnaround at saffhire.com/packages.",
+          "Instant searches (SSN Trace, Sex Offender, Global Security Watch List, the National Criminal Database, state database searches and MVR) usually return in minutes. Full background packages take 1 to 3 days on average. Packages with drug screening take 1 to 5 days on average, and records that need a closer look can take longer. County searches and verifications depend on courts, employers and schools, so individual results can vary. See Standard Packages and Turnaround at saffhire.com/packages.",
       },
       {
         question: "What is included in every background check package?",
