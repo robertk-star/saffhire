@@ -54,7 +54,7 @@ export default function PackagesClient() {
             The National Criminal Database search also includes a Sex Offender registry search.
           </p>
           <p className="text-gray-700 mb-10">
-            Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Full background packages take 1 to 3 days on average.
+            Instant searches (SSN Trace, Sex Offender, Global Security Watch List, National Criminal Database, state database and MVR) usually return in minutes. Full background packages take 1 to 3 days on average. Drug screens and records that need a closer look can take longer.
           </p>
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6" style={font}>Compare packages</h2>
           <div className="overflow-x-auto">

@@ -19,4 +19,26 @@ describe("homepage turnaround heading", () => {
     assert.doesNotMatch(packages, /2-5 days|1-2 days|turnaround: "1 day"/);
     assert.match(packages, /Full background packages take 1 to 3 days on average/);
   });
+
+  it("says drug screens and records that need a closer look can take longer (Nov 13 audit)", () => {
+    const note = "Drug screens and records that need a closer look can take longer.";
+    for (const path of [
+      "../components/WhyChooseUsSection.tsx",
+      "../components/PackagesClient.tsx",
+      "../data/pageFaqs.ts",
+      "../legacy/FAQPage.tsx",
+      "../data/aiInfoPage.ts",
+      "../public/llms.txt",
+      "../public/llms-full.txt",
+    ]) {
+      const source = readFileSync(new URL(path, import.meta.url), "utf8");
+      assert.ok(source.includes(note), path);
+      // llms-full.txt already uses dashes in its section headings; check only the new line there.
+      const checked = path.endsWith("llms-full.txt") ? note : source;
+      assert.doesNotMatch(checked, /[\u2014\u2013]|guarantee|24 hour|48 hour/i, path);
+    }
+    const home = readFileSync(new URL("../components/WhyChooseUsSection.tsx", import.meta.url), "utf8");
+    assert.match(home, /A full package typically takes 1 to 3 days\./);
+  });
 });
+
