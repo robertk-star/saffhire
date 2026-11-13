@@ -13,7 +13,7 @@
 - Contact page: `/contact`
 - Homepage contact anchor: `/#contact`
 - Account setup: `https://intake.saffhire.com/`
-- Client login: `https://saffhire.instascreen.net/sso/login.taz`
+- Client login: `/login`
 - Blog: `/blog`
 - Background Screening Guides: `/background-screening-guides`
 

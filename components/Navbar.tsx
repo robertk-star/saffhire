@@ -76,7 +76,7 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden lg:flex items-center gap-4">
-              <a href="https://saffhire.instascreen.net/sso/login.taz" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-600 font-medium text-sm transition-colors">Login</a>
+              <a href="/login" className="text-gray-700 hover:text-green-600 font-medium text-sm transition-colors">Login</a>
               <a href="https://intake.saffhire.com/" target="_blank" rel="noopener noreferrer" className="bg-[#17843f] hover:bg-[#116b32] text-white font-medium text-sm px-5 py-2 rounded-md transition-colors">Create Account</a>
             </div>
 
@@ -126,7 +126,7 @@ export default function Navbar() {
             </div>
             <a href="/referral-partners" className="block py-2 text-sm font-semibold text-gray-700 hover:text-green-600 transition-colors" onClick={() => setMobileOpen(false)}>Partners</a>
             <div className="pt-4 space-y-2 border-t border-gray-200">
-              <a href="https://saffhire.instascreen.net/sso/login.taz" target="_blank" rel="noopener noreferrer" className="block py-2 text-sm font-semibold text-gray-700 hover:text-green-600 transition-colors" onClick={() => setMobileOpen(false)}>Login</a>
+              <a href="/login" className="block py-2 text-sm font-semibold text-gray-700 hover:text-green-600 transition-colors" onClick={() => setMobileOpen(false)}>Login</a>
               <a href="https://intake.saffhire.com/" target="_blank" rel="noopener noreferrer" className="block bg-[#17843f] hover:bg-[#116b32] text-white text-center font-semibold text-sm py-2 rounded-md transition-colors" onClick={() => setMobileOpen(false)}>Create Account</a>
             </div>
           </div>

@@ -29,7 +29,7 @@ export default function Footer() {
     { label: "FAQ", href: "/faq" },
     { label: "Referral Partners", href: "/referral-partners" },
     { label: "Contact", href: "/contact" },
-    { label: "Login", href: "https://saffhire.instascreen.net/sso/login.taz" },
+    { label: "Login", href: "/login" },
     { label: "Create Account", href: "https://intake.saffhire.com/" },
   ];
 

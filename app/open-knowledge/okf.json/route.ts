@@ -14,7 +14,7 @@ export function GET() {
       coverage: 'United States, all 50 states',
       phone: '(888) 588-1733',
       email: 'info@saffhire.com',
-      login_url: 'https://saffhire.instascreen.net/sso/login.taz',
+      login_url: `${SITE_URL}/login`,
       account_setup_url: 'https://intake.saffhire.com/',
     },
     positioning: 'Fast, secure, reliable background screening services for employers across all industries.',

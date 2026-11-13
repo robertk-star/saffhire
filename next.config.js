@@ -19,6 +19,10 @@ const nextConfig = {
         destination: 'https://saffhire.com/:path*',
         permanent: true,
       },
+      // Client portal login (Nov 13 2026 audit). Keep the vendor portal URL out of
+      // visible page text and links: every public "Login" link points at /login.
+      // 302 (non-permanent) so the portal URL can change without cached redirects.
+      { source: '/login', destination: 'https://saffhire.instascreen.net/sso/login.taz', statusCode: 302 },
       { source: '/pricing', destination: '/contact', permanent: true },
       { source: '/privacy', destination: '/privacy-policy', permanent: true },
       { source: '/terms', destination: '/terms-of-service', permanent: true },
