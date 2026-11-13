@@ -47,7 +47,7 @@ function PageShell({
         {children}
       </div>
 
-      <div className="proposal-page-footer mt-8 shrink-0 text-center text-xs text-slate-400">— {pageNumber} —</div>
+      <div className="proposal-page-footer mt-8 shrink-0 text-center text-xs text-slate-400">{pageNumber}</div>
     </section>
   );
 }
@@ -474,7 +474,7 @@ export default function MultiPackageProposalPreview() {
                         <div className="font-bold text-slate-900">{pkg.name}</div>
                         {pkg.description ? <div className="text-xs text-slate-500">{pkg.description}</div> : null}
                       </td>
-                      <td className="px-4 py-3 text-slate-700">{pkg.includes.join(' · ') || '—'}</td>
+                      <td className="px-4 py-3 text-slate-700">{pkg.includes.join(' · ')}</td>
                       <td className="whitespace-nowrap px-4 py-3 text-right align-top font-bold text-slate-900">{money(pkg.total)}</td>
                     </tr>
                   ))}

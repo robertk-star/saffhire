@@ -199,7 +199,7 @@ function LegacyFCRAArticle() {
   return (
     <div className="space-y-8" style={{ fontFamily: "'Open Sans', sans-serif", color: "#374151", lineHeight: "1.8" }}>
       <p className="text-lg text-gray-700 leading-relaxed font-medium">
-        At SaffHire, compliance is not an add-on — it is built into how we perform every background screening. The Fair Credit Reporting Act (FCRA) sets the rules for how consumer reports can be used for employment decisions, and employers must follow these rules carefully.
+        At SaffHire, compliance is not an add-on. It is built into how we perform every background screening. The Fair Credit Reporting Act (FCRA) sets the rules for how consumer reports can be used for employment decisions, and employers must follow these rules carefully.
       </p>
 
       <Section title="What the FCRA Requires">

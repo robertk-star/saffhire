@@ -61,7 +61,7 @@ function PageShell({
         {children}
       </div>
 
-      <div className="proposal-page-footer mt-8 shrink-0 text-center text-xs text-slate-400">— {pageNumber} —</div>
+      <div className="proposal-page-footer mt-8 shrink-0 text-center text-xs text-slate-400">{pageNumber}</div>
     </section>
   );
 }
