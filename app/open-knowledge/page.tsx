@@ -5,7 +5,7 @@ import { openKnowledgePages } from '@/data/openKnowledgePages';
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://saffhire.com').replace('https://www.saffhire.com', 'https://saffhire.com');
 
 export const metadata: Metadata = {
-  title: 'Open Knowledge Format for SaffHire Background Screening',
+  title: 'Open Knowledge Format for Background Screening',
   description:
     'Open Knowledge pages for SaffHire: company, service, industry, and compliance facts for customers, search engines, and AI tools.',
   alternates: {

@@ -4,7 +4,7 @@ import DatabaseBlogPostClient from '@/components/DatabaseBlogPostClient';
 import { blogPosts, type BlogPost } from '@/data/blogPosts';
 import { blogPostRegistry } from '@/legacy/blogRegistry';
 import { getPublishedDbBlogPostBySlug, type PublicBlogPost } from '@/lib/blogDrafts';
-import { blogDocumentMeta, publicMetaDescription } from '@/lib/blogSeo';
+import { blogDocumentMeta, blogDocumentTitle, publicMetaDescription } from '@/lib/blogSeo';
 import { blogSocialMetadata } from '@/lib/blogSocialMeta';
 import { blogPostingSchema } from '@/lib/structuredData';
 
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ...social,
     };
   }
-  return { title: post?.title || 'Background Screening Blog', description, ...social };
+  return { title: post ? blogDocumentTitle(post.slug, post.title) : 'Background Screening Blog', description, ...social };
 }
 
 function schemaScript(schema: ReturnType<typeof blogPostingSchema>) {

@@ -172,7 +172,7 @@ export const seoAuthorityPages: SeoAuthorityPage[] = [
     path: "/volunteer-background-checks",
     slug: "volunteer-background-checks",
     title: "Volunteer Background Checks",
-    metaTitle: "Volunteer Background Checks for Churches and Nonprofits",
+    metaTitle: "Volunteer Background Checks for Churches & Nonprofits",
     description:
       "Volunteer background checks help churches, nonprofits, schools, and community organizations protect the people they serve.",
     heroAnswer:
